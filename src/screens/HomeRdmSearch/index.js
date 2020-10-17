@@ -5,6 +5,7 @@ import React,{useState,useEffect} from 'react';
 import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl} from 'react-native';
 import firebase from '../../connection/FirebaseConection';
 import DownImagesRdm from '../../components/DownImagesRdm';
+import SearchVoltar from '../../components/SearchVoltar'
 
 export default () => {
    
@@ -15,7 +16,9 @@ export default () => {
     const [isRefresh, setIsRefresh] = useState(false);
     
     const handleClick = () => {
-        navigation.navigate('HomeRdmCadastro');
+        navigation.navigate('HomeRdm');
+         setSearchTexto('');
+          setListFire([]);
     };
 
     const pushDados = () =>{
@@ -81,7 +84,7 @@ export default () => {
                 
             <SafeAreaView style={{ backgroundColor: '#1C1C1C', flex: 1 ,marginTop:1}}>
                
-               <SearchCadastrar  value={searchTexto} 
+               <SearchVoltar  value={searchTexto} 
                autoCapitalize='characters' 
                onEndEditing={handleClickSearch} 
                onChangeText={(t) => setSearchTexto(t)} 
