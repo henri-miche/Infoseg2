@@ -81,7 +81,7 @@ export default ({data}) => {
                         <Text style={styles.text}> Telefone: {telefone}</Text>
                         <Text style={styles.text}> Genero: {genero}</Text>
                         <Text style={styles.text}> Local: {local}</Text>
-                        <Text style={styles.text}> RO: {tipoRo}</Text>
+                        <Text style={styles.text}> RAU: {tipoRo}</Text>
                     </View>
                 </View>
                         <View style={{margin:10}}>
