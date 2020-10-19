@@ -8,6 +8,7 @@ import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import * as imagePicker from 'expo-image-picker';
 import moment from 'moment';
+import { mask,unMask } from 'remask'
 import firebase from '../../connection/FirebaseConection';
 
 
@@ -175,6 +176,18 @@ export default () => {
         setFoto(data);
     }
 
+    const mascaraCpf = (t) => {
+        setCpf(mask(t,['999.999.999-99']))
+    }
+
+    const mascaraNascimento = (t) => {
+        setNascimento(mask(t,['99/99/9999']))
+    }
+
+    const mascaraTelefone = (t) => {
+        setTelefone(mask(t,['(99) 99999-9999']))
+    }
+
     return (
         <Container >
 
@@ -201,9 +214,9 @@ export default () => {
                                 
                                 <View style={{flex:1,marginLeft:10}}>
                                     
-                                    <TextInput style={styles.input} placeholder='CPF:' keyboardType='number-pad' value={cpf} onChangeText={(t) => setCpf(t)} />
+                                    <TextInput style={styles.input} placeholder='CPF:' keyboardType='number-pad' value={cpf} onChangeText={(t) => mascaraCpf(t)} />
                                     <TextInput style={styles.input} placeholder='Identidade:' keyboardType='number-pad' value={identidade} onChangeText={(t) => setIdentidade(t)} />
-                                    <TextInput style={styles.input} placeholder='Nascimento:' keyboardType='number-pad' value={nascimento} onChangeText={(t) => setNascimento(t)} />
+                                    <TextInput style={styles.input} placeholder='Nascimento:' keyboardType='number-pad' value={nascimento} onChangeText={(t) => mascaraNascimento(t)} />
                                     <TextInput style={styles.input} placeholder='Tipo RDM:' value={tipoRo} onChangeText={(t) => setTipoRo(t)} />
                                     <TextInput style={styles.input} placeholder='Local:' autoCapitalize='characters' value={local} onChangeText={(t) => setLocal(t)} />
                                 
@@ -219,7 +232,7 @@ export default () => {
                                 <View style={{flexDirection:'row',flex:1}}>
 
                                       <View style={{flex:1}}>  
-                                        <TextInput style={styles.input} placeholder='Telefone:' keyboardType='number-pad' value={telefone} onChangeText={(t) => setTelefone(t)} />
+                                        <TextInput style={styles.input} placeholder='Telefone:' keyboardType='number-pad' value={telefone} onChangeText={(t) => mascaraTelefone(t)} />
                                      </View>
 
                                      <View style={{flex:1}}>
