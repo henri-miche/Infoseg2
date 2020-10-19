@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl} from 'react-native';
+import {SafeAreaView,FlatList, StyleSheet, RefreshControl} from 'react-native';
 import {Container} from './styles';
 import { useNavigation } from '@react-navigation/native';
 import SearchCadastrar from "../../components/SearchCadastrar";

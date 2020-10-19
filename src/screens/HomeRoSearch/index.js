@@ -1,8 +1,7 @@
 import { Container } from './styles';
-import SearchCadastrar from "../../components/SearchCadastrar";
 import {useNavigation, useRoute} from '@react-navigation/native'
 import React,{useState,useEffect} from 'react';
-import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl} from 'react-native';
+import {SafeAreaView,FlatList, StyleSheet, RefreshControl} from 'react-native';
 import firebase from '../../connection/FirebaseConection';
 import DownFotos2 from '../../components/DownFotos2';
 import SearchVoltar from '../../components/SearchVoltar'

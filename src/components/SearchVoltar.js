@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Image, Text, View } from 'react-native';
+import { Image, Text } from 'react-native';
 
 
 const ContainerSearch = styled.View`

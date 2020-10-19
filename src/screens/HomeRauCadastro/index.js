@@ -1,5 +1,5 @@
-import React,{useEffect, useState} from 'react';
-import { SafeAreaView,Text, View, StyleSheet,Image,TextInput,Button,Alert } from 'react-native';
+import React,{ useState} from 'react';
+import { SafeAreaView, View, StyleSheet,Image,TextInput,Button,Alert } from 'react-native';
 import { Container } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import ConfirmarCancel from '../../components/ConfirmarCancel';
@@ -8,7 +8,7 @@ import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import * as imagePicker from 'expo-image-picker';
 import moment from 'moment';
-import { mask,unMask } from 'remask'
+import { mask } from 'remask'
 import firebase from '../../connection/FirebaseConection';
 
 
@@ -33,9 +33,18 @@ export default () => {
     const navigation = useNavigation();
 
     const handleClick = () => {
-        setNome('');
-        setCpf('');
-        setEndereço('');
+         setNome('');
+            setCpf('');
+            setEndereço('');
+            setIdentidade('');
+            setNascimento('');
+            setTipoRo('');
+            setLocal('');
+            setMae('');
+            setPai('');
+            setTelefone('');
+            setGenero('');
+            setHistorico('');
         navigation.navigate('HomeRau');
     };
 
@@ -117,7 +126,7 @@ export default () => {
     
  /*if tem que ser editado para nano permitir envio vazio*/
     const confirmar = () => {
-        if(nome !== '' && cpf !== '' ){
+        if(nome !== '' && tipoRo !== '' && local !== '' && historico !== '' ){
            
            const user = firebase.auth().currentUser;
                 if(user){
@@ -197,7 +206,7 @@ export default () => {
                     
                         <View style={styles.form}>
                             <View style={{flex: 1,marginTop:5}}>
-                                <TextInput style={styles.input} placeholder='Nome:' autoCapitalize='characters' value={nome} onChangeText={(t)=>setNome(t)} />
+                                <TextInput style={styles.input} placeholder='Nome:*' autoCapitalize='characters' value={nome} onChangeText={(t)=>setNome(t)} />
                             </View>
                             <View style={{flexDirection:'row'}}>
                                 <View style={styles.campos}>
@@ -217,8 +226,8 @@ export default () => {
                                     <TextInput style={styles.input} placeholder='CPF:' keyboardType='number-pad' value={cpf} onChangeText={(t) => mascaraCpf(t)} />
                                     <TextInput style={styles.input} placeholder='Identidade:' keyboardType='number-pad' value={identidade} onChangeText={(t) => setIdentidade(t)} />
                                     <TextInput style={styles.input} placeholder='Nascimento:' keyboardType='number-pad' value={nascimento} onChangeText={(t) => mascaraNascimento(t)} />
-                                    <TextInput style={styles.input} placeholder='Tipo RAU:' value={tipoRo} onChangeText={(t) => setTipoRo(t)} />
-                                    <TextInput style={styles.input} placeholder='Local:' autoCapitalize='characters' value={local} onChangeText={(t) => setLocal(t)} />
+                                    <TextInput style={styles.input} placeholder='Tipo RAU:*' value={tipoRo} onChangeText={(t) => setTipoRo(t)} />
+                                    <TextInput style={styles.input} placeholder='Local:*' autoCapitalize='characters' value={local} onChangeText={(t) => setLocal(t)} />
                                 
                                 </View>
                             
@@ -239,7 +248,7 @@ export default () => {
                                          <TextInput style={styles.input} placeholder='Gênero:' value={genero} onChangeText={(t) => setGenero(t)} />
                                      </View>
                                 </View>
-                                <TextInput style={styles.inputHist} placeholder='Histórico:' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />
+                                <TextInput style={styles.inputHist} placeholder='Histórico:*    *Obrigatório o preenchimento' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />
                         </View>
 
                     </ScrollView>
