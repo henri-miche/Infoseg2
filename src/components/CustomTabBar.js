@@ -109,7 +109,7 @@ export default ({state, navigation}) => {
                 <Image source={require('../../assets/docAzul.png')}
                     style={{ width: 30, height: 30, opacity: state.index === 2 ? 1 : 0.5 }}
                 />
-                    <Text style={{ color: '#fff', fontSize: 18 }}>RDM</Text>
+                    <Text style={{ color: '#fff', fontSize: 18 }}>RRM</Text>
             </TabItem> 
 
             <TabItem onPress={() => goTo('HomeBoStack')}>
