@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
-import { Text,Image } from 'react-native';
+import { Text,Image,StyleSheet } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { 
     Container,
-    InputArea,
-    CustomButton,
-    CustomBottomText,
-    SignMessageButton,
-    SignMessageButtonText,
+    TextoTitulo,
+    ImagemStyle,
+    SubtituloCbtu,
+    FaçaSeuLogin,
+    BtnEntrar,
+    EntrarText,
  } from './styles';
-import SignInput from '../../components/SignInput';
+import InputLogin from '../../components/InputLogin';
+import InputLoginSenha from '../../components/InputLoginSenha';
 import firebase from '../../connection/FirebaseConection';
 
 export default () => {
@@ -71,12 +73,35 @@ export default () => {
 
     return (
         <Container>
+            
+            <ImagemStyle source={require('../../../assets/brasaoTransarente.png')}/>
+            
+            <TextoTitulo>InfoSeg Mobile</TextoTitulo>
+
+            <SubtituloCbtu>CBTU BH</SubtituloCbtu>
+
+            <FaçaSeuLogin> Faça seu login</FaçaSeuLogin>
+
+            <InputLogin/>
+            <InputLoginSenha/>
+
+            <BtnEntrar>
+                <EntrarText>Entrar</EntrarText>
+            </BtnEntrar>
+            
+        </Container>
+    );
+}
+/*
+<Container>
+       
             <Image source={require('../../../assets/brasaoTransarente.png')}
-                style={{width:250,height:250}}
+             style={{width: 175,height: 175}}
                     
                 />
-            <Text style={{ fontSize: 40, marginTop: 10, color:'#D3D3D3' }}>INFOSEG</Text>
-            
+            <Textotitulo>
+            <Text>InfoSeg Mobile</Text>
+            </Textotitulo>
             <InputArea>
                 <SignInput placeholder="E-mail" 
                 value={emailField} 
@@ -100,5 +125,5 @@ export default () => {
                 <SignMessageButtonText>CADASTRE-SE</SignMessageButtonText>
             </SignMessageButton>
         </Container>
-    );
-}
+
+*/
