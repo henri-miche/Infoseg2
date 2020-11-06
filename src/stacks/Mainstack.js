@@ -4,6 +4,7 @@ import Preload from '../screens/Preload';
 import TelaLogin from '../screens/TelaLogin';
 import TelaCadastro from '../screens/TelaCadastro';
 import MainTab from '../stacks/MainTab';
+import HomeRoStack from '../stacks/HomeRoStack';
 import {Image,Text,View} from 'react-native';
 
 
@@ -17,7 +18,13 @@ export default () => (
         <Stack.Screen name="Preload" component={Preload} />
         <Stack.Screen name="TelaLogin" component={TelaLogin} />
         <Stack.Screen name="TelaCadastro" component={TelaCadastro} />
-        <Stack.Screen name="MainTab" component={MainTab}
+         <Stack.Screen name="HomeRoStack" component={HomeRoStack} />
+        
+    
+    </Stack.Navigator>
+);
+/*
+<Stack.Screen name="MainTab" component={MainTab}
             options={{  headerShown: true,
                 headerTitle: () => 
                 <View style={{justifyContent:'center',alignItems:'center', }}>
@@ -33,7 +40,4 @@ export default () => (
                         
             }}     
             
-        />
-    
-    </Stack.Navigator>
-);
+        />*/

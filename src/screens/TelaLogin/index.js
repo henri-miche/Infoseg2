@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text,Image,StyleSheet } from 'react-native';
+import { Text,Image,StyleSheet,TouchableOpacity, View } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { 
     Container,
@@ -9,6 +9,8 @@ import {
     FaçaSeuLogin,
     BtnEntrar,
     EntrarText,
+    EsqueciSenha,
+    BtnCriarConta,
  } from './styles';
 import InputLogin from '../../components/InputLogin';
 import InputLoginSenha from '../../components/InputLoginSenha';
@@ -82,12 +84,30 @@ export default () => {
 
             <FaçaSeuLogin> Faça seu login</FaçaSeuLogin>
 
-            <InputLogin/>
-            <InputLoginSenha/>
+            
+            <InputLogin
+             value={emailField} 
+             onChangeText={t => setEmailField(t)}
+             placeholder="E-mail" 
+             placeholderTextColor="#666360" 
+             color="#fff"/>
+            <InputLoginSenha  
+            value={senhaField} 
+            onChangeText={t => setSenhaField(t)} 
+            password={true}
+            placeholder="Senha" 
+            placeholderTextColor="#666360" 
+            color="#fff"/>
 
-            <BtnEntrar>
+            <BtnEntrar onPress={handleSignClic}>
                 <EntrarText>Entrar</EntrarText>
             </BtnEntrar>
+
+            <TouchableOpacity >
+                <EsqueciSenha>Esqueci minha Senha</EsqueciSenha>
+            </TouchableOpacity>
+            
+         
             
         </Container>
     );

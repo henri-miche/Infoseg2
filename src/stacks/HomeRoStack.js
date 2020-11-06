@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 
 export default () => (
-    <Stack.Navigator initialRouteName="HomeRo" >
+    <Stack.Navigator initialRouteName="HomeRo" screenOptions={{headerShown:false}} >
 
         <Stack.Screen name="HomeRo" component={HomeRo} />
         <Stack.Screen name="HomeRoCadastro" component={HomeRoCadastro} />

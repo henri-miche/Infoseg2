@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, StyleSheet, Image, Text} from 'react-native';
 import firebase from '../connection/FirebaseConection';
+import styled from 'styled-components/native';
 
 export default ({data}) => {
 
@@ -55,14 +56,252 @@ export default ({data}) => {
    }
   }, [])
 
+  const TextNome = styled.Text`
+    width: 162px;
+    height: 24px;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 24px;
+/* identical to box height */
+
+
+/* Orange */
+
+color: #FF9000;
+`;
+
+
+
+const TextLabel = styled.Text`
+
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+margin-left:15px;
+/* Orange */
+
+color: #FF9000;
+`;
+
+const TextLabelP = styled.Text`
+
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+/* Orange */
+
+color: #FF9000;
+`;
+
+const TextPool = styled.Text`
+
+
+font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+
+/* Orange */
+
+color: #F4EDE8;
+`;
+
+const BtnOcorrenciaFull = styled.TouchableOpacity`
+
+width: 315px;
+height: 50px;
+alignItems:center;
+justifyContent:center;
+flexDirection:row;
+border-radius:10px;
+
+/* Orange */
+
+background: #FF9000;
+`
+const Flat = styled.View`
+
+
+width: 315px;
+height: 237px;
+marginBottom:25px;
+
+/* Darkest */
+
+background: #2E2E2E;
+
+border-radius: 10px;
+`
+const ViewHist = styled.View`
+    margin-right:15px;
+      margin-left:15px;
+      margin-top:10px;
+      height:54px;
+      width:285px;
+      
+
+`
+const Texthist = styled.Text`
+
+
+font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+/* Orange */
+
+color: #F4EDE8;
+`;
+
+
+
+
 
         return (
-            <View style={styles.iconFlat}>
-           
-                <View style={{flex:1,justifyContent:'center',flexDirection:'row',marginTop:5}}>
+            <Flat>
+
+                <View style={styles.row} >
+                <View style={styles.viewImage}>
                     <Image source={avatar2} style={styles.itemAvatar} />
                 </View>
-                <View style={{flexDirection:'row',marginTop:5,padding:10,height:200,paddingLeft:40}}>
+
+                <View style={{marginTop:15,marginLeft:14}}>
+                <TextNome style={styles.textNome}>{nome}</TextNome>
+                
+                <View style={styles.viewRoLocal}>
+                <TextLabelP>RO:<TextPool>{tipoRo}</TextPool></TextLabelP>
+                <TextLabel>Local:<TextPool>{local}</TextPool> </TextLabel>
+                </View>
+                <TextLabelP>ASO:<TextPool>{cosop}</TextPool></TextLabelP>
+                </View>
+
+                </View>
+
+                <View style={styles.viewCalendario}>
+                    <Image source = {require('../../assets/Calendário.png')} styles={{ width:14,height: 14,}}/>
+                    <TextPool> {dataa}</TextPool>
+                    <View style={{marginLeft:25,flexDirection:'row',alignItems:'center'}}>
+                     <Image source = {require('../../assets/Horário.png')} styles={{ width:14,height: 14,}}/>
+                      <TextPool> {hora}</TextPool>
+                    </View> 
+              </View>
+              <ViewHist>
+                  <TextLabelP  numberOfLines={3} ellipsizeMode="tail">Detalhes:<Texthist>{historico}</Texthist></TextLabelP>
+              </ViewHist>
+              <BtnOcorrenciaFull>
+                <Text style={styles.textBtnOcorr}>Ver Ocorrência Completa</Text>
+                <Image source = {require('../../assets/setaocorrenciacompleta.png')} />
+              </BtnOcorrenciaFull>
+            </Flat>
+        );
+    
+
+}
+
+const styles = StyleSheet.create({
+    textBtnOcorr:{
+        width: 190,
+        height: 21,
+
+    fontSize: 16,
+    lineHeight: 21,
+
+/* Text */
+
+color: '#F4EDE8'
+    },
+   hist:{
+     marginRight:15,
+      marginLeft:15,
+      marginTop:10,
+      height:54,
+      width:285,
+      alignItems:'center',
+      
+    },
+   
+    viewCalendario:{
+      flexDirection:'row',
+      marginLeft:15,
+      marginTop:12,
+      alignItems:'center'
+    },
+  
+    viewRoLocal:{
+      flexDirection:'row',
+      marginTop:10,
+      marginBottom:10
+    },
+    row:{
+        
+        flexDirection: 'row'
+    },
+    viewImage:{
+        
+        marginTop:15,
+        marginLeft:15,
+    },
+    itemArea: {
+        height: 100,
+        flex: 1,
+        flexDirection: 'row'
+    },
+    itemAvatar: {
+        width: 60,
+        height: 80,
+        borderRadius: 5,
+        
+    },
+    itemInfo: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+    btnEnviar: {
+        margin: 10,
+        borderWidth: 1,
+        borderColor: 'red',
+        width: 150,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    iconFlat: {
+        width: 315,
+        height: 237,
+
+
+/* Darkest */
+
+backgroundColor: '#2E2E2E',
+
+borderRadius: 10,
+
+
+        /*
+        flex:1,
+        borderColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 5,
+        backgroundColor:'#000',
+        margin: 5,
+*/
+    },
+    btnEnviar: {
+        borderWidth: 1,
+        borderColor: 'red',
+        width: 50,
+        height: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 5,
+    },
+    text: {
+        color: '#fff',
+        fontSize:12,
+    }
+});
+/*<View style={{flexDirection:'row',marginTop:5,padding:10,height:200,paddingLeft:40}}>
                     
                     <View style={{flex:1,justifyContent:'space-between'}}> 
                         <Text style={styles.text}> Nome: {nome} </Text>
@@ -86,60 +325,4 @@ export default ({data}) => {
                 </View>
                         <View style={{margin:10}}>
                             <Text style={styles.text}> Historico: {historico}</Text>
-                        </View>
-            </View>
-        );
-    
-
-}
-
-const styles = StyleSheet.create({
-    itemArea: {
-        height: 100,
-        flex: 1,
-        flexDirection: 'row'
-    },
-    itemAvatar: {
-        width: 150,
-        height: 150,
-        marginLeft:3
-        
-    },
-    itemInfo: {
-        flex: 1,
-        flexDirection: 'column'
-    },
-    btnEnviar: {
-        margin: 10,
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 150,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    iconFlat: {
-        
-        
-        flex:1,
-        borderColor: '#fff',
-        borderWidth: 1,
-        borderRadius: 5,
-        backgroundColor:'#000',
-        margin: 5,
-
-    },
-    btnEnviar: {
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 50,
-        height: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: 5,
-    },
-    text: {
-        color: '#fff',
-        fontSize:12,
-    }
-});
+                        </View>*/

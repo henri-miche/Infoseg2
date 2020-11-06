@@ -5,6 +5,8 @@ import styled from 'styled-components/native';
 export const Container = styled.SafeAreaView`
     background-color: #000;
     flex:1;
+    justify-content: center;
+    align-items: center;
 `;
 /*
 export const InputArea = styled.SafeAreaView`
@@ -40,13 +42,10 @@ export const SignMessageButtonText = styled.Text`
 */
 //implementações
 export const TextoTitulo = styled.Text`
-    position: absolute;
+    
     width: 189px;
     height: 34px;
-    left: 93px;
-    top: 280px;
-
-    font-family: Roboto Slab;
+    margin-top:15px;
     font-style: normal;
     font-weight: bold;
     font-size: 26px;
@@ -59,24 +58,15 @@ export const TextoTitulo = styled.Text`
 `;
 
 export const ImagemStyle = styled.Image`
-   
-position: absolute;
 width: 175px;
 height: 175px;
-left: 100px;
-top: 90px;
-
-
 `;
 
 export const SubtituloCbtu = styled.Text`
-    position: absolute;
+    
 width: 71px;
 height: 21px;
-left: 152px;
-top: 319px;
-
-font-family: Roboto Slab;
+margin-top:5px;
 font-style: normal;
 font-weight: 500;
 font-size: 16px;
@@ -89,13 +79,10 @@ color: #F4EDE8;
 `;
 
 export const FaçaSeuLogin = styled.Text`
-    position: absolute;
+    
 width: 137px;
 height: 26px;
-left: 119px;
-top: 385px;
-
-font-family: Roboto Slab;
+margin-top:45px;
 font-style: normal;
 font-weight: 500;
 font-size: 20px;
@@ -108,11 +95,11 @@ color: #F4EDE8;
 `;
 
 export const BtnEntrar = styled.TouchableOpacity`
-position: absolute;
+
 width: 315px;
 height: 50px;
-left: 30px;
-top: 575px;
+margin-top:25px;
+
 justify-content:center;
 
 /* Orange */
@@ -122,7 +109,6 @@ border-radius: 10px;
 `;
 
 export const EntrarText = styled.Text`
- font-family: Roboto Slab;
 font-style: normal;
 font-weight: bold;
 font-size: 16px;
@@ -133,5 +119,32 @@ text-align: center;
 
 color: #F4EDE8;
 `;
+
+export const EsqueciSenha = styled.Text`
+
+width: 144px;
+height: 18px;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 18px;
+text-align: center;
+margin-top:20px;
+/* White */
+
+color: #F4EDE8;
+`;
+
+export const BtnCriarConta = styled.TouchableOpacity`
+
+width: 375px;
+height: 60px;
+margin-top:65px;
+
+/* Dark */
+
+background: #1D1D1D;
+
+`
 
 
