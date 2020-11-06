@@ -11,7 +11,7 @@ export default () => {
     firebase.auth().onAuthStateChanged((user)=>{
         if(user) {            
             navigation.reset({
-                routes:[{name:'HomeRoStack'}]
+                routes:[{name:'HomeRo'}]
             });
         }else {
             navigation.reset({

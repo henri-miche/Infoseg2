@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { View, StyleSheet, Image, Text} from 'react-native';
 import firebase from '../connection/FirebaseConection';
 import styled from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
 
 export default ({data}) => {
 
@@ -23,6 +24,7 @@ export default ({data}) => {
     const cosop = data.cosop;
     const endereço = data.endereço;
     const [avatar2,setAvatar2] = useState(null);  
+    const navigation = useNavigation();
 
     const buscarFotos = () => {
         const storage = firebase.storage();
@@ -155,7 +157,10 @@ color: #F4EDE8;
 `;
 
 
-
+function handleClickVerCompleta () {
+        navigation.navigate('HomeBo',{key:key});
+        
+    };
 
 
         return (
@@ -189,7 +194,7 @@ color: #F4EDE8;
               <ViewHist>
                   <TextLabelP  numberOfLines={3} ellipsizeMode="tail">Detalhes:<Texthist>{historico}</Texthist></TextLabelP>
               </ViewHist>
-              <BtnOcorrenciaFull>
+              <BtnOcorrenciaFull onPress = { handleClickVerCompleta}>
                 <Text style={styles.textBtnOcorr}>Ver Ocorrência Completa</Text>
                 <Image source = {require('../../assets/setaocorrenciacompleta.png')} />
               </BtnOcorrenciaFull>

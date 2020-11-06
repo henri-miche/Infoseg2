@@ -36,7 +36,7 @@ export default () => {
     const navigation = useNavigation();
     const [isRefresh, setIsRefresh] = useState(false);
     const [searchTexto, setSearchTexto] = useState('');
-    const [FirebaseUser, setFirebaseUser] = useState([]);
+    const [Filtro, setFiltro] = useState('');
     const [nome, setNome] = useState('');
 
 
