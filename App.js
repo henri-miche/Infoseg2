@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React,{useEffect} from 'react';
 /*import { StyleSheet, Text, View } from 'react-native';*/
 import {NavigationContainer} from '@react-navigation/native';
 import Mainstack from './src/stacks/Mainstack';
-
+import * as Font from 'expo-font';
 import { Platform, InteractionManager } from 'react-native';
 
 export default function App() {
@@ -54,6 +54,18 @@ export default function App() {
   }
 
   /*começo do app*/
+
+  const font = async () => {
+         await Font.loadAsync({
+          RobotoSlab:require('./assets/fonts/RobotoSlab-VariableFont_wght.ttf')
+      })
+    };
+
+   
+
+ useEffect(() => {
+      font();
+  }, [])
 
   return (
     

@@ -40,6 +40,8 @@ export default ({data}) => {
         }
         });
     }
+
+    
     
 
     useEffect(() => {
@@ -65,6 +67,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 18px;
 line-height: 24px;
+font-family: RobotoSlab;
 /* identical to box height */
 
 
@@ -82,6 +85,7 @@ font-weight: 500;
 font-size: 14px;
 line-height: 18px;
 margin-left:15px;
+font-family: RobotoSlab;
 /* Orange */
 
 color: #FF9000;
@@ -93,6 +97,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 14px;
 line-height: 18px;
+font-family: RobotoSlab;
 /* Orange */
 
 color: #FF9000;
@@ -104,7 +109,7 @@ const TextPool = styled.Text`
 font-weight: 500;
 font-size: 14px;
 line-height: 18px;
-
+font-family: RobotoSlab;
 /* Orange */
 
 color: #F4EDE8;
@@ -117,7 +122,8 @@ height: 50px;
 alignItems:center;
 justifyContent:center;
 flexDirection:row;
-border-radius:10px;
+border-bottom-left-radius:15px;
+border-bottom-right-radius:15px;
 
 /* Orange */
 
@@ -147,7 +153,7 @@ const ViewHist = styled.View`
 `
 const Texthist = styled.Text`
 
-
+font-family: RobotoSlab;
 font-weight: 500;
 font-size: 14px;
 line-height: 18px;
@@ -208,7 +214,7 @@ const styles = StyleSheet.create({
     textBtnOcorr:{
         width: 190,
         height: 21,
-
+        fontFamily:'RobotoSlab',
     fontSize: 16,
     lineHeight: 21,
 

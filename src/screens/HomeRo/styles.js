@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+
+
+
 export const Container = styled.SafeAreaView`
     flex: 1;
     background-color:#000;
@@ -17,6 +20,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 20px;
 line-height: 26px;
+font-family: RobotoSlab;
 
 /* Orange */
 
@@ -43,6 +47,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 16px;
 line-height: 21px;
+font-family: RobotoSlab;
 
 /* White */
 
@@ -69,6 +74,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 18px;
 line-height: 24px;
+font-family: RobotoSlab;
 /* identical to box height */
 
 text-align: center;
@@ -132,6 +138,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 20px;
 line-height: 26px;
+font-family: RobotoSlab;
 
 /* White */
 
@@ -147,6 +154,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 14px;
 line-height: 18px;
+font-family: RobotoSlab;
 
 /* Text 2 */
 
@@ -180,6 +188,7 @@ line-height: 18px;
 display: flex;
 align-items: center;
 text-align: center;
+font-family: RobotoSlab;
 
 /* Orange */
 
@@ -212,6 +221,7 @@ line-height: 18px;
 display: flex;
 align-items: center;
 text-align: center;
+font-family: RobotoSlab;
 
 
 /* Text */
@@ -244,6 +254,7 @@ line-height: 18px;
 display: flex;
 align-items: center;
 text-align: center;
+font-family: RobotoSlab;
 
 /* Orange */
 
@@ -266,7 +277,7 @@ border-radius: 20px;
 
 `
 export const BoText = styled.Text`
-
+font-family: RobotoSlab;
 width: 19px;
 height: 18px;
 font-style: normal;

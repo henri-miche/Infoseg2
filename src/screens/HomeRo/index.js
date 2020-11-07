@@ -30,6 +30,7 @@ import { useNavigation } from '@react-navigation/native';
 import firebase from '../../connection/FirebaseConection';
 import DownFotos2 from '../../components/DownFotos2';
 
+
 export default () => {
 
     const [listFire, setListFire] = useState(null);

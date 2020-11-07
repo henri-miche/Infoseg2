@@ -38,7 +38,7 @@ export default () => {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     navigation.reset({
-                        routes: [{ name: 'MainTab' }]
+                        routes: [{ name: 'HomeRo' }]
                     });
                 }
             });

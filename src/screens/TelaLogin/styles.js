@@ -51,6 +51,7 @@ export const TextoTitulo = styled.Text`
     font-size: 26px;
     line-height: 34px;
     text-align: center;
+    font-family: RobotoSlab;
 
 /* Orange */
 
@@ -72,7 +73,7 @@ font-weight: 500;
 font-size: 16px;
 line-height: 21px;
 text-align: center;
-
+font-family: RobotoSlab;
 /* Text */
 
 color: #F4EDE8;
@@ -80,7 +81,7 @@ color: #F4EDE8;
 
 export const FaçaSeuLogin = styled.Text`
     
-width: 137px;
+
 height: 26px;
 margin-top:45px;
 font-style: normal;
@@ -88,7 +89,7 @@ font-weight: 500;
 font-size: 20px;
 line-height: 26px;
 text-align: center;
-
+font-family: RobotoSlab;
 /* White */
 
 color: #F4EDE8;
@@ -114,7 +115,7 @@ font-weight: bold;
 font-size: 16px;
 line-height: 21px;
 text-align: center;
-
+font-family: RobotoSlab;
 /* Text */
 
 color: #F4EDE8;
@@ -122,7 +123,7 @@ color: #F4EDE8;
 
 export const EsqueciSenha = styled.Text`
 
-width: 144px;
+
 height: 18px;
 font-style: normal;
 font-weight: normal;
@@ -131,7 +132,7 @@ line-height: 18px;
 text-align: center;
 margin-top:20px;
 /* White */
-
+font-family: RobotoSlab;
 color: #F4EDE8;
 `;
 
