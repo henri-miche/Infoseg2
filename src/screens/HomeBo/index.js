@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { Image,StyleSheet,View,Text } from 'react-native';
+import { Image,StyleSheet,View } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native'
 import firebase from '../../connection/FirebaseConection';
-import DownFotos2 from '../../components/DownFotos2';
 import { Container,
 ViewTitullo,
 TextTitulo,
@@ -14,6 +13,10 @@ TextLabel,
 TextLabelText,
 TextLabelcamposmae,
 TextCamposmae,
+TextDetallhesOcorr,
+TextLabeldetalhes,
+TextDetalhes,
+TextCodRegistro,
 
 } from './styles';
 
@@ -22,8 +25,6 @@ export default () => {
         const route = useRoute();
         const navigation = useNavigation();
         const [key, setKey] = useState(route.params.key);
-        const [listFire, setListFire] = useState(null);
-        const [isRefresh, setIsRefresh] = useState(false);
         const [nome, setNome] = useState();
         const [identidade, setIdentidade] = useState();
         const [cpf, setCpf] = useState();
@@ -50,7 +51,7 @@ export default () => {
                     const identidade = snapshot.val().Identidade;
                     const cpf = snapshot.val().CPF;
                     const chaveFoto = snapshot.val().ChaveFoto;
-                    const dataa = snapshot.val().Data;
+                    const data = snapshot.val().Data;
                     const hora = snapshot.val().Hora;
                     const nascimento = snapshot.val().Nascimento;
                     const tipoRo = snapshot.val().TipoRo;
@@ -103,22 +104,6 @@ export default () => {
         });
     }
 
-     useEffect(() => {
-      let isUnmount = false;
-
-      setTimeout(() => {
-          
-      
-      if (!isUnmount) {
-          buscarFotos();
-      }
-   }, 1000);
-   return ()=>{
-      isUnmount = true;
-      setAvatar2(null);
-   }
-  }, [])
-
 useEffect(() => {
       let isUnmount = false;
 
@@ -127,18 +112,52 @@ useEffect(() => {
       
       if (!isUnmount) {
           pushDados();
+          buscarFotos();
       }
    }, 1000);
    return ()=>{
       isUnmount = true;
-      setListFire([]);
+    setIdentidade('');
+    setNome('');
+    setCpf('');
+    setChaveFoto('');
+    setData('');
+    setHora('');
+    setNascimento('');
+    setTipoRo('');
+    setLocal('');
+    setMae('');
+    setPai('');
+    setTelefone('');
+    setGenero('');
+    setHistorico('');
+    setCosop('');
+    setEndereço('');
+
       
    }
   }, [])
 
-    const handleClick = () => {
-        navigation.navigate('HomeBoCadastro');
+     const sair = () => {
+        setIdentidade('');
+        setNome('');
+        setCpf('');
+        setChaveFoto('');
+        setData('');
+        setHora('');
+        setNascimento('');
+        setTipoRo('');
+        setLocal('');
+        setMae('');
+        setPai('');
+        setTelefone('');
+        setGenero('');
+        setHistorico('');
+        setCosop('');
+        setEndereço('');
+        navigation.goBack();
     };
+   
 
     return (
         <Container >
@@ -147,7 +166,7 @@ useEffect(() => {
                 
                 <TextTitulo>Detalhes da Ocorrência</TextTitulo>
                 
-                <TouchSair>
+                <TouchSair onPress = {sair}>
                     <Image source = {require('../../../assets/SetaSair.png')} />
                 </TouchSair>
             
@@ -177,8 +196,42 @@ useEffect(() => {
                 </View>
             </ViewQualificaçao>
 
-            <View style={{marginTop:10,marginLeft:30}}>
+            <View style={{marginLeft:30}}>
                 <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
+                <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
+                 
+                 <View style = {{flexDirection:'row',justifyContent:'space-between',paddingRight:60}}>
+                     <TextLabelcamposmae>CEP:<TextCamposmae>{}</TextCamposmae></TextLabelcamposmae>
+                      <TextLabelcamposmae>Gênero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
+                 </View>
+                 
+                <TextLabelcamposmae>Endereço:<TextCamposmae>{endereço}</TextCamposmae></TextLabelcamposmae>
+            </View>
+            
+            <View style={{marginLeft:30,marginTop:35}}>
+                <TextDetallhesOcorr>Detalhes da Ocorrência</TextDetallhesOcorr>
+            </View>
+
+            <View style={{marginTop:15,marginLeft:30}}>
+
+                <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:60}} >
+                    <TextLabeldetalhes>Data:<TextDetalhes>{data}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabeldetalhes>Hora:<TextDetalhes>{hora}</TextDetalhes></TextLabeldetalhes>
+                </View>
+
+                <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:115}}>
+                     <TextLabeldetalhes>RO:<TextDetalhes>{tipoRo}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabeldetalhes>Local:<TextDetalhes>{local}</TextDetalhes></TextLabeldetalhes>
+                </View>
+
+                <View>
+                    <TextLabeldetalhes>ASO:<TextDetalhes>{cosop}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabeldetalhes>Detalhes:<TextDetalhes>{historico}</TextDetalhes></TextLabeldetalhes>
+                </View>
+            </View>
+
+            <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
+                <TextCodRegistro>Código de Registro:</TextCodRegistro>
             </View>
 
         </Container>
@@ -201,17 +254,4 @@ const styles = StyleSheet.create({
     },
 
 })
-  /*<SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
-                    <FlatList 
-                    data={listFire}
-                        
-                        keyExtractor={(item) => item.key}
-                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
-                        
-                        renderItem={({ item }) =>
-                           <DownFotos2 data={item}/>
-                           
-                            
-
-                        } />
-                </SafeAreaView>*/
+  

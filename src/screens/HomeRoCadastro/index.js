@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import { SafeAreaView,Text, View, StyleSheet,Image,TextInput,Button,Alert } from 'react-native';
-import { Container } from './styles';
+
 import { useNavigation } from '@react-navigation/native';
 import ConfirmarCancel from '../../components/ConfirmarCancel';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,6 +9,13 @@ import * as Permissions from 'expo-permissions';
 import * as imagePicker from 'expo-image-picker';
 import moment from 'moment';
 import firebase from '../../connection/FirebaseConection';
+import { Container,
+ViewTitullo,
+TouchSair,
+TextTitulo,
+TextSubtitulo,
+ImageSpace,
+} from './styles';
 
 
 export default () => {
@@ -44,7 +51,20 @@ export default () => {
             
             uploadImage(foto.uri, chave)
                 .then(() => {
-                    Alert.alert("Imagem enviada!");
+                    setNome('');
+                    setCpf('');
+                    setEndereço('');
+                    setIdentidade('');
+                    setNascimento('');
+                    setTipoRo('');
+                    setLocal('');
+                    setMae('');
+                    setPai('');
+                    setTelefone('');
+                    setGenero('');
+                    setHistorico('');
+                    alert('Dados enviados!');
+                    navigation.navigate('HomeRo');
                 })
                 .catch((error) => {
                     Alert.alert(error);
@@ -175,10 +195,59 @@ export default () => {
         setFoto(data);
     }
 
+    const sair = () => {
+        navigation.goBack();
+    };
+
     return (
         <Container >
 
-            <SafeAreaView style={{ backgroundColor: '#000', flex: 1, marginBottom: 0.5,justifyContent:'flex-end' }}>
+            <ViewTitullo>
+                
+                <TextTitulo>Detalhes da Ocorrência</TextTitulo>
+                
+                <TouchSair onPress = {sair}>
+                    <Image source = {require('../../../assets/SetaSair.png')} />
+                </TouchSair>
+            
+            </ViewTitullo>
+
+            <View style={styles.viewQualiEnv}>
+                <TextSubtitulo>Qualificação do Envolvido</TextSubtitulo>
+            </View>
+
+            <View style = {styles.viewFotoMais}>
+
+                <View> 
+                    <ImageSpace>
+                        <Image source = {require('../../../assets/adicionarimagem.png')} />
+                    </ImageSpace> 
+                </View>
+
+                <View></View>
+
+            </View>
+
+
+
+        </Container>
+    );
+}
+const styles = StyleSheet.create({
+    viewFotoMais:{
+        marginLeft:30,
+        marginTop:25,
+        
+    },
+    viewQualiEnv:{
+        marginLeft:30,
+        marginTop:25,
+        
+    },
+    
+})
+/*
+ <SafeAreaView style={{ backgroundColor: '#000', flex: 1, marginBottom: 0.5,justifyContent:'flex-end' }}>
                 
                     <ScrollView> 
                     
@@ -233,50 +302,4 @@ export default () => {
                 
                 <ConfirmarCancel onPress={handleClick} onPress1={confirmar}/>
                
-            </SafeAreaView>
-
-
-
-        </Container>
-    );
-}
-const styles = StyleSheet.create({
-    form:{
-        flex:1,
-        
-    },
-    formFoto:{
-        width:150,
-        height:150,
-        backgroundColor:'#D3D3D3',
-        marginBottom:5
-    },
-    campos:{
-        
-        flexDirection:'column',
-        alignItems:'center',
-        padding:5,
-        justifyContent:'center'
-        
-        
-    },
-    input:{
-        height:40,
-        borderWidth:1,
-        borderColor:'#fff',
-        backgroundColor:'#D3D3D3',
-        borderRadius:30,
-        paddingLeft:10,
-        margin:5,
-        
-    },
-    inputHist:{
-        height:200,
-        borderWidth:1,
-        borderColor:'#fff',
-        backgroundColor:'#D3D3D3',
-        
-        paddingLeft:10,
-        margin:5,
-    }
-})
+            </SafeAreaView>*/

@@ -4,18 +4,16 @@ import styled from 'styled-components/native';
 
 
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.ScrollView`
     flex: 1;
     background-color:#000;
     
 `;
 
 export const TextoBoasVindas = styled.Text`
-    position: absolute;
+   
 width: 112px;
 height: 26px;
-left: 30px;
-top: 60px;
 font-style: normal;
 font-weight: 500;
 font-size: 20px;
@@ -29,20 +27,15 @@ color: #FF9000;
 `;
 
 export const TouchExit = styled.TouchableOpacity`
-position: absolute;
+
 width: 24px;
 height: 24px;
-left: 321px;
-top: 60px;
+
 
 `
 
 export const SubTitulo = styled.Text`
-position: absolute;
-width: 260px;
-height: 21px;
-left: 30px;
-top: 91px;
+
 font-style: normal;
 font-weight: 500;
 font-size: 16px;
@@ -56,11 +49,9 @@ color: #F4EDE8;
 
 
 export const GerarRo = styled.TouchableOpacity`
-position: absolute;
-left: 8%;
-right: 53.33%;
-top: 16.87%;
-bottom: 72.04%;
+
+width: 145px;
+height: 90px;
 justify-content:center;
 align-items:center;
 
@@ -85,11 +76,9 @@ color: #F4EDE8;
 `
 
 export const GerarRau = styled.TouchableOpacity`
-position: absolute;
-left: 53.33%;
-right: 8%;
-top: 16.87%;
-bottom: 72.04%;
+
+width: 145px;
+height: 90px;
 justify-content:center;
 align-items:center;
 
@@ -100,11 +89,8 @@ background: #2E2E2E;
 border-radius: 10px;
 `
 export const GerarRrm = styled.TouchableOpacity`
-position: absolute;
-left: 8%;
-right: 53.33%;
-top: 31.03%;
-bottom: 57.88%;
+width: 145px;
+height: 90px;
 justify-content:center;
 align-items:center;
 
@@ -114,11 +100,8 @@ background: #2E2E2E;
 border-radius: 10px;
 `
 export const GerarBo = styled.TouchableOpacity`
-position: absolute;
-left: 53.33%;
-right: 8%;
-top: 31.03%;
-bottom: 57.88%;
+width: 145px;
+height: 90px;
 justify-content:center;
 align-items:center;
 
@@ -129,11 +112,11 @@ background: #2E2E2E;
 border-radius: 10px;
 `
 export const OcorrenciasText = styled.Text`
-position: absolute;
+
 width: 205px;
 height: 26px;
-left: 30px;
-top: 367px;
+margin-left:30px;
+margin-top:25px;
 font-style: normal;
 font-weight: 500;
 font-size: 20px;
@@ -145,11 +128,10 @@ font-family: RobotoSlab;
 color: #F4EDE8;
 `
 export const FiltrosText = styled.Text`
-position: absolute;
+
 width: 44px;
 height: 18px;
-left: 30px;
-top: 404px;
+
 font-style: normal;
 font-weight: 500;
 font-size: 14px;
@@ -162,11 +144,10 @@ color: #767676;
 `
 
 export const FiltroRo = styled.TouchableOpacity`
-position: absolute;
+
 width: 40px;
 height: 20px;
-left: 86px;
-top: 403px;
+
 justify-content:center;
 align-items:center;
 
@@ -195,11 +176,10 @@ font-family: RobotoSlab;
 color: #FF9000;
 `
 export const FiltroRau = styled.TouchableOpacity`
-position: absolute;
+
 width: 51px;
 height: 20px;
-left: 141px;
-top: 403px;
+
 justify-content:center;
 align-items:center;
 
@@ -230,11 +210,10 @@ color: #F4EDE8;
 `
 
 export const FiltroRrm = styled.TouchableOpacity`
-position: absolute;
+
 width: 54px;
 height: 20px;
-left: 207px;
-top: 403px;
+
 justify-content:center;
 align-items:center;
 
@@ -262,11 +241,10 @@ color: #FF9000;
 `
 
 export const FiltroBo = styled.TouchableOpacity`
-position: absolute;
+
 width: 40px;
 height: 20px;
-left: 276px;
-top: 403px;
+
 justify-content:center;
 align-items:center;
 
@@ -294,12 +272,11 @@ color: #F4EDE8;
 `
 
 export const ViewResumo = styled.View`
-
-position: absolute;
+margin-top:21px;
+margin-left:30px;
 width: 315px;
 height: 237px;
-left: 30px;
-top: 443px;
+
 
 /* Darkest */
 
@@ -308,11 +285,11 @@ background: #2E2E2E;
 border-radius: 10px;
 `
 export const ViewProx = styled.View`
-    position: absolute;
+   
     width: 315px;
     height: 21px;
-    left: 30px;
-    top: 695px;
+    margin-left:30px;
+    margin-top:15px;
     flexDirection:row;
 `
 export const AnteriorBtn = styled.TouchableOpacity`
@@ -327,11 +304,11 @@ export const ProxBtn = styled.TouchableOpacity`
     justify-content:flex-end;
 `
 export const BtnTodasOcorrencias = styled.TouchableOpacity`
-    position: absolute;
+   
     width: 315px;
     height: 50px;
-    left: 30px;
-    top: 731px;
+    margin-left:30px;
+    margin-top:15px;
     align-items: center;
     justify-content:center;
     background: #FF9000;

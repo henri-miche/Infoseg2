@@ -1,16 +1,31 @@
-import { Container } from './styles';
 import SearchCadastrar from "../../components/SearchCadastrar";
 import {useNavigation, useRoute} from '@react-navigation/native'
 import React,{useState,useEffect} from 'react';
-import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl} from 'react-native';
+import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl,Image} from 'react-native';
 import firebase from '../../connection/FirebaseConection';
 import DownFotos2 from '../../components/DownFotos2';
+import Search from '../../components/Search'
+import { Container,
+ViewTitullo,
+TouchSair,
+TextTitulo,
+TextSubtitulo,
+FiltrosText,
+FiltroRo,
+RoText,
+FiltroRau,
+RauText,
+FiltroRrm,
+RrmText,
+FiltroBo,
+BoText,
+ResultBuscaText,
 
+} from './styles';
 export default () => {
    
     const navigation = useNavigation();
     const route = useRoute();
-    const [searchTexto, setSearchTexto] = useState(route.params.searchTexto);
     const [listFire, setListFire] = useState(null);
     const [isRefresh, setIsRefresh] = useState(false);
     
@@ -20,8 +35,7 @@ export default () => {
 
     const pushDados = () =>{
      try {
-      firebase.database().ref('/Ro').orderByChild('Nome').equalTo(searchTexto)
-      .once('value', (snapshot) => {
+      firebase.database().ref('/Ro').once('value', (snapshot) => {
         const list = [];
         snapshot.forEach((childItem) => {
           list.push({
@@ -44,7 +58,7 @@ export default () => {
             cosop: childItem.val().Cosop,
           });
         });
-        setListFire(list);
+        setListFire(list.reverse());
         
       })
 
@@ -52,6 +66,7 @@ export default () => {
       alert(error);
     }
 }
+    
     
    
   useEffect(() => {
@@ -67,27 +82,66 @@ export default () => {
    return ()=>{
       isUnmount = true;
       setListFire([]);
-      setSearchTexto('');
+      
    }
   }, [])
+
 
   const handleClickSearch = () =>{
       pushDados();
       
   }
 
+  const sair = () => {
+        navigation.goBack();
+    };
+
     return (
         <Container >
                 
-            <SafeAreaView style={{ backgroundColor: '#1C1C1C', flex: 1 ,marginTop:1}}>
-               
-               <SearchCadastrar  value={searchTexto} 
-               autoCapitalize='characters' 
-               onEndEditing={handleClickSearch} 
-               onChangeText={(t) => setSearchTexto(t)} 
-               onPress={handleClick}  />
+            <SafeAreaView style={{ backgroundColor: '#000', flex: 1, }}>
+                <ViewTitullo>
                 
-                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                <TextTitulo>Detalhes da Ocorrência</TextTitulo>
+                
+                <TouchSair onPress = {sair}>
+                    <Image source = {require('../../../assets/SetaSair.png')} />
+                </TouchSair>
+            
+            </ViewTitullo>
+
+            <View>
+                <TextSubtitulo>Veja todas as ocorrências já registradas!</TextSubtitulo>
+            </View>
+
+             <View style = {styles.viewFiltros}>
+                <FiltrosText>Filtros</FiltrosText>
+
+                <FiltroRo>
+                    <RoText>RO</RoText>
+                </FiltroRo>
+
+                <FiltroRau>
+                    <RauText>RAU</RauText>
+                </FiltroRau>
+
+                <FiltroRrm>
+                    <RrmText>RRM</RrmText>
+                </FiltroRrm>
+
+                <FiltroBo>
+                    <BoText>BO</BoText>
+                </FiltroBo>
+                </View>
+
+                <Search color='#fff'/>
+
+                <View>
+                    <ResultBuscaText>Resultados da Busca</ResultBuscaText>
+                </View>
+               
+                
+                <SafeAreaView style={{ backgroundColor:'#000',marginLeft:30}}>
                     <FlatList style={styles.viewFlat} 
                     data={listFire}
                         
@@ -111,6 +165,15 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
+    viewFiltros:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:25,
+       marginLeft:30,
+       paddingRight:30,
+       marginRight:59,
+       marginBottom:15,
+    },
     itemArea:{
         height:100,
         flex:1,

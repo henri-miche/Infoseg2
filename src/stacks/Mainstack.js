@@ -6,7 +6,7 @@ import TelaCadastro from '../screens/TelaCadastro';
 import HomeRo from '../screens/HomeRo';
 import HomeBo from '../screens/HomeBo';
 import HomeRoCadastro from '../screens/HomeRoCadastro';
-
+import HomeRoSearch from '../screens/HomeRoSearch';
 
 
 const Stack = createStackNavigator();
@@ -21,6 +21,7 @@ export default () => (
         <Stack.Screen name="HomeRo" component={HomeRo} />
          <Stack.Screen name="HomeRoCadastro" component={HomeRoCadastro} />
         <Stack.Screen name="HomeBo" component={HomeBo} />
+         <Stack.Screen name="HomeRoSearch" component={ HomeRoSearch} />
          
         
     

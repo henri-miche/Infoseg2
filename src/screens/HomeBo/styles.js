@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.ScrollView`
     flex: 1;
     background-color:#000;
 `;
@@ -82,7 +82,7 @@ color: #FF9000;
 export const TextLabel = styled.Text`
 
 
-height: 18px;
+
 margin-top:5px;
 
 font-family: RobotoSlab;
@@ -98,7 +98,7 @@ color: #FF9000;
 
 export const TextLabelText = styled.Text`
 
-height: 18px;
+
 
 
 font-family: RobotoSlab;
@@ -114,8 +114,8 @@ color: #F4EDE8;
 
 export const TextLabelcamposmae = styled.Text`
 
-width: 243px;
-height: 21px;
+margin-top:10px;
+
 
 font-family: RobotoSlab;
 font-style: normal;
@@ -130,8 +130,8 @@ color: #FF9000;
 
 export const TextCamposmae = styled.Text`
 
-width: 243px;
-height: 21px;
+
+
 
 font-family: RobotoSlab;
 font-style: normal;
@@ -142,6 +142,66 @@ line-height: 21px;
 
 color: #F4EDE8;
 `;
+
+export const TextDetallhesOcorr = styled.Text`
+
+
+
+
+font-family: RobotoSlab;
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 26px;
+
+/* White */
+
+color: #F4EDE8;
+`;
+
+
+export const TextLabeldetalhes = styled.Text`
+
+
+
+margin-bottom:10px;
+font-family: RobotoSlab;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 21px;
+
+/* Text */
+
+color: #FF9000;
+`;
+
+export const TextDetalhes = styled.Text`
+font-family: RobotoSlab;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 21px;
+
+/* Text */
+
+color: #F4EDE8;
+`;
+
+export const TextCodRegistro = styled.Text`
+
+font-family: RobotoSlab;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+text-align: center;
+
+/* Text 2 */
+
+color: #767676;
+`;
+
 
 
 

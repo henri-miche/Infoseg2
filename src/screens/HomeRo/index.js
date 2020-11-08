@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {SafeAreaView,FlatList, StyleSheet, RefreshControl,Image, Text} from 'react-native';
+import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image, Text} from 'react-native';
 import {Container,
 TextoBoasVindas,
 TouchExit,
@@ -41,9 +41,7 @@ export default () => {
     const [nome, setNome] = useState('');
 
 
-    const handleClick = () =>  {
-        navigation.navigate('HomeRoCadastro');
-    };
+    
     const Logout  = () => {
         firebase.auth().signOut();
     }
@@ -120,33 +118,45 @@ const pushDados = () =>{
    }
   }, [])
 
-     function handleClickSearch () {
-        navigation.navigate('HomeRoSearch',{searchTexto:searchTexto});
-        setSearchTexto('');
+     
+
+     const todasOcorrencias = () =>  {
+        navigation.navigate('HomeRoSearch');
+    };
+
+    const cadastroRo = () =>  {
+        navigation.navigate('HomeRoCadastro');
     };
 
 
 
     return(
         <Container >
-                <TextoBoasVindas>Olá, {nome}!</TextoBoasVindas>
-                
-                <TouchExit onPress={Logout}>
-                <Image source = {require('../../../assets/Sair.png')} />
-                </TouchExit>
+                <View style = {styles.ViewTitulo}>
+                    <TextoBoasVindas>Olá, {nome}!</TextoBoasVindas>
+            
+                    <TouchExit onPress={Logout}>
+                    <Image source = {require('../../../assets/Sair.png')} />
+                    </TouchExit>
+                </View>
 
+                <View style = {styles.ViewSubTitulo}>
                 <SubTitulo>Como o InfoSeg vai te ajudar hoje?</SubTitulo>
-                
-                <GerarRo>
-                    <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
-                    <TextoGerarRo>Gerar RO</TextoGerarRo>
-                </GerarRo>
-                
-                <GerarRau>
-                    <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
-                    <TextoGerarRo>Gerar RAU</TextoGerarRo>
-                </GerarRau>
+                </View>
 
+                <View style = {styles.ViewRoRau} >
+                    <GerarRo onPress = {cadastroRo}>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
+                        <TextoGerarRo>Gerar RO</TextoGerarRo>
+                    </GerarRo>
+                    
+                    <GerarRau>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
+                        <TextoGerarRo>Gerar RAU</TextoGerarRo>
+                    </GerarRau>
+                </View>
+                
+                <View style = {styles.ViewRrmBo}>
                 <GerarRrm>
                     <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
                     <TextoGerarRo>Gerar RRM</TextoGerarRo>
@@ -156,9 +166,11 @@ const pushDados = () =>{
                     <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
                     <TextoGerarRo>Gerar BO</TextoGerarRo>
                 </GerarBo>
+                </View>
 
                 <OcorrenciasText>Ocorrências Recentes</OcorrenciasText>
-
+                
+                <View style = {styles.viewFiltros}>
                 <FiltrosText>Filtros</FiltrosText>
 
                 <FiltroRo>
@@ -176,6 +188,7 @@ const pushDados = () =>{
                 <FiltroBo>
                     <BoText>BO</BoText>
                 </FiltroBo>
+                </View>
 
                 <ViewResumo>
                   <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
@@ -207,7 +220,7 @@ const pushDados = () =>{
                         </ProxBtn>
                 </ViewProx>        
                 
-                <BtnTodasOcorrencias>
+                <BtnTodasOcorrencias onPress={todasOcorrencias}>
                     <Text style= {styles.textVerTodasOcorr}>Ver Todas as Ocorrências</Text>
                 </BtnTodasOcorrencias>
                 
@@ -219,6 +232,39 @@ const pushDados = () =>{
 }
 
 const styles = StyleSheet.create({
+    viewFiltros:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:25,
+       marginLeft:30,
+       paddingRight:30,
+       marginRight:59,
+    },
+    ViewRrmBo:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:25,
+       marginLeft:30,
+       paddingRight:30,
+    },
+    ViewRoRau:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:25,
+       marginLeft:30,
+       paddingRight:30,
+    },
+    ViewSubTitulo:{
+        marginLeft:30,
+        marginTop:5,
+    },
+    ViewTitulo:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:30,
+        marginLeft:30,
+        paddingRight:35,
+    },
     textVerTodasOcorr:{
 width: 194,
 height: 21,
