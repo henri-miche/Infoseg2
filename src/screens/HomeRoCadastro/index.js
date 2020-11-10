@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import { SafeAreaView,Text, View, StyleSheet,Image,TextInput,Button,Alert } from 'react-native';
-
+import {Picker} from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import ConfirmarCancel from '../../components/ConfirmarCancel';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,12 +9,20 @@ import * as Permissions from 'expo-permissions';
 import * as imagePicker from 'expo-image-picker';
 import moment from 'moment';
 import firebase from '../../connection/FirebaseConection';
+import Inputs from '../../components/Inputs'
+import InputsInteiro from '../../components/InputsInteiro'
+import InputMaePai from '../../components/InputMaePai'
+import InputMenor from '../../components/InputMenor'
+import InputMenorAinda from '../../components/InputMenorAinda'
 import { Container,
 ViewTitullo,
 TouchSair,
 TextTitulo,
 TextSubtitulo,
 ImageSpace,
+BtnFixa,
+TextEndereço,
+TextInformações,
 } from './styles';
 
 
@@ -33,7 +41,7 @@ export default () => {
     const [telefone, setTelefone] = useState('');
     const [genero, setGenero] = useState('');
     const [historico, setHistorico] = useState('');
-    
+    const [estado, setEstado] = useState("MG");
 
 
     const navigation = useNavigation();
@@ -224,19 +232,205 @@ export default () => {
                     </ImageSpace> 
                 </View>
 
-                <View></View>
+                <View style={styles.viewInpustsCima}>
+                
+                <Inputs source = {require('../../../assets/rgicon.png')} placeholder ='RG' placeholderTextColor ='#666360'/>
+                 <Inputs source = {require('../../../assets/rgicon.png')} placeholder ='CPF' placeholderTextColor ='#666360'/>
+                  <Inputs source = {require('../../../assets/phone.png')} placeholder ='Telefone' placeholderTextColor ='#666360'/>
+                </View>
 
             </View>
 
+            <View style = {styles.viewInputsMeio} >
+                <InputsInteiro  source = {require('../../../assets/user.png')} placeholder ='Nome Completo' placeholderTextColor ='#666360'/>
+                
+                 <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360'/>
+                    <BtnFixa>
+                        <Image  source = {require('../../../assets/Btnfixa.png')}/>
+                    </BtnFixa>
+                </View>
+                
+                 <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360'/>
+                    <BtnFixa>
+                        <Image  source = {require('../../../assets/Btnfixa.png')}/>
+                    </BtnFixa>
+                 </View>
+
+            </View>
+            
+            <View style = {styles.viewNascimento}>
+
+                <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Nascimento' placeholderTextColor ='#666360' />
+
+                <Picker
+                selectedValue={genero}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#666360'}}
+                onValueChange={(itemValue, itemIndex) => setGenero(itemValue)}
+                >
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                </Picker>
+                
+            </View>
+
+            <View>
+                <TextEndereço>Endereço do Envolvido</TextEndereço>
+
+            </View>
+
+            <View style= {styles.viewEstado}>
 
 
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' />
+                <Picker
+                selectedValue={estado}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#666360' }}
+                onValueChange={(itemValue, itemIndex) => setEstado(itemValue)}
+                >
+                        <Picker.Item label="Minas Gerais" value="MG" />
+                        <Picker.Item label="Acre" value="AC" />
+                        <Picker.Item label="Alagoas" value="AL" />
+                        <Picker.Item label="Amapa" value="AP" />
+                        <Picker.Item label="Amazonas" value="AM" />
+                        <Picker.Item label="Bahia" value="BA" />
+                        <Picker.Item label="Ceará" value="CE" />
+                        <Picker.Item label="Espírito Santo" value="ES" />
+                        <Picker.Item label="Goiás" value="GO" />
+                        <Picker.Item label="Maranhão" value="MA" />
+                        <Picker.Item label="Mato Grosso do Sul" value="MS" />
+                        <Picker.Item label="Pará" value="PA" />
+                        <Picker.Item label="Paraíba" value="PB" />
+                        <Picker.Item label="Paraná" value="PR" />
+                        <Picker.Item label="Pernambuco" value="PE" />
+                        <Picker.Item label="Piauí" value="PI" />
+                        <Picker.Item label="Rio de Janeiro" value="RJ" />
+                        <Picker.Item label="Rio Grande do Norte" value="RN" />
+                        <Picker.Item label="Rio Grande do Sul" value="RS" />
+                        <Picker.Item label="Rondônia" value="RO" />
+                        <Picker.Item label="Roraima" value="RR" />
+                        <Picker.Item label="Santa Catarina" value="SC" />
+                        <Picker.Item label="Pernambuco" value="PE" />
+                        <Picker.Item label="São Paulo" value="SP" />
+                        <Picker.Item label="Sergipe" value="SE" />
+                        <Picker.Item label="Tocantins" value="TO" />
+                        <Picker.Item label="Distrito Federal" value="DF" />
+                </Picker>
+            </View>
+                    
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cidade' placeholderTextColor ='#666360' />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Bairro' placeholderTextColor ='#666360' />
+            </View>
+
+            <View style = {styles.viewLogradoro}>
+             <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' />
+
+            </View>
+
+            <View style = {{marginLeft:30}} >
+            <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Complemento' placeholderTextColor ='#666360'/>
+            </View>
+
+            <View style = {{marginBottom:25}}>
+            <TextInformações>Informações da Ocorrência</TextInformações>
+
+            </View>
+                    
+            <View style = {styles.viewDataHora} >
+                 <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Data' placeholderTextColor ='#666360' />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Hora' placeholderTextColor ='#666360' />
+            </View>
+
+            <View style = {styles.viewTipoRo}>
+
+               <Picker
+                selectedValue={tipoRo}
+                style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#666360'}}
+                onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
+                >
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                </Picker>
+
+                <Picker
+                selectedValue={local}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,color:'#666360',marginRight:14}}
+                onValueChange={(itemValue, itemIndex) => setLocal(itemValue)}
+                >
+                <Picker.Item label="UVL" value="UVL" />
+                <Picker.Item label="UFL" value="UFL" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                
+                </Picker>
+                
+            </View>
+ 
         </Container>
     );
 }
 const styles = StyleSheet.create({
+    viewTipoRo:{
+        marginLeft:30,
+        flexDirection:'row', 
+        justifyContent:'space-between' 
+    }, 
+    viewDataHora:{
+        marginLeft:30,
+        flexDirection:'row',  
+    }, 
+    viewLogradoro:{
+        marginLeft:30,
+        flexDirection:'row',  
+    }, 
+    
+    viewCidadeBairro:{
+        marginLeft:30,
+        flexDirection:'row',
+        
+        
+    }, 
+    viewNascimento:{
+        marginLeft:30,
+        flexDirection:'row'
+    }, 
+    viewEstado:{
+        marginLeft:30,
+        flexDirection:'row'
+    },
+    viewInputsMeio:{
+        marginLeft:30
+    },
+    viewInpustsCima:{
+        marginLeft:16
+    },
+    viewInpustsCima:{
+        marginLeft:16
+    },
+    
     viewFotoMais:{
         marginLeft:30,
         marginTop:25,
+        flexDirection:'row',
+        
         
     },
     viewQualiEnv:{

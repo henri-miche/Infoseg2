@@ -276,6 +276,8 @@ margin-top:21px;
 margin-left:30px;
 width: 315px;
 height: 237px;
+justify-content:center;
+align-items:center;
 
 
 /* Darkest */
