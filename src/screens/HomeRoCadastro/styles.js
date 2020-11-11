@@ -134,6 +134,9 @@ text-align: center;
 color: #F4EDE8;
     
 `
+export const LoadingIcon = styled.ActivityIndicator`
+    margin-top: 30px;
+`;
 
 
 

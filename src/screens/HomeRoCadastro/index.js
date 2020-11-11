@@ -31,28 +31,81 @@ export default () => {
     
     const [foto,setFoto] = useState(null);
     const [cpf, setCpf] = useState('');
-    const [endereço, setEndereço] = useState('');
     const [nome, setNome] = useState('');
     const [identidade, setIdentidade] = useState('');
     const [nascimento, setNascimento] = useState('');
-    const [tipoRo, setTipoRo] = useState('RO');
-    const [local, setLocal] = useState('');
+    const [tipoRo, setTipoRo] = useState("RO");
+    const [local, setLocal] = useState("UVL");
     const [mae, setMae] = useState('');
     const [pai, setPai] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [genero, setGenero] = useState('');
+    const [genero, setGenero] = useState("Masculino");
     const [historico, setHistorico] = useState('');
 
-    const [estado, setEstado] = useState('');
-    const [tipoOcorrencia, setTipoOcorrencia] = useState('');
+    const [estado, setEstado] = useState("MG");
+   
     const [cep, setCep] = useState('');
+
+    const [tipoOcorrencia1, setTipoOcorrencia1] = useState();
+     const [tipoOcorrenciaRo, setTipoOcorrenciaRo] = useState({ "1": "Furto","2": "Auxilio Púbico","3": "Atendimento a deficiente físico","4": "Atendimento a deficiente visual",});
+    const [tipoOcorrenciaRau, setTipoOcorrenciaRau] = useState({ "1": "Acidente","2": "Acidente na escada rolante","3": "Acidente na escada fixa","4": "Mal súbito",});
+    const [tipoOcorrenciaBo, setTipoOcorrenciaBo] = useState({ "1": "Pessoa perdida","2": "Òbito","3": "Importunação ofensiva ao pudor","4": "Ameaça",});
+    const [tipoOcorrenciaRRM, setTipoOcorrenciaRRM] = useState({ "1": "Panfletagem","2": "Recolhimento de mercadoria","3": "Recolhimento de bilhete",});
+    
+    const [tipoOcorrencia, setTipoOcorrencia] = useState(tipoOcorrenciaRo);
+
     const [cidade, setCidade] = useState('');
     const [bairro, setBairro] = useState('');
     const [logradouro, setLogradouro] = useState('');
-    const [numero, setNumero] = useState('');
+    const [numeroCasa, setNumeroCasa] = useState('');
     const [complemento, setComplemento] = useState('');
     const [hora, setHora] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
     const [data, setData] = useState(moment().format('DD-MM-YYYY'));
+    const [pickerChoice, setPickerChoice] = useState();
+
+     const [pickerRO, setPickerRo] = useState(<Picker
+                selectedValue={tipoOcorrencia}
+                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
+                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
+                >
+                <Picker.Item label="Furto" value="Furto" />
+                <Picker.Item label="Auxilio público" value="Auxilio público" />
+                <Picker.Item label="Atendimento a deficiente físico" value="Atendimento a deficiente físico" />
+                <Picker.Item label="Atendimento a deficiente visual" value="Atendimento a deficiente visual" />
+                </Picker>);
+
+        const [pickerRau, setPickerRau] = useState(<Picker
+                selectedValue={tipoOcorrencia}
+                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
+                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
+                >
+                <Picker.Item label="Acidente" value="Acidente" />
+                <Picker.Item label="Acidente na escada rolante" value="Acidente na escada rolante" />
+                <Picker.Item label="Acidente na escada fixa" value="Acidente na escada fixa" />
+                <Picker.Item label="Mal súbito" value="Mal súbito" />
+                </Picker>);
+
+        const [pickerRRM, setPickerRRM] = useState(<Picker
+                selectedValue={tipoOcorrencia}
+                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
+                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
+                >
+                <Picker.Item label="Panfletagem" value="Panfletagem" />
+                <Picker.Item label="Recolhimento de mercadoria" value="Recolhimento de mercadoria" />
+                <Picker.Item label="Recolhimento de bilhete" value="Recolhimento de bilhete" />
+                
+                </Picker>);
+         
+          const [pickerBO, setPickerBO] = useState(<Picker
+                selectedValue={tipoOcorrencia}
+                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
+                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
+                >
+                <Picker.Item label="Pessoa perdida" value="Pessoa perdida" />
+                <Picker.Item label="Òbito" value="Òbito" />
+                <Picker.Item label="Importunação ofensiva ao pudor" value="Importunação ofensiva ao pudor" />
+                <Picker.Item label="Ameaça" value="Ameaça" />
+                </Picker>);
 
 
 
@@ -74,11 +127,10 @@ export default () => {
                 firebase.database().ref('/'+tipoRo).child(chave).set({
                 Nome: nome,
                 CPF: cpf,
-                Endereço: endereço,
                 Cosop:cosop,
                 ChaveFoto:chave,
-                Data:dataa,
-                Hora:horario,
+                Data:data,
+                Hora:hora,
                 Identidade:identidade,
                 Nascimento:nascimento,
                 TipoRo:tipoRo,
@@ -87,13 +139,22 @@ export default () => {
                 Pai:pai,
                 Telefone:telefone,
                 Genero:genero,
-                Historico:historico
+                Historico:historico,
+                Estado:estado,
+                TipoOcorrencia:tipoOcorrencia,
+                CEP:cep,
+                Cidade:cidade,
+                bairro:bairro,
+                Logradouro:logradouro,
+                NumeroCasa:numeroCasa,
+                Complemento:complemento,
+                
             })
 
                 }).then(() => { 
                     setNome('');
                     setCpf('');
-                    setEndereço('');
+                    
                     setIdentidade('');
                     setNascimento('');
                     setTipoRo('');
@@ -103,12 +164,20 @@ export default () => {
                     setTelefone('');
                     setGenero('');
                     setHistorico('');
+                     setEstado('');
+                    setTipoOcorrencia('');
+                    setCep('');
+                    setCidade('');
+                    setBairro('');
+                    setLogradouro('');
+                    setNumeroCasa('');
+                    setComplemento('');
                     alert('Dados enviados!');
                     navigation.navigate('HomeRo');
 
                 })
                 .catch((error) => {
-                    Alert.alert(error);
+                    alert(error);
                 });
         }
     }
@@ -188,8 +257,8 @@ export default () => {
                             let chavess = firebase.database().ref('Ro');
                             let chave = chavess.push().key;
                             
-                            saveFoto(chave);
-                            saveUser(cosop,chave);
+                            saveFoto(chave,cosop);
+                           
                     
                         });       
                     
@@ -257,13 +326,31 @@ export default () => {
 
     
 
-    /*para mudança por picker useEffect(() => {
+     useEffect(() => {
       
-          alert('local ' + local)
+      switch (tipoRo) {
+          case 'RO':
+              setTipoOcorrencia(tipoOcorrenciaRo)
+              break;
+        case 'RAU':
+              setTipoOcorrencia(tipoOcorrenciaRau)
+              break;
+         case 'BO':
+             setTipoOcorrencia(tipoOcorrenciaBo)
+              break;      
+
+        case 'RRM':
+             setTipoOcorrencia(tipoOcorrenciaRRM)
+              break;  
+
+          default:
+              break;
+      }
+        
    return ()=>{
       
    }
-  }, [local])*/
+  }, [tipoRo])
 
    
 
@@ -387,7 +474,7 @@ export default () => {
 
             <View style = {styles.viewLogradoro}>
              <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouro} onChangeText={(t) => setLogradouro(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numero} onChangeText={(t) => setNumero(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasa} onChangeText={(t) => setNumeroCasa(t)} />
 
             </View>
 
@@ -448,19 +535,25 @@ export default () => {
             </View>
 
 
-             <Picker
-                selectedValue={tipoRo}
-                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
-                onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
-                >
-                <Picker.Item label="Tipo da Ocorrencia" value="Masculino" />
-                <Picker.Item label="Feminino" value="Feminino" />
-                </Picker>
+
+                <Picker
+                style={{height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
+                mode="dropdown"
+                selectedValue={tipoOcorrencia1}
+                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia1(itemValue)}>
+                {Object.keys(tipoOcorrencia).map((key) => {
+                return (<Picker.Item label={tipoOcorrencia[key]} value={key} key={key}/>) //if you have a bunch of keys value pair
+                })}
+                </Picker>   
+
+             
 
              <TextInput style={styles.inputHist} color ='#fff' placeholder='                      Destalhes da ocorrência' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />  
-             <BtnCadastrarOcorrencia>
+             <BtnCadastrarOcorrencia onPress={confirmar}>
                  <TextBtnOcorrencia>Cadastrar Ocorrência</TextBtnOcorrencia>
              </BtnCadastrarOcorrencia>
+
+            
  
         </Container>
     );
