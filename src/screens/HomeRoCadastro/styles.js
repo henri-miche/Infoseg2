@@ -5,6 +5,7 @@ export const Container = styled.ScrollView`
     flex: 1;
     flex-direction: column;
     background-color:#000;
+   
 `;
 
 export const ViewTitullo = styled.View`
@@ -104,6 +105,33 @@ export const TextInformações= styled.Text`
         /* White */
 
         color: #F4EDE8;
+    
+`
+export const BtnCadastrarOcorrencia = styled.TouchableOpacity` 
+width: 350px;
+height: 50px;
+background: #FF9000;
+border-radius: 10px;  
+justify-content:center;
+    align-items:center;
+    margin-left:30px;
+    margin-top:30px;
+`
+export const TextBtnOcorrencia= styled.Text`      
+width: 162px;
+height: 21px;
+font-family: RobotoSlab;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 21px;
+display: flex;
+align-items: center;
+text-align: center;
+
+/* Text */
+
+color: #F4EDE8;
     
 `
 

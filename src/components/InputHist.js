@@ -3,24 +3,29 @@ import styled from 'styled-components/native';
 
 
 const InputArea = styled.View`
-    width: 165px;
-    height: 50px;
+    width: 315px;
+    height: 230Px;
     background: #2E2E2E;
     flex-direction: row;
     border-radius: 10px;
     /*padding-left: 15px;*/
-    align-items: center;
+    
     margin-bottom:15px;
+    margin-left:30px;
+    margin-top:15px;
+    
 `;
 
  const Input = styled.TextInput`
     
-    width: 165px;
-    height: 50px;
+    width: 315px;
+    height: 230px;
     background: #2E2E2E;
     border-radius: 10px; 
     padding-left:10px;
     color:#fff;
+    
+    
 `;   
 
 export const ImagemEmail = styled.Image`
@@ -29,10 +34,10 @@ height:18px;
 margin-left:16px;
 `;
 
-export default ({placeholder,source,styled,keyboardType, value, onChangeText, password,placeholderTextColor,color}) => {
+export default ({placeholder,source,styled, value,multiline, onChangeText, password,placeholderTextColor,color}) => {
     return(
-        <InputArea>
-            <ImagemEmail source = {source}/>
+        
+           
             <Input 
                 color={color}
                 placeholderTextColor={placeholderTextColor}
@@ -40,8 +45,8 @@ export default ({placeholder,source,styled,keyboardType, value, onChangeText, pa
                 value={value}
                 onChangeText={onChangeText}
                 secureTextEntry={password}
-                keyboardType ={keyboardType}
+                multiline = {multiline}
             />
-        </InputArea>
+        
     );
 }

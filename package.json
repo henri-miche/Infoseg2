@@ -32,7 +32,9 @@
     "react-native-screens": "~2.10.1",
     "react-native-swiper": "^1.6.0",
     "react-native-web": "~0.13.12",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "remask": "^0.1.0-alpha.5",
+    "vanilla-masker": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
