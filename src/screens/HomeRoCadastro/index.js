@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { SafeAreaView,Text, View, StyleSheet,Image,TextInput,Button,Alert } from 'react-native';
+import { SafeAreaView,Text, View, StyleSheet,Image,TextInput,Button,Alert, Modal,TouchableOpacity } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import Constants from 'expo-constants';
@@ -24,7 +24,10 @@ TextEndereço,
 TextInformações,
 BtnCadastrarOcorrencia,
 TextBtnOcorrencia,
+ModalText,
+ModalTextText,
 } from './styles';
+
 
 
 export default () => {
@@ -62,6 +65,7 @@ export default () => {
     const [hora, setHora] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
     const [data, setData] = useState(moment().format('DD-MM-YYYY'));
     const [pickerChoice, setPickerChoice] = useState();
+    const [modalVisible, setModallVisible] = useState(false);
 
      const [pickerRO, setPickerRo] = useState(<Picker
                 selectedValue={tipoOcorrencia}
@@ -356,7 +360,7 @@ export default () => {
 
     return (
         <Container >
-
+       
             <ViewTitullo>
                 
                 <TextTitulo>Detalhes da Ocorrência</TextTitulo>
@@ -374,11 +378,33 @@ export default () => {
             <View style = {styles.viewFotoMais}>
 
                 <View> 
-                    <ImageSpace onPress = {carregarFoto} >
+                    <ImageSpace onPress = {()=>{setModallVisible(true)}} >
                     
                         <Image style={styles.formFoto} resizeMode='stretch' source={foto ? foto : require('../../../assets/adicionarimagem.png') }/> 
                     </ImageSpace> 
                 </View>
+
+                <Modal 
+                visible={modalVisible}
+                animationType='fade'
+                transparent={true}
+                onRequestClose = {()=>setModallVisible(false)}
+                >
+                <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+                
+                <View style={{width:150,height:150,backgroundColor:'#000',justifyContent:'center',alignItems:'center',marginBottom:400}}>
+                  <ModalText>
+
+                  </ModalText>
+
+                  <ModalText>
+
+                  </ModalText>
+                </View>
+
+                </View>
+                </Modal>
+
 
                 <View style={styles.viewInpustsCima}>
                 
@@ -413,6 +439,7 @@ export default () => {
                 <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Nascimento' placeholderTextColor ='#666360' keyboardType='number-pad' value={nascimento} onChangeText={(t) => mascaraNascimento(t)} />
 
                 <Picker
+                mode="dropdown"
                 selectedValue={genero}
                 style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setGenero(itemValue)}
@@ -433,6 +460,7 @@ export default () => {
 
                 <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' keyboardType='number-pad' value={cep} onChangeText={(t) => mascaraCep(t)} />
                 <Picker
+                mode="dropdown"
                 selectedValue={estado}
                 style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff' }}
                 onValueChange={(itemValue, itemIndex) => setEstado(itemValue)}
@@ -495,6 +523,7 @@ export default () => {
             <View style = {styles.viewTipoRo}>
 
                <Picker
+               mode="dropdown"
                 selectedValue={tipoRo}
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
@@ -506,6 +535,7 @@ export default () => {
                 </Picker>
 
                 <Picker
+                mode="dropdown"
                 selectedValue={local}
                 style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginRight:14}}
                 onValueChange={(itemValue, itemIndex) => setLocal(itemValue)}
@@ -554,7 +584,7 @@ export default () => {
              </BtnCadastrarOcorrencia>
 
             
- 
+               
         </Container>
     );
 }

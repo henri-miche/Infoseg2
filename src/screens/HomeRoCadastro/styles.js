@@ -138,5 +138,28 @@ export const LoadingIcon = styled.ActivityIndicator`
     margin-top: 30px;
 `;
 
+export const ModalText = styled.TouchableOpacity`
+    flex:1;
+    justify-content:center;
+    align-items:center;
+    background-color:#fff;
+`
+
+export const ModalTextText= styled.Text`
+        width: 257px;
+        height: 26px;
+        font-family: RobotoSlab;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 26px;
+        margin-left:30px;
+        margin-top:15px;
+
+        /* White */
+
+        color: #F4EDE8;
+    
+`
 
 
