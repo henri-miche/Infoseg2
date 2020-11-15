@@ -143,22 +143,23 @@ export const ModalText = styled.TouchableOpacity`
     justify-content:center;
     align-items:center;
     background-color:#fff;
+    width:75;
+    height:75;
+    background-color:#000;
 `
 
 export const ModalTextText= styled.Text`
-        width: 257px;
-        height: 26px;
+       
         font-family: RobotoSlab;
         font-style: normal;
         font-weight: 500;
         font-size: 20px;
         line-height: 26px;
-        margin-left:30px;
-        margin-top:15px;
+        
 
         /* White */
 
-        color: #F4EDE8;
+        color:#FF9000;
     
 `
 

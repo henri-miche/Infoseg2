@@ -288,6 +288,7 @@ export default () => {
              return;
          }
         setFoto(data);
+        setModallVisible(false);
     }
 
     const tirarFoto = async () => {
@@ -306,6 +307,7 @@ export default () => {
              return;
          }
         setFoto(data);
+        setModallVisible(false);
     }
 
     const sair = () => {
@@ -392,14 +394,21 @@ export default () => {
                 >
                 <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
                 
-                <View style={{width:150,height:150,backgroundColor:'#000',justifyContent:'center',alignItems:'center',marginBottom:400}}>
-                  <ModalText>
+                <View style={{width:120,height:120,backgroundColor:'#000',justifyContent:'center',alignItems:'center',alignSelf:'center'}}>
 
+                    <View style={{width:75,height:75,flex:1,backgroundColor:'#000',justifyContent:'center',alignItems:'center'}}>
+                    
+                  <ModalText onPress={tirarFoto}>
+                       <ModalTextText>foto</ModalTextText> 
                   </ModalText>
 
-                  <ModalText>
+                    </View>
 
+                    <View style={{width:75,height:75,flex:1,backgroundColor:'#000',justifyContent:'center',alignItems:'center'}}>
+                  <ModalText onPress={carregarFoto}>
+                      <ModalTextText>galeria</ModalTextText>  
                   </ModalText>
+                  </View>
                 </View>
 
                 </View>

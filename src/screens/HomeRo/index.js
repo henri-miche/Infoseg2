@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image, Text} from 'react-native';
 import {Container,
 TextoBoasVindas,
@@ -39,7 +39,10 @@ export default () => {
     const [searchTexto, setSearchTexto] = useState('');
     const [Filtro, setFiltro] = useState('');
     const [nome, setNome] = useState('');
-
+    const [nomeOcorr, setNomeOcorr] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [index, setIndex] = useState(0);
+    const mounted = useRef();
 
     
     const Logout  = () => {
@@ -63,8 +66,10 @@ export default () => {
 
     
     
-const pushDados = () =>{
-     try {
+const pushDados = async () =>{
+    
+
+   try {
       firebase.database().ref('/Ro').once('value', (snapshot) => {
         const list = [];
         snapshot.forEach((childItem) => {
@@ -95,8 +100,12 @@ const pushDados = () =>{
     } catch (error) {
       alert(error);
     }
+        
 }
     
+  
+
+
     useEffect(()=>{
         pushUser();
     },)
@@ -108,7 +117,7 @@ const pushDados = () =>{
           
       
       if (!isUnmount) {
-          pushDados();
+         pushDados();
       }
    }, 1000);
    return ()=>{
@@ -127,6 +136,24 @@ const pushDados = () =>{
     const cadastroRo = () =>  {
         navigation.navigate('HomeRoCadastro');
     };
+
+
+     const proximo = () => {
+       
+       if (index < listFire.length-1  ){
+         setIndex(index +1);
+       }
+        return
+       }
+
+     const anterior = () => {
+       
+       if (index > 0  ){
+         setIndex(index -1);
+       }
+        return
+       }
+
 
 
 
@@ -191,7 +218,9 @@ const pushDados = () =>{
                 </View>
 
                 <ViewResumo>
-                  <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                  
+
+                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
                     <FlatList style={styles.viewFlat} 
                     data={listFire}
                         
@@ -205,16 +234,17 @@ const pushDados = () =>{
 
                         } />
                 </SafeAreaView>
+
                 </ViewResumo>
 
                 <ViewProx>
-                        <AnteriorBtn>
+                        <AnteriorBtn >
                          <Image source = {require('../../../assets/setaproxesquerda.png')} style={{marginRight:7}} />
                             <Text style = {styles.textProxAnter}>Anterior</Text>
 
                         </AnteriorBtn>
 
-                        <ProxBtn>
+                        <ProxBtn >
                             <Text style = {styles.textProxAnter}>Pròximo</Text>
                             <Image source = {require('../../../assets/setaproxdireita.png')} style={{marginLeft:7}} />
                         </ProxBtn>
@@ -365,4 +395,17 @@ color: '#FF9000',
                         } />
                 </SafeAreaView>
 
-            </SafeAreaView>*/
+            </SafeAreaView>*//*<SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                    <FlatList style={styles.viewFlat} 
+                    data={listFire}
+                        
+                        keyExtractor={(item) => item.key}
+                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
+                        
+                        renderItem={({ item }) =>
+                           <DownFotos2 data={item}/>
+                           
+                            
+
+                        } />
+                </SafeAreaView>*/
