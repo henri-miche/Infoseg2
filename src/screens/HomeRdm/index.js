@@ -75,11 +75,8 @@ export default () => {
             color="#fff"/>
 
             <BtnEntrar onPress={handleClickRedefinir}>
-                <EntrarText>Entrar</EntrarText>
+                <EntrarText>Enviar</EntrarText>
             </BtnEntrar>
-
-            
-            
          
             
         </Container>

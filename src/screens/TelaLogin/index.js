@@ -103,9 +103,7 @@ export default () => {
                 <EntrarText>Entrar</EntrarText>
             </BtnEntrar>
 
-            <TouchableOpacity >
-                <EsqueciSenha>Esqueci minha Senha</EsqueciSenha>
-            </TouchableOpacity>
+            
             
          
             

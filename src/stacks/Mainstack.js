@@ -8,6 +8,7 @@ import HomeBo from '../screens/HomeBo';
 import HomeRoCadastro from '../screens/HomeRoCadastro';
 import HomeRoSearch from '../screens/HomeRoSearch';
 import HomeRdm from '../screens/HomeRdm';
+import HomeRdmCadastro from '../screens/HomeRdmCadastro';
 
 
 const Stack = createStackNavigator();
@@ -24,6 +25,14 @@ export default () => (
         <Stack.Screen name="HomeBo" component={HomeBo} />
          <Stack.Screen name="HomeRoSearch" component={ HomeRoSearch} />
          <Stack.Screen name="HomeRdm" component={ HomeRdm} />
+         <Stack.Screen name="HomeRdmCadastro" options={{headerShown:true,
+         headerTitle:'Área do Agente',
+         headerTintColor:'#FF9000',
+         headerStyle:{
+                    backgroundColor: '#000',
+                    
+                }
+         }} component={ HomeRdmCadastro} />
          
         
     

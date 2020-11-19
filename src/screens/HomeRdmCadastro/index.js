@@ -1,282 +1,415 @@
-import React,{useEffect, useState} from 'react';
-import { SafeAreaView,Text, View, StyleSheet,Image,TextInput,Button,Alert } from 'react-native';
-import { Container } from './styles';
+import React,{useState,useEffect,useRef} from 'react';
+import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image} from 'react-native';
+import {Container,
+TextoBoasVindas,
+TouchExit,
+SubTitulo,
+GerarRo,
+TextoGerarRo,
+GerarRrm,
+OcorrenciasText,
+TextoRedefinirSenha,
+
+
+} from './styles';
 import { useNavigation } from '@react-navigation/native';
-import ConfirmarCancel from '../../components/ConfirmarCancel';
-import { ScrollView } from 'react-native-gesture-handler';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
-import * as imagePicker from 'expo-image-picker';
-import moment from 'moment';
 import firebase from '../../connection/FirebaseConection';
+import DownFotos2 from '../../components/DownFotos2';
+import Search from '../../components/Search'
 
 
 export default () => {
-    
-    const [foto,setFoto] = useState(null);
-    const [cpf, setCpf] = useState('');
-    const [endereço, setEndereço] = useState('');
-    const [nome, setNome] = useState('');
-    const [identidade, setIdentidade] = useState('');
-    const [nascimento, setNascimento] = useState('');
-    const [tipoRo, setTipoRo] = useState('');
-    const [local, setLocal] = useState('');
-    const [mae, setMae] = useState('');
-    const [pai, setPai] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [genero, setGenero] = useState('');
-    const [historico, setHistorico] = useState('');
-    
 
-
+    const [listFire, setListFire] = useState(null);
     const navigation = useNavigation();
+    const [isRefresh, setIsRefresh] = useState(false);
+    const [searchTexto, setSearchTexto] = useState('');
+    const [Filtro, setFiltro] = useState('');
+    const [nome, setNome] = useState('');
+    const [nomeOcorr, setNomeOcorr] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [index, setIndex] = useState(0);
+    const mounted = useRef();
+    
 
-    const handleClick = () => {
-        setNome('');
-        setCpf('');
-        setEndereço('');
-        navigation.navigate('HomeRdm');
-    };
+    
+    const Logout  = () => {
+        firebase.auth().signOut();
+    }
+   
+    const pushUser = () => {
+        const user = firebase.auth().currentUser;
+        if (user) {
+            firebase.database().ref('usuarios').child(user.uid)
+                .once('value').then((snapshot) => {
+                    const nome = snapshot.val().nome;
+                    setNome(nome);
 
-
-    const saveFoto = (chave) => {
-        if (foto !== null) {
-            
-            uploadImage(foto.uri, chave)
-                .then(() => {
-                    Alert.alert("Imagem enviada!");
-                })
-                .catch((error) => {
-                    Alert.alert(error);
                 });
+        }}
+
+
+    
+    
+const pushDados = async () =>{
+    
+
+   try {
+      firebase.database().ref('/Ro').once('value', (snapshot) => {
+        const list = [];
+        snapshot.forEach((childItem) => {
+          list.push({
+            key: childItem.key,
+            CPF: childItem.val().CPF,
+            Nome: childItem.val().Nome,
+            ChaveFoto: childItem.val().ChaveFoto,
+            endereço: childItem.val().Endereço,
+            dataa: childItem.val().Data,
+            hora: childItem.val().Hora,
+            identidade: childItem.val().Identidade,
+            nascimento: childItem.val().Nascimento,
+            tipoRo: childItem.val().TipoRo,
+            local: childItem.val().Local,
+            mae: childItem.val().Mae,
+            pai: childItem.val().Pai,
+            telefone: childItem.val().Telefone,
+            genero: childItem.val().Genero,
+            historico: childItem.val().Historico,
+            cosop: childItem.val().Cosop,
+          });
+        });
+        setListFire(list.reverse());
+        
+      })
+
+    } catch (error) {
+      alert(error);
+    }
+        
+}
+
+
+    const pushDadosSearch = () =>{
+     try {
+      firebase.database().ref('/Ro').orderByChild('Nome').startAt(searchTexto)
+      .once('value', (snapshot) => {
+        const list = [];
+        snapshot.forEach((childItem) => {
+          list.push({
+            key: childItem.key,
+            CPF: childItem.val().CPF,
+            Nome: childItem.val().Nome,
+            ChaveFoto: childItem.val().ChaveFoto,
+            endereço: childItem.val().Endereço,
+            dataa: childItem.val().Data,
+            hora: childItem.val().Hora,
+            identidade: childItem.val().Identidade,
+            nascimento: childItem.val().Nascimento,
+            tipoRo: childItem.val().TipoRo,
+            local: childItem.val().Local,
+            mae: childItem.val().Mae,
+            pai: childItem.val().Pai,
+            telefone: childItem.val().Telefone,
+            genero: childItem.val().Genero,
+            historico: childItem.val().Historico,
+            cosop: childItem.val().Cosop,
+          });
+        });
+        setListFire(list);
+        
+      })
+
+    } catch (error) {
+      alert(error);
+    }
+}
+    
+  
+
+
+    useEffect(()=>{
+        pushUser();
+    },)
+
+    useEffect(()=>{
+        if (searchTexto == '') {
+            pushDados();
         }
-    }
+    },[searchTexto])
+   
+  useEffect(() => {
+      let isUnmount = false;
 
-    const uploadImage = async (uri, imageName) => {
-        const response = await fetch(uri);
-        const blob = await response.blob();
-
-        var ref = firebase.storage().ref().child("Rdm/" + imageName);
-        return ref.put(blob);
-    }
+      setTimeout(() => {
+          
+      
+      if (!isUnmount) {
+         pushDados();
+      }
+   }, 1000);
+   return ()=>{
+      isUnmount = true;
+      setListFire([]);
+      setSearchTexto('');
+   }
+  }, [])
 
      
 
-    const saveUser =  (cosop,chave) => {
-            
-        let horario = moment().utcOffset('-03:00').format(' hh:mm:ss a');
-        let dataa = moment().format('DD-MM-YYYY');
+     const todasOcorrencias = () =>  {
+        navigation.navigate('HomeRoSearch');
+    };
 
-        try {
-            firebase.database().ref('/Rdm').child(chave).set({
-                Nome: nome,
-                CPF: cpf,
-                Endereço: endereço,
-                Cosop:cosop,
-                ChaveFoto:chave,
-                Data:dataa,
-                Hora:horario,
-                Identidade:identidade,
-                Nascimento:nascimento,
-                TipoRo:tipoRo,
-                Local:local,
-                Mae:mae,
-                Pai:pai,
-                Telefone:telefone,
-                Genero:genero,
-                Historico:historico
-            })
+    const cadastroRo = () =>  {
+        navigation.navigate('HomeRoCadastro');
+    };
 
-        } catch (error) {
-            alert(error);
-        }
-        finally {
-            setNome('');
-            setCpf('');
-            setEndereço('');
-            setIdentidade('');
-            setNascimento('');
-            setTipoRo('');
-            setLocal('');
-            setMae('');
-            setPai('');
-            setTelefone('');
-            setGenero('');
-            setHistorico('');
-            alert('Dados enviados!');
-            navigation.navigate('HomeRdm');
-            
-        }
-    }
 
-   
+     
+       const handleClickSearch = () =>{
+           if (searchTexto) {
+               pushDadosSearch();
+           }   
+  }
 
-   
-    
-    
- /*if tem que ser editado para nano permitir envio vazio*/
-    const confirmar = () => {
-        if(nome !== '' && cpf !== '' ){
-           
-           const user = firebase.auth().currentUser;
-                if(user){
-                   //seta nome do usuario pro relatorio
-                    firebase.database().ref('usuarios').child(user.uid)
-                        .once('value').then((snapshot) => {
-                            let cosop = snapshot.val().nome;
-                            //seta chave realtime para foto
-                            let chavess = firebase.database().ref('Ro');
-                            let chave = chavess.push().key;
-                            
-                            saveFoto(chave);
-                            saveUser(cosop,chave);
-                    
-                        });       
-                    
-                } 
-           
-                    
-        }else {alert("Preencha os campos corretamente");}
-     };
+   const handleClickAreaAgente = () =>{
+              navigation.navigate('HomeRdm');
+  }
 
-     const carregarFoto = async () => {
-        if(Constants.platform.ios){
-            const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if(status !== 'granted'){
-                alert('Permissão necessária!');
-                return;
-            }
-        }
-        const data = await imagePicker.launchImageLibraryAsync({});
-        if (data.cancelled) {
-            return;
-        }
-         if (!data.uri) {
-             return;
-         }
-        setFoto(data);
-    }
 
-    const tirarFoto = async () => {
-        if(Constants.platform.ios){
-            const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if(status !== 'granted'){
-                alert('Permissão necessária!');
-                return;
-            }
-        }
-        const data = await imagePicker.launchCameraAsync({});
-        if (data.cancelled) {
-            return;
-        }
-         if (!data.uri) {
-             return;
-         }
-        setFoto(data);
-    }
 
-    return (
+
+    return(
         <Container >
-
-            <SafeAreaView style={{ backgroundColor: '#000', flex: 1, marginBottom: 0.5,justifyContent:'flex-end' }}>
                 
-                    <ScrollView> 
-                    
-                        <View style={styles.form}>
-                            <View style={{flex: 1,marginTop:5}}>
-                                <TextInput style={styles.input} placeholder='Nome:' autoCapitalize='characters' value={nome} onChangeText={(t)=>setNome(t)} />
-                            </View>
-                            <View style={{flexDirection:'row'}}>
-                                <View style={styles.campos}>
-                                    <Image source={foto} style={styles.formFoto}/>
-                                    
-                                        <View style={{marginTop:5}} >
-                                            <Button title='Carregar foto.' onPress={carregarFoto} />
-                                            <View style={{marginTop:5}}>
-                                                <Button title='Tirar foto.'  onPress={tirarFoto} />
-                                            </View>
-                                        </View>
-                                
-                                </View>
-                                
-                                <View style={{flex:1,marginLeft:10}}>
-                                    
-                                    <TextInput style={styles.input} placeholder='CPF:' keyboardType='number-pad' value={cpf} onChangeText={(t) => setCpf(t)} />
-                                    <TextInput style={styles.input} placeholder='Identidade:' keyboardType='number-pad' value={identidade} onChangeText={(t) => setIdentidade(t)} />
-                                    <TextInput style={styles.input} placeholder='Nascimento:' keyboardType='number-pad' value={nascimento} onChangeText={(t) => setNascimento(t)} />
-                                    <TextInput style={styles.input} placeholder='Tipo RO:' value={tipoRo} onChangeText={(t) => setTipoRo(t)} />
-                                    <TextInput style={styles.input} placeholder='Local:' autoCapitalize='characters' value={local} onChangeText={(t) => setLocal(t)} />
-                                
-                                </View>
-                            
-                        </View>
-                                <View style={{flex:1}}>
-                                <TextInput style={styles.input} placeholder='Mãe:' value={mae} onChangeText={(t) => setMae(t)} />
-                                <TextInput style={styles.input} placeholder='Pai:' value={pai} onChangeText={(t) => setPai(t)} />
-                                <TextInput style={styles.input} placeholder='Endereço:' value={endereço} onChangeText={(t) => setEndereço(t)} />
-                                </View>
-
-                                <View style={{flexDirection:'row',flex:1}}>
-
-                                      <View style={{flex:1}}>  
-                                        <TextInput style={styles.input} placeholder='Telefone:' keyboardType='number-pad' value={telefone} onChangeText={(t) => setTelefone(t)} />
-                                     </View>
-
-                                     <View style={{flex:1}}>
-                                         <TextInput style={styles.input} placeholder='Gênero:' value={genero} onChangeText={(t) => setGenero(t)} />
-                                     </View>
-                                </View>
-                                <TextInput style={styles.inputHist} placeholder='Histórico:' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />
-                        </View>
-
-                    </ScrollView>
+                <View style={{flexDirection:'row',marginTop:30}} >
+                 <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginLeft:15}}>
                 
-                <ConfirmarCancel onPress={handleClick} onPress1={confirmar}/>
+                <GerarRo onPress = {handleClickAreaAgente}>                 
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
+                        
+                    </GerarRo>
+                    <TextoRedefinirSenha>Redefinir Senha</TextoRedefinirSenha>
+                </View>
+
                
-            </SafeAreaView>
+                
+                <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginRight:15}}>
+                
+                <GerarRo>                 
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
+                        
+                    </GerarRo>
+                    <TextoGerarRo>Pedido de folga</TextoGerarRo>
+                </View>
+                
+                </View>
 
+                <View style={{flexDirection:'row',marginTop:30}} >
+                 <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginLeft:15}}>
+                
+                <GerarRo >                 
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
+                        
+                    </GerarRo>
+                    <TextoGerarRo>Marcação de fèrias</TextoGerarRo>
+                </View>
 
+               
+                
+                <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginRight:15}}>
+                
+                <GerarRo>                 
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
+                        
+                    </GerarRo>
+                    <TextoGerarRo>IS's</TextoGerarRo>
+                </View>
+                
+                </View>
+
+                
+
+                  <View style={{flexDirection:'row',marginTop:30}} >
+                 <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginLeft:15}}>
+                
+                <GerarRo >                 
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
+                        
+                    </GerarRo>
+                    <TextoGerarRo>Escala</TextoGerarRo>
+                </View>
+
+               
+                
+                <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginRight:15}}>
+                
+                
+                </View>
+                
+                </View>
+                
+                
+                 
+
+                
+
+                    
+                
+                
+                
+
+        
 
         </Container>
     );
 }
+
 const styles = StyleSheet.create({
-    form:{
-        flex:1,
-        
+    viewFiltros:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:25,
+       marginLeft:30,
+       paddingRight:30,
+       marginRight:59,
     },
-    formFoto:{
+    ViewRrmBo:{
+       flexDirection:'row',
+       
+       marginTop:10,
+       marginLeft:30,
+       paddingRight:30,
+    },
+    ViewRoRau:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:25,
+       marginLeft:30,
+       paddingRight:30,
+    },
+    ViewSubTitulo:{
+        marginLeft:30,
+        marginTop:5,
+    },
+    ViewTitulo:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:30,
+        marginLeft:30,
+        paddingRight:35,
+    },
+    textVerTodasOcorr:{
+width: 194,
+height: 21,
+
+fontWeight: 'bold',
+fontSize: 16,
+lineHeight: 21,
+/* Text */
+
+color: '#F4EDE8',
+    },
+    textProxAnter:{   
+width: 64,
+height: 21,
+fontSize: 16,
+lineHeight: 21,
+/* Orange */
+color: '#FF9000',
+    },
+    itemArea:{
+        height:100,
+        flex:1,
+        flexDirection:'row',
+    },
+    itemFoto:{
         width:150,
         height:150,
-        backgroundColor:'#D3D3D3',
-        marginBottom:5
+        margin:10,
     },
-    campos:{
-        
-        flexDirection:'column',
-        alignItems:'center',
-        padding:5,
-        justifyContent:'center'
-        
-        
+    itemInfo:{
+        flex:1
     },
-    input:{
-        height:40,
-        borderWidth:1,
-        borderColor:'#fff',
-        backgroundColor:'#D3D3D3',
-        borderRadius:30,
-        paddingLeft:10,
-        margin:5,
-        
+    container: {
+        flex: 1,
+        backgroundColor: '#000',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    inputHist:{
-        height:200,
-        borderWidth:1,
-        borderColor:'#fff',
-        backgroundColor:'#D3D3D3',
+    text: {
+        color: '#fff',
+    },
+    textInput: {
+        width: 300,
+        height: 50,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        textAlign: 'center',
+        marginTop: 5
+    },
+    btnEnviar: {
+        margin: 10,
+        borderWidth: 1,
+        borderColor: 'red',
+        width: 150,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    iconFlat: {
+        flexDirection: 'row',
+        width: 350,
+        height: 50,
+        borderColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5
+    },
+    btnEnviar: {
+        borderWidth: 1,
+        borderColor: 'red',
+        width: 50,
+        height: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 5
+    },
+    viewFlat: {
         
-        paddingLeft:10,
-        margin:5,
     }
 })
+/*<SafeAreaView style={{ backgroundColor: '#1C1C1C', flex: 1 ,marginTop:1}}>
+               <SearchCadastrar  autoCapitalize={'characters'} onEndEditing={handleClickSearch} value={searchTexto} onChangeText={(t) => setSearchTexto(t)} onPress={handleClick} />
+                
+                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                    <FlatList style={styles.viewFlat} 
+                    data={listFire}
+                        
+                        keyExtractor={(item) => item.key}
+                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
+                        
+                        renderItem={({ item }) =>
+                           <DownFotos2 data={item}/>
+                           
+                            
+
+                        } />
+                </SafeAreaView>
+
+            </SafeAreaView>*//*<SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                    <FlatList style={styles.viewFlat} 
+                    data={listFire}
+                        
+                        keyExtractor={(item) => item.key}
+                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
+                        
+                        renderItem={({ item }) =>
+                           <DownFotos2 data={item}/>
+                           
+                            
+
+                        } />
+                </SafeAreaView>*/

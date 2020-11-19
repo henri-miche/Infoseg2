@@ -1,29 +1,14 @@
 import React,{useState,useEffect,useRef} from 'react';
-import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image, Text} from 'react-native';
+import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image} from 'react-native';
 import {Container,
 TextoBoasVindas,
 TouchExit,
 SubTitulo,
 GerarRo,
 TextoGerarRo,
-GerarRau,
 GerarRrm,
-GerarBo,
 OcorrenciasText,
-FiltrosText,
-FiltroRo,
-RoText,
-FiltroRau,
-RauText,
-FiltroRrm,
-RrmText,
-FiltroBo,
-BoText,
-ViewResumo,
-ViewProx,
-AnteriorBtn,
-ProxBtn,
-BtnTodasOcorrencias,
+
 
 } from './styles';
 import { useNavigation } from '@react-navigation/native';
@@ -58,9 +43,6 @@ export default () => {
                 .once('value').then((snapshot) => {
                     const nome = snapshot.val().nome;
                     setNome(nome);
-
-                  
-
 
                 });
         }}
@@ -190,7 +172,7 @@ const pushDados = async () =>{
   }
 
    const handleClickAreaAgente = () =>{
-              navigation.navigate('HomeRdm');
+              navigation.navigate('HomeRdmCadastro');
   }
 
 
