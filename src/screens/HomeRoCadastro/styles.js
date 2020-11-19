@@ -143,8 +143,8 @@ export const ModalText = styled.TouchableOpacity`
     justify-content:center;
     align-items:center;
     background-color:#fff;
-    width:75;
-    height:75;
+    width:75px;
+    height:75px;
     background-color:#000;
 `
 
@@ -160,6 +160,19 @@ export const ModalTextText= styled.Text`
         /* White */
 
         color:#FF9000;
+    
+`
+export const LoadingArea = styled.View`
+       
+        position:absolute;
+        left:0;
+        top:0;
+        right:0;
+        bottom:0;
+        background-color: rgba(0,0,0,0.6);
+        align-items:center;
+        justify-content:flex-end;
+        margin-bottom:100px;
     
 `
 

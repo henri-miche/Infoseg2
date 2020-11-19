@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 
 
-export const Container = styled.ScrollView`
+export const Container = styled.SafeAreaView`
     flex: 1;
     background-color:#000;
     
@@ -50,10 +50,11 @@ color: #F4EDE8;
 
 export const GerarRo = styled.TouchableOpacity`
 
-width: 145px;
-height: 90px;
+width: 95%;
+height: 60px;
 justify-content:center;
 align-items:center;
+flexDirection:row;
 
 /* Darkest */
 
@@ -66,46 +67,23 @@ font-weight: 500;
 font-size: 18px;
 line-height: 24px;
 font-family: RobotoSlab;
+
 /* identical to box height */
 
 text-align: center;
 
 /* Text */
 
-color: #F4EDE8;
+color: #FF9000;
 `
 
-export const GerarRau = styled.TouchableOpacity`
-
-width: 145px;
-height: 90px;
-justify-content:center;
-align-items:center;
-
-
-/* Darkest */
-
-background: #2E2E2E;
-border-radius: 10px;
-`
 export const GerarRrm = styled.TouchableOpacity`
-width: 145px;
-height: 90px;
+width: 95%;
+height: 60px;
 justify-content:center;
 align-items:center;
-
-/* Darkest */
-
-background: #2E2E2E;
-border-radius: 10px;
-`
-export const GerarBo = styled.TouchableOpacity`
-width: 145px;
-height: 90px;
-justify-content:center;
-align-items:center;
-
-
+flexDirection:row;
+justify-content:space-between
 /* Darkest */
 
 background: #2E2E2E;
@@ -116,7 +94,8 @@ export const OcorrenciasText = styled.Text`
 width: 205px;
 height: 26px;
 margin-left:30px;
-margin-top:25px;
+margin-top:10px;
+margin-bottom:15px;
 font-style: normal;
 font-weight: 500;
 font-size: 20px;

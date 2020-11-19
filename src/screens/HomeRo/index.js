@@ -29,6 +29,7 @@ BtnTodasOcorrencias,
 import { useNavigation } from '@react-navigation/native';
 import firebase from '../../connection/FirebaseConection';
 import DownFotos2 from '../../components/DownFotos2';
+import Search from '../../components/Search'
 
 
 export default () => {
@@ -43,6 +44,7 @@ export default () => {
     const [cpf, setCpf] = useState('');
     const [index, setIndex] = useState(0);
     const mounted = useRef();
+    
 
     
     const Logout  = () => {
@@ -102,6 +104,42 @@ const pushDados = async () =>{
     }
         
 }
+
+
+    const pushDadosSearch = () =>{
+     try {
+      firebase.database().ref('/Ro').orderByChild('Nome').startAt(searchTexto)
+      .once('value', (snapshot) => {
+        const list = [];
+        snapshot.forEach((childItem) => {
+          list.push({
+            key: childItem.key,
+            CPF: childItem.val().CPF,
+            Nome: childItem.val().Nome,
+            ChaveFoto: childItem.val().ChaveFoto,
+            endereço: childItem.val().Endereço,
+            dataa: childItem.val().Data,
+            hora: childItem.val().Hora,
+            identidade: childItem.val().Identidade,
+            nascimento: childItem.val().Nascimento,
+            tipoRo: childItem.val().TipoRo,
+            local: childItem.val().Local,
+            mae: childItem.val().Mae,
+            pai: childItem.val().Pai,
+            telefone: childItem.val().Telefone,
+            genero: childItem.val().Genero,
+            historico: childItem.val().Historico,
+            cosop: childItem.val().Cosop,
+          });
+        });
+        setListFire(list);
+        
+      })
+
+    } catch (error) {
+      alert(error);
+    }
+}
     
   
 
@@ -109,6 +147,12 @@ const pushDados = async () =>{
     useEffect(()=>{
         pushUser();
     },)
+
+    useEffect(()=>{
+        if (searchTexto == '') {
+            pushDados();
+        }
+    },[searchTexto])
    
   useEffect(() => {
       let isUnmount = false;
@@ -138,21 +182,16 @@ const pushDados = async () =>{
     };
 
 
-     const proximo = () => {
-       
-       if (index < listFire.length-1  ){
-         setIndex(index +1);
-       }
-        return
-       }
+     
+       const handleClickSearch = () =>{
+           if (searchTexto) {
+               pushDadosSearch();
+           }   
+  }
 
-     const anterior = () => {
-       
-       if (index > 0  ){
-         setIndex(index -1);
-       }
-        return
-       }
+   const handleClickAreaAgente = () =>{
+              navigation.navigate('HomeRdm');
+  }
 
 
 
@@ -173,54 +212,48 @@ const pushDados = async () =>{
 
                 <View style = {styles.ViewRoRau} >
                     <GerarRo onPress = {cadastroRo}>
-                        <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
-                        <TextoGerarRo>Gerar RO</TextoGerarRo>
+                        <View style={{flex:1,alignItems:'flex-end',marginRight:10}}>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30,marginLeft:60}}/>
+                        </View>
+
+                        <View style={{flex:2,justifyContent:'flex-start',alignItems:'flex-start'}}>
+                        <TextoGerarRo>Gerar Ocorrência</TextoGerarRo>
+                    </View>
+
                     </GerarRo>
-                    
-                    <GerarRau>
-                        <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
-                        <TextoGerarRo>Gerar RAU</TextoGerarRo>
-                    </GerarRau>
                 </View>
                 
                 <View style = {styles.ViewRrmBo}>
-                <GerarRrm>
-                    <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
-                    <TextoGerarRo>Gerar RRM</TextoGerarRo>
+                <GerarRrm onPress={handleClickAreaAgente}>
+
+                <View style={{flex:1,alignItems:'flex-end',marginRight:10}}>
+                    <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30,marginLeft:60}}/>
+                </View>
+
+                    <View style={{flex:2,justifyContent:'flex-start',alignItems:'flex-start'}}>
+                         <TextoGerarRo>Área do Agente</TextoGerarRo>
+                    </View>
+                   
                 </GerarRrm>
 
-                <GerarBo>
-                    <Image source = {require('../../../assets/file-plus.png')} style={{width:24,height:24,}}/>
-                    <TextoGerarRo>Gerar BO</TextoGerarRo>
-                </GerarBo>
+               
                 </View>
 
                 <OcorrenciasText>Ocorrências Recentes</OcorrenciasText>
                 
-                <View style = {styles.viewFiltros}>
-                <FiltrosText>Filtros</FiltrosText>
+                 <Search color='#fff'
+                 value={searchTexto} 
+               autoCapitalize='characters' 
+               onEndEditing={handleClickSearch} 
+               onChangeText={(t) => setSearchTexto(t)}
+                     
+                 />
 
-                <FiltroRo>
-                    <RoText>RO</RoText>
-                </FiltroRo>
 
-                <FiltroRau>
-                    <RauText>RAU</RauText>
-                </FiltroRau>
-
-                <FiltroRrm>
-                    <RrmText>RRM</RrmText>
-                </FiltroRrm>
-
-                <FiltroBo>
-                    <BoText>BO</BoText>
-                </FiltroBo>
-                </View>
-
-                <ViewResumo>
+                
                   
 
-                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                <SafeAreaView style={{ flex:1,backgroundColor:'#000',marginLeft:30,marginTop:15}}>
                     <FlatList style={styles.viewFlat} 
                     data={listFire}
                         
@@ -235,24 +268,11 @@ const pushDados = async () =>{
                         } />
                 </SafeAreaView>
 
-                </ViewResumo>
-
-                <ViewProx>
-                        <AnteriorBtn >
-                         <Image source = {require('../../../assets/setaproxesquerda.png')} style={{marginRight:7}} />
-                            <Text style = {styles.textProxAnter}>Anterior</Text>
-
-                        </AnteriorBtn>
-
-                        <ProxBtn >
-                            <Text style = {styles.textProxAnter}>Pròximo</Text>
-                            <Image source = {require('../../../assets/setaproxdireita.png')} style={{marginLeft:7}} />
-                        </ProxBtn>
-                </ViewProx>        
                 
-                <BtnTodasOcorrencias onPress={todasOcorrencias}>
-                    <Text style= {styles.textVerTodasOcorr}>Ver Todas as Ocorrências</Text>
-                </BtnTodasOcorrencias>
+
+                    
+                
+                
                 
 
         
@@ -273,7 +293,7 @@ const styles = StyleSheet.create({
     ViewRrmBo:{
        flexDirection:'row',
        justifyContent:'space-between',
-       marginTop:25,
+       marginTop:10,
        marginLeft:30,
        paddingRight:30,
     },

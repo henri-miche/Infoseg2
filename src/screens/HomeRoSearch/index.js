@@ -1,15 +1,15 @@
-import SearchCadastrar from "../../components/SearchCadastrar";
-import {useNavigation, useRoute} from '@react-navigation/native'
-import React,{useState,useEffect} from 'react';
-import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl,Image} from 'react-native';
-import firebase from '../../connection/FirebaseConection';
-import DownFotos2 from '../../components/DownFotos2';
-import Search from '../../components/Search'
-import { Container,
-ViewTitullo,
-TouchSair,
-TextTitulo,
-TextSubtitulo,
+import React,{useState,useEffect,useRef} from 'react';
+import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image, Text} from 'react-native';
+import {Container,
+TextoBoasVindas,
+TouchExit,
+SubTitulo,
+GerarRo,
+TextoGerarRo,
+GerarRau,
+GerarRrm,
+GerarBo,
+OcorrenciasText,
 FiltrosText,
 FiltroRo,
 RoText,
@@ -19,22 +19,58 @@ FiltroRrm,
 RrmText,
 FiltroBo,
 BoText,
-ResultBuscaText,
+ViewResumo,
+ViewProx,
+AnteriorBtn,
+ProxBtn,
+BtnTodasOcorrencias,
 
 } from './styles';
-export default () => {
-   
-    const navigation = useNavigation();
-    const route = useRoute();
-    const [listFire, setListFire] = useState(null);
-    const [isRefresh, setIsRefresh] = useState(false);
-    
-    const handleClick = () => {
-        navigation.navigate('HomeRoCadastro');
-    };
+import { useNavigation } from '@react-navigation/native';
+import firebase from '../../connection/FirebaseConection';
+import DownFotos2 from '../../components/DownFotos2';
+import Search from '../../components/Search'
 
-    const pushDados = () =>{
-     try {
+
+export default () => {
+
+    const [listFire, setListFire] = useState(null);
+    const navigation = useNavigation();
+    const [isRefresh, setIsRefresh] = useState(false);
+    const [searchTexto, setSearchTexto] = useState('');
+    const [Filtro, setFiltro] = useState('');
+    const [nome, setNome] = useState('');
+    const [nomeOcorr, setNomeOcorr] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [index, setIndex] = useState(0);
+    const mounted = useRef();
+
+    
+    const Logout  = () => {
+        firebase.auth().signOut();
+    }
+   
+    const pushUser = () => {
+        const user = firebase.auth().currentUser;
+        if (user) {
+            firebase.database().ref('usuarios').child(user.uid)
+                .once('value').then((snapshot) => {
+                    const nome = snapshot.val().nome;
+                    setNome(nome);
+
+                  
+
+
+                });
+        }}
+
+
+    
+    
+const pushDados = async () =>{
+    
+
+   try {
       firebase.database().ref('/Ro').once('value', (snapshot) => {
         const list = [];
         snapshot.forEach((childItem) => {
@@ -65,9 +101,15 @@ export default () => {
     } catch (error) {
       alert(error);
     }
+        
 }
     
-    
+  
+
+
+    useEffect(()=>{
+        pushUser();
+    },)
    
   useEffect(() => {
       let isUnmount = false;
@@ -76,72 +118,98 @@ export default () => {
           
       
       if (!isUnmount) {
-          pushDados();
+         pushDados();
       }
    }, 1000);
    return ()=>{
       isUnmount = true;
       setListFire([]);
-      
+      setSearchTexto('');
    }
   }, [])
 
+     
 
-  const handleClickSearch = () =>{
-      pushDados();
-      
-  }
-
-  const sair = () => {
-        navigation.goBack();
+     const todasOcorrencias = () =>  {
+        navigation.navigate('HomeRoSearch');
     };
 
-    return (
+    const cadastroRo = () =>  {
+        navigation.navigate('HomeRoCadastro');
+    };
+
+
+     const proximo = () => {
+       
+       if (index < listFire.length-1  ){
+         setIndex(index +1);
+       }
+        return
+       }
+
+     const anterior = () => {
+       
+       if (index > 0  ){
+         setIndex(index -1);
+       }
+        return
+       }
+
+
+
+
+    return(
         <Container >
-                
-            <SafeAreaView style={{ backgroundColor: '#000', flex: 1, }}>
-                <ViewTitullo>
-                
-                <TextTitulo>Detalhes da Ocorrência</TextTitulo>
-                
-                <TouchSair onPress = {sair}>
-                    <Image source = {require('../../../assets/SetaSair.png')} />
-                </TouchSair>
+                <View style = {styles.ViewTitulo}>
+                    <TextoBoasVindas>Olá, {nome}!</TextoBoasVindas>
             
-            </ViewTitullo>
-
-            <View>
-                <TextSubtitulo>Veja todas as ocorrências já registradas!</TextSubtitulo>
-            </View>
-
-             <View style = {styles.viewFiltros}>
-                <FiltrosText>Filtros</FiltrosText>
-
-                <FiltroRo>
-                    <RoText>RO</RoText>
-                </FiltroRo>
-
-                <FiltroRau>
-                    <RauText>RAU</RauText>
-                </FiltroRau>
-
-                <FiltroRrm>
-                    <RrmText>RRM</RrmText>
-                </FiltroRrm>
-
-                <FiltroBo>
-                    <BoText>BO</BoText>
-                </FiltroBo>
+                    <TouchExit onPress={Logout}>
+                    <Image source = {require('../../../assets/Sair.png')} />
+                    </TouchExit>
                 </View>
 
-                <Search color='#fff'/>
-
-                <View>
-                    <ResultBuscaText>Resultados da Busca</ResultBuscaText>
+                <View style = {styles.ViewSubTitulo}>
+                <SubTitulo>Como o InfoSeg vai te ajudar hoje?</SubTitulo>
                 </View>
-               
+
+                <View style = {styles.ViewRoRau} >
+                    <GerarRo onPress = {cadastroRo}>
+                        <View style={{flex:1,alignItems:'flex-end',marginRight:10}}>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30,marginLeft:60}}/>
+                        </View>
+
+                        <View style={{flex:2,justifyContent:'flex-start',alignItems:'flex-start'}}>
+                        <TextoGerarRo>Gerar Ocorrência</TextoGerarRo>
+                    </View>
+
+                    </GerarRo>
+                </View>
                 
-                <SafeAreaView style={{ backgroundColor:'#000',marginLeft:30}}>
+                <View style = {styles.ViewRrmBo}>
+                <GerarRrm>
+
+                <View style={{flex:1,alignItems:'flex-end',marginRight:10}}>
+                    <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30,marginLeft:60}}/>
+                </View>
+
+                    <View style={{flex:2,justifyContent:'flex-start',alignItems:'flex-start'}}>
+                         <TextoGerarRo>Área do Agente</TextoGerarRo>
+                    </View>
+                   
+                </GerarRrm>
+
+               
+                </View>
+
+                <OcorrenciasText>Ocorrências Recentes</OcorrenciasText>
+                
+                 <Search color='#fff'/>
+
+
+                
+                  
+
+                <SafeAreaView style={{ flex:1,backgroundColor:'#000',marginLeft:30,marginTop:15}}>
                     <FlatList style={styles.viewFlat} 
                     data={listFire}
                         
@@ -156,9 +224,14 @@ export default () => {
                         } />
                 </SafeAreaView>
 
-            </SafeAreaView>
+                
 
-            
+                    
+                
+                
+                
+
+        
 
         </Container>
     );
@@ -172,7 +245,50 @@ const styles = StyleSheet.create({
        marginLeft:30,
        paddingRight:30,
        marginRight:59,
-       marginBottom:15,
+    },
+    ViewRrmBo:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:10,
+       marginLeft:30,
+       paddingRight:30,
+    },
+    ViewRoRau:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:25,
+       marginLeft:30,
+       paddingRight:30,
+    },
+    ViewSubTitulo:{
+        marginLeft:30,
+        marginTop:5,
+    },
+    ViewTitulo:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:30,
+        marginLeft:30,
+        paddingRight:35,
+    },
+    textVerTodasOcorr:{
+width: 194,
+height: 21,
+
+fontWeight: 'bold',
+fontSize: 16,
+lineHeight: 21,
+/* Text */
+
+color: '#F4EDE8',
+    },
+    textProxAnter:{   
+width: 64,
+height: 21,
+fontSize: 16,
+lineHeight: 21,
+/* Orange */
+color: '#FF9000',
     },
     itemArea:{
         height:100,
@@ -237,3 +353,35 @@ const styles = StyleSheet.create({
         
     }
 })
+/*<SafeAreaView style={{ backgroundColor: '#1C1C1C', flex: 1 ,marginTop:1}}>
+               <SearchCadastrar  autoCapitalize={'characters'} onEndEditing={handleClickSearch} value={searchTexto} onChangeText={(t) => setSearchTexto(t)} onPress={handleClick} />
+                
+                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                    <FlatList style={styles.viewFlat} 
+                    data={listFire}
+                        
+                        keyExtractor={(item) => item.key}
+                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
+                        
+                        renderItem={({ item }) =>
+                           <DownFotos2 data={item}/>
+                           
+                            
+
+                        } />
+                </SafeAreaView>
+
+            </SafeAreaView>*//*<SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
+                    <FlatList style={styles.viewFlat} 
+                    data={listFire}
+                        
+                        keyExtractor={(item) => item.key}
+                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
+                        
+                        renderItem={({ item }) =>
+                           <DownFotos2 data={item}/>
+                           
+                            
+
+                        } />
+                </SafeAreaView>*/

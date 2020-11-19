@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { SafeAreaView,Text, View, StyleSheet,Image,TextInput,Button,Alert, Modal,TouchableOpacity } from 'react-native';
+import { SafeAreaView,Text,ActivityIndicator, View, StyleSheet,Image,TextInput,Button,Alert, Modal,TouchableOpacity } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import Constants from 'expo-constants';
@@ -26,6 +26,7 @@ BtnCadastrarOcorrencia,
 TextBtnOcorrencia,
 ModalText,
 ModalTextText,
+LoadingArea,
 } from './styles';
 
 
@@ -66,6 +67,9 @@ export default () => {
     const [data, setData] = useState(moment().format('DD-MM-YYYY'));
     const [pickerChoice, setPickerChoice] = useState();
     const [modalVisible, setModallVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [permissaoBo, setPermissaoBo] = useState(false);
+
 
      const [pickerRO, setPickerRo] = useState(<Picker
                 selectedValue={tipoOcorrencia}
@@ -124,11 +128,15 @@ export default () => {
 
 
     const saveFoto = (chave,cosop) => {
+        setLoading(true);
         if (foto !== null) {
-            
-            uploadImage(foto.uri, chave)
-                .then(() => {
-                firebase.database().ref('/'+tipoRo).child(chave).set({
+ 
+            uploadImage(foto.uri, chave).catch((error) => {
+                    alert(error);
+                });
+            }
+
+             firebase.database().ref('/'+tipoRo).child(chave).set({
                 Nome: nome,
                 CPF: cpf,
                 Cosop:cosop,
@@ -155,7 +163,7 @@ export default () => {
                 
             })
 
-                }).then(() => { 
+                .then(() => { 
                     setNome('');
                     setCpf('');
                     
@@ -176,6 +184,8 @@ export default () => {
                     setLogradouro('');
                     setNumeroCasa('');
                     setComplemento('');
+
+                    setLoading(false);
                     alert('Dados enviados!');
                     navigation.navigate('HomeRo');
 
@@ -183,7 +193,7 @@ export default () => {
                 .catch((error) => {
                     alert(error);
                 });
-        }
+        
     }
 
     const uploadImage = async (uri, imageName) => {
@@ -358,7 +368,30 @@ export default () => {
    }
   }, [tipoRo])
 
-   
+  const poolPermissions = async () =>{
+      
+      const user = firebase.auth().currentUser;
+       if (user) {
+
+            const req = await firebase.database().ref('usuarios').child(user.uid)
+                .once('value');
+                const json = await req.toJSON();
+                setPermissaoBo(json.BO);
+                console.log(permissaoBo)
+                }
+              }
+
+              useEffect(()=>{
+                  poolPermissions();
+              },[]) 
+
+              const semRegistroPai = () => {
+                    setPai('Sem registro')
+              }
+
+              const semRegistroMae = () => {
+                  setMae('Sem registro')
+              }
 
     return (
         <Container >
@@ -429,14 +462,14 @@ export default () => {
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={mae} onChangeText={(t) => setMae(t)}/>
-                    <BtnFixa>
+                    <BtnFixa onPress={semRegistroMae}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                 </View>
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={pai} onChangeText={(t) => setPai(t)}/>
-                    <BtnFixa>
+                    <BtnFixa onPress={semRegistroPai}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                  </View>
@@ -531,6 +564,7 @@ export default () => {
 
             <View style = {styles.viewTipoRo}>
 
+                {permissaoBo && 
                <Picker
                mode="dropdown"
                 selectedValue={tipoRo}
@@ -542,6 +576,22 @@ export default () => {
                 <Picker.Item label="RRM" value="RRM" />
                 <Picker.Item label="RAU" value="RAU" />
                 </Picker>
+                }
+
+                {!permissaoBo && 
+               <Picker
+               mode="dropdown"
+                selectedValue={tipoRo}
+                style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
+                >
+                <Picker.Item label="RO" value="RO" />
+                
+                <Picker.Item label="RRM" value="RRM" />
+                <Picker.Item label="RAU" value="RAU" />
+                </Picker>
+                }
+
 
                 <Picker
                 mode="dropdown"
@@ -588,13 +638,23 @@ export default () => {
              
 
              <TextInput style={styles.inputHist} color ='#fff' placeholder='                      Destalhes da ocorrência' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />  
-             <BtnCadastrarOcorrencia onPress={confirmar}>
+             <BtnCadastrarOcorrencia disabled={loading} onPress={confirmar}>
                  <TextBtnOcorrencia>Cadastrar Ocorrência</TextBtnOcorrencia>
              </BtnCadastrarOcorrencia>
 
-            
+             {loading &&
+            <LoadingArea>
+                <ActivityIndicator
+                       size='large'
+                       color='#fff' 
+
+                />
+            </LoadingArea>
+             }
                
         </Container>
+
+       
     );
 }
 const styles = StyleSheet.create({
@@ -726,3 +786,68 @@ const styles = StyleSheet.create({
                 <ConfirmarCancel onPress={handleClick} onPress1={confirmar}/>
                
             </SafeAreaView>*/
+
+
+/*
+            const saveFoto = (chave,cosop) => {
+        if (foto !== null) {
+            
+            uploadImage(foto.uri, chave)
+                .then(() => {
+                firebase.database().ref('/'+tipoRo).child(chave).set({
+                Nome: nome,
+                CPF: cpf,
+                Cosop:cosop,
+                ChaveFoto:chave,
+                Data:data,
+                Hora:hora,
+                Identidade:identidade,
+                Nascimento:nascimento,
+                TipoRo:tipoRo,
+                Local:local,
+                Mae:mae,
+                Pai:pai,
+                Telefone:telefone,
+                Genero:genero,
+                Historico:historico,
+                Estado:estado,
+                TipoOcorrencia:tipoOcorrencia,
+                CEP:cep,
+                Cidade:cidade,
+                bairro:bairro,
+                Logradouro:logradouro,
+                NumeroCasa:numeroCasa,
+                Complemento:complemento,
+                
+            })
+
+                }).then(() => { 
+                    setNome('');
+                    setCpf('');
+                    
+                    setIdentidade('');
+                    setNascimento('');
+                    setTipoRo('');
+                    setLocal('');
+                    setMae('');
+                    setPai('');
+                    setTelefone('');
+                    setGenero('');
+                    setHistorico('');
+                     setEstado('');
+                    setTipoOcorrencia('');
+                    setCep('');
+                    setCidade('');
+                    setBairro('');
+                    setLogradouro('');
+                    setNumeroCasa('');
+                    setComplemento('');
+                    alert('Dados enviados!');
+                    navigation.navigate('HomeRo');
+
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        }
+    }*/

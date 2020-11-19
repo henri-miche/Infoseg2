@@ -200,9 +200,14 @@ useEffect(() => {
                 <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
                 <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
                  
-                 <View style = {{flexDirection:'row',justifyContent:'space-between',paddingRight:60}}>
+                 <View style = {{flexDirection:'row'}}>
+                     <View style={{flex:1}}>
                      <TextLabelcamposmae>CEP:<TextCamposmae>{}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                        <View style={{flex:1}}>
                       <TextLabelcamposmae>Gênero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
+                </View>
                  </View>
                  
                 <TextLabelcamposmae>Endereço:<TextCamposmae>{endereço}</TextCamposmae></TextLabelcamposmae>
@@ -214,14 +219,31 @@ useEffect(() => {
 
             <View style={{marginTop:15,marginLeft:30}}>
 
-                <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:60}} >
+                <View style={{flexDirection:'row'}} >
+                   
+                   <View style={{flex:1}}>
                     <TextLabeldetalhes>Data:<TextDetalhes>{data}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+               
+                <View style={{flex:1}}>
                     <TextLabeldetalhes>Hora:<TextDetalhes>{hora}</TextDetalhes></TextLabeldetalhes>
                 </View>
+                
+                </View>
 
-                <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:115}}>
-                     <TextLabeldetalhes>RO:<TextDetalhes>{tipoRo}</TextDetalhes></TextLabeldetalhes>
-                    <TextLabeldetalhes>Local:<TextDetalhes>{local}</TextDetalhes></TextLabeldetalhes>
+                <View style={{flexDirection:'row'}}>
+                    
+                    <View style={{flex:1}}>
+                        <TextLabeldetalhes>RO:<TextDetalhes>{tipoRo}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+
+                    <View style={{flex:1}}>
+
+                         <TextLabeldetalhes>Local:<TextDetalhes>{local}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+
+                     
+                   
                 </View>
 
                 <View>
@@ -231,7 +253,7 @@ useEffect(() => {
             </View>
 
             <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
-                <TextCodRegistro>Código de Registro:</TextCodRegistro>
+                <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
             </View>
 
         </Container>

@@ -1,174 +1,87 @@
-import React,{useState,useEffect} from 'react';
-import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl} from 'react-native';
-import {Container} from './styles';
-import { useNavigation } from '@react-navigation/native';
-import SearchCadastrar from "../../components/SearchCadastrar";
+import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import { 
+    Container,
+    TextoTitulo,
+    ImagemStyle,
+    SubtituloCbtu,
+    FaçaSeuLogin,
+    BtnEntrar,
+    EntrarText,
+    
+ } from './styles';
+
+import InputLoginSenha from '../../components/InputLoginSenha';
 import firebase from '../../connection/FirebaseConection';
-import DownImagesRdm from '../../components/DownImagesRdm';
 
 export default () => {
 
-    const [listFire, setListFire] = useState(null);
+    
+    const [newPassword, setNewPassword] = useState();
+    const [currentPass, setCurrentPass] = useState();
+    const [confirmaçao, setConfirmaçao] = useState();
     const navigation = useNavigation();
-    const [isRefresh, setIsRefresh] = useState(false);
-    const [searchTexto, setSearchTexto] = useState('');
-
-
-    const handleClick = () =>  {
-        navigation.navigate('HomeRdmCadastro');
-    };
-    
-   
 
     
+
     
-const pushDados = () =>{
-     try {
-      firebase.database().ref('/Rdm').once('value', (snapshot) => {
-        const list = [];
-        snapshot.forEach((childItem) => {
-          list.push({
-            key: childItem.key,
-            CPF: childItem.val().CPF,
-            Nome: childItem.val().Nome,
-            ChaveFoto: childItem.val().ChaveFoto,
-            endereço: childItem.val().Endereço,
-            dataa: childItem.val().Data,
-            hora: childItem.val().Hora,
-            identidade: childItem.val().Identidade,
-            nascimento: childItem.val().Nascimento,
-            tipoRo: childItem.val().TipoRo,
-            local: childItem.val().Local,
-            mae: childItem.val().Mae,
-            pai: childItem.val().Pai,
-            telefone: childItem.val().Telefone,
-            genero: childItem.val().Genero,
-            historico: childItem.val().Historico,
-            cosop: childItem.val().Cosop,
-          });
-        });
-        setListFire(list.reverse());
+
+    
+
+    const handleClickRedefinir = () => {
+
+
+        const user = firebase.auth().currentUser;
         
-      })
-
-    } catch (error) {
-      alert(error);
-    }
-}
     
+    if (user != null && newPassword === confirmaçao) {
+        user.updatePassword(newPassword).then(() => {
+            alert('Sanha redefinida!')
+    }, (error) => {
+  
+         alert(error)
+    });
+}}
    
-  useEffect(() => {
-      let isUnmount = false;
+    
+    
 
-      setTimeout(() => {
-          
-      
-      if (!isUnmount) {
-          pushDados();
-      }
-   }, 1000);
-   return ()=>{
-      isUnmount = true;
-      setListFire([]);
-      setSearchTexto('');
-   }
-  }, [])
+    return (
+        <Container>
+            
+            <ImagemStyle source={require('../../../assets/brasaoTransarente.png')}/>
+            
+            <TextoTitulo>InfoSeg Mobile</TextoTitulo>
 
-     function handleClickSearch () {
-        navigation.navigate('HomeRdmSearch',{searchTexto:searchTexto});
-        setSearchTexto('');
-    };
+            <SubtituloCbtu>CBTU BH</SubtituloCbtu>
 
-    return(
-        <Container >
-                
-            <SafeAreaView style={{ backgroundColor: '#1C1C1C', flex: 1 ,marginTop:1}}>
-               <SearchCadastrar  autoCapitalize={'characters'} onEndEditing={handleClickSearch} value={searchTexto} onChangeText={(t) => setSearchTexto(t)} onPress={handleClick} />
-                
-                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
-                    <FlatList style={styles.viewFlat} 
-                    data={listFire}
-                        
-                        keyExtractor={(item) => item.key}
-                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
-                        
-                        renderItem={({ item }) =>
-                           <DownImagesRdm data={item}/>
-                           
-                            
-
-                        } />
-                </SafeAreaView>
-
-            </SafeAreaView>
+            <FaçaSeuLogin>REDEFINIR SENHA</FaçaSeuLogin>
 
             
+            
+            <InputLoginSenha
+             value={newPassword} 
+             onChangeText={t => setNewPassword(t)}
+             placeholder="Nova senha" 
+             placeholderTextColor="#666360" 
+             password={true}
+             color="#fff"/>
+            <InputLoginSenha  
+            value={confirmaçao} 
+            onChangeText={t => setConfirmaçao(t)} 
+            password={true}
+            placeholder="Confirmar nova senha" 
+            placeholderTextColor="#666360" 
+            color="#fff"/>
 
+            <BtnEntrar onPress={handleClickRedefinir}>
+                <EntrarText>Entrar</EntrarText>
+            </BtnEntrar>
+
+            
+            
+         
+            
         </Container>
     );
 }
-
-const styles = StyleSheet.create({
-    itemArea:{
-        height:100,
-        flex:1,
-        flexDirection:'row',
-    },
-    itemFoto:{
-        width:150,
-        height:150,
-        margin:10,
-    },
-    itemInfo:{
-        flex:1
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#000',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        color: '#fff',
-    },
-    textInput: {
-        width: 300,
-        height: 50,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        textAlign: 'center',
-        marginTop: 5
-    },
-    btnEnviar: {
-        margin: 10,
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 150,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    iconFlat: {
-        flexDirection: 'row',
-        width: 350,
-        height: 50,
-        borderColor: '#fff',
-        borderWidth: 1,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 5
-    },
-    btnEnviar: {
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 50,
-        height: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: 5
-    },
-    viewFlat: {
-        
-    }
-})

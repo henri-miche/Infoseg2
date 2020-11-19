@@ -29,7 +29,7 @@ height:18px;
 margin-left:16px;
 `;
 
-export default ({placeholder, value, onChangeText, password,placeholderTextColor,color}) => {
+export default ({placeholder,onEndEditing, value,autoCapitalize, onChangeText, password,placeholderTextColor,color}) => {
     return(
         <InputArea>
             <ImagemEmail source = {require('../../assets/search.png')}/>
@@ -40,6 +40,8 @@ export default ({placeholder, value, onChangeText, password,placeholderTextColor
                 value={value}
                 onChangeText={onChangeText}
                 secureTextEntry={password}
+                autoCapitalize ={autoCapitalize}
+                onEndEditing={onEndEditing}
             />
         </InputArea>
     );
