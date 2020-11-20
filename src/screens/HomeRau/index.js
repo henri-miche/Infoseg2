@@ -1,63 +1,110 @@
 import React,{useState,useEffect} from 'react';
-import {SafeAreaView,Text,FlatList, View, StyleSheet, RefreshControl} from 'react-native';
-import {Container} from './styles';
-import { useNavigation } from '@react-navigation/native';
-import SearchCadastrar from "../../components/SearchCadastrar";
+import { Button, Image,StyleSheet,View } from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native'
 import firebase from '../../connection/FirebaseConection';
-import DownImagesRau from '../../components/DownImagesRau';
+import { Container,
+ViewTitullo,
+TextTitulo,
+TouchSair,
+ViewQualificaçao,
+TextQuaificaçao,
+TextNome,
+TextLabel,
+TextLabelText,
+TextLabelcamposmae,
+TextCamposmae,
+TextDetallhesOcorr,
+TextLabeldetalhes,
+TextDetalhes,
+TextCodRegistro,
+
+} from './styles';
 
 export default () => {
 
-    const [listFire, setListFire] = useState(null);
-    const navigation = useNavigation();
-    const [isRefresh, setIsRefresh] = useState(false);
-    const [searchTexto, setSearchTexto] = useState('');
-
-
-    const handleClick = () =>  {
-        navigation.navigate('HomeRauCadastro');
-    };
-    
-   
-
-    
-    
-const pushDados = () =>{
+        const route = useRoute();
+        const navigation = useNavigation();
+        const [key, setKey] = useState(route.params.key);
+        const [nome, setNome] = useState();
+        const [identidade, setIdentidade] = useState();
+        const [cpf, setCpf] = useState();
+        const [chaveFoto, setChaveFoto] = useState();
+        const [data, setData] = useState();
+        const [hora, setHora] = useState();
+        const [nascimento, setNascimento] = useState();
+        const [tipoRo, setTipoRo] = useState();
+        const [local, setLocal] = useState();
+        const [mae, setMae] = useState();
+        const [pai, setPai] = useState();
+        const [telefone, setTelefone] = useState();
+        const [genero, setGenero] = useState();
+        const [historico, setHistorico] = useState();
+        const [cosop, setCosop] = useState();
+        const [endereço, setEndereço] = useState();
+        const [avatar2,setAvatar2] = useState(null);  
+       
+    const pushDados = () =>{
      try {
-      firebase.database().ref('/Rau').once('value', (snapshot) => {
-        const list = [];
-        snapshot.forEach((childItem) => {
-          list.push({
-            key: childItem.key,
-            CPF: childItem.val().CPF,
-            Nome: childItem.val().Nome,
-            ChaveFoto: childItem.val().ChaveFoto,
-            endereço: childItem.val().Endereço,
-            dataa: childItem.val().Data,
-            hora: childItem.val().Hora,
-            identidade: childItem.val().Identidade,
-            nascimento: childItem.val().Nascimento,
-            tipoRo: childItem.val().TipoRo,
-            local: childItem.val().Local,
-            mae: childItem.val().Mae,
-            pai: childItem.val().Pai,
-            telefone: childItem.val().Telefone,
-            genero: childItem.val().Genero,
-            historico: childItem.val().Historico,
-            cosop: childItem.val().Cosop,
-          });
-        });
-        setListFire(list.reverse());
-        
-      })
+     firebase.database().ref('/Ro').child(key)
+                .once('value').then((snapshot) => {
+                    const nome = snapshot.val().Nome;
+                    const identidade = snapshot.val().Identidade;
+                    const cpf = snapshot.val().CPF;
+                    const chaveFoto = snapshot.val().ChaveFoto;
+                    const data = snapshot.val().Data;
+                    const hora = snapshot.val().Hora;
+                    const nascimento = snapshot.val().Nascimento;
+                    const tipoRo = snapshot.val().TipoRo;
+                    const local = snapshot.val().Local;
+                    const mae = snapshot.val().Mae;
+                    const pai = snapshot.val().Pai;
+                    const telefone = snapshot.val().Telefone;
+                    const genero =snapshot.val().Genero;
+                    const historico = snapshot.val().Historico;
+                    const cosop = snapshot.val().Cosop;
+                    const endereço = snapshot.val().Endereço;
+                   
+                    
+                    setIdentidade(identidade);
+                    setNome(nome);
+                    setCpf(cpf);
+                    setChaveFoto(chaveFoto);
+                    setData(data);
+                    setHora(hora);
+                    setNascimento(nascimento);
+                    setTipoRo(tipoRo);
+                    setLocal(local);
+                    setMae(mae);
+                    setPai(pai);
+                    setTelefone(telefone);
+                    setGenero(genero);
+                    setHistorico(historico);
+                    setCosop(cosop);
+                    setEndereço(endereço);
+
+                });
 
     } catch (error) {
       alert(error);
     }
 }
+
+ const buscarFotos = () => {
+        const storage = firebase.storage();
+        const starsRef = storage.ref('images/').child(key);
     
-   
-  useEffect(() => {
+        starsRef.getDownloadURL().then(function (url) {
+            let avatar1 = { uri: url };
+            setAvatar2(avatar1);
+    
+        }).catch((error) => {
+        if (error.code === 'storage/object-not-found'){
+            
+        }
+        });
+    }
+
+useEffect(() => {
       let isUnmount = false;
 
       setTimeout(() => {
@@ -65,42 +112,158 @@ const pushDados = () =>{
       
       if (!isUnmount) {
           pushDados();
+          buscarFotos();
       }
    }, 1000);
    return ()=>{
       isUnmount = true;
-       setListFire([]);
-      setSearchTexto('');
+    setIdentidade('');
+    setNome('');
+    setCpf('');
+    setChaveFoto('');
+    setData('');
+    setHora('');
+    setNascimento('');
+    setTipoRo('');
+    setLocal('');
+    setMae('');
+    setPai('');
+    setTelefone('');
+    setGenero('');
+    setHistorico('');
+    setCosop('');
+    setEndereço('');
+
+      
    }
   }, [])
 
-     function handleClickSearch () {
-        navigation.navigate('HomeRauSearch',{searchTexto:searchTexto});
-        setSearchTexto('');
+     const sair = () => {
+        setIdentidade('');
+        setNome('');
+        setCpf('');
+        setChaveFoto('');
+        setData('');
+        setHora('');
+        setNascimento('');
+        setTipoRo('');
+        setLocal('');
+        setMae('');
+        setPai('');
+        setTelefone('');
+        setGenero('');
+        setHistorico('');
+        setCosop('');
+        setEndereço('');
+        navigation.goBack();
     };
+   
+    const pdfScreen = () => {
+        navigation.navigate('HomeRau')
+    }
 
-    return(
+   
+
+  
+
+    return (
         <Container >
-                
-            <SafeAreaView style={{ backgroundColor: '#1C1C1C', flex: 1 ,marginTop:1}}>
-               <SearchCadastrar  autoCapitalize={'characters'} onEndEditing={handleClickSearch} value={searchTexto} onChangeText={(t) => setSearchTexto(t)} onPress={handleClick} />
-                
-                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
-                    <FlatList style={styles.viewFlat} 
-                    data={listFire}
-                        
-                        keyExtractor={(item) => item.key}
-                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
-                        
-                        renderItem={({ item }) =>
-                           <DownImagesRau data={item}/>
-                           
-                            
 
-                        } />
-                </SafeAreaView>
+           <ViewTitullo>
+                
+                <TextTitulo>Detalhes da Ocorrência</TextTitulo>
+                
+                <TouchSair onPress = {sair}>
+                    <Image source = {require('../../../assets/SetaSair.png')} />
+                </TouchSair>
+            
+            </ViewTitullo>
 
-            </SafeAreaView>
+            <ViewQualificaçao>
+                <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
+
+                <View style = {{flexDirection:'row'}}>
+
+                 <View style={styles.viewImage}>
+                    <Image source={avatar2} style={styles.itemAvatar} />
+                </View>
+
+                <View style={{}}>
+                <TextNome>{nome}</TextNome>
+
+                <View style={{marginTop:16}}>
+                <TextLabel>RG:<TextLabelText>{identidade}</TextLabelText></TextLabel>
+                <TextLabel>CPF:<TextLabelText>{cpf}</TextLabelText></TextLabel>
+                <TextLabel>Telefone:<TextLabelText>{telefone}</TextLabelText></TextLabel>
+                <TextLabel>Nascimento:<TextLabelText>{nascimento}</TextLabelText></TextLabel>
+                </View>
+                
+                </View>
+               
+                </View>
+            </ViewQualificaçao>
+
+            <View style={{marginLeft:30}}>
+                <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
+                <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
+                 
+                 <View style = {{flexDirection:'row'}}>
+                     <View style={{flex:1}}>
+                     <TextLabelcamposmae>CEP:<TextCamposmae>{}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                        <View style={{flex:1}}>
+                      <TextLabelcamposmae>Gênero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
+                </View>
+                 </View>
+                 
+                <TextLabelcamposmae>Endereço:<TextCamposmae>{endereço}</TextCamposmae></TextLabelcamposmae>
+            </View>
+            
+            <View style={{marginLeft:30,marginTop:35}}>
+                <TextDetallhesOcorr>Detalhes da Ocorrência</TextDetallhesOcorr>
+            </View>
+
+            <View style={{marginTop:15,marginLeft:30}}>
+
+                <View style={{flexDirection:'row'}} >
+                   
+                   <View style={{flex:1}}>
+                    <TextLabeldetalhes>Data:<TextDetalhes>{data}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+               
+                <View style={{flex:1}}>
+                    <TextLabeldetalhes>Hora:<TextDetalhes>{hora}</TextDetalhes></TextLabeldetalhes>
+                </View>
+                
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+                    
+                    <View style={{flex:1}}>
+                        <TextLabeldetalhes>RO:<TextDetalhes>{tipoRo}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+
+                    <View style={{flex:1}}>
+
+                         <TextLabeldetalhes>Local:<TextDetalhes>{local}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+
+                     
+                   
+                </View>
+
+                <View>
+                    <TextLabeldetalhes>ASO:<TextDetalhes>{cosop}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabeldetalhes>Detalhes:<TextDetalhes>{historico}</TextDetalhes></TextLabeldetalhes>
+                </View>
+            </View>
+
+            <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
+                <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
+            </View>
+
+            <Button title='Gerar PDF' onPress={pdfScreen}/>
 
             
 
@@ -109,66 +272,19 @@ const pushDados = () =>{
 }
 
 const styles = StyleSheet.create({
-    itemArea:{
-        height:100,
-        flex:1,
-        flexDirection:'row',
-    },
-    itemFoto:{
-        width:150,
-        height:150,
-        margin:10,
-    },
-    itemInfo:{
-        flex:1
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#000',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        color: '#fff',
-    },
-    textInput: {
-        width: 300,
-        height: 50,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        textAlign: 'center',
-        marginTop: 5
-    },
-    btnEnviar: {
-        margin: 10,
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 150,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    iconFlat: {
-        flexDirection: 'row',
-        width: 350,
-        height: 50,
-        borderColor: '#fff',
-        borderWidth: 1,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 5
-    },
-    btnEnviar: {
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 50,
-        height: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: 5
-    },
-    viewFlat: {
+
+    viewImage:{
         
-    }
+        marginTop:15,
+        marginLeft:30,
+        marginRight:15,
+    },
+    itemAvatar: {
+        width: 116,
+        height: 156,
+        borderRadius: 5,
+        
+    },
+
 })
+  

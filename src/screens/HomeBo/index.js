@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { Image,StyleSheet,View } from 'react-native';
+import { Button, Image,StyleSheet,View } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native'
 import firebase from '../../connection/FirebaseConection';
 import { Container,
@@ -158,6 +158,9 @@ useEffect(() => {
         navigation.goBack();
     };
    
+    const pdfScreen = () => {
+        navigation.navigate('HomeRau',{key:key})
+    }
 
     return (
         <Container >
@@ -255,6 +258,8 @@ useEffect(() => {
             <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
                 <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
             </View>
+
+            <Button title='pdf' onPress={pdfScreen}/>
 
         </Container>
     );
