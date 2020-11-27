@@ -38,7 +38,7 @@ export default () => {
     const [nome, setNome] = useState('');
     const [identidade, setIdentidade] = useState('');
     const [nascimento, setNascimento] = useState('');
-    const [tipoRo, setTipoRo] = useState("RO");
+    const [tipoRo, setTipoRo] = useState("Escolha");
     const [local, setLocal] = useState("UVL");
     const [mae, setMae] = useState('');
     const [pai, setPai] = useState('');
@@ -51,12 +51,12 @@ export default () => {
     const [cep, setCep] = useState('');
 
     const [tipoOcorrencia1, setTipoOcorrencia1] = useState();
-     const [tipoOcorrenciaRo, setTipoOcorrenciaRo] = useState({ "1": "Furto","2": "Auxilio Púbico","3": "Atendimento a deficiente físico","4": "Atendimento a deficiente visual",});
-    const [tipoOcorrenciaRau, setTipoOcorrenciaRau] = useState({ "1": "Acidente","2": "Acidente na escada rolante","3": "Acidente na escada fixa","4": "Mal súbito",});
-    const [tipoOcorrenciaBo, setTipoOcorrenciaBo] = useState({ "1": "Pessoa perdida","2": "Òbito","3": "Importunação ofensiva ao pudor","4": "Ameaça",});
-    const [tipoOcorrenciaRRM, setTipoOcorrenciaRRM] = useState({ "1": "Panfletagem","2": "Recolhimento de mercadoria","3": "Recolhimento de bilhete",});
+     const [tipoOcorrenciaRo, setTipoOcorrenciaRo] = useState({ "Furto": "Furto","Auxilio Púbico": "Auxilio Púbico","Atendimento a deficiente físico": "Atendimento a deficiente físico","Atendimento a deficiente visual": "Atendimento a deficiente visual",});
+    const [tipoOcorrenciaRau, setTipoOcorrenciaRau] = useState({ "Acidente": "Acidente","Acidente na escada rolante": "Acidente na escada rolante","Acidente na escada fixa": "Acidente na escada fixa","Mal súbito": "Mal súbito",});
+    const [tipoOcorrenciaBo, setTipoOcorrenciaBo] = useState({ "Pessoa perdida": "Pessoa perdida","Òbito": "Òbito","Importunação ofensiva ao pudor": "Importunação ofensiva ao pudor","Ameaça": "Ameaça",});
+    const [tipoOcorrenciaRRM, setTipoOcorrenciaRRM] = useState({ "Panfletagem": "Panfletagem","Recolhimento de mercadoria": "Recolhimento de mercadoria","Recolhimento de bilhete": "Recolhimento de bilhete",});
     
-    const [tipoOcorrencia, setTipoOcorrencia] = useState(tipoOcorrenciaRo);
+    const [tipoOcorrencia, setTipoOcorrencia] = useState('');
 
     const [cidade, setCidade] = useState('');
     const [bairro, setBairro] = useState('');
@@ -71,60 +71,33 @@ export default () => {
     const [permissaoBo, setPermissaoBo] = useState(false);
 
 
-     const [pickerRO, setPickerRo] = useState(<Picker
-                selectedValue={tipoOcorrencia}
-                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
-                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
-                >
-                <Picker.Item label="Furto" value="Furto" />
-                <Picker.Item label="Auxilio público" value="Auxilio público" />
-                <Picker.Item label="Atendimento a deficiente físico" value="Atendimento a deficiente físico" />
-                <Picker.Item label="Atendimento a deficiente visual" value="Atendimento a deficiente visual" />
-                </Picker>);
+    const [tipoDeEnvolvimento, setTipoDeEnvolvimento] = useState('');
+    const [nacionalidade, setNacionalidade] = useState('');
+    const [naturalidade, setNaturalidade] = useState('');
+    const [idadeAparente, setIdadeAparente] = useState('');
+    const [estadoCivil, setEstadoCivil] = useState('');
+    const [cutis, setCutis] = useState('');
+    const [ocupaçãoAtual, setOcupaçãoAtual] = useState('');
+    const [grauEscoar, setGrauEscolar] = useState('');
+    const [orgãoExpedidor, setOrgãoEpedidor] = useState('');
+    const [ufEnvolvido, setUfEnvolvido] = useState('');
+    const [ufMoradia, setUfMoradia] = useState('');
+    const [paisMoradia, setpaisMoradia] = useState('');
+    const [tentadoConsumado, setTentadoConsumado] = useState('');
+    const [alvoDoEvento, setAlvoDoEvento] = useState('');
+    const [dataDoFato, setDataDoFato] = useState('');
+    const [horarioDoFato, setHorarioDoFato] = useState('');
+    const [dataFinal, setDataFinal] = useState('');
+    const [horarioFinal, setHorarioFinal] = useState('');
+    
 
-        const [pickerRau, setPickerRau] = useState(<Picker
-                selectedValue={tipoOcorrencia}
-                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
-                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
-                >
-                <Picker.Item label="Acidente" value="Acidente" />
-                <Picker.Item label="Acidente na escada rolante" value="Acidente na escada rolante" />
-                <Picker.Item label="Acidente na escada fixa" value="Acidente na escada fixa" />
-                <Picker.Item label="Mal súbito" value="Mal súbito" />
-                </Picker>);
-
-        const [pickerRRM, setPickerRRM] = useState(<Picker
-                selectedValue={tipoOcorrencia}
-                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
-                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
-                >
-                <Picker.Item label="Panfletagem" value="Panfletagem" />
-                <Picker.Item label="Recolhimento de mercadoria" value="Recolhimento de mercadoria" />
-                <Picker.Item label="Recolhimento de bilhete" value="Recolhimento de bilhete" />
-                
-                </Picker>);
-         
-          const [pickerBO, setPickerBO] = useState(<Picker
-                selectedValue={tipoOcorrencia}
-                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff',marginLeft:30,marginTop:15}}
-                onValueChange={(itemValue, itemIndex) => setTipoOcorrencia(itemValue)}
-                >
-                <Picker.Item label="Pessoa perdida" value="Pessoa perdida" />
-                <Picker.Item label="Òbito" value="Òbito" />
-                <Picker.Item label="Importunação ofensiva ao pudor" value="Importunação ofensiva ao pudor" />
-                <Picker.Item label="Ameaça" value="Ameaça" />
-                </Picker>);
+    
 
 
 
     const navigation = useNavigation();
 
-    const handleClick = () => {
-        setNome('');
-        setCpf('');
-        setEndereço('');
-        navigation.navigate('HomeRo');
-    };
+    
 
 
     const saveFoto = (chave,cosop) => {
@@ -136,7 +109,7 @@ export default () => {
                 });
             }
 
-             firebase.database().ref('/'+tipoRo).child(chave).set({
+             firebase.database().ref('/Ocorrencias').child(chave).set({
                 Nome: nome,
                 CPF: cpf,
                 Cosop:cosop,
@@ -153,13 +126,35 @@ export default () => {
                 Genero:genero,
                 Historico:historico,
                 Estado:estado,
-                TipoOcorrencia:tipoOcorrencia,
+                TipoOcorrencia1:tipoOcorrencia1,
                 CEP:cep,
                 Cidade:cidade,
                 bairro:bairro,
                 Logradouro:logradouro,
                 NumeroCasa:numeroCasa,
                 Complemento:complemento,
+
+                TipodeEnvolvimento:tipoDeEnvolvimento,
+                Nacionalidade:nacionalidade,
+                Naturalidade:naturalidade,
+                IdadeAparente:idadeAparente,
+                EstadoCivil:estadoCivil,
+                Cutis:cutis,
+                OcupaçãoAtual:ocupaçãoAtual,
+                GrauEscolar:grauEscoar,
+                OrgãoExpedidor:orgãoExpedidor,
+                UfEnvolvido:ufEnvolvido,
+                PaisMoradia:paisMoradia,
+                TentadoConsumado:tentadoConsumado,
+                AlvoDoEvento:alvoDoEvento,
+                DataDoFato:dataDoFato,
+                HorarioDoFato:horarioDoFato,
+                DataFinal:dataFinal,
+                HorarioFinal:horarioFinal,
+
+                
+                
+                
                 
             })
 
@@ -200,57 +195,13 @@ export default () => {
         const response = await fetch(uri);
         const blob = await response.blob();
 
-        var ref = firebase.storage().ref().child(tipoRo+"/" + imageName);
+        var ref = firebase.storage().ref().child("ocorrencias/" + imageName);
         return ref.put(blob);
     }
 
      
 
-    const saveUser =  (cosop,chave) => {
-            
-        
-
-        try {
-            firebase.database().ref('/Ro').child(chave).set({
-                Nome: nome,
-                CPF: cpf,
-                Endereço: endereço,
-                Cosop:cosop,
-                ChaveFoto:chave,
-                Data:dataa,
-                Hora:horario,
-                Identidade:identidade,
-                Nascimento:nascimento,
-                TipoRo:tipoRo,
-                Local:local,
-                Mae:mae,
-                Pai:pai,
-                Telefone:telefone,
-                Genero:genero,
-                Historico:historico
-            })
-
-        } catch (error) {
-            alert(error);
-        }
-        finally {
-            setNome('');
-            setCpf('');
-            setEndereço('');
-            setIdentidade('');
-            setNascimento('');
-            setTipoRo('');
-            setLocal('');
-            setMae('');
-            setPai('');
-            setTelefone('');
-            setGenero('');
-            setHistorico('');
-            alert('Dados enviados!');
-            navigation.navigate('HomeRo');
-            
-        }
-    }
+    
 
    
 
@@ -358,6 +309,9 @@ export default () => {
         case 'RRM':
              setTipoOcorrencia(tipoOcorrenciaRRM)
               break;  
+        case 'Escolha':
+             setTipoOcorrencia('')
+              break;       
 
           default:
               break;
@@ -492,10 +446,41 @@ export default () => {
                 
             </View>
 
-            <View>
+             <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Nacionalidade' placeholderTextColor ='#666360' value={nacionalidade} onChangeText={(t) => setNacionalidade(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Naturalidade' placeholderTextColor ='#666360' value={naturalidade} onChangeText={(t) => setNaturalidade(t)} />
+            </View>
+
+             <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Idade Aparente' placeholderTextColor ='#666360' value={idadeAparente} onChangeText={(t) => setIdadeAparente(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Estado Civil' placeholderTextColor ='#666360' value={estadoCivil} onChangeText={(t) => setEstadoCivil(t)} />
+            </View>
+
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutis} onChangeText={(t) => setCutis(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Ocupação Atual' placeholderTextColor ='#666360' value={ocupaçãoAtual} onChangeText={(t) => setOcupaçãoAtual(t)} />
+            </View>
+
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Escolaridade' placeholderTextColor ='#666360' value={grauEscoar} onChangeText={(t) => setGrauEscolar(t)} />
+                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidor} onChangeText={(t) => setOrgãoEpedidor(t)} />
+                   </View>
+
+                   <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='UF Nascimento' placeholderTextColor ='#666360' value={ufEnvolvido} onChangeText={(t) => setUfEnvolvido(t)} />
+                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Tipo de Envolvimento' placeholderTextColor ='#666360' value={tipoDeEnvolvimento} onChangeText={(t) => setTipoDeEnvolvimento(t)} />
+                   </View>
+
+                   
+            
+
+                   
+
+
+            <>
                 <TextEndereço>Endereço do Envolvido</TextEndereço>
 
-            </View>
+            </>
 
             <View style= {styles.viewEstado}>
 
@@ -552,6 +537,13 @@ export default () => {
             <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Complemento' placeholderTextColor ='#666360' value={complemento} onChangeText={(t) => setComplemento(t)}/>
             </View>
 
+             <View style = {styles.viewCidadeBairro}>
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='País' placeholderTextColor ='#666360' value={paisMoradia} onChangeText={(t) => setpaisMoradia(t)} />
+                        
+                       
+                       </View>
+
+
             <View style = {{marginBottom:25}}>
             <TextInformações>Informações da Ocorrência</TextInformações>
 
@@ -562,6 +554,24 @@ export default () => {
                 <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Hora' placeholderTextColor ='#666360' value ={hora}  />
             </View>
 
+             <View style = {styles.viewCidadeBairro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Tentado/Consumado' placeholderTextColor ='#666360' value={tentadoConsumado} onChangeText={(t) => setTentadoConsumado(t)} />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Alvo do Evento' placeholderTextColor ='#666360' value={alvoDoEvento} onChangeText={(t) => setAlvoDoEvento(t)} />
+                
+                 </View>
+
+                 <View style = {styles.viewCidadeBairro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Data do Fato' placeholderTextColor ='#666360' value={dataDoFato} onChangeText={(t) => setDataDoFato(t)} />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Hora do Fato' placeholderTextColor ='#666360' value={horarioDoFato} onChangeText={(t) => setHorarioDoFato(t)} />
+                
+                 </View>
+
+                  <View style = {styles.viewCidadeBairro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Data Final' placeholderTextColor ='#666360' value={dataFinal} onChangeText={(t) => setDataFinal(t)} />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Hora Final' placeholderTextColor ='#666360' value={horarioFinal} onChangeText={(t) => setHorarioFinal(t)} />
+                
+                 </View>
+
             <View style = {styles.viewTipoRo}>
 
                 {permissaoBo && 
@@ -571,6 +581,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
+                <Picker.Item label="Escolha" value="Escolha" />
                 <Picker.Item label="RO" value="RO" />
                 <Picker.Item label="BO" value="BO" />
                 <Picker.Item label="RRM" value="RRM" />
@@ -585,6 +596,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
+                <Picker.Item label="Escolha" value="Escolha" />
                 <Picker.Item label="RO" value="RO" />
                 
                 <Picker.Item label="RRM" value="RRM" />
@@ -635,6 +647,9 @@ export default () => {
                 })}
                 </Picker>   
 
+                 
+
+
              
 
              <TextInput style={styles.inputHist} color ='#fff' placeholder='                      Destalhes da ocorrência' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />  
@@ -658,6 +673,10 @@ export default () => {
     );
 }
 const styles = StyleSheet.create({
+    viewRow:{
+        marginLeft:30,
+        flexDirection:'row',  
+    }, 
      formFoto:{
         width:133.85,
         height:180,
