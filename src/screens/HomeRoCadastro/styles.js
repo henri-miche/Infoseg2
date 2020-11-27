@@ -175,5 +175,19 @@ export const LoadingArea = styled.View`
         margin-bottom:100px;
     
 `
+export const TextEnvolvido2= styled.Text`
+        
+        
+        font-family: RobotoSlab;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        
+
+        /* White */
+
+        color: #F4EDE8;
+    
+`
 
 

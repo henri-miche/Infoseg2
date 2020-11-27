@@ -5,8 +5,20 @@ import {NavigationContainer} from '@react-navigation/native';
 import Mainstack from './src/stacks/Mainstack';
 import * as Font from 'expo-font';
 import { Platform, InteractionManager } from 'react-native';
+import * as Updates from "expo-updates";
 
 export default function App() {
+
+  useEffect(() => {
+    async function updateApp() {
+      const { isAvailable } = await Updates.checkForUpdateAsync();
+      if (isAvailable) {
+        await Updates.fetchUpdateAsync();
+        await Updates.reloadAsync(); // depende da sua estratégia
+      }
+    }
+    updateApp();
+  }, []);
 
   /*todo este codigo para desabilitar aviso de timer real database,import acima tbm,caso excluir */
   const _setTimeout = global.setTimeout;

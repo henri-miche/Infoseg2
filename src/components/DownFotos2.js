@@ -6,10 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 
 export default ({data}) => {
 
-    const nome = data.Nome;
-    const cpf = data.CPF;
+    const nome = data.nome;
+    const cpf = data.cpf;
     const key = data.key;
-    const chaveFoto = data.ChaveFoto;
+    const chaveFoto = data.chaveFoto;
     const dataa = data.dataa;
     const hora = data.hora;
     const identidade = data.identidade;
@@ -28,7 +28,7 @@ export default ({data}) => {
 
     const buscarFotos = () => {
         const storage = firebase.storage();
-        const starsRef = storage.ref('images/').child(key);
+        const starsRef = storage.ref('ocorrencias/').child(key);
     
         starsRef.getDownloadURL().then(function (url) {
             let avatar1 = { uri: url };

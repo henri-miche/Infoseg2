@@ -54,27 +54,27 @@ const pushDados = async () =>{
     
 
    try {
-      firebase.database().ref('/Ro').once('value', (snapshot) => {
+      firebase.database().ref('/Ocorrencias').once('value', (snapshot) => {
         const list = [];
         snapshot.forEach((childItem) => {
           list.push({
             key: childItem.key,
-            CPF: childItem.val().CPF,
-            Nome: childItem.val().Nome,
-            ChaveFoto: childItem.val().ChaveFoto,
-            endereço: childItem.val().Endereço,
-            dataa: childItem.val().Data,
-            hora: childItem.val().Hora,
-            identidade: childItem.val().Identidade,
-            nascimento: childItem.val().Nascimento,
-            tipoRo: childItem.val().TipoRo,
-            local: childItem.val().Local,
-            mae: childItem.val().Mae,
-            pai: childItem.val().Pai,
-            telefone: childItem.val().Telefone,
-            genero: childItem.val().Genero,
-            historico: childItem.val().Historico,
-            cosop: childItem.val().Cosop,
+            cpf: childItem.val().cpf,
+            nome: childItem.val().nome,
+            chaveFoto: childItem.val().chaveFoto,
+            endereço: childItem.val().endereço,
+            dataa: childItem.val().data,
+            hora: childItem.val().hora,
+            identidade: childItem.val().identidade,
+            nascimento: childItem.val().nascimento,
+            tipoRo: childItem.val().tipoRo,
+            local: childItem.val().local,
+            mae: childItem.val().mae,
+            pai: childItem.val().pai,
+            telefone: childItem.val().telefone,
+            genero: childItem.val().genero,
+            historico: childItem.val().historico,
+            cosop: childItem.val().cosop,
           });
         });
         setListFire(list.reverse());
@@ -96,22 +96,22 @@ const pushDados = async () =>{
         snapshot.forEach((childItem) => {
           list.push({
             key: childItem.key,
-            CPF: childItem.val().CPF,
-            Nome: childItem.val().Nome,
-            ChaveFoto: childItem.val().ChaveFoto,
-            endereço: childItem.val().Endereço,
-            dataa: childItem.val().Data,
-            hora: childItem.val().Hora,
-            identidade: childItem.val().Identidade,
-            nascimento: childItem.val().Nascimento,
-            tipoRo: childItem.val().TipoRo,
-            local: childItem.val().Local,
-            mae: childItem.val().Mae,
-            pai: childItem.val().Pai,
-            telefone: childItem.val().Telefone,
-            genero: childItem.val().Genero,
-            historico: childItem.val().Historico,
-            cosop: childItem.val().Cosop,
+            cpf: childItem.val().cpf,
+            nome: childItem.val().nome,
+            chaveFoto: childItem.val().chaveFoto,
+            endereço: childItem.val().endereço,
+            dataa: childItem.val().data,
+            hora: childItem.val().hora,
+            identidade: childItem.val().identidade,
+            nascimento: childItem.val().nascimento,
+            tipoRo: childItem.val().tipoRo,
+            local: childItem.val().local,
+            mae: childItem.val().mae,
+            pai: childItem.val().pai,
+            telefone: childItem.val().telefone,
+            genero: childItem.val().genero,
+            historico: childItem.val().historico,
+            cosop: childItem.val().cosop,
           });
         });
         setListFire(list);

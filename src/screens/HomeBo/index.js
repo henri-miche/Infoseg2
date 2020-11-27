@@ -45,24 +45,24 @@ export default () => {
        
     const pushDados = () =>{
      try {
-     firebase.database().ref('/Ro').child(key)
+     firebase.database().ref('/Ocorrencias').child(key)
                 .once('value').then((snapshot) => {
-                    const nome = snapshot.val().Nome;
-                    const identidade = snapshot.val().Identidade;
-                    const cpf = snapshot.val().CPF;
-                    const chaveFoto = snapshot.val().ChaveFoto;
-                    const data = snapshot.val().Data;
-                    const hora = snapshot.val().Hora;
-                    const nascimento = snapshot.val().Nascimento;
-                    const tipoRo = snapshot.val().TipoRo;
-                    const local = snapshot.val().Local;
-                    const mae = snapshot.val().Mae;
-                    const pai = snapshot.val().Pai;
-                    const telefone = snapshot.val().Telefone;
-                    const genero =snapshot.val().Genero;
-                    const historico = snapshot.val().Historico;
-                    const cosop = snapshot.val().Cosop;
-                    const endereço = snapshot.val().Endereço;
+                    const nome = snapshot.val().nome;
+                    const identidade = snapshot.val().identidade;
+                    const cpf = snapshot.val().cpf;
+                    const chaveFoto = snapshot.val().chaveFoto;
+                    const data = snapshot.val().data;
+                    const hora = snapshot.val().hora;
+                    const nascimento = snapshot.val().nascimento;
+                    const tipoRo = snapshot.val().tipoRo;
+                    const local = snapshot.val().local;
+                    const mae = snapshot.val().mae;
+                    const pai = snapshot.val().pai;
+                    const telefone = snapshot.val().telefone;
+                    const genero =snapshot.val().genero;
+                    const historico = snapshot.val().historico;
+                    const cosop = snapshot.val().cosop;
+                    const endereço = snapshot.val().endereço;
                    
                     
                     setIdentidade(identidade);
@@ -91,7 +91,7 @@ export default () => {
 
  const buscarFotos = () => {
         const storage = firebase.storage();
-        const starsRef = storage.ref('images/').child(key);
+        const starsRef = storage.ref('ocorrencias/').child(key);
     
         starsRef.getDownloadURL().then(function (url) {
             let avatar1 = { uri: url };
