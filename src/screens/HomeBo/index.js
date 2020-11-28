@@ -42,6 +42,8 @@ export default () => {
         const [cosop, setCosop] = useState();
         const [endereço, setEndereço] = useState();
         const [avatar2,setAvatar2] = useState(null);  
+
+        const [tipoOcorrencia1, setTipoOcorrencia1] = useState();
        
     const pushDados = () =>{
      try {
@@ -63,6 +65,7 @@ export default () => {
                     const historico = snapshot.val().historico;
                     const cosop = snapshot.val().cosop;
                     const endereço = snapshot.val().endereço;
+                    const tipoOcorrencia1 = snapshot.val().tipoOcorrencia1;
                    
                     
                     setIdentidade(identidade);
@@ -81,6 +84,8 @@ export default () => {
                     setHistorico(historico);
                     setCosop(cosop);
                     setEndereço(endereço);
+
+                    setTipoOcorrencia1(tipoOcorrencia1);
 
                 });
 
@@ -159,7 +164,7 @@ useEffect(() => {
     };
    
     const pdfScreen = () => {
-        navigation.navigate('HomeRau',{key:key})
+        navigation.navigate('HomeRau',{key:key,local:local})
     }
 
     return (
@@ -237,7 +242,7 @@ useEffect(() => {
                 <View style={{flexDirection:'row'}}>
                     
                     <View style={{flex:1}}>
-                        <TextLabeldetalhes>RO:<TextDetalhes>{tipoRo}</TextDetalhes></TextLabeldetalhes>
+                        <TextLabeldetalhes>{tipoRo}:<TextDetalhes>{tipoOcorrencia1}</TextDetalhes></TextLabeldetalhes>
                     </View>
 
                     <View style={{flex:1}}>

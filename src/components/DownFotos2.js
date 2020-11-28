@@ -23,6 +23,7 @@ export default ({data}) => {
     const historico = data.historico;
     const cosop = data.cosop;
     const endereço = data.endereço;
+    const tipoOcorrencia1 = data.tipoOcorrencia1;
     const [avatar2,setAvatar2] = useState(null);  
     const navigation = useNavigation();
 
@@ -134,7 +135,7 @@ const Flat = styled.View`
 
 width: 315px;
 height: 237px;
-marginBottom:25px;
+marginBottom:45px;
 
 /* Darkest */
 
@@ -181,7 +182,7 @@ function handleClickVerCompleta () {
                 <TextNome style={styles.textNome}>{nome}</TextNome>
                 
                 <View style={styles.viewRoLocal}>
-                <TextLabelP>RO:<TextPool>{tipoRo}</TextPool></TextLabelP>
+                <TextLabelP>{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
                 <TextLabel>Local:<TextPool>{local}</TextPool> </TextLabel>
                 </View>
                 <TextLabelP>ASO:<TextPool>{cosop}</TextPool></TextLabelP>
@@ -242,7 +243,8 @@ color: '#F4EDE8'
     viewRoLocal:{
       flexDirection:'row',
       marginTop:10,
-      marginBottom:10
+      marginBottom:10,
+      width:100
     },
     row:{
         
@@ -260,7 +262,7 @@ color: '#F4EDE8'
     },
     itemAvatar: {
         width: 60,
-        height: 80,
+        height: 100,
         borderRadius: 5,
         
     },

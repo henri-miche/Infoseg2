@@ -19,6 +19,8 @@ export default function App() {
     }
     updateApp();
   }, []);
+  
+  
 
   /*todo este codigo para desabilitar aviso de timer real database,import acima tbm,caso excluir */
   const _setTimeout = global.setTimeout;

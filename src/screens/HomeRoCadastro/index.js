@@ -103,6 +103,7 @@ export default () => {
     const [horarioDoFato, setHorarioDoFato] = useState('');
     const [dataFinal, setDataFinal] = useState('');
     const [horarioFinal, setHorarioFinal] = useState('');
+    const [objetosRecolhidos, setObjetosRecolhidos] = useState('');
 
     const [notaFalsa, setNotaFalsa] = useState(true);
 
@@ -139,7 +140,7 @@ export default () => {
     const [nomeEnv2, setNomeEnv2] = useState('');
     const [identidadeEnv2, setIdentidadeEnv2] = useState('');
     const [nascimentoEnv2, setNascimentoEnv2] = useState('');
-    const [tipoRoEnv2, setTipoRoEnv2] = useState("Escolha");
+    const [tipoRoEnv2, setTipoRoEnv2] = useState("Escolha Tipo Ocorrencia");
     const [localEnv2, setLocalEnv2] = useState("UVL");
     const [maeEnv2, setMaeEnv2] = useState('');
     const [paiEnv2, setPaiEnv2] = useState('');
@@ -215,6 +216,7 @@ export default () => {
                 genero:genero,
                 historico:historico,
                 estado:estado,
+
                 tipoOcorrencia1:tipoOcorrencia1,
                 cep:cep,
                 cidade:cidade,
@@ -239,6 +241,7 @@ export default () => {
                 dataDoFato:dataDoFato,
                 horarioDoFato:horarioDoFato,
                 dataFinal:dataFinal,
+                objetosRecolhidos:objetosRecolhidos,
                 horarioFinal:horarioFinal,
                 notaFalsa:notaFalsa,
                 env2:env2,
@@ -283,7 +286,7 @@ export default () => {
                 fioDeSegurança:fioDeSegurança,
                 fundosEspeciais:fundosEspeciais,
                 faixaHoografica:faixaHoografica,
-                
+                fibrasLuzVioleta:fibrasLuzVioleta,
                 
                 
                 
@@ -409,6 +412,7 @@ export default () => {
                 logradouro:logradouro,
                 numeroCasa:numeroCasa,
                 complemento:complemento,
+                objetosRecolhidos:objetosRecolhidos,
 
                 tipodeEnvolvimento:tipoDeEnvolvimento,
                 nacionalidade:nacionalidade,
@@ -563,7 +567,7 @@ export default () => {
     
  /*if tem que ser editado para nano permitir envio vazio*/
     const confirmar = () => {
-        if(nome !== '' && cpf !== '' ){
+        if(nome !== '' && cpf !== ''  && tipoRo !== 'Escolha Tipo Ocorrencia' ){
            
            const user = firebase.auth().currentUser;
                 if(user){
@@ -662,7 +666,7 @@ export default () => {
         case 'RRM':
              setTipoOcorrencia(tipoOcorrenciaRRM)
               break;  
-        case 'Escolha':
+        case 'Escolha Tipo Ocorrencia':
              setTipoOcorrencia('')
              setTipoOcorrencia1('');
               break;       
@@ -691,7 +695,7 @@ export default () => {
                 .once('value');
                 const json = await req.toJSON();
                 setPermissaoBo(json.BO);
-                console.log(permissaoBo)
+                
                 }
               }
 
@@ -714,7 +718,7 @@ export default () => {
                       setMicroImpressoes('')
                   }
                    if(switchRegistroCoincidente === true){
-                      setRegistroCoincidente('difere da cédula original')
+                      setRegistroCoincidente('Difere da cédula original')
                   }else{
                       setRegistroCoincidente('')
                   }
@@ -1225,6 +1229,12 @@ export default () => {
                 
                  </View>
 
+                 <View style = {styles.viewCidadeBairro}>
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Objetos recolhidos' placeholderTextColor ='#666360' value={objetosRecolhidos} onChangeText={(t) => setObjetosRecolhidos(t)} />
+                        
+                       
+                       </View>
+
             <View style = {styles.viewTipoRo}>
 
                 {permissaoBo && 
@@ -1234,7 +1244,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
-                <Picker.Item label="Escolha" value="Escolha" />
+                <Picker.Item label="Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
                 <Picker.Item label="RO" value="RO" />
                 <Picker.Item label="BO" value="BO" />
                 <Picker.Item label="RRM" value="RRM" />
@@ -1249,7 +1259,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
-                <Picker.Item label="Escolha" value="Escolha" />
+                <Picker.Item label="Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
                 <Picker.Item label="RO" value="RO" />
                 
                 <Picker.Item label="RRM" value="RRM" />

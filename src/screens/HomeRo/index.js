@@ -75,6 +75,7 @@ const pushDados = async () =>{
             genero: childItem.val().genero,
             historico: childItem.val().historico,
             cosop: childItem.val().cosop,
+            tipoOcorrencia1:childItem.val().tipoOcorrencia1, 
           });
         });
         setListFire(list.reverse());
@@ -90,7 +91,7 @@ const pushDados = async () =>{
 
     const pushDadosSearch = () =>{
      try {
-      firebase.database().ref('/Ro').orderByChild('Nome').startAt(searchTexto)
+      firebase.database().ref('/Ocorrencias').orderByChild('nome').startAt(searchTexto)
       .once('value', (snapshot) => {
         const list = [];
         snapshot.forEach((childItem) => {
@@ -112,6 +113,7 @@ const pushDados = async () =>{
             genero: childItem.val().genero,
             historico: childItem.val().historico,
             cosop: childItem.val().cosop,
+            tipoOcorrencia1:childItem.val().tipoOcorrencia1,
           });
         });
         setListFire(list);

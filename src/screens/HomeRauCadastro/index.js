@@ -34,29 +34,55 @@ export default () => {
         const [agenteIntegrante,setAgenteIntegrante] = useState(true);
         const [animoUsuario,setAnimoUsuario] = useState(true);
         const [tipoOcorrencia,setTipoOcorrencia] = useState();
+       
+        const [marcaDagua, setMarcaDagua] = useState();
+        const [microImpressoes, setMicroImpressoes] = useState();
+        const [registroCoincidente, setRegistroCoincidente] = useState();
+        const [imagemLatente, setImagemLatente] = useState();
+        const [impressaoRelevo, setImpressaoRelevo] = useState();
+        const [numeraçaoNota, setNumeraçaoNota] = useState();
+        const [fibrasColoridas, setFibrasColoridas] = useState();
+        const [marcaTatil, setMarcaTatil] = useState();
+        const [fioDeSegurança, setFioDeSegurança] = useState();
+        const [fundosEspeciais, setFundosEspeciais] = useState();
+        const [fibrasLuzVioleta, setFibrasLuzVioleta] = useState();
+        const [faixaHoografica, setFaiaHolografica] = useState();
         
           
        
     const pushDados = () =>{
      try {
-     firebase.database().ref('/Ro').child(key)
+     firebase.database().ref('/Ocorrencias').child(key)
                 .once('value').then((snapshot) => {
-                    const nome = snapshot.val().Nome;
-                    const identidade = snapshot.val().Identidade;
-                    const cpf = snapshot.val().CPF;
-                    const chaveFoto = snapshot.val().ChaveFoto;
-                    const data = snapshot.val().Data;
-                    const hora = snapshot.val().Hora;
-                    const nascimento = snapshot.val().Nascimento;
-                    const tipoRo = snapshot.val().TipoRo;
-                    const local = snapshot.val().Local;
-                    const mae = snapshot.val().Mae;
-                    const pai = snapshot.val().Pai;
-                    const telefone = snapshot.val().Telefone;
-                    const genero =snapshot.val().Genero;
-                    const historico = snapshot.val().Historico;
-                    const cosop = snapshot.val().Cosop;
-                    const endereço = snapshot.val().Endereço;
+                    const nome = snapshot.val().nome;
+                    const identidade = snapshot.val().identidade;
+                    const cpf = snapshot.val().cpf;
+                    const chaveFoto = snapshot.val().chaveFoto;
+                    const data = snapshot.val().data;
+                    const hora = snapshot.val().hora;
+                    const nascimento = snapshot.val().nascimento;
+                    const tipoRo = snapshot.val().tipoRo;
+                    const local = snapshot.val().local;
+                    const mae = snapshot.val().mae;
+                    const pai = snapshot.val().pai;
+                    const telefone = snapshot.val().telefone;
+                    const genero =snapshot.val().genero;
+                    const historico = snapshot.val().historico;
+                    const cosop = snapshot.val().cosop;
+                    const endereço = snapshot.val().endereço;
+
+                    const marcaDagua = snapshot.val().marcaDagua;
+                    const microImpressoes = snapshot.val().microImpressoes;
+                    const regitroCoincidente = snapshot.val().regitroCoincidente;
+                    const imagemLatente = snapshot.val().imagemLatente;
+                    const impressaoRelevo = snapshot.val().impressaoRelevo;
+                    const numeraçaoNota =snapshot.val().numeraçaoNota;
+                    const fibrasColoridas = snapshot.val().fibrasColoridas;
+                    const marcaTatil = snapshot.val().marcaTatil;
+                    const fioDeSegurança =snapshot.val().fioDeSegurança;
+                    const fundosEspeciais = snapshot.val().fundosEspeciais;
+                    const faixaHoografica = snapshot.val().faixaHoografica;
+                    const fibrasLuzVioleta = snapshot.val().fibrasLuzVioleta;
                    
                     
                     setIdentidade(identidade);
@@ -75,6 +101,18 @@ export default () => {
                     setHistorico(historico);
                     setCosop(cosop);
                     setEndereço(endereço);
+                     setMarcaDagua(marcaDagua);
+                    setMicroImpressoes(microImpressoes);
+                    setRegistroCoincidente(regitroCoincidente);
+                    setImagemLatente(imagemLatente);
+                    setImpressaoRelevo(impressaoRelevo);
+                    setNumeraçaoNota(numeraçaoNota);
+                    setFibrasColoridas(fibrasColoridas);
+                    setMarcaTatil(marcaTatil);
+                    setFioDeSegurança(fioDeSegurança);
+                    setFundosEspeciais(fundosEspeciais);
+                    setFaiaHolografica(faixaHoografica);
+                    setFibrasLuzVioleta(fibrasLuzVioleta);
 
                 });
 
@@ -203,7 +241,7 @@ useEffect(() => {
                 </View>
 
                  <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}} >CHAVE BO {chaveFoto}</Text>
+                <Text style={{fontSize:15,fontWeight:'bold'}} >AUTÊNTICAÇÃO {chaveFoto}</Text>
                 </View>
 
             </View>
@@ -239,12 +277,12 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>MARCA D'ÁGUA</Text>
-                <Text style={styles.textoConteudo} >INEXISTENTE OU DIFERE DA CÉDULA ORIGINAL</Text>
+                <Text style={styles.textoConteudo} > {marcaDagua} </Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
             <Text style={styles.textoTitulo}>MICROIMPRESSÕES</Text>
-                <Text style={styles.textoConteudo} >{data}</Text>
+                <Text style={styles.textoConteudo} >{microImpressoes}</Text>
                 </View>
 
                 
@@ -255,12 +293,12 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>REGISTRO COINCIDENTE</Text>
-                <Text style={styles.textoConteudo} >INEXISTENTE OU DIFERE DA CÉDULA ORIGINAL</Text>
+                <Text style={styles.textoConteudo} >{registroCoincidente}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>IMAGEM LATENTE</Text>
-                <Text style={styles.textoConteudo} >{hora}</Text>
+                <Text style={styles.textoConteudo} >{imagemLatente}</Text>
                 </View>
 
                 
@@ -271,12 +309,12 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>IMPRESSÃO EM ALTO RELEVO</Text>
-                <Text style={styles.textoConteudo} >INEXISTENTE OU DIFERE DA CÉDULA ORIGINAL</Text>
+                <Text style={styles.textoConteudo} >{impressaoRelevo}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>NUMERAÇÃO</Text>
-                <Text style={styles.textoConteudo} >{hora}</Text>
+                <Text style={styles.textoConteudo} >{numeraçaoNota}</Text>
                 </View>
 
                 
@@ -287,12 +325,12 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>FIBRAS COLORIDAS</Text>
-                <Text style={styles.textoConteudo} >INEXISTENTE OU DIFERE DA CÉDULA ORIGINAL</Text>
+                <Text style={styles.textoConteudo} >{fibrasColoridas}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>MARCA TÁTIL</Text>
-                <Text style={styles.textoConteudo} >{hora}</Text>
+                <Text style={styles.textoConteudo} >{marcaTatil}</Text>
                 </View>
 
                 
@@ -303,12 +341,12 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>FIO DE SEGURANÇA</Text>
-                <Text style={styles.textoConteudo} >INEXISTENTE OU DIFERE DA CÉDULA ORIGINAL</Text>
+                <Text style={styles.textoConteudo} >{fioDeSegurança}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>FUNDOS ESPECIAIS</Text>
-                <Text style={styles.textoConteudo} >{hora}</Text>
+                <Text style={styles.textoConteudo} >{fundosEspeciais}</Text>
                 </View>
 
                 
@@ -319,12 +357,12 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>FIBRAS SENSÍVEIS Á LUZ ULTRAVIOLETA</Text>
-                <Text style={styles.textoConteudo} >INEXISTENTE OU DIFERE DA CÉDULA ORIGINAL</Text>
+                <Text style={styles.textoConteudo} >{fibrasColoridas}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>FAIXA HOLOGRAFICA</Text>
-                <Text style={styles.textoConteudo} >{hora}</Text>
+                <Text style={styles.textoConteudo} >{faixaHoografica}</Text>
                 </View>
 
                 
