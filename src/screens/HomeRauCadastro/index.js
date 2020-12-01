@@ -241,7 +241,7 @@ useEffect(() => {
                 </View>
 
                  <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}} >AUTÊNTICAÇÃO {chaveFoto}</Text>
+                <Text style={{fontSize:15,fontWeight:'bold'}} >AUTENTICAÇÃO {chaveFoto}</Text>
                 </View>
 
             </View>
