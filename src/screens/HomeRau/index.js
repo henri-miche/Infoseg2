@@ -85,6 +85,8 @@ export default () => {
         const [fibrasLuzVioleta, setFibrasLuzVioleta] = useState();
         const [faixaHoografica, setFaiaHolografica] = useState();
 
+        
+
         //variaveis env2
         const [cpfEnv2, setCpfEnv2] = useState();
         const [nomeEnv2, setNomeEnv2] = useState();
@@ -128,15 +130,21 @@ export default () => {
         const [env2, setEnv2] = useState(false);
 
         //variaveis local
-             const [nomeEstaçao,setNomeEstaçao]=useState();
-             const [bairroEstaçao,setBairoEstaçao]=useState();
-             const [cepEstaçao,setCepEstaçao]=useState();
-             const [complementoEstaçao,setComplementoEstaçao]=useState();
-             const [endereçoEstaçao,setEndereçoEstaçao]=useState();
-             const [municipioEstaçao, setMunicipioEstaçao]=useState();
-             const [numeroEstaçao,setNumeroEstaçao]=useState();
-             const [paisEstaçao,setPaisEstaçao]=useState();
-             const [ufEstaçao,setUfEstaçao]=useState();
+        const [nomeEstaçao,setNomeEstaçao]=useState();
+        const [bairroEstaçao,setBairoEstaçao]=useState();
+        const [cepEstaçao,setCepEstaçao]=useState();
+        const [complementoEstaçao,setComplementoEstaçao]=useState();
+        const [endereçoEstaçao,setEndereçoEstaçao]=useState();
+        const [municipioEstaçao, setMunicipioEstaçao]=useState();
+        const [numeroEstaçao,setNumeroEstaçao]=useState();
+        const [paisEstaçao,setPaisEstaçao]=useState();
+        const [ufEstaçao,setUfEstaçao]=useState();
+
+        //variaveis agente
+        const [matriculaAgente,setMatriculaAgente] = useState();
+        const [siapeAgente,setSiapeAgente] = useState();
+        const [cargoAgente,setCargoAgente] = useState();
+        
     
           
        
@@ -159,6 +167,9 @@ export default () => {
                     const genero =snapshot.val().genero;
                     const historico = snapshot.val().historico;
                     const cosop = snapshot.val().cosop;
+                    const siapeAgente = snapshot.val().siapeAgente;
+                    const matriculaAgente = snapshot.val().matriculaAgente;
+                    const cargoAgente = snapshot.val().cargoAgente;
                     const estado = snapshot.val().estado;
 
                     const tipoOcorrencia1 = snapshot.val().tipoOcorrencia1;
@@ -239,6 +250,8 @@ export default () => {
                     const fibrasLuzVioleta = snapshot.val().fibrasLuzVioleta;
 
                     
+
+                    
                     
                     setNome(nome);
                     setCpf(cpf);
@@ -256,6 +269,9 @@ export default () => {
                     setCosop(cosop);
                     setEndereço(endereço);
                     setEstado(estado);
+                    setSiapeAgente(siapeAgente);
+                    setMatriculaAgente(matriculaAgente);
+                    setCargoAgente(cargoAgente);
                    
                     setTipoOcorrencia1(tipoOcorrencia1);
                     setCep(cep);
@@ -328,6 +344,8 @@ export default () => {
                     setFaiaHolografica(faixaHoografica);
                     setFibrasLuzVioleta(fibrasLuzVioleta);
 
+                    
+
                 })
 
     
@@ -379,6 +397,8 @@ export default () => {
                 
               }
 
+              
+
 useEffect(() => {
       let isUnmount = false;
 
@@ -388,6 +408,7 @@ useEffect(() => {
       if (!isUnmount) {
           pushDados();
           buscarFotos();
+          
          
       }
    }, 1000);
@@ -1023,17 +1044,17 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>MATRÍCULA</Text>
-                <Text style={styles.textoConteudo} >{identidade}</Text>
+                <Text style={styles.textoConteudo} >{matriculaAgente}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
             <Text style={styles.textoTitulo}>SIAPE</Text>
-                <Text style={styles.textoConteudo} >{data}</Text>
+                <Text style={styles.textoConteudo} >{siapeAgente}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>CARGO</Text>
-                <Text style={styles.textoConteudo} >{hora}</Text>
+                <Text style={styles.textoConteudo} >{cargoAgente}</Text>
                 </View>
 
             </View>

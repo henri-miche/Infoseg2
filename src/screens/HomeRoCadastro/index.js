@@ -120,6 +120,19 @@ export default () => {
     const [fibrasLuzVioleta, setFibrasLuzVioleta] = useState('');
     const [faixaHoografica, setFaiaHolografica] = useState('');
 
+    const [outrasCaracteristicas, setOutrasCaracteristicas] = useState('');
+    const [moeda, setMoeda] = useState('');
+     const [tipoDoPapel, setTipoDoPapel] = useState('');
+    const [janelaTransparente, setJanelaTransparente] = useState('');
+
+
+    const [origemCedula, setOrigemCedula] = useState('');
+    const [estadoAnimo, setEstadoAnimo] = useState('');
+    const [tentouEvadir, setTentouEvadir] = useState('');
+    const [possuiaOutrasCedulas, setPossuiaOutrascCeduas] = useState('');
+    const [pagouApos, setPagouApos] = useState('');
+
+
     const [switchMarcaDagua, setSwitchMarcaDagua] = useState(false);
     const [switchMicroImpressoes, setSwitchMicroImpressoes] = useState(false);
     const [switchRegistroCoincidente, setSwitchRegistroCoincidente] = useState(false);
@@ -132,6 +145,8 @@ export default () => {
     const [switchFundosEspeciais, setSwitchFundosEspeciais] = useState(false);
     const [switchFibrasLuzVioleta, setSwitchFibrasLuzVioleta] = useState(false);
     const [switchFaixaHoografica, setSwitchFaixaHoografica] = useState(false);
+     const [switchTipoDoPapel, setSwitchTipoDoPapel] = useState(false);
+    const [switchJanelaTransparente, setSwitchJaneaTransparete] = useState(false);
     
 
 //variáveis envolvido 2
@@ -189,7 +204,7 @@ export default () => {
     
 
 
-    const saveFoto = (chave,cosop) => {
+    const saveFoto = (chave,cosop,matriculaAgente,siapeAgente,cargoAgente) => {
         setLoading(true);
         if (foto !== null) {
  
@@ -216,6 +231,9 @@ export default () => {
                 genero:genero,
                 historico:historico,
                 estado:estado,
+                matriculaAgente:matriculaAgente,
+                siapeAgente:siapeAgente,
+                cargoAgente:cargoAgente,
 
                 tipoOcorrencia1:tipoOcorrencia1,
                 cep:cep,
@@ -287,6 +305,16 @@ export default () => {
                 fundosEspeciais:fundosEspeciais,
                 faixaHoografica:faixaHoografica,
                 fibrasLuzVioleta:fibrasLuzVioleta,
+                origemCedula:origemCedula,
+                estadoAnimo:estadoAnimo,
+                tentouEvadir:tentouEvadir,
+                possuiaOutrasCedulas:possuiaOutrasCedulas,
+                pagouApos:pagouApos,
+
+                moeda:moeda,
+                janelaTransparente:janelaTransparente,
+                outrasCaracteristicas:outrasCaracteristicas,
+                tipoDoPapel:tipoDoPapel,
                 
                 
                 
@@ -306,7 +334,7 @@ export default () => {
                     setTelefone('');
                     setGenero('');
                     setHistorico('');
-                     setEstado('');
+                    setEstado('');
                     setTipoOcorrencia('');
                     setCep('');
                     setCidade('');
@@ -413,6 +441,10 @@ export default () => {
                 numeroCasa:numeroCasa,
                 complemento:complemento,
                 objetosRecolhidos:objetosRecolhidos,
+                matriculaAgente:matriculaAgente,
+                siapeAgente:siapeAgente,
+                cargoAgente:cargoAgente,
+
 
                 tipodeEnvolvimento:tipoDeEnvolvimento,
                 nacionalidade:nacionalidade,
@@ -446,6 +478,17 @@ export default () => {
                 fioDeSegurança:fioDeSegurança,
                 fundosEspeciais:fundosEspeciais,
                 faixaHoografica:faixaHoografica,
+
+                origemCedula:origemCedula,
+                estadoAnimo:estadoAnimo,
+                tentouEvadir:tentouEvadir,
+                possuiaOutrasCedulas:possuiaOutrasCedulas,
+                pagouApos:pagouApos,
+
+                moeda:moeda,
+                janelaTransparente:janelaTransparente,
+                outrasCaracteristicas:outrasCaracteristicas,
+                tipoDoPapel:tipoDoPapel,
                 
                 
                 
@@ -575,11 +618,14 @@ export default () => {
                     firebase.database().ref('usuarios').child(user.uid)
                         .once('value').then((snapshot) => {
                             let cosop = snapshot.val().nome;
+                            let matriculaAgente = snapshot.val().matriculaAgente;
+                            let siapeAgente = snapshot.val().siapeAgente;
+                            let cargoAgente = snapshot.val().cargoAgente;
                             //seta chave realtime para foto
                             let chavess = firebase.database().ref('/Ocorrencias');
                             let chave = chavess.push().key;
                             
-                            saveFoto(chave,cosop);
+                            saveFoto(chave,cosop,matriculaAgente,siapeAgente,cargoAgente);
                            
                     
                         });       
@@ -767,9 +813,19 @@ export default () => {
                   }else{
                       setFaiaHolografica('')
                   }
+                  if(switchJanelaTransparente === true){
+                      setJanelaTransparente('Inexistente ou difere da cédula original')
+                  }else{
+                      setJanelaTransparente('')
+                  }
+                  if(switchTipoDoPapel === true){
+                      setTipoDoPapel('Inexistente ou difere da cédula original')
+                  }else{
+                      setTipoDoPapel('')
+                  }
               },[switchEnv2,switchMarcaDagua,switchMicroImpressoes,switchRegistroCoincidente,
                 switchImagemLatente,switchImpressaoRelevo,switchNumeraçaoNota,switchFibrasColoridas,switchMarcaTatil,
-                switchFioDeSegurança,switchFundosEspeciais,switchFibrasLuzVioleta,switchFaixaHoografica
+                switchFioDeSegurança,switchFundosEspeciais,switchFibrasLuzVioleta,switchFaixaHoografica,switchTipoDoPapel,switchJanelaTransparente,
             ]) 
 
 
@@ -1421,10 +1477,59 @@ export default () => {
                  </View>
                  
                  </View>
+
+                  <View style = {{ marginLeft:30,flexDirection:'row',marginTop:15,justifyContent:'space-between',marginRight:5}}>
+                  
+                  <View style={{flexDirection:'row',}}>
+                  <View style={{marginRight:10,marginTop:3}}>
+                        <Text style={{color:'#fff',fontSize:12,}} >TIPO DO PAPEL</Text>
+                  </View>
+                         <Switch thumbColor='#FF9000' trackColor={{true: '#FF9000', false: '#2E2E2E'}} value={switchTipoDoPapel} onValueChange={(t)=>setSwitchTipoDoPapel(t)} />
+                 </View>
+
+                 <View style={{flexDirection:'row',}}>
+                  <View style={{marginRight:10,marginTop:3}}>
+                        <Text style={{color:'#fff',fontSize:12,}} >JANELA TRANSPARENTE</Text>
+                  </View>
+                         <Switch thumbColor='#FF9000' trackColor={{true: '#FF9000', false: '#2E2E2E'}} value={switchJanelaTransparente} onValueChange={(t)=>setSwitchJaneaTransparete(t)} />
+                 </View>
+                 
+                 </View>
                         
+                
+                
+                
+                <View style = {{marginTop:15,marginLeft:30}}>
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Moeda' placeholderTextColor ='#666360' value={moeda} onChangeText={(t) => setMoeda(t)} />
+                 </View>  
+
+                 <View style = {{marginLeft:30}}>
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Outras características' placeholderTextColor ='#666360' value={outrasCaracteristicas} onChangeText={(t) => setOutrasCaracteristicas(t)} />
+                 </View>  
+                
+                <View style = {{marginLeft:30}}>
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Origem da cédula' placeholderTextColor ='#666360' value={origemCedula} onChangeText={(t) => setOrigemCedula(t)} />
+                 </View>
+
+
+
+                  <View style = {styles.viewCidadeBairro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Estado de animo' placeholderTextColor ='#666360' value={estadoAnimo} onChangeText={(t) => setEstadoAnimo(t)} />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Tentou evadir' placeholderTextColor ='#666360' value={tentouEvadir} onChangeText={(t) => setTentouEvadir(t)} />
+                
+                 </View>      
+
+                 <View style = {styles.viewCidadeBairro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Possuía outras cédulas válidas' placeholderTextColor ='#666360' value={possuiaOutrasCedulas} onChangeText={(t) => setPossuiaOutrascCeduas(t)} />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Pagou após o fato' placeholderTextColor ='#666360' value={pagouApos} onChangeText={(t) => setPagouApos(t)} />
+                
+                 </View>    
+                       
+                      
 
                  </View>
 
+                  
                  }
 
                  

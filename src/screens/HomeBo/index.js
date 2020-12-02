@@ -179,9 +179,12 @@ useEffect(() => {
                 </TouchSair>
             
             </ViewTitullo>
-
+            
+            { avatar2 && <>
             <ViewQualificaçao>
                 <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
+
+                
 
                 <View style = {{flexDirection:'row'}}>
 
@@ -265,7 +268,96 @@ useEffect(() => {
             </View>
 
             <Button title='pdf' onPress={pdfScreen}/>
+        </>}
 
+        {!avatar2 && <>
+
+         <ViewQualificaçao>
+                <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
+
+                
+
+                <View style = {{flexDirection:'row',marginLeft:30}}>
+
+                
+
+                <View style={{}}>
+                <TextNome>{nome}</TextNome>
+
+                <View style={{marginTop:16}}>
+                <TextLabel>RG:<TextLabelText>{identidade}</TextLabelText></TextLabel>
+                <TextLabel>CPF:<TextLabelText>{cpf}</TextLabelText></TextLabel>
+                <TextLabel>Telefone:<TextLabelText>{telefone}</TextLabelText></TextLabel>
+                <TextLabel>Nascimento:<TextLabelText>{nascimento}</TextLabelText></TextLabel>
+                </View>
+                
+                </View>
+               
+                </View>
+            </ViewQualificaçao>
+
+            <View style={{marginLeft:30}}>
+                <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
+                <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
+                 
+                 <View style = {{flexDirection:'row'}}>
+                     <View style={{flex:1}}>
+                     <TextLabelcamposmae>CEP:<TextCamposmae>{}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                        <View style={{flex:1}}>
+                      <TextLabelcamposmae>Gênero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
+                </View>
+                 </View>
+                 
+                <TextLabelcamposmae>Endereço:<TextCamposmae>{endereço}</TextCamposmae></TextLabelcamposmae>
+            </View>
+            
+            <View style={{marginLeft:30,marginTop:35}}>
+                <TextDetallhesOcorr>Detalhes da Ocorrência</TextDetallhesOcorr>
+            </View>
+
+            <View style={{marginTop:15,marginLeft:30}}>
+
+                <View style={{flexDirection:'row'}} >
+                   
+                   <View style={{flex:1}}>
+                    <TextLabeldetalhes>Data:<TextDetalhes>{data}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+               
+                <View style={{flex:1}}>
+                    <TextLabeldetalhes>Hora:<TextDetalhes>{hora}</TextDetalhes></TextLabeldetalhes>
+                </View>
+                
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+                    
+                    <View style={{flex:1}}>
+                        <TextLabeldetalhes>{tipoRo}:<TextDetalhes>{tipoOcorrencia1}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+
+                    <View style={{flex:1}}>
+
+                         <TextLabeldetalhes>Local:<TextDetalhes>{local}</TextDetalhes></TextLabeldetalhes>
+                    </View>
+
+                     
+                   
+                </View>
+
+                <View>
+                    <TextLabeldetalhes>ASO:<TextDetalhes>{cosop}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabeldetalhes>Detalhes:<TextDetalhes>{historico}</TextDetalhes></TextLabeldetalhes>
+                </View>
+            </View>
+
+            <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
+                <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
+            </View>
+
+            <Button title='pdf' onPress={pdfScreen}/>
+            </>}
         </Container>
     );
 }

@@ -29,7 +29,7 @@ export default ({data}) => {
 
     const buscarFotos = () => {
         const storage = firebase.storage();
-        const starsRef = storage.ref('ocorrencias/').child(key);
+        const starsRef = storage.ref('/ocorrencias').child(key);
     
         starsRef.getDownloadURL().then(function (url) {
             let avatar1 = { uri: url };
@@ -171,7 +171,10 @@ function handleClickVerCompleta () {
 
 
         return (
+
+            
             <Flat>
+            { avatar2 && <>
 
                 <View style={styles.row} >
                 <View style={styles.viewImage}>
@@ -199,13 +202,48 @@ function handleClickVerCompleta () {
                     </View> 
               </View>
               <ViewHist>
-                  <TextLabelP  numberOfLines={3} ellipsizeMode="tail">Detalhes:<Texthist>{historico}</Texthist></TextLabelP>
+                  <TextLabelP  numberOfLines={3} ellipsizeMode="tail">Histórico:<Texthist>{historico}</Texthist></TextLabelP>
               </ViewHist>
               <BtnOcorrenciaFull onPress = { handleClickVerCompleta}>
                 <Text style={styles.textBtnOcorr}>Ver Ocorrência Completa</Text>
                 <Image source = {require('../../assets/setaocorrenciacompleta.png')} />
               </BtnOcorrenciaFull>
+            </>}
+
+            { !avatar2 && <>
+
+                <View style={styles.row} >
+               
+                <View style={{marginTop:15,marginLeft:14}}>
+                <TextNome style={styles.textNome}>{nome}</TextNome>
+                
+                <View style={styles.viewRoLocal}>
+                <TextLabelP>{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
+                <TextLabel>Local:<TextPool>{local}</TextPool> </TextLabel>
+                </View>
+                <TextLabelP>ASO:<TextPool>{cosop}</TextPool></TextLabelP>
+                </View>
+
+                </View>
+
+                <View style={styles.viewCalendario}>
+                    <Image source = {require('../../assets/Calendário.png')} styles={{ width:14,height: 14,}}/>
+                    <TextPool> {dataa}</TextPool>
+                    <View style={{marginLeft:25,flexDirection:'row',alignItems:'center'}}>
+                     <Image source = {require('../../assets/Horário.png')} styles={{ width:14,height: 14,}}/>
+                      <TextPool> {hora}</TextPool>
+                    </View> 
+              </View>
+              <ViewHist>
+                  <TextLabelP  numberOfLines={3} ellipsizeMode="tail">Histórico:<Texthist>{historico}</Texthist></TextLabelP>
+              </ViewHist>
+              <BtnOcorrenciaFull onPress = { handleClickVerCompleta}>
+                <Text style={styles.textBtnOcorr}>Ver Ocorrência Completa</Text>
+                <Image source = {require('../../assets/setaocorrenciacompleta.png')} />
+              </BtnOcorrenciaFull>
+            </>}
             </Flat>
+            
         );
     
 

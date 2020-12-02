@@ -47,6 +47,17 @@ export default () => {
         const [fundosEspeciais, setFundosEspeciais] = useState();
         const [fibrasLuzVioleta, setFibrasLuzVioleta] = useState();
         const [faixaHoografica, setFaiaHolografica] = useState();
+
+        const [origemCedula, setOrigemCedula] = useState('');
+        const [estadoAnimo, setEstadoAnimo] = useState('');
+        const [tentouEvadir, setTentouEvadir] = useState('');
+        const [possuiaOutrasCedulas, setPossuiaOutrascCeduas] = useState('');
+        const [pagouApos, setPagouApos] = useState('');
+
+        const [moeda, setMoeda] = useState('');
+        const [janelaTransparente, setJanelaTransparente] = useState('');
+        const [outrasCaracteristicas, setOutrasCaracteristicas] = useState('');
+        const [tipoPapel, setTipoPapel] = useState('');
         
           
        
@@ -83,6 +94,19 @@ export default () => {
                     const fundosEspeciais = snapshot.val().fundosEspeciais;
                     const faixaHoografica = snapshot.val().faixaHoografica;
                     const fibrasLuzVioleta = snapshot.val().fibrasLuzVioleta;
+
+                     const origemCedula = snapshot.val().origemCedula;
+                    const estadoAnimo =snapshot.val().estadoAnimo;
+                    const tentouEvadir = snapshot.val().tentouEvadir;
+                    const possuiaOutrasCedulas = snapshot.val().possuiaOutrasCedulas;
+                    const pagouApos = snapshot.val().pagouApos;
+
+                    const moeda =snapshot.val().moeda;
+                    const janelaTransparente = snapshot.val().janelaTransparente;
+                    const outrasCaracteristicas = snapshot.val().outrasCaracteristicas;
+                    const tipoPapel = snapshot.val().tipoDoPapel;
+
+
                    
                     
                     setIdentidade(identidade);
@@ -113,6 +137,16 @@ export default () => {
                     setFundosEspeciais(fundosEspeciais);
                     setFaiaHolografica(faixaHoografica);
                     setFibrasLuzVioleta(fibrasLuzVioleta);
+                    setOrigemCedula(origemCedula);
+                    setEstadoAnimo(estadoAnimo);
+                    setTentouEvadir(tentouEvadir);
+                    setPossuiaOutrascCeduas(possuiaOutrasCedulas);
+                    setPagouApos(pagouApos);
+
+                    setJanelaTransparente(janelaTransparente);
+                    setMoeda(moeda);
+                    setOutrasCaracteristicas(outrasCaracteristicas);
+                    setTipoPapel(tipoPapel);
 
                 });
 
@@ -369,6 +403,32 @@ useEffect(() => {
 
             </View>
 
+             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+             <View style={{borderWidth:1,flex:1,width:'100%',}} >
+             <Text style={styles.textoTitulo}>TIPO E/OU TAMANHO DO PAPEL</Text>
+                <Text style={styles.textoConteudo} >{tipoPapel}</Text>
+                </View>
+
+            <View style={{borderWidth:1,flex:1,width:'100%',}} >
+             <Text style={styles.textoTitulo}>JANELA TRANSPARENTE</Text>
+                <Text style={styles.textoConteudo} >{janelaTransparente}</Text>
+                </View>
+
+                
+
+            </View>
+
+             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+                <Text style={styles.textoTitulo}>MOEDA</Text>
+                <Text style={styles.textoConteudo} >{moeda}</Text>
+            </View>
+
+            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+                <Text style={styles.textoTitulo}>OUTROS</Text>
+                <Text style={styles.textoConteudo} >{outrasCaracteristicas}</Text>
+            </View>
+
 
 
 
@@ -389,12 +449,12 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>ORIGEM DA CÉDULA</Text>
-                <Text style={styles.textoConteudo} >{identidade}</Text>
+                <Text style={styles.textoConteudo} >{origemCedula}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
             <Text style={styles.textoTitulo}>ESTADO DE ANIMO DO USUARIO</Text>
-                <Text style={styles.textoConteudo} >{data}</Text>
+                <Text style={styles.textoConteudo} >{estadoAnimo}</Text>
                 </View>
 
                 
@@ -405,17 +465,17 @@ useEffect(() => {
 
              <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>TENTOU EVADIR DO LOCAL</Text>
-                <Text style={styles.textoConteudo} >{identidade}</Text>
+                <Text style={styles.textoConteudo} >{tentouEvadir}</Text>
                 </View>
 
             <View style={{borderWidth:1,flex:1,width:'100%',}} >
             <Text style={styles.textoTitulo}>POSSUIA OUTRAS CÉDULAS VÁLIDAS</Text>
-                <Text style={styles.textoConteudo} >{data}</Text>
+                <Text style={styles.textoConteudo} >{possuiaOutrasCedulas}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
              <Text style={styles.textoTitulo}>PAGOU APÓS O FATO</Text>
-                <Text style={styles.textoConteudo} >{hora}</Text>
+                <Text style={styles.textoConteudo} >{pagouApos}</Text>
                 </View>
 
             </View>
