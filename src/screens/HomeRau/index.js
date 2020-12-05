@@ -30,7 +30,7 @@ export default () => {
         const [cosop, setCosop] = useState();
         const [endereço, setEndereço] = useState();
         const [avatar2,setAvatar2] = useState(null);
-        const [envolvido2,setEnvolvido2] = useState(false);
+        const [envolvido2,setEnvolvido2] = useState(true);
         const [formNotaFalsa,setFormNotaFalsa] = useState(true);
         const [historicoOcorr,sethistoricoOcorr] = useState(true);
         const [agenteIntegrante,setAgenteIntegrante] = useState(true);
@@ -66,6 +66,7 @@ export default () => {
     const [dataFinal, setDataFinal] = useState();
     const [horarioFinal, setHorarioFinal] = useState();
     const [objetosRecolhidos, setObjetosRecolhidos] = useState('');
+      const [nomeOcorrencia,setNomeOcorrencia] = useState('');
 
     const [notaFalsa, setNotaFalsa] = useState(true);
 
@@ -483,6 +484,28 @@ useEffect(() => {
 
   },[envolvido2])
 
+  useEffect(()=>{
+
+    switch (tipoRo) {
+        case "BO":
+            setNomeOcorrencia('BOLETIM DE OCORRÊNCIA')
+            break;
+        case "RO":
+            setNomeOcorrencia('RELATÓRIO DE OCORRÊNCIA')
+            break;
+        case "RRM":
+            setNomeOcorrencia('RECOLHIMENTO DE MERCADORIA ')
+            break;
+        case "RAU":
+            setNomeOcorrencia('ATENDIMENTO AO USUÁRIO')
+            break;        
+    
+        default:
+            break;
+    }
+
+},[tipoRo])
+
   const pagina2 = () => {
       navigation.navigate('HomeRauCadastro',{key:key})
   }
@@ -492,150 +515,150 @@ useEffect(() => {
 
             <View style={{flexDirection:'row'}}>
             
-            <View>
-                <Image source={require('../../../assets/brasaoTransarente.png')} style={{width:60,height:60,margin:5}} />
-            </View>
-
-            <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center'}} >
-                
-            <View style={{borderWidth:1,marginTop:5,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}}>SUPERINTENDÊNCIA DE TRENS URBANOS-BH</Text>
-            </View>
-            
-            <View style={{flex:1,borderWidth:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,flexDirection:'row'}}>
-                
-                <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}} >BOLETIM DE OCORRÊNCIA</Text>
+                <View>
+                    <Image source={require('../../../assets/brasaoTransarente.png')} style={{width:50,height:50,margin:5}} />
                 </View>
 
-                 <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}} >AUTENTICAÇÃO {chaveFoto}</Text>
-                </View>
+                <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center'}} >
 
-            </View>
-            
-            </View>
+                    <View style={{borderWidth:1,marginTop:5,height:30,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
+                        <Text style={{fontSize:15,fontWeight:'bold'}}>SUPERINTENDÊNCIA DE TRENS URBANOS-BH</Text>
+                    </View>
+
+                    <View style={{height:30,borderWidth:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,flexDirection:'row'}}>
+
+                        <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
+                            <Text style={{fontSize:15,fontWeight:'bold'}} >{nomeOcorrencia}</Text>
+                        </View>
+
+                        <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
+                            <Text style={{fontSize:12,fontWeight:'bold'}} >AUTENTICAÇÃO {chaveFoto}</Text>
+                        </View>
+
+                    </View>
+
+                </View>
 
            </View>
 
-            <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,flexDirection:'row'}}>
+            <View style={{height:30,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,flexDirection:'row'}}>
                 
-                <View style={{borderWidth:1,flex:1,width:'100%',flexDirection:'column'}}>
-                <Text style={styles.textoTitulo} >UNIDADE RESPONSAVEL PELO REGISTRO</Text>
-                <Text style={styles.textoConteudo} >CIA. BRASILEIRA DE TRENS URBANOS/STU-BH</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',flexDirection:'column',}}>
+                    <Text style={styles.textoTitulo} >UNIDADE RESPONSAVEL PELO REGISTRO</Text>
+                    <Text style={styles.textoConteudo} >CIA. BRASILEIRA DE TRENS URBANOS/STU-BH</Text>
                 </View>
 
-                 <View style={{borderWidth:1,flex:1,width:'100%',flexDirection:'column'}}>
-                <Text style={styles.textoTitulo} >ENDEREÇO</Text>
-                <Text style={styles.textoConteudo} >RUA JANUÁRIA 181-BAIRRO FLORESTA-BELO HORIZONTE</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',flexDirection:'column',}}>
+                    <Text style={styles.textoTitulo} >ENDEREÇO</Text>
+                    <Text style={styles.textoConteudo} >RUA JANUÁRIA 181-BAIRRO FLORESTA-BELO HORIZONTE</Text>
                 </View>
 
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}}>DADOS DA OCORRÊCIA</Text>
+            <View style={{borderWidth:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
+                <Text style={{fontSize:15,fontWeight:'bold',}}>DADOS DA OCORRÊCIA</Text>
             </View>
 
             
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,width:'100%',marginRight:5,flexDirection:'row',height:32}}>
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}}>
-                <Text style={styles.textoTitulo}>PROVÁVEL DESCRIÇÃO DA OCORRÊNCIA PRINCIPAL</Text>
-                <Text style={styles.textoConteudo} >{tipoOcorrencia1}</Text>
-            </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>TENTADO/CONSUMADO</Text>
-                <Text style={styles.textoConteudo} >{tentadoConsumado}</Text>
+                <View style={{borderWidth:1,flex:3,width:'100%',}}>
+                    <Text style={styles.textoTitulo}>PROVÁVEL DESCRIÇÃO DA OCORRÊNCIA PRINCIPAL</Text>
+                    <Text style={styles.textoConteudo} >{tipoOcorrencia1}</Text>
                 </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>ALVO DO EVENTO</Text>
-                <Text style={styles.textoConteudo} >{alvoDoEvento}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>TENTADO/CONSUMADO</Text>
+                    <Text style={styles.textoConteudo} >{tentadoConsumado}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>ALVO DO EVENTO</Text>
+                    <Text style={styles.textoConteudo} >{alvoDoEvento}</Text>
+                </View>
+
+
+            </View>
+
+             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>DATA DO FATO</Text>
+                    <Text style={styles.textoConteudo} >{dataDoFato}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>HORÁRIO DO FATO</Text>
+                    <Text style={styles.textoConteudo} >{horarioDoFato}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>DATA FINAL</Text>
+                    <Text style={styles.textoConteudo} >{dataFinal}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>HORARIO FINAL</Text>
+                    <Text style={styles.textoConteudo} >{horarioFinal}</Text>
                 </View>
 
              
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>DATA DO FATO</Text>
-                <Text style={styles.textoConteudo} >{dataDoFato}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>HORÁRIO DO FATO</Text>
-                <Text style={styles.textoConteudo} >{horarioDoFato}</Text>
-                </View>
-
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>DATA FINAL</Text>
-                <Text style={styles.textoConteudo} >{dataFinal}</Text>
-                </View>
-
-                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>HORARIO FINAL</Text>
-                <Text style={styles.textoConteudo} >{horarioFinal}</Text>
-                </View>
-
-             
-            </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+            <View style={{borderWidth:1,width:'100%',marginRight:5,height:32}}>
                 <Text style={styles.textoTitulo}>OBJETOS RECOLHIDOS</Text>
                 <Text style={styles.textoConteudo} >{objetosRecolhidos}</Text>
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
                 <Text style={styles.textoTitulo}>LOCAL</Text>
                 <Text style={styles.textoConteudo} >{nomeEstaçao}: {endereçoEstaçao}</Text>
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NUMERO</Text>
-                <Text style={styles.textoConteudo} >{numeroEstaçao}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NUMERO</Text>
+                    <Text style={styles.textoConteudo} >{numeroEstaçao}</Text>
                 </View>
 
-            
 
-             <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
-                <Text style={styles.textoConteudo} >{complementoEstaçao}</Text>
+
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
+                    <Text style={styles.textoConteudo} >{complementoEstaçao}</Text>
                 </View>
 
-                 <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>BAIRRO</Text>
-                <Text style={styles.textoConteudo} >{bairroEstaçao}</Text>
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>BAIRRO</Text>
+                    <Text style={styles.textoConteudo} >{bairroEstaçao}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>CEP</Text>
-                <Text style={styles.textoConteudo} >{cepEstaçao}</Text>
+                    <Text style={styles.textoTitulo}>CEP</Text>
+                    <Text style={styles.textoConteudo} >{cepEstaçao}</Text>
                 </View>
 
-             
+
             </View>
 
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
-                <Text style={styles.textoConteudo} >{municipioEstaçao}</Text>
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
+                    <Text style={styles.textoConteudo} >{municipioEstaçao}</Text>
                 </View>
 
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>UF</Text>
-                <Text style={styles.textoConteudo} >{ufEstaçao}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>UF</Text>
+                    <Text style={styles.textoConteudo} >{ufEstaçao}</Text>
                 </View>
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>PAÍS</Text>
-                <Text style={styles.textoConteudo} >{paisEstaçao}</Text>
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>PAÍS</Text>
+                    <Text style={styles.textoConteudo} >{paisEstaçao}</Text>
                 </View>
 
             </View>
@@ -648,185 +671,176 @@ useEffect(() => {
                 <Text style={{fontSize:15,fontWeight:'bold'}}>ENVOLVIDO 1</Text>
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             
-
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>SEXO</Text>
-                <Text style={styles.textoConteudo} >{genero}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>SEXO</Text>
+                    <Text style={styles.textoConteudo} >{genero}</Text>
                 </View>
 
-                 <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>TIPO DE ENVOLVIMENTO</Text>
-                <Text style={styles.textoConteudo} >{tipoDeEnvolvimento}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>TIPO DE ENVOLVIMENTO</Text>
+                    <Text style={styles.textoConteudo} >{tipoDeEnvolvimento}</Text>
                 </View>
 
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>DATA DE NASCIMENTO</Text>
+                    <Text style={styles.textoConteudo} >{nascimento}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NATURALIDADE/UF</Text>
+                    <Text style={styles.textoConteudo} >{naturalidade}</Text>
+                </View>
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
                 <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
                 <Text style={styles.textoConteudo} >{nome}</Text>
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-             <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NACIONALIDADE</Text>
-                <Text style={styles.textoConteudo} >{nacionalidade}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>DATA DE NASCIMENTO</Text>
-                <Text style={styles.textoConteudo} >{nascimento}</Text>
-                </View>
-
-             <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NATURALIDADE/UF</Text>
-                <Text style={styles.textoConteudo} >{naturalidade}</Text>
-                </View>
-
-                
-
-            </View>
+            
            
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>IDADE APARENTE</Text>
-                <Text style={styles.textoConteudo} >{idadeAparente}</Text>
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>IDADE APARENTE</Text>
+                    <Text style={styles.textoConteudo} >{idadeAparente}</Text>
                 </View>
 
-            
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>ESTADO CIVIL</Text>
-                <Text style={styles.textoConteudo} >{estadoCivil}</Text>
+
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>ESTADO CIVIL</Text>
+                    <Text style={styles.textoConteudo} >{estadoCivil}</Text>
                 </View>
 
-                
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NACIONALIDADE</Text>
+                    <Text style={styles.textoConteudo} >{nacionalidade}</Text>
+                </View>
 
             </View>    
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>CÚTIS</Text>
-                <Text style={styles.textoConteudo} >{cutis}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>OCUPAÇÃO ATUAL</Text>
-                <Text style={styles.textoConteudo} >{ocupaçãoAtual}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>CÚTIS</Text>
+                    <Text style={styles.textoConteudo} >{cutis}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>GRAU DE ESCOLARIDADE</Text>
-                <Text style={styles.textoConteudo}>{grauEscoar}</Text>
+                    <Text style={styles.textoTitulo}>OCUPAÇÃO ATUAL</Text>
+                    <Text style={styles.textoConteudo} >{ocupaçãoAtual}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>GRAU DE ESCOLARIDADE</Text>
+                    <Text style={styles.textoConteudo}>{grauEscoar}</Text>
                 </View>
 
             </View>   
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
                 <Text style={styles.textoTitulo}>MÃE</Text>
                 <Text style={styles.textoConteudo} >{mae}</Text>
             </View>
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
                 <Text style={styles.textoTitulo}>PAI</Text>
                 <Text style={styles.textoConteudo} >{pai}</Text>
             </View>
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NÚMERO DA IDENTIDADE</Text>
-                <Text style={styles.textoConteudo} >{identidade}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>ORGÃO EXPEDIDOR</Text>
-                <Text style={styles.textoConteudo} >{orgãoExpedidor}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NÚMERO DA IDENTIDADE</Text>
+                    <Text style={styles.textoConteudo} >{identidade}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>UF</Text>
-                <Text style={styles.textoConteudo} >{ufEnvolvido}</Text>
+                    <Text style={styles.textoTitulo}>ORGÃO EXPEDIDOR</Text>
+                    <Text style={styles.textoConteudo} >{orgãoExpedidor}</Text>
                 </View>
 
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>CPF</Text>
-                <Text style={styles.textoConteudo} >{cpf}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>UF</Text>
+                    <Text style={styles.textoConteudo} >{ufEnvolvido}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>CPF</Text>
+                    <Text style={styles.textoConteudo} >{cpf}</Text>
                 </View>
 
             </View>  
 
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>ENDEREÇO</Text>
-                <Text style={styles.textoConteudo} >{logradouro}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>NÚMERO</Text>
-                <Text style={styles.textoConteudo} >{numeroCasa}</Text>
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>ENDEREÇO</Text>
+                    <Text style={styles.textoConteudo} >{logradouro}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
-                <Text style={styles.textoConteudo} >{complemento}</Text>
+                    <Text style={styles.textoTitulo}>NÚMERO</Text>
+                    <Text style={styles.textoConteudo} >{numeroCasa}</Text>
                 </View>
 
-            
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
+                    <Text style={styles.textoConteudo} >{complemento}</Text>
+                </View>
+
+
 
             </View>  
 
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>BAIRRO</Text>
-                <Text style={styles.textoConteudo} >{bairro}</Text>
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>BAIRRO</Text>
+                    <Text style={styles.textoConteudo} >{bairro}</Text>
                 </View>
 
-            <View style={{borderWidth:1,flex:2,width:'100%',}} >
-            <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
-                <Text style={styles.textoConteudo} >{cidade}</Text>
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
+                    <Text style={styles.textoConteudo} >{cidade}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>UF</Text>
-                <Text style={styles.textoConteudo} >{estado}</Text>
+                    <Text style={styles.textoTitulo}>UF</Text>
+                    <Text style={styles.textoConteudo} >{estado}</Text>
                 </View>
 
-            
+
 
             </View>  
 
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>PAÍS</Text>
-                <Text style={styles.textoConteudo} >{paisMoradia}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>CEP</Text>
-                <Text style={styles.textoConteudo} >{cep}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>PAÍS</Text>
+                    <Text style={styles.textoConteudo} >{paisMoradia}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>TELEFONE</Text>
-                <Text style={styles.textoConteudo} >{telefone}</Text>
+                    <Text style={styles.textoTitulo}>CEP</Text>
+                    <Text style={styles.textoConteudo} >{cep}</Text>
                 </View>
 
-                
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>TELEFONE</Text>
+                    <Text style={styles.textoConteudo} >{telefone}</Text>
+                </View>
 
-            
+
+
+
 
             </View>  
 
@@ -837,238 +851,230 @@ useEffect(() => {
                 <Text style={{fontSize:15,fontWeight:'bold'}}>ENVOLVIDO 2</Text>
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
 
-            
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>SEXO</Text>
-                <Text style={styles.textoConteudo} >{generoEnv2}</Text>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>SEXO</Text>
+                    <Text style={styles.textoConteudo} >{generoEnv2}</Text>
                 </View>
 
-                 <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>TIPO DE ENVOLVIMENTO</Text>
-                <Text style={styles.textoConteudo} >{tipoDeEnvolvimentoEnv2}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>TIPO DE ENVOLVIMENTO</Text>
+                    <Text style={styles.textoConteudo} >{tipoDeEnvolvimentoEnv2}</Text>
+                </View>
+               
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>DATA DE NASCIMENTO</Text>
+                    <Text style={styles.textoConteudo} >{nascimentoEnv2}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NATURALIDADE/UF</Text>
+                    <Text style={styles.textoConteudo} >{naturalidadeEnv2}</Text>
                 </View>
 
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
                 <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
                 <Text style={styles.textoConteudo} >{nomeEnv2}</Text>
             </View>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-             <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NACIONALIDADE</Text>
-                <Text style={styles.textoConteudo} >{nacionalidadeEnv2}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>DATA DE NASCIMENTO</Text>
-                <Text style={styles.textoConteudo} >{nascimentoEnv2}</Text>
-                </View>
-
-             <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NATURALIDADE/UF</Text>
-                <Text style={styles.textoConteudo} >{naturalidadeEnv2}</Text>
-                </View>
-
-                
-
-            </View>
            
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-             <View style={{borderWidth:1,flex:2,width:'100%',}} >
-             <Text style={styles.textoTitulo}>IDADE APARENTE</Text>
-                <Text style={styles.textoConteudo} >{idadeAparenteEnv2}</Text>
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>IDADE APARENTE</Text>
+                    <Text style={styles.textoConteudo} >{idadeAparenteEnv2}</Text>
                 </View>
 
-            
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>ESTADO CIVIL</Text>
-                <Text style={styles.textoConteudo} >{estadoCivilEnv2}</Text>
+
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>ESTADO CIVIL</Text>
+                    <Text style={styles.textoConteudo} >{estadoCivilEnv2}</Text>
                 </View>
 
-                
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NACIONALIDADE</Text>
+                    <Text style={styles.textoConteudo} >{nacionalidadeEnv2}</Text>
+                </View>
 
             </View>    
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>CÚTIS</Text>
-                <Text style={styles.textoConteudo} >{cutisEnv2}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>OCUPAÇÃO ATUAL</Text>
-                <Text style={styles.textoConteudo} >{ocupaçãoAtualEnv2}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>CÚTIS</Text>
+                    <Text style={styles.textoConteudo} >{cutisEnv2}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>GRAU DE ESCOLARIDADE</Text>
-                <Text style={styles.textoConteudo} >{grauEscoarEnv2}</Text>
+                    <Text style={styles.textoTitulo}>OCUPAÇÃO ATUAL</Text>
+                    <Text style={styles.textoConteudo} >{ocupaçãoAtualEnv2}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>GRAU DE ESCOLARIDADE</Text>
+                    <Text style={styles.textoConteudo} >{grauEscoarEnv2}</Text>
                 </View>
 
             </View>   
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
                 <Text style={styles.textoTitulo}>MÃE</Text>
                 <Text style={styles.textoConteudo} >{maeEnv2}</Text>
             </View>
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
                 <Text style={styles.textoTitulo}>PAI</Text>
                 <Text style={styles.textoConteudo} >{paiEnv2}</Text>
             </View>
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NÚMERO DA IDENTIDADE</Text>
-                <Text style={styles.textoConteudo} >{identidadeEnv2}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>ORGÃO EXPEDIDOR</Text>
-                <Text style={styles.textoConteudo} >{orgãoExpedidorEnv2}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NÚMERO DA IDENTIDADE</Text>
+                    <Text style={styles.textoConteudo} >{identidadeEnv2}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>UF</Text>
-                <Text style={styles.textoConteudo} >{ufEnvolvidoEnv2}</Text>
+                    <Text style={styles.textoTitulo}>ORGÃO EXPEDIDOR</Text>
+                    <Text style={styles.textoConteudo} >{orgãoExpedidorEnv2}</Text>
                 </View>
 
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>CPF</Text>
-                <Text style={styles.textoConteudo} >{cpfEnv2}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>UF</Text>
+                    <Text style={styles.textoConteudo} >{ufEnvolvidoEnv2}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>CPF</Text>
+                    <Text style={styles.textoConteudo} >{cpfEnv2}</Text>
                 </View>
 
             </View>  
 
 
-            <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>ENDEREÇO</Text>
-                <Text style={styles.textoConteudo} >{logradouroEnv2}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>NÚMERO</Text>
-                <Text style={styles.textoConteudo} >{numeroCasaEnv2}</Text>
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>ENDEREÇO</Text>
+                    <Text style={styles.textoConteudo} >{logradouroEnv2}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
-                <Text style={styles.textoConteudo} >{complementoEnv2}</Text>
+                    <Text style={styles.textoTitulo}>NÚMERO</Text>
+                    <Text style={styles.textoConteudo} >{numeroCasaEnv2}</Text>
                 </View>
 
-            
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
+                    <Text style={styles.textoConteudo} >{complementoEnv2}</Text>
+                </View>
+
+
 
             </View>  
 
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:3,width:'100%',}} >
-             <Text style={styles.textoTitulo}>BAIRRO</Text>
-                <Text style={styles.textoConteudo} >{bairroEnv2}</Text>
+                <View style={{borderWidth:1,flex:3,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>BAIRRO</Text>
+                    <Text style={styles.textoConteudo} >{bairroEnv2}</Text>
                 </View>
 
-            <View style={{borderWidth:1,flex:2,width:'100%',}} >
-            <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
-                <Text style={styles.textoConteudo} >{cidade}</Text>
+                <View style={{borderWidth:1,flex:2,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
+                    <Text style={styles.textoConteudo} >{cidade}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>UF</Text>
-                <Text style={styles.textoConteudo} >{estadoEnv2}</Text>
+                    <Text style={styles.textoTitulo}>UF</Text>
+                    <Text style={styles.textoConteudo} >{estadoEnv2}</Text>
                 </View>
 
-            
+
 
             </View>  
 
 
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>PAÍS</Text>
-                <Text style={styles.textoConteudo} >{paisMoradiaEnv2}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>CEP</Text>
-                <Text style={styles.textoConteudo} >{cepEnv2}</Text>
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>PAÍS</Text>
+                    <Text style={styles.textoConteudo} >{paisMoradiaEnv2}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>TELEFONE</Text>
-                <Text style={styles.textoConteudo} >{telefoneEnv2}</Text>
+                    <Text style={styles.textoTitulo}>CEP</Text>
+                    <Text style={styles.textoConteudo} >{cepEnv2}</Text>
                 </View>
 
-                
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>TELEFONE</Text>
+                    <Text style={styles.textoConteudo} >{telefoneEnv2}</Text>
+                </View>
 
-            
+
+
+
 
             </View>  
                </View> } 
 
                     { historicoOcorr && 
                     <View>
-                  <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'#BEBEBE'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}}>HISTÓRICO</Text>
-            </View>
+                    <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'#BEBEBE'}}>
+                        <Text style={{fontSize:15,fontWeight:'bold'}}>HISTÓRICO</Text>
+                    </View>
 
-            <View style={{borderWidth:1,width:'100%',height:200}}>
-                <Text style={styles.textoConteudo}>{historico}</Text>
-            </View> 
-            </View> 
+                    <View style={{borderWidth:1,width:'100%',height:200}}>
+                        <Text style={styles.textoConteudo}>{historico}</Text>
+                    </View> 
+                    </View> 
             }
 
              { agenteIntegrante && 
              
-             <View>
-            <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}}>AGENTE INTEGRANTE</Text>
+            <View>
+                <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
+                    <Text style={{fontSize:15,fontWeight:'bold'}}>AGENTE INTEGRANTE</Text>
+                </View>
+
+                <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                        <Text style={styles.textoTitulo}>MATRÍCULA</Text>
+                        <Text style={styles.textoConteudo} >{matriculaAgente}</Text>
+                    </View>
+
+                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                        <Text style={styles.textoTitulo}>SIAPE</Text>
+                        <Text style={styles.textoConteudo} >{siapeAgente}</Text>
+                    </View>
+
+                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                        <Text style={styles.textoTitulo}>CARGO</Text>
+                        <Text style={styles.textoConteudo} >{cargoAgente}</Text>
+                    </View>
+
+                </View>
+
+                <View style={{borderWidth:1,height:32,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
+                    <Text style={styles.textoConteudo} >{cosop}</Text>
+                </View>
             </View>
-
-             <View style={{borderWidth:1,flex:1,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>MATRÍCULA</Text>
-                <Text style={styles.textoConteudo} >{matriculaAgente}</Text>
-                </View>
-
-            <View style={{borderWidth:1,flex:1,width:'100%',}} >
-            <Text style={styles.textoTitulo}>SIAPE</Text>
-                <Text style={styles.textoConteudo} >{siapeAgente}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>CARGO</Text>
-                <Text style={styles.textoConteudo} >{cargoAgente}</Text>
-                </View>
-
-            </View>
-
-             <View style={{borderWidth:1,flex:1,width:'100%',}} >
-             <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
-                <Text style={styles.textoConteudo} >{cosop}</Text>
-                </View>
-                </View>
                  }
 
-                   <View style={{marginTop:100}} >
+            <View style={{marginTop:100}} >
                 <Button title='Página 2' onPress={pagina2}  />
-                </View>
+            </View>
             
 
         </Container>
