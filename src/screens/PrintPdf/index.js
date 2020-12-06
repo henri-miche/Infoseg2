@@ -12,38 +12,82 @@ export default () => {
         const route = useRoute();
         const navigation = useNavigation();
         const [key, setKey] = useState(route.params.key);
+        const [localparam, setlocalparam] = useState(route.params.local);
+        const [chaveFoto, setChaveFoto] = useState();
+
+        //variáveis envolvido 1
         const [nome, setNome] = useState();
         const [identidade, setIdentidade] = useState();
-        const [cpf, setCpf] = useState();
-        const [chaveFoto, setChaveFoto] = useState();
+        const [cpf, setCpf] = useState();  
         const [data, setData] = useState();
         const [hora, setHora] = useState();
         const [nascimento, setNascimento] = useState();
-        const [tipoRo, setTipoRo] = useState();
         const [local, setLocal] = useState();
         const [mae, setMae] = useState();
         const [pai, setPai] = useState();
         const [telefone, setTelefone] = useState();
         const [genero, setGenero] = useState();
-        const [historico, setHistorico] = useState();
-        const [cosop, setCosop] = useState();
         const [endereço, setEndereço] = useState();
-       
-        const [env3,setEnv3] = useState(false);
-        const [env4,setEnv4] = useState(false);
-        const [historicoOcorr,sethistoricoOcorr] = useState(true);
-        const [agenteIntegrante,setAgenteIntegrante] = useState(true);
-        const [responsavelPrisão,setresponsavelPrisão] = useState(true);
-        const [relatorOcorrencia, setRelatorOcorrencia] = useState(true);
-        const [recibo, setRecibo] = useState(true);
-        const [tipoOcorrencia,setTipoOcorrencia] = useState();
+        const [cidade, setCidade] = useState();
+        const [bairro, setBairro] = useState();
+        const [logradouro, setLogradouro] = useState();
+        const [numeroCasa, setNumeroCasa] = useState();
+        const [complemento, setComplemento] = useState();
+        const [estado, setEstado] = useState();
+        const [cep, setCep] = useState();
+        const [nacionalidade, setNacionalidade] = useState();
+        const [naturalidade, setNaturalidade] = useState();
+        const [idadeAparente, setIdadeAparente] = useState();
+        const [estadoCivil, setEstadoCivil] = useState();
+        const [cutis, setCutis] = useState();
+        const [ocupaçãoAtual, setOcupaçãoAtual] = useState();
+        const [grauEscoar, setGrauEscolar] = useState();
+        const [orgãoExpedidor, setOrgãoEpedidor] = useState();
+        const [ufEnvolvido, setUfEnvolvido] = useState();
+        const [paisMoradia, setpaisMoradia] = useState();
+
+        //variáveis dados da ocorrência
+        const [historico, setHistorico] = useState();
+        const [tipoRo, setTipoRo] = useState();
+        const [tipoDeEnvolvimento, setTipoDeEnvolvimento] = useState('');
+        const [tipoOcorrencia1, setTipoOcorrencia1] = useState();
+        const [tentadoConsumado, setTentadoConsumado] = useState();
+        const [alvoDoEvento, setAlvoDoEvento] = useState();
+        const [dataDoFato, setDataDoFato] = useState();
+        const [horarioDoFato, setHorarioDoFato] = useState();
+        const [dataFinal, setDataFinal] = useState();
+        const [horarioFinal, setHorarioFinal] = useState();
+        const [objetosRecolhidos, setObjetosRecolhidos] = useState('');
         const [nomeOcorrencia,setNomeOcorrencia] = useState('');
-       
-          
-        const [nomeQuemGerou, setNomeQuemGerou] = useState('');
+
+        //variaveis env2
+        const [cpfEnv2, setCpfEnv2] = useState();
+        const [nomeEnv2, setNomeEnv2] = useState();
+        const [identidadeEnv2, setIdentidadeEnv2] = useState();
+        const [nascimentoEnv2, setNascimentoEnv2] = useState();
+        const [maeEnv2, setMaeEnv2] = useState();
+        const [paiEnv2, setPaiEnv2] = useState();
+        const [telefoneEnv2, setTelefoneEnv2] = useState();
+        const [generoEnv2, setGeneroEnv2] = useState();
+        const [estadoEnv2, setEstadoEnv2] = useState();
+        const [cepEnv2, setCepEnv2] = useState();
+        const [cidadeEnv2, setCidadeEnv2] = useState();
+        const [bairroEnv2, setBairroEnv2] = useState();
+        const [logradouroEnv2, setLogradouroEnv2] = useState();
+        const [numeroCasaEnv2, setNumeroCasaEnv2] = useState();
+        const [complementoEnv2, setComplementoEnv2] = useState();
+        const [tipoDeEnvolvimentoEnv2, setTipoDeEnvolvimentoEnv2] = useState();
+        const [nacionalidadeEnv2, setNacionalidadeEnv2] = useState();
+        const [naturalidadeEnv2, setNaturalidadeEnv2] = useState();
+        const [idadeAparenteEnv2, setIdadeAparenteEnv2] = useState();
+        const [estadoCivilEnv2, setEstadoCivilEnv2] = useState();
+        const [cutisEnv2, setCutisEnv2] = useState();
+        const [ocupaçãoAtualEnv2, setOcupaçãoAtualEnv2] = useState();
+        const [grauEscoarEnv2, setGrauEscolarEnv2] = useState();
+        const [orgãoExpedidorEnv2, setOrgãoEpedidorEnv2] = useState();
+        const [ufEnvolvidoEnv2, setUfEnvolvidoEnv2] = useState();
+        const [paisMoradiaEnv2, setpaisMoradiaEnv2] = useState();
         
-        const [horaGearacao, setHoraGeracao] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
-        const [dataGeracao, setDataGeracao] = useState(moment().format('DD-MM-YYYY'));
 
         //Variáveis envolvido 3
         const [cpfEnv3, setCpfEnv3] = useState();
@@ -101,13 +145,75 @@ export default () => {
         const [ufEnvolvidoEnv4, setUfEnvolvidoEnv4] = useState();
         const [paisMoradiaEnv4, setpaisMoradiaEnv4] = useState();
 
+        //variaveis local
+        const [nomeEstaçao,setNomeEstaçao]=useState();
+        const [bairroEstaçao,setBairoEstaçao]=useState();
+        const [cepEstaçao,setCepEstaçao]=useState();
+        const [complementoEstaçao,setComplementoEstaçao]=useState();
+        const [endereçoEstaçao,setEndereçoEstaçao]=useState();
+        const [municipioEstaçao, setMunicipioEstaçao]=useState();
+        const [numeroEstaçao,setNumeroEstaçao]=useState();
+        const [ufEstaçao,setUfEstaçao]=useState();
+
+         //variaveis agente
+        const [matriculaAgente,setMatriculaAgente] = useState();
+        const [siapeAgente,setSiapeAgente] = useState();
+        const [cargoAgente,setCargoAgente] = useState();
+        const [cosop, setCosop] = useState();
+
+
         
-          
+        const [tipoOcorrencia,setTipoOcorrencia] = useState();
+        
+       
+        const [marcaDagua, setMarcaDagua] = useState();
+        const [microImpressoes, setMicroImpressoes] = useState();
+        const [registroCoincidente, setRegistroCoincidente] = useState();
+        const [imagemLatente, setImagemLatente] = useState();
+        const [impressaoRelevo, setImpressaoRelevo] = useState();
+        const [numeraçaoNota, setNumeraçaoNota] = useState();
+        const [fibrasColoridas, setFibrasColoridas] = useState();
+        const [marcaTatil, setMarcaTatil] = useState();
+        const [fioDeSegurança, setFioDeSegurança] = useState();
+        const [fundosEspeciais, setFundosEspeciais] = useState();
+        const [fibrasLuzVioleta, setFibrasLuzVioleta] = useState();
+        const [faixaHoografica, setFaiaHolografica] = useState();
+
+        const [origemCedula, setOrigemCedula] = useState('');
+        
+        const [estadoAnimo, setEstadoAnimo] = useState('');
+        const [tentouEvadir, setTentouEvadir] = useState('');
+        const [possuiaOutrasCedulas, setPossuiaOutrascCeduas] = useState('');
+        const [pagouApos, setPagouApos] = useState('');
+
+        const [moeda, setMoeda] = useState('');
+        const [janelaTransparente, setJanelaTransparente] = useState('');
+        const [outrasCaracteristicas, setOutrasCaracteristicas] = useState('');
+        const [tipoPapel, setTipoPapel] = useState('');
+        
+
+        const [nomeQuemGerou, setNomeQuemGerou] = useState('');
+        const [horaGearacao, setHoraGeracao] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
+        const [dataGeracao, setDataGeracao] = useState(moment().format('DD-MM-YYYY'));
+
+
+        const [env2, setEnv2] = useState(false);
+        const [envolvido2,setEnvolvido2] = useState(true);
+        const [env3,setEnv3] = useState(false);
+        const [env4,setEnv4] = useState(false);
+        const [formNotaFalsa,setFormNotaFalsa] = useState(true);
+        const [historicoOcorr,sethistoricoOcorr] = useState(true);
+        const [agenteIntegrante,setAgenteIntegrante] = useState(true);
+        const [animoUsuario,setAnimoUsuario] = useState(true);
+        const [responsavelPrisão,setresponsavelPrisão] = useState(true);
+        const [relatorOcorrencia, setRelatorOcorrencia] = useState(true);
+        const [recibo, setRecibo] = useState(true);
        
     const pushDados = () =>{
      try {
      firebase.database().ref('/Ocorrencias').child(key)
                 .once('value').then((snapshot) => {
+                    //env1
                     const nome = snapshot.val().nome;
                     const identidade = snapshot.val().identidade;
                     const cpf = snapshot.val().cpf;
@@ -115,16 +221,83 @@ export default () => {
                     const data = snapshot.val().data;
                     const hora = snapshot.val().hora;
                     const nascimento = snapshot.val().nascimento;
-                    const tipoRo = snapshot.val().tipoRo;
                     const local = snapshot.val().local;
                     const mae = snapshot.val().mae;
                     const pai = snapshot.val().pai;
                     const telefone = snapshot.val().telefone;
                     const genero =snapshot.val().genero;
-                    const historico = snapshot.val().historico;
-                    const cosop = snapshot.val().cosop;
                     const endereço = snapshot.val().endereço;
 
+                    const cidade = snapshot.val().cidade;
+                    const bairro = snapshot.val().bairro;
+                    const logradouro = snapshot.val().logradouro;
+                    const numeroCasa = snapshot.val().numeroCasa;
+                    const complemento = snapshot.val().complemento;
+                    const estado = snapshot.val().estado;//observar pq não esta usando
+                    const cep = snapshot.val().cep;
+                    const nacionalidade = snapshot.val().nacionalidade;
+                    const naturalidade = snapshot.val().naturalidade;
+                    const idadeAparente = snapshot.val().idadeAparente;
+                    const estadoCivil = snapshot.val().estadoCivil;
+                    const cutis =snapshot.val().cutis;
+                    const ocupaçãoAtual = snapshot.val().ocupaçãoAtual;
+                    const grauEscolar = snapshot.val().grauEscolar;
+                    const orgãoExpedidor = snapshot.val().orgãoExpedidor;
+                    const ufEnvolvido = snapshot.val().ufEnvolvido;
+                    const paisMoradia = snapshot.val().paisMoradia;
+
+                    //dados ocorrencia
+                    const tipoRo = snapshot.val().tipoRo;
+                    const historico = snapshot.val().historico;
+                    const tipodeEnvolvimento = snapshot.val().tipodeEnvolvimento;
+                    const tentadoConsumado = snapshot.val().tentadoConsumado;
+                    const alvoDoEvento = snapshot.val().alvoDoEvento;
+                    const dataDoFato = snapshot.val().dataDoFato;
+                    const horarioDoFato = snapshot.val().horarioDoFato;
+                    const dataFinal = snapshot.val().dataFinal;
+                    const horarioFinal = snapshot.val().horarioFinal;
+                    const tipoOcorrencia1 = snapshot.val().tipoOcorrencia1;
+                    const objetosRecolhidos = snapshot.val().objetosRecolhidos;
+                    const nomeOcorrencia = snapshot.val().nomeOcorrencia;//observar pq não esta usando
+                    
+                    
+                    
+                    //agente
+                    const siapeAgente = snapshot.val().siapeAgente;
+                    const matriculaAgente = snapshot.val().matriculaAgente;
+                    const cargoAgente = snapshot.val().cargoAgente;
+                    const cosop = snapshot.val().cosop;
+
+                    //env2
+                    const env2 = snapshot.val().env2;
+                    const nomeEnv2 = snapshot.val().nomeEnv2;
+                    const cpfEnv2 =snapshot.val().cpfEnv2;
+                    const identidadeEnv2 = snapshot.val().identidadeEnv2;
+                    const nascimentoEnv2 = snapshot.val().nascimentoEnv2;
+                    const maeEnv2 = snapshot.val().maeEnv2;
+                    const paiEnv2 = snapshot.val().paiEnv2;
+                    const telefoneEnv2 = snapshot.val().telefoneEnv2;
+                    const generoEnv2 = snapshot.val().generoEnv2;
+                    const estadoEnv2 = snapshot.val().estadoEnv2;
+                    const cepEnv2 = snapshot.val().cepEnv2;
+                    const cidadeEnv2 = snapshot.val().cidadeEnv2;
+                    const bairroEnv2 = snapshot.val().bairroEnv2;
+                    const logradouroEnv2 = snapshot.val().logradouroEnv2;
+                    const numeroCasaEnv2 = snapshot.val().numeroCasaEnv2;
+                    const complementoEnv2 = snapshot.val().complementoEnv2;
+                    const tipodeEnvolvimentoEnv2 = snapshot.val().tipodeEnvolvimentoEnv2;
+                    const nacionalidadeEnv2 =snapshot.val().nacionalidadeEnv2;
+                    const naturalidadeEnv2 = snapshot.val().naturalidadeEnv2;
+                    const idadeAparenteEnv2 = snapshot.val().idadeAparenteEnv2;
+                    const estadoCivilEnv2 = snapshot.val().estadoCivilEnv2;
+                    const cutisEnv2 = snapshot.val().cutisEnv2;
+                    const ocupaçãoAtualEnv2 = snapshot.val().ocupaçãoAtualEnv2;
+                    const grauEscolarEnv2 = snapshot.val().grauEscolarEnv2;
+                    const orgãoExpedidorEnv2 = snapshot.val().orgãoExpedidorEnv2;
+                    const ufEnvolvidoEnv2 = snapshot.val().ufEnvolvidoEnv2;
+                    const paisMoradiaEnv2 = snapshot.val().paisMoradiaEnv2;
+                    
+                    //env3
                     const env3 = snapshot.val().env3;
                     const nomeEnv3 = snapshot.val().nomeEnv3;
                     const cpfEnv3 =snapshot.val().cpfEnv3;
@@ -153,8 +326,8 @@ export default () => {
                     const ufEnvolvidoEnv3 = snapshot.val().ufEnvolvidoEnv3;
                     const paisMoradiaEnv3 = snapshot.val().paisMoradiaEnv3;
 
-
-                    const env4 = snapshot.val().env4;
+                    //env4
+                    const env4 = snapshot.val().env4;//observar pq não esta usando
                     const nomeEnv4 = snapshot.val().nomeEnv4;
                     const cpfEnv4 =snapshot.val().cpfEnv4;
                     const identidadeEnv4 = snapshot.val().identidadeEnv4;
@@ -181,7 +354,35 @@ export default () => {
                     const orgãoExpedidorEnv4 = snapshot.val().orgãoExpedidorEnv4;
                     const ufEnvolvidoEnv4 = snapshot.val().ufEnvolvidoEnv4;
                     const paisMoradiaEnv4 = snapshot.val().paisMoradiaEnv4;
+
                    
+                    
+                    const notaFalsa = snapshot.val().notaFalsa;
+                    const marcaDagua = snapshot.val().marcaDagua;
+                    const microImpressoes = snapshot.val().microImpressoes;
+                    const regitroCoincidente = snapshot.val().regitroCoincidente;
+                    const imagemLatente = snapshot.val().imagemLatente;
+                    const impressaoRelevo = snapshot.val().impressaoRelevo;
+                    const numeraçaoNota =snapshot.val().numeraçaoNota;
+                    const fibrasColoridas = snapshot.val().fibrasColoridas;
+                    const marcaTatil = snapshot.val().marcaTatil;
+                    const fioDeSegurança =snapshot.val().fioDeSegurança;
+                    const fundosEspeciais = snapshot.val().fundosEspeciais;
+                    const faixaHoografica = snapshot.val().faixaHoografica;
+                    const fibrasLuzVioleta = snapshot.val().fibrasLuzVioleta;
+
+                    const origemCedula = snapshot.val().origemCedula;
+                    const estadoAnimo =snapshot.val().estadoAnimo;
+                    const tentouEvadir = snapshot.val().tentouEvadir;
+                    const possuiaOutrasCedulas = snapshot.val().possuiaOutrasCedulas;
+                    const pagouApos = snapshot.val().pagouApos;
+
+                    const moeda =snapshot.val().moeda;
+                    const janelaTransparente = snapshot.val().janelaTransparente;
+                    const outrasCaracteristicas = snapshot.val().outrasCaracteristicas;
+                    const tipoPapel = snapshot.val().tipoDoPapel;
+                    const env3 = snapshot.val().env3;
+
 
 
                    
@@ -202,6 +403,71 @@ export default () => {
                     setHistorico(historico);
                     setCosop(cosop);
                     setEndereço(endereço);
+
+
+                    
+                    setTipoOcorrencia1(tipoOcorrencia1);
+                    setCep(cep);
+                    setBairro(bairro);
+                    setCidade(cidade);
+                    setLogradouro(logradouro);
+                    setNumeroCasa(numeroCasa);
+                    setComplemento(complemento);
+                    setTipoDeEnvolvimento(tipodeEnvolvimento);
+                    setNacionalidade(nacionalidade);
+                    setNaturalidade(naturalidade);
+                    setIdadeAparente(idadeAparente);
+                    setEstadoCivil(estadoCivil);
+                    setCutis(cutis);
+                    setOcupaçãoAtual(ocupaçãoAtual);
+                    setGrauEscolar(grauEscolar);
+                    
+                    setOrgãoEpedidor(orgãoExpedidor);
+                    setUfEnvolvido(ufEnvolvido);
+                    setpaisMoradia(paisMoradia);
+                    setTentadoConsumado(tentadoConsumado);
+                    setAlvoDoEvento(alvoDoEvento);
+                    setDataDoFato(dataDoFato);
+                    setHorarioDoFato(horarioDoFato);
+                    setDataFinal(dataFinal);
+                    setHorarioFinal(horarioFinal);
+
+
+
+
+                    setSiapeAgente(siapeAgente);
+                    setMatriculaAgente(matriculaAgente);
+                    setCargoAgente(cargoAgente);
+                    setEnv2(env2);
+                    setNomeEnv2(nomeEnv2);
+                    setCpfEnv2(cpfEnv2);
+                    setIdentidadeEnv2(identidadeEnv2);
+                    setNascimentoEnv2(nascimentoEnv2);
+                    setIdentidade(identidade);
+                    setObjetosRecolhidos(objetosRecolhidos);
+                    setMaeEnv2(maeEnv2);
+                    setPaiEnv2(paiEnv2);
+                    setTelefoneEnv2(telefoneEnv2);
+                    setGeneroEnv2(generoEnv2);
+                    setEstadoEnv2(estadoEnv2);
+                    setCepEnv2(cepEnv2);
+                    setCidadeEnv2(cidadeEnv2);
+                    setBairroEnv2(bairroEnv2);
+                    setLogradouroEnv2(logradouroEnv2);
+                    setNumeroCasaEnv2(numeroCasaEnv2)
+                    setComplementoEnv2(complementoEnv2);
+                    setTipoDeEnvolvimentoEnv2(tipodeEnvolvimentoEnv2);
+                    setNacionalidadeEnv2(nacionalidadeEnv2);
+                    setNaturalidadeEnv2(naturalidadeEnv2);
+                    setIdadeAparenteEnv2(idadeAparenteEnv2);
+                    setEstadoCivilEnv2(estadoCivilEnv2);
+                    setCutisEnv2(cutisEnv2);
+                    setOcupaçãoAtualEnv2(ocupaçãoAtualEnv2);
+                    setGrauEscolarEnv2(grauEscolarEnv2);
+                    setOrgãoEpedidorEnv2(orgãoExpedidorEnv2);
+                    setUfEnvolvidoEnv2(ufEnvolvidoEnv2);
+                    setpaisMoradiaEnv2(paisMoradiaEnv2);
+
 
                     setEnv3(env3)
                     setNomeEnv3(nomeEnv3);
@@ -258,7 +524,32 @@ export default () => {
                     setOrgãoEpedidorEnv4(orgãoExpedidorEnv4);
                     setUfEnvolvidoEnv4(ufEnvolvidoEnv4);
                     setpaisMoradiaEnv4(paisMoradiaEnv4);
-                     
+
+
+
+                    setMarcaDagua(marcaDagua);
+                    setMicroImpressoes(microImpressoes);
+                    setRegistroCoincidente(regitroCoincidente);
+                    setImagemLatente(imagemLatente);
+                    setImpressaoRelevo(impressaoRelevo);
+                    setNumeraçaoNota(numeraçaoNota);
+                    setFibrasColoridas(fibrasColoridas);
+                    setMarcaTatil(marcaTatil);
+                    setFioDeSegurança(fioDeSegurança);
+                    setFundosEspeciais(fundosEspeciais);
+                    setFaiaHolografica(faixaHoografica);
+                    setFibrasLuzVioleta(fibrasLuzVioleta);
+                    setOrigemCedula(origemCedula);
+                    setEstadoAnimo(estadoAnimo);
+                    setTentouEvadir(tentouEvadir);
+                    setPossuiaOutrascCeduas(possuiaOutrasCedulas);
+                    setPagouApos(pagouApos);
+
+                    setJanelaTransparente(janelaTransparente);
+                    setMoeda(moeda);
+                    setOutrasCaracteristicas(outrasCaracteristicas);
+                    setTipoPapel(tipoPapel);
+                    
 
                 });
 
@@ -267,7 +558,21 @@ export default () => {
     }
 }
 
- 
+ const buscarFotos = () => {
+        const storage = firebase.storage();
+        const starsRef = storage.ref('images/').child(key);
+    
+        starsRef.getDownloadURL().then(function (url) {
+            let avatar1 = { uri: url };
+            setAvatar2(avatar1);
+    
+        }).catch((error) => {
+        if (error.code === 'storage/object-not-found'){
+            
+        }
+        });
+    }
+
 useEffect(() => {
       let isUnmount = false;
 
@@ -276,7 +581,7 @@ useEffect(() => {
       
       if (!isUnmount) {
           pushDados();
-          
+          buscarFotos();
       }
    }, 1000);
    return ()=>{
@@ -324,7 +629,19 @@ useEffect(() => {
    
     
 
-  
+   const createAndSavePDF = async () => {
+  try {
+    const { uri } = await Print.printToFileAsync({ count });
+    
+      const permission = await MediaLibrary.requestPermissionsAsync();
+      if (permission.granted) {
+        await MediaLibrary.createAssetAsync(uri);
+      }
+    
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 useEffect(()=>{
 
@@ -348,7 +665,7 @@ useEffect(()=>{
 
 },[tipoRo])
 
-    const pushUser = () => {
+        const pushUser = () => {
         const user = firebase.auth().currentUser;
         if (user) {
             firebase.database().ref('usuarios').child(user.uid)
@@ -359,38 +676,38 @@ useEffect(()=>{
                 });
         }}
 
-    useEffect(()=>{
+
+        useEffect(()=>{
         pushUser();
         if (env3 === true) {
-            setEnv4(true);
-            sethistoricoOcorr(false);
-            setAgenteIntegrante(false);
-            setresponsavelPrisão(false);
-            setRelatorOcorrencia(false);
-            setRecibo(false);
-
-        }else{
-            setEnv3(false)
-            setEnv4(false);
             sethistoricoOcorr(true);
             setAgenteIntegrante(true);
             setresponsavelPrisão(true);
             setRelatorOcorrencia(true);
             setRecibo(true);
+
+        }else{
+            setEnv3(false)
+            sethistoricoOcorr(false);
+            setAgenteIntegrante(false);
+            setresponsavelPrisão(false);
+            setRelatorOcorrencia(false);
+            setRecibo(false);
         }
        
 
-    },[env3])
+    },[env3]);
 
   
 
-  const pagina3 = () => {
-      navigation.navigate('HomeRauSearch',{key:key})
+  const pagina2 = () => {
+      navigation.navigate('HomeRauCadastro')
   }
 
     return (
         <Container >
-            <View style={{flexDirection:'row'}}>
+
+           <View style={{flexDirection:'row'}}>
             
                 <View>
                     <Image source={require('../../../assets/brasaoTransarente.png')} style={{width:50,height:50,marginLeft:5,marginTop:5,marginRight:5}} />
@@ -432,373 +749,6 @@ useEffect(()=>{
 
             </View>
 
-            {env3 &&
-            <View>
-             <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}}>ENVOLVIDO 3</Text>
-            </View>
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-
-
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>SEXO</Text>
-                    <Text style={styles.textoConteudo} >{generoEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>TIPO DE ENVOLVIMENTO</Text>
-                    <Text style={styles.textoConteudo} >{tipoDeEnvolvimentoEnv3}</Text>
-                </View>
-               
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>DATA DE NASCIMENTO</Text>
-                    <Text style={styles.textoConteudo} >{nascimentoEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NATURALIDADE/UF</Text>
-                    <Text style={styles.textoConteudo} >{naturalidadeEnv3}</Text>
-                </View>
-
-            </View>
-
-             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
-                <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
-                <Text style={styles.textoConteudo} >{nomeEnv3}</Text>
-            </View>
-
-           
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:2,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>IDADE APARENTE</Text>
-                    <Text style={styles.textoConteudo} >{idadeAparenteEnv3}</Text>
-                </View>
-
-
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>ESTADO CIVIL</Text>
-                    <Text style={styles.textoConteudo} >{estadoCivilEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:2,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NACIONALIDADE</Text>
-                    <Text style={styles.textoConteudo} >{nacionalidadeEnv3}</Text>
-                </View>
-
-            </View>    
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>CÚTIS</Text>
-                    <Text style={styles.textoConteudo} >{cutisEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>OCUPAÇÃO ATUAL</Text>
-                    <Text style={styles.textoConteudo} >{ocupaçãoAtualEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>GRAU DE ESCOLARIDADE</Text>
-                    <Text style={styles.textoConteudo} >{grauEscoarEnv3}</Text>
-                </View>
-
-            </View>   
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
-                <Text style={styles.textoTitulo}>MÃE</Text>
-                <Text style={styles.textoConteudo} >{maeEnv3}</Text>
-            </View>
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
-                <Text style={styles.textoTitulo}>PAI</Text>
-                <Text style={styles.textoConteudo} >{paiEnv3}</Text>
-            </View>
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NÚMERO DA IDENTIDADE</Text>
-                    <Text style={styles.textoConteudo} >{identidadeEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>ORGÃO EXPEDIDOR</Text>
-                    <Text style={styles.textoConteudo} >{orgãoExpedidorEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>UF</Text>
-                    <Text style={styles.textoConteudo} >{ufEnvolvidoEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>CPF</Text>
-                    <Text style={styles.textoConteudo} >{cpfEnv3}</Text>
-                </View>
-
-            </View>  
-
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>ENDEREÇO</Text>
-                    <Text style={styles.textoConteudo} >{logradouroEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NÚMERO</Text>
-                    <Text style={styles.textoConteudo} >{numeroCasaEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
-                    <Text style={styles.textoConteudo} >{complementoEnv3}</Text>
-                </View>
-
-
-
-            </View>  
-
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>BAIRRO</Text>
-                    <Text style={styles.textoConteudo} >{bairroEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:2,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
-                    <Text style={styles.textoConteudo} >{cidadeEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>UF</Text>
-                    <Text style={styles.textoConteudo} >{estadoEnv3}</Text>
-                </View>
-
-
-
-            </View>  
-
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>PAÍS</Text>
-                    <Text style={styles.textoConteudo} >{paisMoradiaEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>CEP</Text>
-                    <Text style={styles.textoConteudo} >{cepEnv3}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>TELEFONE</Text>
-                    <Text style={styles.textoConteudo} >{telefoneEnv3}</Text>
-                </View>
-
-
-
-
-
-            </View>  
-               </View> }
-
-
-
-
-               {env4 &&
-            <View>
-             <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
-                <Text style={{fontSize:15,fontWeight:'bold'}}>ENVOLVIDO 4</Text>
-            </View>
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-
-
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>SEXO</Text>
-                    <Text style={styles.textoConteudo} >{generoEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>TIPO DE ENVOLVIMENTO</Text>
-                    <Text style={styles.textoConteudo} >{tipoDeEnvolvimentoEnv4}</Text>
-                </View>
-               
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>DATA DE NASCIMENTO</Text>
-                    <Text style={styles.textoConteudo} >{nascimentoEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NATURALIDADE/UF</Text>
-                    <Text style={styles.textoConteudo} >{naturalidadeEnv4}</Text>
-                </View>
-
-            </View>
-
-             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
-                <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
-                <Text style={styles.textoConteudo} >{nomeEnv4}</Text>
-            </View>
-
-           
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:2,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>IDADE APARENTE</Text>
-                    <Text style={styles.textoConteudo} >{idadeAparenteEnv4}</Text>
-                </View>
-
-
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>ESTADO CIVIL</Text>
-                    <Text style={styles.textoConteudo} >{estadoCivilEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:2,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NACIONALIDADE</Text>
-                    <Text style={styles.textoConteudo} >{nacionalidadeEnv4}</Text>
-                </View>
-
-            </View>    
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>CÚTIS</Text>
-                    <Text style={styles.textoConteudo} >{cutisEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>OCUPAÇÃO ATUAL</Text>
-                    <Text style={styles.textoConteudo} >{ocupaçãoAtualEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>GRAU DE ESCOLARIDADE</Text>
-                    <Text style={styles.textoConteudo} >{grauEscoarEnv4}</Text>
-                </View>
-
-            </View>   
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
-                <Text style={styles.textoTitulo}>MÃE</Text>
-                <Text style={styles.textoConteudo} >{maeEnv4}</Text>
-            </View>
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
-                <Text style={styles.textoTitulo}>PAI</Text>
-                <Text style={styles.textoConteudo} >{paiEnv4}</Text>
-            </View>
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NÚMERO DA IDENTIDADE</Text>
-                    <Text style={styles.textoConteudo} >{identidadeEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>ORGÃO EXPEDIDOR</Text>
-                    <Text style={styles.textoConteudo} >{orgãoExpedidorEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>UF</Text>
-                    <Text style={styles.textoConteudo} >{ufEnvolvidoEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>CPF</Text>
-                    <Text style={styles.textoConteudo} >{cpfEnv4}</Text>
-                </View>
-
-            </View>  
-
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>ENDEREÇO</Text>
-                    <Text style={styles.textoConteudo} >{logradouroEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NÚMERO</Text>
-                    <Text style={styles.textoConteudo} >{numeroCasaEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>COMPLEMENTO</Text>
-                    <Text style={styles.textoConteudo} >{complementoEnv4}</Text>
-                </View>
-
-
-
-            </View>  
-
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>BAIRRO</Text>
-                    <Text style={styles.textoConteudo} >{bairroEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:2,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
-                    <Text style={styles.textoConteudo} >{cidadeEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>UF</Text>
-                    <Text style={styles.textoConteudo} >{estadoEnv4}</Text>
-                </View>
-
-
-
-            </View>  
-
-
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>PAÍS</Text>
-                    <Text style={styles.textoConteudo} >{paisMoradiaEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>CEP</Text>
-                    <Text style={styles.textoConteudo} >{cepEnv4}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>TELEFONE</Text>
-                    <Text style={styles.textoConteudo} >{telefoneEnv4}</Text>
-                </View>
-
-
-
-
-
-            </View>  
-               </View> } 
-
             { historicoOcorr && 
             <View>
 
@@ -818,10 +768,6 @@ useEffect(()=>{
 
 
 
-                
-
-
-
               { responsavelPrisão && 
 
             <View>
@@ -833,17 +779,17 @@ useEffect(()=>{
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>UNIDADE</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{origemCedula}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>MATRICULA</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{tentouEvadir}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>SIAPE</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{possuiaOutrasCedulas}</Text>
                 </View>
 
             </View>
@@ -854,12 +800,12 @@ useEffect(()=>{
 
                 <View style={{borderWidth:1,flex:3,width:'100%',}} >
                     <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{possuiaOutrasCedulas}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>CARGO</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{tentouEvadir}</Text>
                 </View>
 
             </View>
@@ -881,17 +827,17 @@ useEffect(()=>{
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>UNIDADE</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{origemCedula}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>MATRICULA</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{tentouEvadir}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>SIAPE</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{possuiaOutrasCedulas}</Text>
                 </View>
 
             </View>
@@ -902,12 +848,12 @@ useEffect(()=>{
 
                 <View style={{borderWidth:1,flex:3,width:'100%',}} >
                     <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{possuiaOutrasCedulas}</Text>
                 </View>
 
                 <View style={{borderWidth:1,flex:1,width:'100%',}} >
                     <Text style={styles.textoTitulo}>CARGO</Text>
-                    <Text style={styles.textoConteudo} >{}</Text>
+                    <Text style={styles.textoConteudo} >{tentouEvadir}</Text>
                 </View>
 
             </View>
@@ -962,6 +908,7 @@ useEffect(()=>{
             
             </View>
                  }
+
 
                  { recibo && 
              
@@ -1057,9 +1004,193 @@ useEffect(()=>{
             </View>
                  }
 
+                 { formNotaFalsa && 
+             
+            <View>
+            <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
+                <Text style={{fontSize:15,fontWeight:'bold'}}>CARACTERÍSTICAS QUE EVIDENCIAM A POSSIBILIDADE DE FALSIFICAÇÃO</Text>
+            </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>MARCA D'ÁGUA</Text>
+                    <Text style={styles.textoConteudo} > {marcaDagua} </Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>MICROIMPRESSÕES</Text>
+                    <Text style={styles.textoConteudo} >{microImpressoes}</Text>
+                </View>
+
+
+
+            </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>REGISTRO COINCIDENTE</Text>
+                    <Text style={styles.textoConteudo} >{registroCoincidente}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>IMAGEM LATENTE</Text>
+                    <Text style={styles.textoConteudo} >{imagemLatente}</Text>
+                </View>
+
+                
+
+            </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>IMPRESSÃO EM ALTO RELEVO</Text>
+                    <Text style={styles.textoConteudo} >{impressaoRelevo}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>NUMERAÇÃO</Text>
+                    <Text style={styles.textoConteudo} >{numeraçaoNota}</Text>
+                </View>
+
+                
+
+            </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>FIBRAS COLORIDAS</Text>
+                    <Text style={styles.textoConteudo} >{fibrasColoridas}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>MARCA TÁTIL</Text>
+                    <Text style={styles.textoConteudo} >{marcaTatil}</Text>
+                </View>
+
+                
+
+            </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>FIO DE SEGURANÇA</Text>
+                    <Text style={styles.textoConteudo} >{fioDeSegurança}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>FUNDOS ESPECIAIS</Text>
+                    <Text style={styles.textoConteudo} >{fundosEspeciais}</Text>
+                </View>
+
+                
+
+            </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>FIBRAS SENSÍVEIS Á LUZ ULTRAVIOLETA</Text>
+                    <Text style={styles.textoConteudo} >{fibrasColoridas}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>FAIXA HOLOGRAFICA</Text>
+                    <Text style={styles.textoConteudo} >{faixaHoografica}</Text>
+                </View>
+
+                
+
+            </View>
+
+             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                     <Text style={styles.textoTitulo}>TIPO E/OU TAMANHO DO PAPEL</Text>
+                     <Text style={styles.textoConteudo} >{tipoPapel}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>JANELA TRANSPARENTE</Text>
+                    <Text style={styles.textoConteudo} >{janelaTransparente}</Text>
+                </View>
+
+                
+
+            </View>
+
+             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
+                <Text style={styles.textoTitulo}>MOEDA</Text>
+                <Text style={styles.textoConteudo} >{moeda}</Text>
+            </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
+                <Text style={styles.textoTitulo}>OUTROS</Text>
+                <Text style={styles.textoConteudo} >{outrasCaracteristicas}</Text>
+            </View>
+
+
+
+
+             
+                </View>
+                 }
+
+
+
+                { animoUsuario && 
+             
+            <View>
+                <View style={{borderWidth:1,height:32,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
+                    <Text style={{fontSize:15,fontWeight:'bold'}}>INFORMAÇÕES PRESTADAS PELO ENVOLVIDO</Text>
+                </View>
+
+                <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                        <Text style={styles.textoTitulo}>ORIGEM DA CÉDULA</Text>
+                        <Text style={styles.textoConteudo} >{origemCedula}</Text>
+                    </View>
+
+                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                        <Text style={styles.textoTitulo}>ESTADO DE ANIMO DO USUARIO</Text>
+                        <Text style={styles.textoConteudo} >{estadoAnimo}</Text>
+                    </View>
+
+
+
+                </View>
+
+            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>TENTOU EVADIR DO LOCAL</Text>
+                    <Text style={styles.textoConteudo} >{tentouEvadir}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>POSSUIA OUTRAS CÉDULAS VÁLIDAS</Text>
+                    <Text style={styles.textoConteudo} >{possuiaOutrasCedulas}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>PAGOU APÓS O FATO</Text>
+                    <Text style={styles.textoConteudo} >{pagouApos}</Text>
+                </View>
+
+            </View>
+
+
+            </View>
+            }
+
                    
            <View style={{marginTop:100}} >
-                      <Button title='Página 3' onPress={pagina3}  />
+                      <Button title='Página 3' onPress={pagina2}  />
            </View>
 
             
@@ -1076,11 +1207,9 @@ const styles = StyleSheet.create({
     },
     textoConteudo:{
         fontSize:12,
-         paddingLeft:2,
     },
 textoTitulo:{
         fontSize:10,
-         paddingLeft:2,
     },
     viewImage:{
         

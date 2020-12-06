@@ -2,10 +2,8 @@ import React,{useState,useEffect} from 'react';
 import { Button, Image,StyleSheet,View,Text } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native'
 import firebase from '../../connection/FirebaseConection';
-import * as Print from "expo-print";
-import * as MediaLibrary from "expo-media-library";
 import { Container} from './styles';
-import { set } from 'react-native-reanimated';
+
 
 export default () => {
 
@@ -31,9 +29,7 @@ export default () => {
         const [endereço, setEndereço] = useState();
         const [avatar2,setAvatar2] = useState(null);
         const [envolvido2,setEnvolvido2] = useState(true);
-        const [formNotaFalsa,setFormNotaFalsa] = useState(true);
-        const [historicoOcorr,sethistoricoOcorr] = useState(true);
-        const [agenteIntegrante,setAgenteIntegrante] = useState(true);
+       
 
 
     const [cidade, setCidade] = useState();
@@ -57,7 +53,6 @@ export default () => {
     const [grauEscoar, setGrauEscolar] = useState();
     const [orgãoExpedidor, setOrgãoEpedidor] = useState();
     const [ufEnvolvido, setUfEnvolvido] = useState();
-    const [ufMoradia, setUfMoradia] = useState();
     const [paisMoradia, setpaisMoradia] = useState();
     const [tentadoConsumado, setTentadoConsumado] = useState();
     const [alvoDoEvento, setAlvoDoEvento] = useState();
@@ -68,23 +63,11 @@ export default () => {
     const [objetosRecolhidos, setObjetosRecolhidos] = useState('');
       const [nomeOcorrencia,setNomeOcorrencia] = useState('');
 
-    const [notaFalsa, setNotaFalsa] = useState(true);
+    
 
 
 
-        //variaveis nota falsa
-        const [marcaDagua, setMarcaDagua] = useState();
-        const [microImpressoes, setMicroImpressoes] = useState();
-        const [registroCoincidente, setRegistroCoincidente] = useState();
-        const [imagemLatente, setImagemLatente] = useState();
-        const [impressaoRelevo, setImpressaoRelevo] = useState();
-        const [numeraçaoNota, setNumeraçaoNota] = useState();
-        const [fibrasColoridas, setFibrasColoridas] = useState();
-        const [marcaTatil, setMarcaTatil] = useState();
-        const [fioDeSegurança, setFioDeSegurança] = useState();
-        const [fundosEspeciais, setFundosEspeciais] = useState();
-        const [fibrasLuzVioleta, setFibrasLuzVioleta] = useState();
-        const [faixaHoografica, setFaiaHolografica] = useState();
+       
 
         
 
@@ -93,28 +76,17 @@ export default () => {
         const [nomeEnv2, setNomeEnv2] = useState();
         const [identidadeEnv2, setIdentidadeEnv2] = useState();
         const [nascimentoEnv2, setNascimentoEnv2] = useState();
-       
         const [maeEnv2, setMaeEnv2] = useState();
         const [paiEnv2, setPaiEnv2] = useState();
         const [telefoneEnv2, setTelefoneEnv2] = useState();
         const [generoEnv2, setGeneroEnv2] = useState();
-       
-
         const [estadoEnv2, setEstadoEnv2] = useState();
-
         const [cepEnv2, setCepEnv2] = useState();
-
-
         const [cidadeEnv2, setCidadeEnv2] = useState();
         const [bairroEnv2, setBairroEnv2] = useState();
         const [logradouroEnv2, setLogradouroEnv2] = useState();
         const [numeroCasaEnv2, setNumeroCasaEnv2] = useState();
         const [complementoEnv2, setComplementoEnv2] = useState();
-           
-
-
-
-
         const [tipoDeEnvolvimentoEnv2, setTipoDeEnvolvimentoEnv2] = useState();
         const [nacionalidadeEnv2, setNacionalidadeEnv2] = useState();
         const [naturalidadeEnv2, setNaturalidadeEnv2] = useState();
@@ -125,9 +97,7 @@ export default () => {
         const [grauEscoarEnv2, setGrauEscolarEnv2] = useState();
         const [orgãoExpedidorEnv2, setOrgãoEpedidorEnv2] = useState();
         const [ufEnvolvidoEnv2, setUfEnvolvidoEnv2] = useState();
-
         const [paisMoradiaEnv2, setpaisMoradiaEnv2] = useState();
-
         const [env2, setEnv2] = useState(false);
 
         //variaveis local
@@ -138,7 +108,6 @@ export default () => {
         const [endereçoEstaçao,setEndereçoEstaçao]=useState();
         const [municipioEstaçao, setMunicipioEstaçao]=useState();
         const [numeroEstaçao,setNumeroEstaçao]=useState();
-        const [paisEstaçao,setPaisEstaçao]=useState();
         const [ufEstaçao,setUfEstaçao]=useState();
 
         //variaveis agente
@@ -201,7 +170,10 @@ export default () => {
                     const horarioDoFato = snapshot.val().horarioDoFato;
                     const dataFinal = snapshot.val().dataFinal;
                     const horarioFinal = snapshot.val().horarioFinal;
+
                     const notaFalsa = snapshot.val().notaFalsa;
+
+                    
                     const env2 = snapshot.val().env2;
                     const nomeEnv2 = snapshot.val().nomeEnv2;
                     const cpfEnv2 =snapshot.val().cpfEnv2;
@@ -237,18 +209,7 @@ export default () => {
                     const orgãoExpedidorEnv2 = snapshot.val().orgãoExpedidorEnv2;
                     const ufEnvolvidoEnv2 = snapshot.val().ufEnvolvidoEnv2;
                     const paisMoradiaEnv2 = snapshot.val().paisMoradiaEnv2;
-                    const marcaDagua = snapshot.val().marcaDagua;
-                    const microImpressoes = snapshot.val().microImpressoes;
-                    const regitroCoincidente = snapshot.val().regitroCoincidente;
-                    const imagemLatente = snapshot.val().imagemLatente;
-                    const impressaoRelevo = snapshot.val().impressaoRelevo;
-                    const numeraçaoNota =snapshot.val().numeraçaoNota;
-                    const fibrasColoridas = snapshot.val().fibrasColoridas;
-                    const marcaTatil = snapshot.val().marcaTatil;
-                    const fioDeSegurança =snapshot.val().fioDeSegurança;
-                    const fundosEspeciais = snapshot.val().fundosEspeciais;
-                    const faixaHoografica = snapshot.val().faixaHoografica;
-                    const fibrasLuzVioleta = snapshot.val().fibrasLuzVioleta;
+                   
 
                     
 
@@ -299,7 +260,7 @@ export default () => {
                     setHorarioDoFato(horarioDoFato);
                     setDataFinal(dataFinal);
                     setHorarioFinal(horarioFinal);
-                    setNotaFalsa(notaFalsa);
+                   
                     setEnv2(env2);
                     setNomeEnv2(nomeEnv2);
                     setCpfEnv2(cpfEnv2);
@@ -332,18 +293,7 @@ export default () => {
                     setOrgãoEpedidorEnv2(orgãoExpedidorEnv2);
                     setUfEnvolvidoEnv2(ufEnvolvidoEnv2);
                     setpaisMoradiaEnv2(paisMoradiaEnv2);
-                    setMarcaDagua(marcaDagua);
-                    setMicroImpressoes(microImpressoes);
-                    setRegistroCoincidente(regitroCoincidente);
-                    setImagemLatente(imagemLatente);
-                    setImpressaoRelevo(impressaoRelevo);
-                    setNumeraçaoNota(numeraçaoNota);
-                    setFibrasColoridas(fibrasColoridas);
-                    setMarcaTatil(marcaTatil);
-                    setFioDeSegurança(fioDeSegurança);
-                    setFundosEspeciais(fundosEspeciais);
-                    setFaiaHolografica(faixaHoografica);
-                    setFibrasLuzVioleta(fibrasLuzVioleta);
+                    
 
                     
 
@@ -356,20 +306,7 @@ export default () => {
     }
 }
 
- const buscarFotos = () => {
-        const storage = firebase.storage();
-        const starsRef = storage.ref('images/').child(key);
-    
-        starsRef.getDownloadURL().then(function (url) {
-            let avatar1 = { uri: url };
-            setAvatar2(avatar1);
-    
-        }).catch((error) => {
-        if (error.code === 'storage/object-not-found'){
-            
-        }
-        });
-    }
+ 
 
      const poolEndereçoLocal = async(local) =>{
       
@@ -386,7 +323,7 @@ export default () => {
                 setEndereçoEstaçao(json.endereço);
                 setMunicipioEstaçao(json.municipio);
                 setNumeroEstaçao(json.numero);
-                setPaisEstaçao(json.pais);
+                
                 setUfEstaçao(json.uf);
 
                 
@@ -408,7 +345,7 @@ useEffect(() => {
       
       if (!isUnmount) {
           pushDados();
-          buscarFotos();
+          
           
          
       }
@@ -461,28 +398,9 @@ useEffect(() => {
    
     
 
-   const createAndSavePDF = async () => {
-  try {
-    const { uri } = await Print.printToFileAsync({ count });
-    
-      const permission = await MediaLibrary.requestPermissionsAsync();
-      if (permission.granted) {
-        await MediaLibrary.createAssetAsync(uri);
-      }
-    
-  } catch (error) {
-    console.error(error);
-  }
-};
+   
 
-  useEffect(()=>{
-
-    if (envolvido2 === true) {
-        sethistoricoOcorr(false)
-        setAgenteIntegrante(false)
-    }
-
-  },[envolvido2])
+  
 
   useEffect(()=>{
 
@@ -516,16 +434,16 @@ useEffect(() => {
             <View style={{flexDirection:'row'}}>
             
                 <View>
-                    <Image source={require('../../../assets/brasaoTransarente.png')} style={{width:50,height:50,margin:5}} />
+                    <Image source={require('../../../assets/brasaoTransarente.png')} style={{width:50,height:50,marginLeft:5,marginTop:5,marginRight:5}} />
                 </View>
 
                 <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center'}} >
 
-                    <View style={{borderWidth:1,marginTop:5,height:30,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
+                    <View style={{borderWidth:1,marginTop:5,height:25,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
                         <Text style={{fontSize:15,fontWeight:'bold'}}>SUPERINTENDÊNCIA DE TRENS URBANOS-BH</Text>
                     </View>
 
-                    <View style={{height:30,borderWidth:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,flexDirection:'row'}}>
+                    <View style={{height:25,borderWidth:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,flexDirection:'row'}}>
 
                         <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
                             <Text style={{fontSize:15,fontWeight:'bold'}} >{nomeOcorrencia}</Text>
@@ -611,10 +529,28 @@ useEffect(() => {
                 <Text style={styles.textoConteudo} >{objetosRecolhidos}</Text>
             </View>
 
-             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5}}>
-                <Text style={styles.textoTitulo}>LOCAL</Text>
-                <Text style={styles.textoConteudo} >{nomeEstaçao}: {endereçoEstaçao}</Text>
+             <View style={{borderWidth:1,height:32,width:'100%',flexDirection:'row'}}>
+                
+                <View style={{borderWidth:1,flex:3,width:'100%',}}>
+                    <Text style={styles.textoTitulo}>LOCAL</Text>
+                    <Text style={styles.textoConteudo} >{nomeEstaçao}: {endereçoEstaçao}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
+                    <Text style={styles.textoConteudo} >{municipioEstaçao}</Text>
+                </View>
+
+                <View style={{borderWidth:1,flex:1,width:'100%',}} >
+                    <Text style={styles.textoTitulo}>UF</Text>
+                    <Text style={styles.textoConteudo} >{ufEstaçao}</Text>
+                </View>
+
+                
+
             </View>
+
+             
 
             <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
 
@@ -644,24 +580,7 @@ useEffect(() => {
             </View>
 
 
-            <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>MUNICÍPIO</Text>
-                    <Text style={styles.textoConteudo} >{municipioEstaçao}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>UF</Text>
-                    <Text style={styles.textoConteudo} >{ufEstaçao}</Text>
-                </View>
-
-                <View style={{borderWidth:1,flex:3,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>PAÍS</Text>
-                    <Text style={styles.textoConteudo} >{paisEstaçao}</Text>
-                </View>
-
-            </View>
+           
             
              <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
                 <Text style={{fontSize:15,fontWeight:'bold'}}>QUALIFICAÇÃO DOS ENVOLVIDOS</Text>
@@ -1027,50 +946,9 @@ useEffect(() => {
             </View>  
                </View> } 
 
-                    { historicoOcorr && 
-                    <View>
-                    <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'#BEBEBE'}}>
-                        <Text style={{fontSize:15,fontWeight:'bold'}}>HISTÓRICO</Text>
-                    </View>
+                   
 
-                    <View style={{borderWidth:1,width:'100%',height:200}}>
-                        <Text style={styles.textoConteudo}>{historico}</Text>
-                    </View> 
-                    </View> 
-            }
-
-             { agenteIntegrante && 
-             
-            <View>
-                <View style={{borderWidth:1,flex:1,width:'100%',justifyContent:'center',alignItems:'center',marginRight:5,backgroundColor:'#BEBEBE'}}>
-                    <Text style={{fontSize:15,fontWeight:'bold'}}>AGENTE INTEGRANTE</Text>
-                </View>
-
-                <View style={{borderWidth:1,height:32,width:'100%',marginRight:5,flexDirection:'row'}}>
-
-                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                        <Text style={styles.textoTitulo}>MATRÍCULA</Text>
-                        <Text style={styles.textoConteudo} >{matriculaAgente}</Text>
-                    </View>
-
-                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                        <Text style={styles.textoTitulo}>SIAPE</Text>
-                        <Text style={styles.textoConteudo} >{siapeAgente}</Text>
-                    </View>
-
-                    <View style={{borderWidth:1,flex:1,width:'100%',}} >
-                        <Text style={styles.textoTitulo}>CARGO</Text>
-                        <Text style={styles.textoConteudo} >{cargoAgente}</Text>
-                    </View>
-
-                </View>
-
-                <View style={{borderWidth:1,height:32,width:'100%',}} >
-                    <Text style={styles.textoTitulo}>NOME COMPLETO</Text>
-                    <Text style={styles.textoConteudo} >{cosop}</Text>
-                </View>
-            </View>
-                 }
+            
 
             <View style={{marginTop:100}} >
                 <Button title='Página 2' onPress={pagina2}  />
@@ -1089,9 +967,13 @@ const styles = StyleSheet.create({
     },
     textoConteudo:{
         fontSize:12,
+        paddingLeft:2,
+        
     },
 textoTitulo:{
         fontSize:10,
+        paddingLeft:2,
+        
     },
 
     viewImage:{
@@ -1105,7 +987,10 @@ textoTitulo:{
         height: 156,
         borderRadius: 5,
         
+        
     },
+    
+        
 
 })
 
