@@ -31,7 +31,7 @@ height:18px;
 margin-left:16px;
 `;
 
-export default ({placeholder,source,styled, value, onChangeText, password,placeholderTextColor,color}) => {
+export default ({placeholder,source,onEndEditing,keyboardType,styled, value, onChangeText, password,placeholderTextColor,color}) => {
     return(
         <InputArea>
             <ImagemEmail source = {source}/>
@@ -42,6 +42,8 @@ export default ({placeholder,source,styled, value, onChangeText, password,placeh
                 value={value}
                 onChangeText={onChangeText}
                 secureTextEntry={password}
+                onEndEditing={onEndEditing}
+                keyboardType={keyboardType}
             />
         </InputArea>
     );

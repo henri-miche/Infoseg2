@@ -40,7 +40,7 @@ export const TouchSair = styled.TouchableOpacity`
 `
 
 export const TextSubtitulo= styled.Text`
-        width: 246px;
+        
         height: 26px;
         font-family: RobotoSlab;
         font-style: normal;
@@ -76,7 +76,7 @@ export const BtnFixa = styled.TouchableOpacity`
    
 `
 export const TextEndereço= styled.Text`
-        width: 217px;
+        
         height: 26px;
         font-family: RobotoSlab;
         font-style: normal;

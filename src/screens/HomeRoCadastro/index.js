@@ -195,7 +195,27 @@ export default () => {
    
     const [env2, setEnv2] = useState(false);
     const [switchEnv2, setSwitchEnv2] = useState(false);
-    
+
+    const [switchAgenteParticipante1, setSwitchAgenteParticipante1] = useState(false);
+    const [AgenteParticipante1, setAgenteParticipante1] = useState(false);
+    const [nomeAgente1, setNomeAgente1] = useState(''); 
+    const [matriculaAgente1, setMatriculaAgente1] = useState('');
+    const [siapeAgente1, setSiapeAgente1] = useState('');
+    const [cargoAgente1, setCargoAgente1] = useState('');
+    const [searchAgente1, setSearchAgente1] = useState('');
+    const [tipoEnvolvimentoAgente1, setTipoEnvolvimentoAgente1] = useState('Agente Integrante');
+
+    //Agente participante 2
+    const [switchAgenteParticipante2, setSwitchAgenteParticipante2] = useState(false);
+    const [AgenteParticipante2, setAgenteParticipante2] = useState(false);
+    const [nomeAgente2, setNomeAgente2] = useState(''); 
+    const [matriculaAgente2, setMatriculaAgente2] = useState('');
+    const [siapeAgente2, setSiapeAgente2] = useState('');
+    const [cargoAgente2, setCargoAgente2] = useState('');
+    const [searchAgente2, setSearchAgente2] = useState('');
+    const [tipoEnvolvimentoAgente2, setTipoEnvolvimentoAgente2] = useState('Agente Integrante');
+
+    const [listAgentes, setListAgentes] = useState(null);
 
 
 
@@ -204,7 +224,7 @@ export default () => {
     
 
 
-    const saveFoto = (chave,cosop,matriculaAgente,siapeAgente,cargoAgente) => {
+    const saveFoto = (chave,nomeAgenteRelator,matriculaAgenteRelator,siapeAgenteRelator,cargoAgenteRelator) => {
         setLoading(true);
         if (foto !== null) {
  
@@ -216,34 +236,22 @@ export default () => {
             if (env2) {
                  firebase.database().ref('/Ocorrencias').child(chave).set({
                 nome: nome,
-                cpf: cpf,
-                cosop:cosop,
-                chaveFoto:chave,
+                cpf: cpf,                
                 data:data,
                 hora:hora,
                 identidade:identidade,
                 nascimento:nascimento,
-                tipoRo:tipoRo,
-                local:local,
                 mae:mae,
                 pai:pai,
                 telefone:telefone,
                 genero:genero,
-                historico:historico,
                 estado:estado,
-                matriculaAgente:matriculaAgente,
-                siapeAgente:siapeAgente,
-                cargoAgente:cargoAgente,
-
-                tipoOcorrencia1:tipoOcorrencia1,
                 cep:cep,
                 cidade:cidade,
                 bairro:bairro,
                 logradouro:logradouro,
                 numeroCasa:numeroCasa,
                 complemento:complemento,
-
-                tipodeEnvolvimento:tipoDeEnvolvimento,
                 nacionalidade:nacionalidade,
                 naturalidade:naturalidade,
                 idadeAparente:idadeAparente,
@@ -254,17 +262,22 @@ export default () => {
                 orgãoExpedidor:orgãoExpedidor,
                 ufEnvolvido:ufEnvolvido,
                 paisMoradia:paisMoradia,
+
+                
+                tipoOcorrencia1:tipoOcorrencia1,
+                tipodeEnvolvimento:tipoDeEnvolvimento,
+                tipoRo:tipoRo,
                 tentadoConsumado:tentadoConsumado,
                 alvoDoEvento:alvoDoEvento,
                 dataDoFato:dataDoFato,
                 horarioDoFato:horarioDoFato,
-                dataFinal:dataFinal,
-                objetosRecolhidos:objetosRecolhidos,
+                dataFinal:dataFinal,              
                 horarioFinal:horarioFinal,
-                notaFalsa:notaFalsa,
-                env2:env2,
+                historico:historico,
+                objetosRecolhidos:objetosRecolhidos,
+                local:local,
 
-                
+                env2:env2,
                 nomeEnv2: nomeEnv2,
                 cpfEnv2: cpfEnv2,
                 identidadeEnv2:identidadeEnv2,
@@ -280,7 +293,6 @@ export default () => {
                 logradouroEnv2:logradouroEnv2,
                 numeroCasaEnv2:numeroCasaEnv2,
                 complementoEnv2:complementoEnv2,
-
                 tipodeEnvolvimentoEnv2:tipoDeEnvolvimentoEnv2,
                 nacionalidadeEnv2:nacionalidadeEnv2,
                 naturalidadeEnv2:naturalidadeEnv2,
@@ -292,6 +304,9 @@ export default () => {
                 orgãoExpedidorEnv2:orgãoExpedidorEnv2,
                 ufEnvolvidoEnv2:ufEnvolvidoEnv2,
                 paisMoradiaEnv2:paisMoradiaEnv2,
+
+                //nota falsa estado cidadão
+                notaFalsa:notaFalsa,
 
                 marcaDagua:marcaDagua,
                 microImpressoes:microImpressoes,
@@ -310,12 +325,32 @@ export default () => {
                 tentouEvadir:tentouEvadir,
                 possuiaOutrasCedulas:possuiaOutrasCedulas,
                 pagouApos:pagouApos,
-
                 moeda:moeda,
                 janelaTransparente:janelaTransparente,
                 outrasCaracteristicas:outrasCaracteristicas,
                 tipoDoPapel:tipoDoPapel,
+
+                //agente envolvido 1
+                nomeAgente1:nomeAgente1,
+                siapeAgente1:siapeAgente1,
+                matriculaAgente1:matriculaAgente1,
+                cargoAgente1:cargoAgente1,
+                tipoEnvolvimentoAgente1:tipoEnvolvimentoAgente1,
                 
+                //agente relator
+                matriculaAgenteRelator:matriculaAgenteRelator,
+                siapeAgenteRelator:siapeAgenteRelator,
+                cargoAgenteRelator:cargoAgenteRelator,
+                nomeAgenteRelator:nomeAgenteRelator,
+                chaveFoto:chave,
+
+                //agente envolvido 2
+                nomeAgente2:nomeAgente2,
+                siapeAgente2:siapeAgente2,
+                matriculaAgente2:matriculaAgente2,
+                cargoAgente2:cargoAgente2,
+                tipoEnvolvimentoAgente2:tipoEnvolvimentoAgente2,
+
                 
                 
                 
@@ -418,35 +453,22 @@ export default () => {
 
              firebase.database().ref('/Ocorrencias').child(chave).set({
                nome: nome,
-                cpf: cpf,
-                cosop:cosop,
-                chaveFoto:chave,
+                cpf: cpf,                
                 data:data,
                 hora:hora,
                 identidade:identidade,
                 nascimento:nascimento,
-                tipoRo:tipoRo,
-                local:local,
                 mae:mae,
                 pai:pai,
                 telefone:telefone,
                 genero:genero,
-                historico:historico,
                 estado:estado,
-                tipoOcorrencia1:tipoOcorrencia1,
                 cep:cep,
                 cidade:cidade,
                 bairro:bairro,
                 logradouro:logradouro,
                 numeroCasa:numeroCasa,
                 complemento:complemento,
-                objetosRecolhidos:objetosRecolhidos,
-                matriculaAgente:matriculaAgente,
-                siapeAgente:siapeAgente,
-                cargoAgente:cargoAgente,
-
-
-                tipodeEnvolvimento:tipoDeEnvolvimento,
                 nacionalidade:nacionalidade,
                 naturalidade:naturalidade,
                 idadeAparente:idadeAparente,
@@ -457,13 +479,21 @@ export default () => {
                 orgãoExpedidor:orgãoExpedidor,
                 ufEnvolvido:ufEnvolvido,
                 paisMoradia:paisMoradia,
+
+                
+                tipoOcorrencia1:tipoOcorrencia1,
+                tipodeEnvolvimento:tipoDeEnvolvimento,
+                tipoRo:tipoRo,
                 tentadoConsumado:tentadoConsumado,
                 alvoDoEvento:alvoDoEvento,
                 dataDoFato:dataDoFato,
                 horarioDoFato:horarioDoFato,
-                dataFinal:dataFinal,
+                dataFinal:dataFinal,              
                 horarioFinal:horarioFinal,
-                notaFalsa:notaFalsa,
+                historico:historico,
+                objetosRecolhidos:objetosRecolhidos,
+                local:local,
+
                 env2:env2,
 
 
@@ -489,6 +519,27 @@ export default () => {
                 janelaTransparente:janelaTransparente,
                 outrasCaracteristicas:outrasCaracteristicas,
                 tipoDoPapel:tipoDoPapel,
+
+                //agente relator
+                matriculaAgenteRelator:matriculaAgenteRelator,
+                siapeAgenteRelator:siapeAgenteRelator,
+                cargoAgenteRelator:cargoAgenteRelator,
+                nomeAgenteRelator:nomeAgenteRelator,
+                chaveFoto:chave,
+
+                //agente envolvido 1
+                nomeAgente1:nomeAgente1,
+                siapeAgente1:siapeAgente1,
+                matriculaAgente1:matriculaAgente1,
+                cargoAgente1:cargoAgente1,
+                tipoEnvolvimentoAgente1:tipoEnvolvimentoAgente1,
+
+                //agente envolvido 2
+                nomeAgente2:nomeAgente2,
+                siapeAgente2:siapeAgente2,
+                matriculaAgente2:matriculaAgente2,
+                cargoAgente2:cargoAgente2,
+                tipoEnvolvimentoAgente2:tipoEnvolvimentoAgente2,
                 
                 
                 
@@ -591,6 +642,7 @@ export default () => {
         
     }
 
+    //carrega imagem
     const uploadImage = async (uri, imageName) => {
         const response = await fetch(uri);
         const blob = await response.blob();
@@ -617,15 +669,15 @@ export default () => {
                    //seta nome do usuario pro relatorio
                     firebase.database().ref('usuarios').child(user.uid)
                         .once('value').then((snapshot) => {
-                            let cosop = snapshot.val().nome;
-                            let matriculaAgente = snapshot.val().matriculaAgente;
-                            let siapeAgente = snapshot.val().siapeAgente;
-                            let cargoAgente = snapshot.val().cargoAgente;
+                            let nomeAgenteRelator = snapshot.val().nome;
+                            let matriculaAgenteRelator = snapshot.val().matriculaAgente;
+                            let siapeAgenteRelator = snapshot.val().siapeAgente;
+                            let cargoAgenteRelator = snapshot.val().cargoAgente;
                             //seta chave realtime para foto
                             let chavess = firebase.database().ref('/Ocorrencias');
                             let chave = chavess.push().key;
                             
-                            saveFoto(chave,cosop,matriculaAgente,siapeAgente,cargoAgente);
+                            saveFoto(chave,nomeAgenteRelator,matriculaAgenteRelator,siapeAgenteRelator,cargoAgenteRelator);
                            
                     
                         });       
@@ -636,6 +688,7 @@ export default () => {
         }else {alert("Preencha os campos corretamente");}
      };
 
+     //Galeria
      const carregarFoto = async () => {
         if(Constants.platform.ios){
             const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -655,6 +708,7 @@ export default () => {
         setModallVisible(false);
     }
 
+    //foto camera
     const tirarFoto = async () => {
         if(Constants.platform.ios){
             const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -674,9 +728,13 @@ export default () => {
         setModallVisible(false);
     }
 
+    //sair
+
     const sair = () => {
         navigation.goBack();
     };
+
+    //mascaras env 2
 
      const mascaraCpf = (t) => {
         setCpf(mask(t,['999.999.999-99']))
@@ -690,9 +748,27 @@ export default () => {
         setTelefone(mask(t,['(99) 99999-9999']))
     }
 
-    const mascaraCep = (t) => {
+    /*const mascaraCep = (t) => {
         setCep(mask(t,['99999-999']))
+    }*/
+
+    //Mascaras env 2
+
+    const mascaraCpfEnv2 = (t) => {
+        setCpfEnv2(mask(t,['999.999.999-99']))
     }
+
+    const mascaraTelefoneEnv2 = (t) => {
+        setTelefoneEnv2(mask(t,['(99) 99999-9999']))
+    }
+
+    const mascaraNascimentoEnv2 = (t) => {
+        setNascimentoEnv2(mask(t,['99/99/9999']))
+    }
+
+    
+
+    
 
     
 
@@ -752,7 +828,30 @@ export default () => {
                       setEnv2(true)
                   }else{
                       setEnv2(false)
+                  }if(switchAgenteParticipante1 === true){
+                      setAgenteParticipante1(true)
+                  }else{
+                      setAgenteParticipante1(false)
+                      setSwitchAgenteParticipante2(false);
+                      setSearchAgente1('');
+                      setNomeAgente1('');
+                      setMatriculaAgente1('');
+                      setSiapeAgente1('');
+                      setCargoAgente1('');
+                      setTipoEnvolvimentoAgente1('');
                   }
+                   if(switchAgenteParticipante2 === true){
+                      setAgenteParticipante2(true);
+                  }else{
+                      setAgenteParticipante2(false);
+                      setNomeAgente2('');
+                      setMatriculaAgente2('');
+                      setSiapeAgente2('');
+                      setCargoAgente2('');
+                      setTipoEnvolvimentoAgente2('');
+                      setSearchAgente2('');
+                  }
+
                    if(switchMarcaDagua === true){
                       setMarcaDagua('Inexistente ou difere da cédula original')
                   }else{
@@ -823,7 +922,7 @@ export default () => {
                   }else{
                       setTipoDoPapel('')
                   }
-              },[switchEnv2,switchMarcaDagua,switchMicroImpressoes,switchRegistroCoincidente,
+              },[switchEnv2,switchAgenteParticipante1,switchAgenteParticipante2,switchMarcaDagua,switchMicroImpressoes,switchRegistroCoincidente,
                 switchImagemLatente,switchImpressaoRelevo,switchNumeraçaoNota,switchFibrasColoridas,switchMarcaTatil,
                 switchFioDeSegurança,switchFundosEspeciais,switchFibrasLuzVioleta,switchFaixaHoografica,switchTipoDoPapel,switchJanelaTransparente,
             ]) 
@@ -837,6 +936,158 @@ export default () => {
               const semRegistroMae = () => {
                   setMae('Sem registro')
               }
+
+            
+                    //fetch('https://viacep.com.br/ws/30570000/json/')por cep em baio por uf cidade
+                const buscarCep = (cep) =>{
+                            fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
+                                    console.log(data);
+                                    setCidade(data.localidade);
+                                    setBairro(data.bairro);
+                                    setLogradouro(data.logradouro);
+                                    setEstado(data.uf)
+                                    console.log(cidade);
+                                    console.log(bairro);
+                                    console.log(estado);
+                                    console.log(logradouro);
+                            })
+                }
+
+                 const buscarCepenv2 = (cep) =>{
+                            fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
+                                    console.log(data);
+                                    setCidadeEnv2(data.localidade);
+                                    setBairroEnv2(data.bairro);
+                                    setLogradouroEnv2(data.logradouro);
+                                    setEstadoEnv2(data.uf)
+                                    console.log(cidadeEnv2);
+                                    console.log(bairroEnv2);
+                                    console.log(estadoEnv2);
+                                    console.log(logradouroEnv2);
+                            })
+                }
+
+
+                const buscarAgente = (nomeAgente) =>{
+                                try {
+                    firebase.database().ref('/usuarios').orderByChild('nome').startAt(nomeAgente)
+                    .once('value', (snapshot) => {
+                        const list = [];
+                        
+                        snapshot.forEach((childItem) => {
+                        list.push({
+                        
+                            cargoAgente:childItem.val().cargoAgente,
+                            nome: childItem.val().nome,
+                            matriculaAgente: childItem.val().matriculaAgente,
+                            siapeAgente: childItem.val().siapeAgente,
+                        
+                        });
+                        });
+                        
+                        const nome = list[0].nome;
+                        const cargoAgente = list[0].cargoAgente;
+                        const matriculaAgente = list[0].matriculaAgente;
+                        const siapeAgente = list[0].siapeAgente;
+                        
+                        setNomeAgente1(nome);
+                        setCargoAgente1(cargoAgente);
+                        setMatriculaAgente1(matriculaAgente);
+                        console.log(matriculaAgente1)
+                        setSiapeAgente1(siapeAgente);
+
+                        
+                        
+                        
+                        
+                        
+                        
+                    })
+
+                    } catch (error) {
+                    alert(error);
+                    }
+                }
+
+                 const buscarAgente2 = (nomeAgente) =>{
+                                try {
+                    firebase.database().ref('/usuarios').orderByChild('nome').startAt(nomeAgente)
+                    .once('value', (snapshot) => {
+                        const list = [];
+                        
+                        snapshot.forEach((childItem) => {
+                        list.push({
+                        
+                            cargoAgente:childItem.val().cargoAgente,
+                            nome: childItem.val().nome,
+                            matriculaAgente: childItem.val().matriculaAgente,
+                            siapeAgente: childItem.val().siapeAgente,
+                        
+                        });
+                        });
+                        
+                        const nome = list[0].nome;
+                        const cargoAgente = list[0].cargoAgente;
+                        const matriculaAgente = list[0].matriculaAgente;
+                        const siapeAgente = list[0].siapeAgente;
+                        
+                        setNomeAgente2(nome);
+                        setCargoAgente2(cargoAgente);
+                        setMatriculaAgente2(matriculaAgente);
+                        console.log(matriculaAgente1)
+                        setSiapeAgente2(siapeAgente);
+
+                        
+                        
+                        
+                        
+                        
+                        
+                    })
+
+                    } catch (error) {
+                    alert(error);
+                    }
+                }
+
+            useEffect(()=>{
+               
+                if (searchAgente1==='') {
+                    setNomeAgente1('');
+                    setCargoAgente1('');
+                    setMatriculaAgente1('');
+                    setSiapeAgente1('');
+                }
+                
+            
+            
+            },[searchAgente1])
+
+            useEffect(()=>{
+               
+                if (searchAgente2==='') {
+                    setNomeAgente2('');
+                    setCargoAgente2('');
+                    setMatriculaAgente2('');
+                    setSiapeAgente2('');
+                }
+                
+            
+            
+            },[searchAgente2])
+
+            const handleClickSearch = () =>{
+           if (searchAgente1) {
+                buscarAgente(searchAgente1);
+           }   
+           
+  }
+  const handleClickSearchAgente2 = () =>{
+           if (searchAgente2) {
+                buscarAgente2(searchAgente2);
+           }   
+           
+  }
 
     return (
         <Container >
@@ -976,7 +1227,7 @@ export default () => {
             <View style= {styles.viewEstado}>
 
 
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' keyboardType='number-pad' value={cep} onChangeText={(t) => mascaraCep(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' onEndEditing={()=>buscarCep(cep)} keyboardType='number-pad' value={cep} onChangeText={(t) => setCep(t)} />
                 <Picker
                 mode="dropdown"
                 selectedValue={estado}
@@ -994,6 +1245,7 @@ export default () => {
                         <Picker.Item label="Goiás" value="GO" />
                         <Picker.Item label="Maranhão" value="MA" />
                         <Picker.Item label="Mato Grosso do Sul" value="MS" />
+                        <Picker.Item label="Mato Grosso" value="MT" />
                         <Picker.Item label="Pará" value="PA" />
                         <Picker.Item label="Paraíba" value="PB" />
                         <Picker.Item label="Paraná" value="PR" />
@@ -1005,7 +1257,6 @@ export default () => {
                         <Picker.Item label="Rondônia" value="RO" />
                         <Picker.Item label="Roraima" value="RR" />
                         <Picker.Item label="Santa Catarina" value="SC" />
-                        <Picker.Item label="Pernambuco" value="PE" />
                         <Picker.Item label="São Paulo" value="SP" />
                         <Picker.Item label="Sergipe" value="SE" />
                         <Picker.Item label="Tocantins" value="TO" />
@@ -1041,6 +1292,7 @@ export default () => {
                      <Switch thumbColor='#FF9000' trackColor={{true: '#FF9000', false: '#2E2E2E'}} value={switchEnv2} onValueChange={(t)=>setSwitchEnv2(t)} />
                 </View>
 
+                
 
 
 
@@ -1056,68 +1308,37 @@ export default () => {
               { env2 && 
               <View>
               <View style={styles.viewQualiEnv}>
-                <TextSubtitulo>Qualificação do Envolvido</TextSubtitulo>
+                <TextSubtitulo>Qualificação do Envolvido 2</TextSubtitulo>
             </View>
 
-            <View style = {styles.viewFotoMais}>
+           
 
-                <View> 
-                    <ImageSpace onPress = {()=>{setModallVisible(true)}} >
-                    
-                        <Image style={styles.formFoto} resizeMode='stretch' source={foto ? foto : require('../../../assets/adicionarimagem.png') }/> 
-                    </ImageSpace> 
-                </View>
+               
 
-                <Modal 
-                visible={modalVisible}
-                animationType='fade'
-                transparent={true}
-                onRequestClose = {()=>setModallVisible(false)}
-                >
-                <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
                 
-                <View style={{width:120,height:120,backgroundColor:'#000',justifyContent:'center',alignItems:'center',alignSelf:'center'}}>
-
-                    <View style={{width:75,height:75,flex:1,backgroundColor:'#000',justifyContent:'center',alignItems:'center'}}>
-                    
-                  <ModalText onPress={tirarFoto}>
-                       <ModalTextText>foto</ModalTextText> 
-                  </ModalText>
-
-                    </View>
-
-                    <View style={{width:75,height:75,flex:1,backgroundColor:'#000',justifyContent:'center',alignItems:'center'}}>
-                  <ModalText onPress={carregarFoto}>
-                      <ModalTextText>galeria</ModalTextText>  
-                  </ModalText>
-                  </View>
-                </View>
-
-                </View>
-                </Modal>
 
 
-                <View style={styles.viewInpustsCima}>
+                <View style={{marginLeft:30,marginTop:15}}>
                 
-                <Inputs source = {require('../../../assets/rgicon.png')} placeholder ='RG' placeholderTextColor ='#666360' keyboardType='number-pad' value={identidade} onChangeText={(t) => setIdentidade(t)}/>
-                 <Inputs source = {require('../../../assets/rgicon.png')} placeholder ='CPF' placeholderTextColor ='#666360' keyboardType='number-pad' value={cpf} onChangeText={(t) => mascaraCpf(t)}/>
-                  <Inputs source = {require('../../../assets/phone.png')} placeholder ='Telefone' placeholderTextColor ='#666360' keyboardType='number-pad' value={telefone} onChangeText={(t) => mascaraTelefone(t)}/>
+                <InputsInteiro source = {require('../../../assets/rgicon.png')} placeholder ='RG' placeholderTextColor ='#666360' keyboardType='number-pad' value={identidadeEnv2} onChangeText={(t) => setIdentidadeEnv2(t)}/>
+                 <InputsInteiro source = {require('../../../assets/rgicon.png')} placeholder ='CPF' placeholderTextColor ='#666360' keyboardType='number-pad' value={cpfEnv2} onChangeText={(t) => mascaraCpfEnv2(t)}/>
+                  <InputsInteiro source = {require('../../../assets/phone.png')} placeholder ='Telefone' placeholderTextColor ='#666360' keyboardType='number-pad' value={telefoneEnv2} onChangeText={(t) => mascaraTelefoneEnv2(t)}/>
                 </View>
 
-            </View>
+           
 
             <View style = {styles.viewInputsMeio} >
-                <InputsInteiro  source = {require('../../../assets/user.png')} placeholder ='Nome Completo' placeholderTextColor ='#666360' autoCapitalize='characters' value={nome} onChangeText={(t)=>setNome(t)} />
+                <InputsInteiro  source = {require('../../../assets/user.png')} placeholder ='Nome Completo' placeholderTextColor ='#666360' autoCapitalize='characters' value={nomeEnv2} onChangeText={(t)=>setNomeEnv2(t)} />
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={mae} onChangeText={(t) => setMae(t)}/>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={maeEnv2} onChangeText={(t) => setMaeEnv2(t)}/>
                     <BtnFixa onPress={semRegistroMae}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                 </View>
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={pai} onChangeText={(t) => setPai(t)}/>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={paiEnv2} onChangeText={(t) => setPaiEnv2(t)}/>
                     <BtnFixa onPress={semRegistroPai}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
@@ -1127,13 +1348,13 @@ export default () => {
             
             <View style = {styles.viewNascimento}>
 
-                <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Nascimento' placeholderTextColor ='#666360' keyboardType='number-pad' value={nascimento} onChangeText={(t) => mascaraNascimento(t)} />
+                <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Nascimento' placeholderTextColor ='#666360' keyboardType='number-pad' value={nascimentoEnv2} onChangeText={(t) => mascaraNascimentoEnv2(t)} />
 
                 <Picker
                 mode="dropdown"
-                selectedValue={genero}
+                selectedValue={generoEnv2}
                 style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
-                onValueChange={(itemValue, itemIndex) => setGenero(itemValue)}
+                onValueChange={(itemValue, itemIndex) => setGeneroEnv2(itemValue)}
                 >
                 <Picker.Item label="Masculino" value="Masculino" />
                 <Picker.Item label="Feminino" value="Feminino" />
@@ -1142,28 +1363,28 @@ export default () => {
             </View>
 
              <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Nacionalidade' placeholderTextColor ='#666360' value={nacionalidade} onChangeText={(t) => setNacionalidade(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Naturalidade' placeholderTextColor ='#666360' value={naturalidade} onChangeText={(t) => setNaturalidade(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Nacionalidade' placeholderTextColor ='#666360' value={nacionalidadeEnv2} onChangeText={(t) => setNacionalidadeEnv2(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Naturalidade' placeholderTextColor ='#666360' value={naturalidadeEnv2} onChangeText={(t) => setNaturalidadeEnv2(t)} />
             </View>
 
              <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Idade Aparente' placeholderTextColor ='#666360' value={idadeAparente} onChangeText={(t) => setIdadeAparente(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Estado Civil' placeholderTextColor ='#666360' value={estadoCivil} onChangeText={(t) => setEstadoCivil(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Idade Aparente' placeholderTextColor ='#666360' value={idadeAparenteEnv2} onChangeText={(t) => setIdadeAparenteEnv2(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Estado Civil' placeholderTextColor ='#666360' value={estadoCivilEnv2} onChangeText={(t) => setEstadoCivilEnv2(t)} />
             </View>
 
             <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutis} onChangeText={(t) => setCutis(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Ocupação Atual' placeholderTextColor ='#666360' value={ocupaçãoAtual} onChangeText={(t) => setOcupaçãoAtual(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutisEnv2} onChangeText={(t) => setCutisEnv2(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Ocupação Atual' placeholderTextColor ='#666360' value={ocupaçãoAtualEnv2} onChangeText={(t) => setOcupaçãoAtualEnv2(t)} />
             </View>
 
             <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Escolaridade' placeholderTextColor ='#666360' value={grauEscoar} onChangeText={(t) => setGrauEscolar(t)} />
-                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidor} onChangeText={(t) => setOrgãoEpedidor(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Escolaridade' placeholderTextColor ='#666360' value={grauEscoarEnv2} onChangeText={(t) => setGrauEscolarEnv2(t)} />
+                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidorEnv2} onChangeText={(t) => setOrgãoEpedidorEnv2(t)} />
                    </View>
 
                    <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='UF Nascimento' placeholderTextColor ='#666360' value={ufEnvolvido} onChangeText={(t) => setUfEnvolvido(t)} />
-                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Tipo de Envolvimento' placeholderTextColor ='#666360' value={tipoDeEnvolvimento} onChangeText={(t) => setTipoDeEnvolvimento(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='UF Nascimento' placeholderTextColor ='#666360' value={ufEnvolvidoEnv2} onChangeText={(t) => setUfEnvolvidoEnv2(t)} />
+                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Tipo de Envolvimento' placeholderTextColor ='#666360' value={tipoDeEnvolvimentoEnv2} onChangeText={(t) => setTipoDeEnvolvimentoEnv2(t)} />
                    </View>
 
                    
@@ -1173,19 +1394,19 @@ export default () => {
 
 
             <>
-                <TextEndereço>Endereço do Envolvido</TextEndereço>
+                <TextEndereço>Endereço do Envolvido 2</TextEndereço>
 
             </>
 
             <View style= {styles.viewEstado}>
 
 
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' keyboardType='number-pad' value={cep} onChangeText={(t) => mascaraCep(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' onEndEditing={()=>buscarCepenv2(cepEnv2)} keyboardType='number-pad' value={cepEnv2} onChangeText={(t) => setCepEnv2(t)} />
                 <Picker
                 mode="dropdown"
-                selectedValue={estado}
+                selectedValue={estadoEnv2}
                 style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff' }}
-                onValueChange={(itemValue, itemIndex) => setEstado(itemValue)}
+                onValueChange={(itemValue, itemIndex) => setEstadoEnv2(itemValue)}
                 >
                         <Picker.Item label="Minas Gerais" value="MG" />
                         <Picker.Item label="Acre" value="AC" />
@@ -1218,22 +1439,22 @@ export default () => {
             </View>
                     
             <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cidade' placeholderTextColor ='#666360' value={cidade} onChangeText={(t) => setCidade(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Bairro' placeholderTextColor ='#666360' value={bairro} onChangeText={(t) => setBairro(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cidade' placeholderTextColor ='#666360' value={cidadeEnv2} onChangeText={(t) => setCidadeEnv2(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Bairro' placeholderTextColor ='#666360' value={bairroEnv2} onChangeText={(t) => setBairroEnv2(t)} />
             </View>
 
             <View style = {styles.viewLogradoro}>
-             <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouro} onChangeText={(t) => setLogradouro(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasa} onChangeText={(t) => setNumeroCasa(t)} />
+             <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouroEnv2} onChangeText={(t) => setLogradouroEnv2(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasaEnv2} onChangeText={(t) => setNumeroCasaEnv2(t)} />
 
             </View>
 
             <View style = {{marginLeft:30}} >
-            <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Complemento' placeholderTextColor ='#666360' value={complemento} onChangeText={(t) => setComplemento(t)}/>
+            <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Complemento' placeholderTextColor ='#666360' value={complementoEnv2} onChangeText={(t) => setComplementoEnv2(t)}/>
             </View>
 
              <View style = {styles.viewCidadeBairro}>
-                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='País' placeholderTextColor ='#666360' value={paisMoradia} onChangeText={(t) => setpaisMoradia(t)} />
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='País' placeholderTextColor ='#666360' value={paisMoradiaEnv2} onChangeText={(t) => setpaisMoradiaEnv2(t)} />
                         
                        
                        </View>
@@ -1243,7 +1464,82 @@ export default () => {
 
 
 
+                <View style={{justifyContent:'flex-start',alignItems:'flex-start',flexDirection:'row',marginLeft:30,marginTop:15}}>
+                        <View style={{marginRight:15}}>
+                            <TextEnvolvido2>Agente Participante</TextEnvolvido2>
+                        </View>
+                     <Switch thumbColor='#FF9000' trackColor={{true: '#FF9000', false: '#2E2E2E'}} value={switchAgenteParticipante1} onValueChange={(t)=>setSwitchAgenteParticipante1(t)} />
+                </View>
 
+
+                {AgenteParticipante1 &&
+                <View>
+
+                    <View style = {{marginLeft:30,marginTop:15}} >
+                        <InputsInteiro source = {require('../../../assets/search.png')} placeholder ='Pesquisar Nome' placeholderTextColor ='#666360' onEndEditing={handleClickSearch} value={searchAgente1} onChangeText={(t) => setSearchAgente1(t)}/>
+                    </View>
+
+                    <View style = {styles.viewLogradoro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Nome' placeholderTextColor ='#666360' value={nomeAgente1}  />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Siape' placeholderTextColor ='#666360' value={siapeAgente1} onChangeText={(t) => setSiapeAgente1(t)} />
+                    </View>
+
+                    <View style = {styles.viewLogradoro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cargo' placeholderTextColor ='#666360' value={cargoAgente1} onChangeText={(t) => setCargoAgente1(t)} />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Matrícula' placeholderTextColor ='#666360' value={matriculaAgente1} onChangeText={(t) => setMatriculaAgente1(t)} />
+                    </View>
+
+                    <Picker
+                mode="dropdown"
+                selectedValue={tipoEnvolvimentoAgente1}
+                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:30,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTipoEnvolvimentoAgente1(itemValue)}
+                >
+                <Picker.Item label="Agente Integrante" value="Agente Integrante" />
+                <Picker.Item label="Responsável pela Apreensão/Prisão/Condução" value="Responsável pela Apreensão/Prisão/Condução" />
+                </Picker>
+
+                <View style={{justifyContent:'flex-start',alignItems:'flex-start',flexDirection:'row',marginLeft:30,marginTop:15}}>
+                        <View style={{marginRight:15}}>
+                            <TextEnvolvido2>Agente Participante 2</TextEnvolvido2>
+                        </View>
+                     <Switch thumbColor='#FF9000' trackColor={{true: '#FF9000', false: '#2E2E2E'}} value={switchAgenteParticipante2} onValueChange={(t)=>setSwitchAgenteParticipante2(t)} />
+                </View>
+
+                </View>
+                }
+
+                {AgenteParticipante2 &&
+                <View>
+
+                    <View style = {{marginLeft:30,marginTop:15}} >
+                        <InputsInteiro source = {require('../../../assets/search.png')} placeholder ='Pesquisar Nome' placeholderTextColor ='#666360' onEndEditing={handleClickSearchAgente2} value={searchAgente2} onChangeText={(t) => setSearchAgente2(t)}/>
+                    </View>
+
+                    <View style = {styles.viewLogradoro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Nome' placeholderTextColor ='#666360' value={nomeAgente2}  />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Siape' placeholderTextColor ='#666360' value={siapeAgente2} onChangeText={(t) => setSiapeAgente2(t)} />
+                    </View>
+
+                    <View style = {styles.viewLogradoro}>
+                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cargo' placeholderTextColor ='#666360' value={cargoAgente2} onChangeText={(t) => setCargoAgente2(t)} />
+                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Matrícula' placeholderTextColor ='#666360' value={matriculaAgente2} onChangeText={(t) => setMatriculaAgente2(t)} />
+                    </View>
+
+                    <Picker
+                mode="dropdown"
+                selectedValue={tipoEnvolvimentoAgente2}
+                style={{ height: 50, width: 350,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:30,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTipoEnvolvimentoAgente2(itemValue)}
+                >
+                <Picker.Item label="Agente Integrante" value="Agente Integrante" />
+                <Picker.Item label="Responsável pela Apreensão/Prisão/Condução" value="Responsável pela Apreensão/Prisão/Condução" />
+                </Picker>
+
+                
+
+                </View>
+                }
 
 
 

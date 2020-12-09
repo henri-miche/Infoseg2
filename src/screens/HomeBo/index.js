@@ -164,7 +164,7 @@ useEffect(() => {
     };
    
     const pdfScreen = () => {
-        navigation.navigate('HomeRau',{key:key,local:local})
+        navigation.navigate('PrintPdf',{key:key,local:local})
     }
 
     return (
