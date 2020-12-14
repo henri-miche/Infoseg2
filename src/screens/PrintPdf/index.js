@@ -667,7 +667,7 @@ useEffect(() => {
     setTelefone('');
     setGenero('');
     setHistorico('');
-    setCosop('');
+    
     setEndereço('');
 
       
@@ -689,7 +689,7 @@ useEffect(() => {
         setTelefone('');
         setGenero('');
         setHistorico('');
-        setCosop('');
+        
         setEndereço('');
         navigation.goBack();
     };
@@ -1883,6 +1883,8 @@ useEffect(()=>{
 
             
 
+            
+
              
             </View>
                  }
@@ -2389,7 +2391,7 @@ textoTitulo:{
                 </View>
 
                 <View>
-                    <TextLabeldetalhes>ASO:<TextDetalhes>{cosop}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabeldetalhes>ASO:<TextDetalhes></TextDetalhes></TextLabeldetalhes>
                     <TextLabeldetalhes>Detalhes:<TextDetalhes>{historico}</TextDetalhes></TextLabeldetalhes>
                 </View>
             </View>

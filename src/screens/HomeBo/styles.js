@@ -120,7 +120,7 @@ margin-top:10px;
 font-family: RobotoSlab;
 font-style: normal;
 font-weight: 500;
-font-size: 16px;
+font-size: 12px;
 line-height: 21px;
 
 /* Orange */
@@ -136,7 +136,7 @@ export const TextCamposmae = styled.Text`
 font-family: RobotoSlab;
 font-style: normal;
 font-weight: 500;
-font-size: 16px;
+font-size: 12px;
 line-height: 21px;
 /* Text */
 

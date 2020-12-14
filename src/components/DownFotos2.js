@@ -21,7 +21,7 @@ export default ({data}) => {
     const telefone = data.telefone;
     const genero = data.genero;
     const historico = data.historico;
-    const cosop = data.cosop;
+    const nomeAgenteRelator = data.nomeAgenteRelator;
     const endereço = data.endereço;
     const tipoOcorrencia1 = data.tipoOcorrencia1;
     const [avatar2,setAvatar2] = useState(null);  
@@ -188,7 +188,7 @@ function handleClickVerCompleta () {
                 <TextLabelP>{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
                 <TextLabel>Local:<TextPool>{local}</TextPool> </TextLabel>
                 </View>
-                <TextLabelP>ASO:<TextPool>{cosop}</TextPool></TextLabelP>
+                <TextLabelP>ASO:<TextPool>{nomeAgenteRelator}</TextPool></TextLabelP>
                 </View>
 
                 </View>
@@ -221,7 +221,7 @@ function handleClickVerCompleta () {
                 <TextLabelP>{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
                 <TextLabel>Local:<TextPool>{local}</TextPool> </TextLabel>
                 </View>
-                <TextLabelP>ASO:<TextPool>{cosop}</TextPool></TextLabelP>
+                <TextLabelP>ASO:<TextPool>{nomeAgenteRelator}</TextPool></TextLabelP>
                 </View>
 
                 </View>

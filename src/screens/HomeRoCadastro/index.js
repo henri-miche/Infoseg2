@@ -44,7 +44,7 @@ export default () => {
     const [mae, setMae] = useState('');
     const [pai, setPai] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [genero, setGenero] = useState("Masculino");
+    const [genero, setGenero] = useState("");
     const [historico, setHistorico] = useState('');
 
     const [estado, setEstado] = useState("MG");
@@ -745,7 +745,7 @@ export default () => {
     }
 
     const mascaraTelefone = (t) => {
-        setTelefone(mask(t,['(99) 99999-9999']))
+        setTelefone(mask(t,['(99) 9999-9999','(99) 99999-9999' ]))
     }
 
     /*const mascaraCep = (t) => {
@@ -766,7 +766,22 @@ export default () => {
         setNascimentoEnv2(mask(t,['99/99/9999']))
     }
 
-    
+    //mascaras informações da ocorrência
+    const mascaraDataFato = (t) => {
+        setDataDoFato(mask(t,['99/99/9999']))
+    }
+
+    const mascaraDataFinal = (t) => {
+        setDataFinal(mask(t,['99/99/9999']))
+    }
+
+    const mascaraHoraDoFato = (t) => {
+        setHorarioDoFato(mask(t,['99:99']))
+    }
+
+    const mascaraHoraFinal = (t) => {
+        setHorarioFinal(mask(t,['99:99']))
+    }
 
     
 
@@ -827,7 +842,35 @@ export default () => {
                   if(switchEnv2 === true){
                       setEnv2(true)
                   }else{
-                      setEnv2(false)
+                    setEnv2(false)
+                    setNomeEnv2('')
+                    setCpfEnv2('')
+                    setIdentidadeEnv2('')
+                    setNascimentoEnv2('')
+                    setMaeEnv2('')
+                    setPaiEnv2('')
+                    setTelefoneEnv2('')
+                    setGeneroEnv2('')
+                    setEstadoEnv2('')
+                    setCepEnv2('')
+                    setCidadeEnv2('')
+                    setBairroEnv2('')
+                    setLogradouroEnv2('')
+                    setNumeroCasaEnv2('')
+                    setComplementoEnv2('')
+
+                    setTipoDeEnvolvimentoEnv2('')
+                    setNacionalidadeEnv2('')
+                    setNaturalidadeEnv2('')
+                    setIdadeAparenteEnv2('')
+                    setEstadoCivilEnv2('')
+                    setCutisEnv2('')
+                    setOcupaçãoAtualEnv2('')
+                    setGrauEscolarEnv2('')
+                    setOrgãoEpedidorEnv2('')
+                    setUfEnvolvidoEnv2('')
+                    setpaisMoradiaEnv2('')  
+
                   }if(switchAgenteParticipante1 === true){
                       setAgenteParticipante1(true)
                   }else{
@@ -936,6 +979,15 @@ export default () => {
               const semRegistroMae = () => {
                   setMae('Sem registro')
               }
+
+              const semRegistroPai2 = () => {
+                    setPaiEnv2('Sem registro')
+              }
+
+              const semRegistroMae2 = () => {
+                  setMaeEnv2('Sem registro')
+              }
+
 
             
                     //fetch('https://viacep.com.br/ws/30570000/json/')por cep em baio por uf cidade
@@ -1182,6 +1234,7 @@ export default () => {
                 style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setGenero(itemValue)}
                 >
+                <Picker.Item label="Gênero" value="Gênero" />
                 <Picker.Item label="Masculino" value="Masculino" />
                 <Picker.Item label="Feminino" value="Feminino" />
                 </Picker>
@@ -1194,23 +1247,57 @@ export default () => {
             </View>
 
              <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Idade Aparente' placeholderTextColor ='#666360' value={idadeAparente} onChangeText={(t) => setIdadeAparente(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Estado Civil' placeholderTextColor ='#666360' value={estadoCivil} onChangeText={(t) => setEstadoCivil(t)} />
+                <InputMenor source = {require('../../../assets/user.png')} placeholder ='Idade Aparente'  keyboardType='number-pad' placeholderTextColor ='#666360' value={idadeAparente} onChangeText={(t) => setIdadeAparente(t)} />
+                 <Picker
+                mode="dropdown"
+                selectedValue={estadoCivil}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setEstadoCivil(itemValue)}
+                >
+                <Picker.Item label="Estado Civil" value="Estado Civil" />
+                <Picker.Item label="Solteiro(a)" value="Solteiro(a)" />
+                <Picker.Item label="Casado(a)" value="Casado(a)" />
+                <Picker.Item label="Divorciado(a)" value="Divorciado(a)" />
+                </Picker>
             </View>
 
             <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutis} onChangeText={(t) => setCutis(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Ocupação Atual' placeholderTextColor ='#666360' value={ocupaçãoAtual} onChangeText={(t) => setOcupaçãoAtual(t)} />
+                <InputMenor source = {require('../../../assets/user.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutis} onChangeText={(t) => setCutis(t)} />
+                <InputMenorAinda source = {require('../../../assets/user.png')} placeholder ='Ocupação Atual' placeholderTextColor ='#666360' value={ocupaçãoAtual} onChangeText={(t) => setOcupaçãoAtual(t)} />
             </View>
 
             <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Escolaridade' placeholderTextColor ='#666360' value={grauEscoar} onChangeText={(t) => setGrauEscolar(t)} />
-                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidor} onChangeText={(t) => setOrgãoEpedidor(t)} />
+               <InputMenor source = {require('../../../assets/rgicon.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidor} onChangeText={(t) => setOrgãoEpedidor(t)} />
+               <Picker
+                mode="dropdown"
+                selectedValue={grauEscoar}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setGrauEscolar(itemValue)}
+                >
+                <Picker.Item label="Grau de Escolaridade" value="Grau de Escolaridade" />
+                <Picker.Item label="Fundamental Incompleto" value="Fundamental Incompleto" />
+                <Picker.Item label="Fundamental Completo" value="Fundamental Completo" />
+                <Picker.Item label="Médio Incompleto" value="Médio Incompleto" />
+                <Picker.Item label="Médio Completo" value="Médio Completo" />
+                <Picker.Item label="Superior Incompleto" value="Superior Incompleto" />
+                <Picker.Item label="Superior Completo" value="Superior Completo" />
+                </Picker>
+                   
                    </View>
 
                    <View style = {styles.viewCidadeBairro}>
                 <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='UF Nascimento' placeholderTextColor ='#666360' value={ufEnvolvido} onChangeText={(t) => setUfEnvolvido(t)} />
-                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Tipo de Envolvimento' placeholderTextColor ='#666360' value={tipoDeEnvolvimento} onChangeText={(t) => setTipoDeEnvolvimento(t)} />
+                   <Picker
+                mode="dropdown"
+                selectedValue={tipoDeEnvolvimento}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTipoDeEnvolvimento(itemValue)}
+                >
+                <Picker.Item label="Tipo de Envolvimento" value="Tipo de Envolvimento" />
+                <Picker.Item label="Autor" value="Autor" />
+                <Picker.Item label="Vítima" value="Vítima" />
+                <Picker.Item label="Testemunha" value="Testemunha" />
+                </Picker>
                    </View>
 
                    
@@ -1332,14 +1419,14 @@ export default () => {
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={maeEnv2} onChangeText={(t) => setMaeEnv2(t)}/>
-                    <BtnFixa onPress={semRegistroMae}>
+                    <BtnFixa onPress={semRegistroMae2}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                 </View>
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={paiEnv2} onChangeText={(t) => setPaiEnv2(t)}/>
-                    <BtnFixa onPress={semRegistroPai}>
+                    <BtnFixa onPress={semRegistroPai2}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                  </View>
@@ -1356,6 +1443,7 @@ export default () => {
                 style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setGeneroEnv2(itemValue)}
                 >
+                <Picker.Item label="Gênero" value="Gênero" />
                 <Picker.Item label="Masculino" value="Masculino" />
                 <Picker.Item label="Feminino" value="Feminino" />
                 </Picker>
@@ -1369,8 +1457,19 @@ export default () => {
 
              <View style = {styles.viewCidadeBairro}>
                 <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Idade Aparente' placeholderTextColor ='#666360' value={idadeAparenteEnv2} onChangeText={(t) => setIdadeAparenteEnv2(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Estado Civil' placeholderTextColor ='#666360' value={estadoCivilEnv2} onChangeText={(t) => setEstadoCivilEnv2(t)} />
-            </View>
+                       
+                       <Picker
+                mode="dropdown"
+                selectedValue={estadoCivilEnv2}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setEstadoCivilEnv2(itemValue)}
+                >
+                <Picker.Item label="Estado Civil" value="Estado Civil" />
+                <Picker.Item label="Solteiro(a)" value="Solteiro(a)" />
+                <Picker.Item label="Casado(a)" value="Casado(a)" />
+                <Picker.Item label="Divorciado(a)" value="Divorciado(a)" />
+                </Picker>
+                       </View>
 
             <View style = {styles.viewCidadeBairro}>
                 <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutisEnv2} onChangeText={(t) => setCutisEnv2(t)} />
@@ -1378,14 +1477,39 @@ export default () => {
             </View>
 
             <View style = {styles.viewCidadeBairro}>
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Escolaridade' placeholderTextColor ='#666360' value={grauEscoarEnv2} onChangeText={(t) => setGrauEscolarEnv2(t)} />
-                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidorEnv2} onChangeText={(t) => setOrgãoEpedidorEnv2(t)} />
-                   </View>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidorEnv2} onChangeText={(t) => setOrgãoEpedidorEnv2(t)} />
+               
+               <Picker
+                mode="dropdown"
+                selectedValue={grauEscoarEnv2}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setGrauEscolarEnv2(itemValue)}
+                >
+                <Picker.Item label="Grau de Escolaridade" value="Grau de Escolaridade" />
+                <Picker.Item label="Fundamental Incompleto" value="Fundamental Incompleto" />
+                <Picker.Item label="Fundamental Completo" value="Fundamental Completo" />
+                <Picker.Item label="Médio Incompleto" value="Médio Incompleto" />
+                <Picker.Item label="Médio Completo" value="Médio Completo" />
+                <Picker.Item label="Superior Incompleto" value="Superior Incompleto" />
+                <Picker.Item label="Superior Completo" value="Superior Completo" />
+                </Picker>
+                          </View>
 
                    <View style = {styles.viewCidadeBairro}>
                 <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='UF Nascimento' placeholderTextColor ='#666360' value={ufEnvolvidoEnv2} onChangeText={(t) => setUfEnvolvidoEnv2(t)} />
-                   <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Tipo de Envolvimento' placeholderTextColor ='#666360' value={tipoDeEnvolvimentoEnv2} onChangeText={(t) => setTipoDeEnvolvimentoEnv2(t)} />
-                   </View>
+                     
+                     <Picker
+                mode="dropdown"
+                selectedValue={tipoDeEnvolvimentoEnv2}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTipoDeEnvolvimentoEnv2(itemValue)}
+                >
+                <Picker.Item label="Tipo de Envolvimento" value="Tipo de Envolvimento" />
+                <Picker.Item label="Autor" value="Autor" />
+                <Picker.Item label="Vítima" value="Vítima" />
+                <Picker.Item label="Testemunha" value="Testemunha" />
+                </Picker>
+                      </View>
 
                    
             
@@ -1570,22 +1694,22 @@ export default () => {
                  </View>
 
                  <View style = {styles.viewCidadeBairro}>
-                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Data do Fato' placeholderTextColor ='#666360' value={dataDoFato} onChangeText={(t) => setDataDoFato(t)} />
-                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Hora do Fato' placeholderTextColor ='#666360' value={horarioDoFato} onChangeText={(t) => setHorarioDoFato(t)} />
+                        <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Data do Fato' keyboardType='number-pad' placeholderTextColor ='#666360' value={dataDoFato} onChangeText={(t) => mascaraDataFato(t)} />
+                        <InputMenorAinda source = {require('../../../assets/calendar.png')} placeholder ='Hora do Fato' keyboardType='number-pad' placeholderTextColor ='#666360' value={horarioDoFato} onChangeText={(t) => mascaraHoraDoFato(t)} />
                 
                  </View>
 
                   <View style = {styles.viewCidadeBairro}>
-                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Data Final' placeholderTextColor ='#666360' value={dataFinal} onChangeText={(t) => setDataFinal(t)} />
-                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Hora Final' placeholderTextColor ='#666360' value={horarioFinal} onChangeText={(t) => setHorarioFinal(t)} />
+                        <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Data Final' keyboardType='number-pad'  placeholderTextColor ='#666360'  value={dataFinal} onChangeText={(t) => mascaraDataFinal(t)} />
+                        <InputMenorAinda source = {require('../../../assets/calendar.png')} placeholder ='Hora Final' keyboardType='number-pad' placeholderTextColor ='#666360'  value={horarioFinal} onChangeText={(t) => mascaraHoraFinal(t)} />
                 
                  </View>
 
-                 <View style = {styles.viewCidadeBairro}>
-                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Objetos recolhidos' placeholderTextColor ='#666360' value={objetosRecolhidos} onChangeText={(t) => setObjetosRecolhidos(t)} />
-                        
+                 
+                
+                        <TextInput style={styles.inputObjRec} color ='#fff' placeholder='                             Objetos Recolhidos' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={objetosRecolhidos} onChangeText={(t) => setObjetosRecolhidos(t)} />
                        
-                       </View>
+                      
 
             <View style = {styles.viewTipoRo}>
 
@@ -1619,7 +1743,7 @@ export default () => {
                 </Picker>
                 }
 
-
+                <View style={{marginLeft:15}}>
                 <Picker
                 mode="dropdown"
                 selectedValue={local}
@@ -1647,7 +1771,8 @@ export default () => {
                 <Picker.Item label="UEL" value="UEL" />
                 
                 </Picker>
-                
+                </View>
+
             </View>
 
 
@@ -1833,7 +1958,7 @@ export default () => {
 
              
 
-             <TextInput style={styles.inputHist} color ='#fff' placeholder='                      Destalhes da ocorrência' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />  
+             <TextInput style={styles.inputHist} color ='#fff' placeholder='                         Histórico da ocorrência' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />  
              <BtnCadastrarOcorrencia disabled={loading} onPress={confirmar}>
                  <TextBtnOcorrencia>Cadastrar Ocorrência</TextBtnOcorrencia>
              </BtnCadastrarOcorrencia>
@@ -1854,6 +1979,17 @@ export default () => {
     );
 }
 const styles = StyleSheet.create({
+    inputObjRec:{
+        width:350,
+        height:150,
+        backgroundColor:'#2e2e2e',
+        borderRadius:10,
+        paddingLeft:10,
+        marginLeft:30,
+        marginBottom:15,
+        padding:10
+        
+    },
     viewRow:{
         marginLeft:30,
         flexDirection:'row',  
@@ -1880,7 +2016,7 @@ const styles = StyleSheet.create({
     viewTipoRo:{
         marginLeft:30,
         flexDirection:'row', 
-        justifyContent:'space-between' 
+         
     }, 
     viewDataHora:{
         marginLeft:30,
@@ -1929,125 +2065,3 @@ const styles = StyleSheet.create({
     },
     
 })
-/*
- <SafeAreaView style={{ backgroundColor: '#000', flex: 1, marginBottom: 0.5,justifyContent:'flex-end' }}>
-                
-                    <ScrollView> 
-                    
-                        <View style={styles.form}>
-                            <View style={{flex: 1,marginTop:5}}>
-                                <TextInput style={styles.input} placeholder='Nome:' autoCapitalize='characters' value={nome} onChangeText={(t)=>setNome(t)} />
-                            </View>
-                            <View style={{flexDirection:'row'}}>
-                                <View style={styles.campos}>
-                                    <Image source={foto} style={styles.formFoto}/>
-                                    
-                                        <View style={{marginTop:5}} >
-                                            <Button title='Carregar foto.' onPress={carregarFoto} />
-                                            <View style={{marginTop:5}}>
-                                                <Button title='Tirar foto.'  onPress={tirarFoto} />
-                                            </View>
-                                        </View>
-                                
-                                </View>
-                                
-                                <View style={{flex:1,marginLeft:10}}>
-                                    
-                                    <TextInput style={styles.input} placeholder='CPF:' keyboardType='number-pad' value={cpf} onChangeText={(t) => setCpf(t)} />
-                                    <TextInput style={styles.input} placeholder='Identidade:' keyboardType='number-pad' value={identidade} onChangeText={(t) => setIdentidade(t)} />
-                                    <TextInput style={styles.input} placeholder='Nascimento:' keyboardType='number-pad' value={nascimento} onChangeText={(t) => setNascimento(t)} />
-                                    <TextInput style={styles.input} placeholder='Tipo RO:' value={tipoRo} onChangeText={(t) => setTipoRo(t)} />
-                                    <TextInput style={styles.input} placeholder='Local:' autoCapitalize='characters' value={local} onChangeText={(t) => setLocal(t)} />
-                                
-                                </View>
-                            
-                        </View>
-                                <View style={{flex:1}}>
-                                <TextInput style={styles.input} placeholder='Mãe:' value={mae} onChangeText={(t) => setMae(t)} />
-                                <TextInput style={styles.input} placeholder='Pai:' value={pai} onChangeText={(t) => setPai(t)} />
-                                <TextInput style={styles.input} placeholder='Endereço:' value={endereço} onChangeText={(t) => setEndereço(t)} />
-                                </View>
-
-                                <View style={{flexDirection:'row',flex:1}}>
-
-                                      <View style={{flex:1}}>  
-                                        <TextInput style={styles.input} placeholder='Telefone:' keyboardType='number-pad' value={telefone} onChangeText={(t) => setTelefone(t)} />
-                                     </View>
-
-                                     <View style={{flex:1}}>
-                                         <TextInput style={styles.input} placeholder='Gênero:' value={genero} onChangeText={(t) => setGenero(t)} />
-                                     </View>
-                                </View>
-                                <TextInput style={styles.inputHist} placeholder='Histórico:' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />
-                        </View>
-
-                    </ScrollView>
-                
-                <ConfirmarCancel onPress={handleClick} onPress1={confirmar}/>
-               
-            </SafeAreaView>*/
-
-
-/*
-            const saveFoto = (chave,cosop) => {
-        if (foto !== null) {
-            
-            uploadImage(foto.uri, chave)
-                .then(() => {
-                firebase.database().ref('/'+tipoRo).child(chave).set({
-                Nome: nome,
-                CPF: cpf,
-                Cosop:cosop,
-                ChaveFoto:chave,
-                Data:data,
-                Hora:hora,
-                Identidade:identidade,
-                Nascimento:nascimento,
-                TipoRo:tipoRo,
-                Local:local,
-                Mae:mae,
-                Pai:pai,
-                Telefone:telefone,
-                Genero:genero,
-                Historico:historico,
-                Estado:estado,
-                TipoOcorrencia:tipoOcorrencia,
-                CEP:cep,
-                Cidade:cidade,
-                bairro:bairro,
-                Logradouro:logradouro,
-                NumeroCasa:numeroCasa,
-                Complemento:complemento,
-                
-            })
-
-                }).then(() => { 
-                    setNome('');
-                    setCpf('');
-                    
-                    setIdentidade('');
-                    setNascimento('');
-                    setTipoRo('');
-                    setLocal('');
-                    setMae('');
-                    setPai('');
-                    setTelefone('');
-                    setGenero('');
-                    setHistorico('');
-                     setEstado('');
-                    setTipoOcorrencia('');
-                    setCep('');
-                    setCidade('');
-                    setBairro('');
-                    setLogradouro('');
-                    setNumeroCasa('');
-                    setComplemento('');
-                    alert('Dados enviados!');
-                    navigation.navigate('HomeRo');
-
-                })
-                .catch((error) => {
-                    alert(error);
-                });
-        }
-    }*/

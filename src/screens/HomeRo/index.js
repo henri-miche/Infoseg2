@@ -74,7 +74,7 @@ const pushDados = async () =>{
             telefone: childItem.val().telefone,
             genero: childItem.val().genero,
             historico: childItem.val().historico,
-            cosop: childItem.val().cosop,
+            nomeAgenteRelator: childItem.val().nomeAgenteRelator,
             tipoOcorrencia1:childItem.val().tipoOcorrencia1, 
           });
         });
@@ -112,7 +112,7 @@ const pushDados = async () =>{
             telefone: childItem.val().telefone,
             genero: childItem.val().genero,
             historico: childItem.val().historico,
-            cosop: childItem.val().cosop,
+            nomeAgenteRelator: childItem.val().nomeAgenteRelator,
             tipoOcorrencia1:childItem.val().tipoOcorrencia1,
           });
         });
