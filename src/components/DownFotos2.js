@@ -165,7 +165,7 @@ color: #F4EDE8;
 
 
 function handleClickVerCompleta () {
-        navigation.navigate('HomeBo',{key:key});
+        navigation.navigate('HomeBo',{key:key,local:local});
         
     };
 

@@ -1,10 +1,14 @@
 import React,{useState,useEffect} from 'react';
-import { Button, Image,StyleSheet,View,Text } from 'react-native';
+import { Button, Image,StyleSheet,View,Text,ActivityIndicator } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native'
 import firebase from '../../connection/FirebaseConection';
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
-import { Container} from './styles';
+import { Container,LoadingArea,BtnCadastrarOcorrencia,
+TextBtnOcorrencia,
+LoadingIcon,
+
+} from './styles';
 import moment from 'moment';
 
 export default () => {
@@ -90,15 +94,15 @@ export default () => {
         
 
         //Variáveis envolvido 3
-        const [cpfEnv3, setCpfEnv3] = useState('');
-        const [nomeEnv3, setNomeEnv3] = useState('');
-        const [identidadeEnv3, setIdentidadeEnv3] = useState('');
-        const [nascimentoEnv3, setNascimentoEnv3] = useState(''); 
-        const [maeEnv3, setMaeEnv3] = useState('');
-        const [paiEnv3, setPaiEnv3] = useState('');
-        const [telefoneEnv3, setTelefoneEnv3] = useState('');
-        const [generoEnv3, setGeneroEnv3] = useState('');
-        const [estadoEnv3, setEstadoEnv3] = useState('');
+        const [cpfEnv3, setCpfEnv3] = useState('xx');
+        const [nomeEnv3, setNomeEnv3] = useState('xx');
+        const [identidadeEnv3, setIdentidadeEnv3] = useState('xx');
+        const [nascimentoEnv3, setNascimentoEnv3] = useState('xx'); 
+        const [maeEnv3, setMaeEnv3] = useState('xx');
+        const [paiEnv3, setPaiEnv3] = useState('xx');
+        const [telefoneEnv3, setTelefoneEnv3] = useState('xx');
+        const [generoEnv3, setGeneroEnv3] = useState('xx');
+        const [estadoEnv3, setEstadoEnv3] = useState('xx');
         const [cepEnv3, setCepEnv3] = useState('');
         const [cidadeEnv3, setCidadeEnv3] = useState('');
         const [bairroEnv3, setBairroEnv3] = useState('');
@@ -233,6 +237,9 @@ export default () => {
         const [responsavelPrisão,setresponsavelPrisão] = useState(true);
         const [relatorOcorrencia, setRelatorOcorrencia] = useState(true);
         const [recibo, setRecibo] = useState(true);
+        const [freedown, setFreeDown] = useState(false);
+        const [loading, setLoading] = useState(false);
+        
 
        
     const pushDados = () =>{
@@ -726,12 +733,15 @@ useEffect(() => {
 
   const createAndSavePDF = async (html) => {
   try {
+      setLoading(true);
     const { uri } = await Print.printToFileAsync({ html });
     
       const permission = await MediaLibrary.requestPermissionsAsync();
       if (permission.granted) {
         await MediaLibrary.createAssetAsync(uri);
-        alert('pdf baixado');
+        console.log(uri.split('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540h-michel%252FInfoseg/Print/'))
+        setLoading(false);
+        alert('PDF: '+uri.split('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540h-michel%252FInfoseg/Print/')+' \nbaixado com sucesso!');
       }
     
   } catch (error) {
@@ -812,6 +822,12 @@ useEffect(()=>{
 
       }
   },[tipoEnvolvimentoAgente1,tipoEnvolvimentoAgente2])
+
+  useEffect(()=>{
+    if (nomeOcorrencia) {
+        setFreeDown(true)
+    }
+  },[nomeOcorrencia])
 
   const htmlContent1 = `
    <!DOCTYPE html>
@@ -1599,13 +1615,42 @@ img {
         
 
         <Container >
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
 
-        <Button title='pdf' onPress={() => createAndSavePDF(htmlContent1)} />
+        { freedown &&
+        <>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
+
+        
+
+             <BtnCadastrarOcorrencia disabled={loading} onPress={() => createAndSavePDF(htmlContent1)} >
+                 <TextBtnOcorrencia>Baixar Pdf</TextBtnOcorrencia>
+             </BtnCadastrarOcorrencia>
 
            </View>
-            
+           </>
+            }
 
+            { !freedown &&
+        <>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
+
+                <Text style={styles.textLoading}>...Loading</Text>
+
+           </View>
+           </>
+            }
+
+            {loading &&
+            <LoadingArea>
+                <ActivityIndicator
+                       size='large'
+                       color='#fff' 
+
+                />
+            </LoadingArea>
+             }
+
+           
         </Container>
     );
 }
@@ -1616,134 +1661,10 @@ const styles = StyleSheet.create({
         flex:1,
         width:'100%',
     },
-    textoConteudo:{
-        fontSize:12,
-        paddingLeft:2,
-        
-    },
-textoTitulo:{
-        fontSize:10,
-        paddingLeft:2,
-        
-    },
+    textLoading:{
+        color:'#FF9000',
 
-    viewImage:{
-        
-        marginTop:15,
-        marginLeft:30,
-        marginRight:15,
-    },
-    itemAvatar: {
-        width: 116,
-        height: 156,
-        borderRadius: 5,
-        
-        
-    },
-    
-        
+    }
+  
 
 })
-
-
-
-
-
-
-/* <ViewTitullo>
-                
-                <TextTitulo>Detalhes da Ocorrência</TextTitulo>
-                
-                <TouchSair onPress = {sair}>
-                    <Image source = {require('../../../assets/SetaSair.png')} />
-                </TouchSair>
-            
-            </ViewTitullo>
-
-            <ViewQualificaçao>
-                <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
-
-                <View style = {{flexDirection:'row'}}>
-
-                 <View style={styles.viewImage}>
-                    <Image source={avatar2} style={styles.itemAvatar} />
-                </View>
-
-                <View style={{}}>
-                <TextNome>{nome}</TextNome>
-
-                <View style={{marginTop:16}}>
-                <TextLabel>RG:<TextLabelText>{identidade}</TextLabelText></TextLabel>
-                <TextLabel>CPF:<TextLabelText>{cpf}</TextLabelText></TextLabel>
-                <TextLabel>Telefone:<TextLabelText>{telefone}</TextLabelText></TextLabel>
-                <TextLabel>Nascimento:<TextLabelText>{nascimento}</TextLabelText></TextLabel>
-                </View>
-                
-                </View>
-               
-                </View>
-            </ViewQualificaçao>
-
-            <View style={{marginLeft:30}}>
-                <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
-                <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
-                 
-                 <View style = {{flexDirection:'row'}}>
-                     <View style={{flex:1}}>
-                     <TextLabelcamposmae>CEP:<TextCamposmae>{}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                        <View style={{flex:1}}>
-                      <TextLabelcamposmae>Gênero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
-                </View>
-                 </View>
-                 
-                <TextLabelcamposmae>Endereço:<TextCamposmae>{endereço}</TextCamposmae></TextLabelcamposmae>
-            </View>
-            
-            <View style={{marginLeft:30,marginTop:35}}>
-                <TextDetallhesOcorr>Detalhes da Ocorrência</TextDetallhesOcorr>
-            </View>
-
-            <View style={{marginTop:15,marginLeft:30}}>
-
-                <View style={{flexDirection:'row'}} >
-                   
-                   <View style={{flex:1}}>
-                    <TextLabeldetalhes>Data:<TextDetalhes>{data}</TextDetalhes></TextLabeldetalhes>
-                    </View>
-               
-                <View style={{flex:1}}>
-                    <TextLabeldetalhes>Hora:<TextDetalhes>{hora}</TextDetalhes></TextLabeldetalhes>
-                </View>
-                
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-                    
-                    <View style={{flex:1}}>
-                        <TextLabeldetalhes>RO:<TextDetalhes>{tipoRo}</TextDetalhes></TextLabeldetalhes>
-                    </View>
-
-                    <View style={{flex:1}}>
-
-                         <TextLabeldetalhes>Local:<TextDetalhes>{local}</TextDetalhes></TextLabeldetalhes>
-                    </View>
-
-                     
-                   
-                </View>
-
-                <View>
-                    <TextLabeldetalhes>ASO:<TextDetalhes></TextDetalhes></TextLabeldetalhes>
-                    <TextLabeldetalhes>Detalhes:<TextDetalhes>{historico}</TextDetalhes></TextLabeldetalhes>
-                </View>
-            </View>
-
-            <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
-                <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
-            </View>
-
-            <Button title='Gerar PDF' onPress={createAndSavePDF}/>
-            */
-  

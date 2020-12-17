@@ -1,7 +1,10 @@
 import React,{useState,useEffect} from 'react';
-import { Button, Image,StyleSheet,View } from 'react-native';
+import { Button, Image,StyleSheet,View,Text,ActivityIndicator } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native'
 import firebase from '../../connection/FirebaseConection';
+import * as Print from "expo-print";
+import * as MediaLibrary from "expo-media-library";
+import moment from 'moment';
 import { Container,
 ViewTitullo,
 TextTitulo,
@@ -17,6 +20,9 @@ TextDetallhesOcorr,
 TextLabeldetalhes,
 TextDetalhes,
 TextCodRegistro,
+LoadingArea,BtnCadastrarOcorrencia,
+TextBtnOcorrencia,
+LoadingIcon,
 
 } from './styles';
 
@@ -26,6 +32,7 @@ export default () => {
         const navigation = useNavigation();
         const [key, setKey] = useState(route.params.key);
         const [chaveFoto, setChaveFoto] = useState();
+        const [localparam, setlocalparam] = useState(route.params.local);
 
         //variáveis envolvido 1
         const [nome, setNome] = useState();
@@ -230,6 +237,8 @@ export default () => {
         
 
         const [nomeQuemGerou, setNomeQuemGerou] = useState('');
+        const [horaGearacao, setHoraGeracao] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
+        const [dataGeracao, setDataGeracao] = useState(moment().format('DD-MM-YYYY'));
       
 
 
@@ -244,6 +253,8 @@ export default () => {
         const [responsavelPrisão,setresponsavelPrisão] = useState(true);
         const [relatorOcorrencia, setRelatorOcorrencia] = useState(true);
         const [recibo, setRecibo] = useState(true);
+        const [freedown, setFreeDown] = useState(false);
+        const [loading, setLoading] = useState(false);
 
         const [avatar2, setAvatar2] = useState(null);
        
@@ -698,10 +709,107 @@ useEffect(() => {
         setEndereço('');
         navigation.goBack();
     };
+
+    
    
     const pdfScreen = () => {
         navigation.navigate('PdfDown',{key:key,local:local})
     }
+
+    const poolEndereçoLocal = async(local) =>{
+      
+      
+     try {
+     
+            const req = await firebase.database().ref('/local/').child(local)
+                .once('value');
+                const json = await req.toJSON();
+                setNomeEstaçao(json.nome);
+                setBairoEstaçao(json.bairro);
+                setCepEstaçao(json.cep);
+                setComplementoEstaçao(json.complemento);
+                setEndereçoEstaçao(json.endereço);
+                setMunicipioEstaçao(json.municipio);
+                setNumeroEstaçao(json.numero);
+                
+                setUfEstaçao(json.uf);
+
+                
+
+    } catch (error) {
+      alert(error);
+    }
+
+                
+              }
+
+     const createAndSavePDF = async (html) => {
+  try {
+      setLoading(true);
+    const { uri } = await Print.printToFileAsync({ html });
+    
+      const permission = await MediaLibrary.requestPermissionsAsync();
+      if (permission.granted) {
+        await MediaLibrary.createAssetAsync(uri);
+        console.log(uri.split('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540h-michel%252FInfoseg/Print/'))
+        setLoading(false);
+        alert('PDF: '+uri.split('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540h-michel%252FInfoseg/Print/')+' \nbaixado com sucesso!');
+      }
+    
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+useEffect(()=>{
+
+    switch (tipoRo) {
+        case "BO":
+            setNomeOcorrencia('BOLETIM DE OCORRÊNCIA')
+            break;
+        case "RO":
+            setNomeOcorrencia('RELATÓRIO DE OCORRÊNCIA')
+            break;
+        case "RRM":
+            setNomeOcorrencia('RECOLHIMENTO DE MERCADORIA ')
+            break;
+        case "RAU":
+            setNomeOcorrencia('ATENDIMENTO AO USUÁRIO')
+            break;        
+    
+        default:
+            break;
+    }
+
+},[tipoRo])
+
+ const pushUser = () => {
+        const user = firebase.auth().currentUser;
+        if (user) {
+            firebase.database().ref('usuarios').child(user.uid)
+                .once('value').then((snapshot) => {
+                    const nome = snapshot.val().nome;
+                    setNomeQuemGerou(nome);
+
+                });
+        }}
+
+
+        useEffect(()=>{
+        pushUser();
+        if(localparam !== undefined){
+          poolEndereçoLocal(localparam);
+          }
+       
+       
+
+    },[localparam]);
+
+    useEffect(()=>{
+    if (nomeOcorrencia) {
+        setFreeDown(true)
+    }
+  },[nomeOcorrencia])
 
     useEffect(()=>{
       if (tipoEnvolvimentoAgente1==='Responsável pela Apreensão/Prisão/Condução') {
@@ -729,6 +837,789 @@ useEffect(() => {
 
       }
   },[tipoEnvolvimentoAgente1,tipoEnvolvimentoAgente2])
+
+
+const htmlContent1 = `
+   <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pdf Content</title>
+    <link rel="stylesheet" href="estilo.css" />
+    
+</head>
+
+<style>
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0px;
+}
+
+img {
+    width: 70px;
+    height: 70px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.ContainerCima{
+    display: flex;
+    flex-direction: row;
+}
+.Inteira{
+    border:1px solid black;
+    width: 790px;
+    line-height: 35px;
+    background-color: #bebebe;
+    margin-top: 5px;
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+.Meia{
+    border:1px solid black;
+    width: 395px;
+    height: 35px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    align-content: center;
+    line-height: 35px;
+    font-weight: bold; 
+    text-align: center;
+}
+.InteiraReal{
+    border:1px solid black;
+    width: 870px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #bebebe;
+    line-height: 35px;
+    font-weight: bold;
+}
+.MeiaBaixo{
+    border:1px solid black;
+    width: 435px;
+    height: 35px;
+    font-size: 12px;
+    
+}
+.Envolve{
+    border:1px solid black;
+    width: 870px;
+    height: 35px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+}
+.Dentro1{
+    border:1px solid black;
+    height: 35px;
+    font-size: 12px;
+    display: flex;
+    flex: 1;
+    
+}
+.Dentro2{
+    border:1px solid black;
+    height: 35px;
+    font-size: 12px;
+    display: flex;
+    flex: 2;
+}
+.Dentro3{
+    border:1px solid black;
+    height: 35px;
+    font-size: 12px;
+    display: flex;
+    flex: 3;
+}
+.InteiraDentro{
+    border:1px solid black;
+    width: 870px;
+    height: 35px;
+    font-size: 12px;
+    display: flex;
+    
+}
+.Historico{
+    border:1px solid black;
+    width: 870px;
+    height: 200px;
+    font-size: 12px;
+}
+.ObjetosRecolhidos{
+    border:1px solid black;
+    width: 870px;
+    height: 100px;
+    font-size: 12px;
+}
+.InteiraReal2{
+    border:1px solid black;
+    width: 870px;
+    height: 60px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #bebebe;
+    line-height: 30px;
+    font-weight: bold;
+}
+.InteiraDentro2{
+    border:1px solid black;
+    width: 870px;
+    height: 45px;
+    font-size: 12px;
+    display: flex;
+    
+}
+</style>
+
+<body>
+    
+    <div class=ContainerCima>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" />
+    
+    <div>
+
+        <div class="Inteira">SUPERINTENDÊNCIA DE TRENS URBANOS-BH</div>
+        
+        <div class=ContainerCima>
+            <div class="Meia"> ${nomeOcorrencia} </div>
+            <div class="Meia"> AUTENTICAÇÃO ${chaveFoto} </div>
+            
+        </div>
+    
+    </div>
+
+    </div>
+
+    <div class=ContainerCima>
+        <div class="MeiaBaixo">Unidade responsável pelo registro<br/>CIA BRASILEIRA DE TRENS URBANOS</div>
+        <div class="MeiaBaixo">Endereço<br/>RUA JANUÁRIA 181-BAIRRO FLORESTA-BELO HORIZONTE</div>
+    </div>
+
+    <div class="InteiraReal">DADOS DA OCORRÊNCIA</div>
+    
+    <div class="Envolve">
+
+        <div class="Dentro2">Provável descrição da ocorrência principal <br/>${tipoOcorrencia1} </div>
+
+        <div class="Dentro1">Tentado/Consumado <br/>${tentadoConsumado}</div>
+
+        <div class="Dentro1">Alvo do evento  <br/>${alvoDoEvento}</div>
+
+    </div>
+
+    <div class="Envolve">
+
+        
+        <div class="Dentro1">Data do Fato<br/>${dataDoFato}</div>
+
+        <div class="Dentro1">Horario do Fato<br/>${horarioDoFato}</div>
+
+         <div class="Dentro1">Data Final<br/>${dataFinal}</div>
+
+        <div class="Dentro1">Horario Final<br/>${horarioFinal}</div>
+
+    </div>
+
+    <div class="Envolve">
+
+        
+        <div class="Dentro3">Local<br/>${nomeEstaçao}: ${endereçoEstaçao}</div>
+
+        <div class="Dentro1">Município<br/>${municipioEstaçao}</div>
+
+         <div class="Dentro1">UF<br/>${ufEstaçao}</div>
+
+
+    </div>
+
+     <div class="Envolve">
+
+        
+        <div class="Dentro1">Número<br/>${numeroEstaçao}</div>
+
+        <div class="Dentro2">Complemento<br/>${complementoEstaçao}</div>
+
+         <div class="Dentro2">Bairro<br/>${bairroEstaçao}</div>
+
+         <div class="Dentro1">Cep<br/>${cepEstaçao}</div>
+
+
+    </div>
+
+    <div class="InteiraReal">QUALIFICAÇÃO DOS ENVOLVIDOS</div>
+    <div class="InteiraReal">ENVOLVIDO 1</div>
+
+    <div class="Envolve">
+
+        
+        <div class="Dentro1">Sexo<br/>${genero}</div>
+
+        <div class="Dentro1">Tipo de Envolvimento<br/>${tipoDeEnvolvimento}</div>
+
+         <div class="Dentro1">Data de Nascimento<br/>${nascimento}</div>
+
+         <div class="Dentro1">Naturalidade<br/>${naturalidade}</div>
+
+
+    </div>
+
+    <div class="InteiraDentro" >Nome Completo <br/>${nome}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Idade Aparente<br/>${idadeAparente}</div>
+
+        <div class="Dentro1">Estado Civil<br/>${estadoCivil}</div>
+
+         <div class="Dentro1">Nacionalidade<br/>${nacionalidade}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Cútis<br/>${cutis}</div>
+
+        <div class="Dentro1">Ocupação Atual<br/>${ocupaçãoAtual}</div>
+
+         <div class="Dentro1">Grau de Escolaridade<br/>${grauEscoar}</div>
+
+    </div>
+
+    <div class="InteiraDentro" >Mae<br/>${mae}</div>
+    <div class="InteiraDentro" >Pai<br/>${pai}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Número da Identidade<br/>${identidade}</div>
+
+        <div class="Dentro1">Orgão Epedidor<br/>${orgãoExpedidor}</div>
+
+         <div class="Dentro1">UF<br/>${ufEnvolvido}</div>
+         
+         <div class="Dentro1">CPF<br/>${cpf}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Endereço<br/>${logradouro}</div>
+
+        <div class="Dentro1">Número<br/>${numeroCasa}</div>
+
+         <div class="Dentro1">Complemento<br/>${complemento}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Bairro<br/>${bairro}</div>
+
+        <div class="Dentro2">Município<br/>${cidade}</div>
+
+         <div class="Dentro1">UF<br/>${estado}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">País<br/>${paisMoradia}</div>
+
+        <div class="Dentro1">CEP<br/>${cep}</div>
+
+         <div class="Dentro1">Telefone<br/>${telefone}</div>
+         
+    </div>
+
+    <div class="InteiraReal">ENVOLVIDO 2</div>
+
+    <div class="Envolve">
+
+        
+        <div class="Dentro1">Sexo<br/>${generoEnv2}</div>
+
+        <div class="Dentro1">Tipo de Envolvimento<br/>${tipoDeEnvolvimentoEnv2}</div>
+
+         <div class="Dentro1">Data de Nascimento<br/>${nascimentoEnv2}</div>
+
+         <div class="Dentro1">Naturalidade<br/>${naturalidadeEnv2}</div>
+
+
+    </div>
+
+    <div class="InteiraDentro" >Nome Completo <br/>${nomeEnv2}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Idade Aparente<br/>${idadeAparenteEnv2}</div>
+
+        <div class="Dentro1">Estado Civil<br/>${estadoCivilEnv2}</div>
+
+         <div class="Dentro1">Nacionalidade<br/>${nacionalidadeEnv2}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Cútis<br/>${cutisEnv2}</div>
+
+        <div class="Dentro1">Ocupação Atual<br/>${ocupaçãoAtualEnv2}</div>
+
+         <div class="Dentro1">Grau de Escolaridade<br/>${grauEscoarEnv2}</div>
+
+    </div>
+
+    <div class="InteiraDentro" >Mae<br/>${maeEnv2}</div>
+    <div class="InteiraDentro" >Pai<br/>${paiEnv2}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Número da Identidade<br/>${identidadeEnv2}</div>
+
+        <div class="Dentro1">Orgão Epedidor<br/>${orgãoExpedidorEnv2}</div>
+
+         <div class="Dentro1">UF<br/>${ufEnvolvidoEnv2}</div>
+         
+         <div class="Dentro1">CPF<br/>${cpfEnv2}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Endereço<br/>${logradouroEnv2}</div>
+
+        <div class="Dentro1">Número<br/>${numeroCasaEnv2}</div>
+
+         <div class="Dentro1">Complemento<br/>${complementoEnv2}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Bairro<br/>${bairroEnv2}</div>
+
+        <div class="Dentro2">Município<br/>${cidade}</div>
+
+         <div class="Dentro1">UF<br/>${estadoEnv2}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">País<br/>${paisMoradiaEnv2}</div>
+
+        <div class="Dentro1">CEP<br/>${cepEnv2}</div>
+
+         <div class="Dentro1">Telefone<br/>${telefoneEnv2}</div>
+         
+    </div>
+
+    <div style="height: 55px;"></div>
+
+    <div class=ContainerCima>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" />
+    
+    <div>
+
+        <div class="Inteira">SUPERINTENDÊNCIA DE TRENS URBANOS-BH</div>
+        
+        <div class=ContainerCima>
+            <div class="Meia">${nomeOcorrencia}</div>
+            <div class="Meia"> AUTENTICAÇÃO ${chaveFoto} </div>
+            
+        </div>
+    
+    </div>
+
+    </div>
+
+    <div class="InteiraReal">ENVOLVIDO 3</div>
+
+    <div class="Envolve">
+
+        
+        <div class="Dentro1">Sexo<br/>${generoEnv3}</div>
+
+        <div class="Dentro1">Tipo de Envolvimento<br/>${tipoDeEnvolvimentoEnv3}</div>
+
+         <div class="Dentro1">Data de Nascimento<br/>${nascimentoEnv3}</div>
+
+         <div class="Dentro1">Naturalidade<br/>${naturalidadeEnv3}</div>
+
+
+    </div>
+
+    <div class="InteiraDentro" >Nome Completo <br/>${nomeEnv3}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Idade Aparente<br/>${idadeAparenteEnv3}</div>
+
+        <div class="Dentro1">Estado Civil<br/>${estadoCivilEnv3}</div>
+
+         <div class="Dentro1">Nacionalidade<br/>${nacionalidadeEnv3}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Cútis<br/>${cutisEnv3}</div>
+
+        <div class="Dentro1">Ocupação Atual<br/>${ocupaçãoAtualEnv3}</div>
+
+         <div class="Dentro1">Grau de Escolaridade<br/>${grauEscoarEnv3}</div>
+
+    </div>
+
+    <div class="InteiraDentro" >Mae<br/>${maeEnv3}</div>
+    <div class="InteiraDentro" >Pai<br/>${paiEnv3}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Número da Identidade<br/>${identidadeEnv3}</div>
+
+        <div class="Dentro1">Orgão Epedidor<br/>${orgãoExpedidorEnv3}</div>
+
+         <div class="Dentro1">UF<br/>${ufEnvolvidoEnv3}</div>
+         
+         <div class="Dentro1">CPF<br/>${cpfEnv3}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Endereço<br/>${logradouroEnv3}</div>
+
+        <div class="Dentro1">Número<br/>${numeroCasaEnv3}</div>
+
+         <div class="Dentro1">Complemento<br/>${complementoEnv3}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Bairro<br/>${bairroEnv3}</div>
+
+        <div class="Dentro2">Município<br/>${cidadeEnv3}</div>
+
+         <div class="Dentro1">UF<br/>${estadoEnv3}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">País<br/>${paisMoradiaEnv3}</div>
+
+        <div class="Dentro1">CEP<br/>${cepEnv3}</div>
+
+         <div class="Dentro1">Telefone<br/>${telefoneEnv3}</div>
+         
+    </div>
+
+    <div class="InteiraReal">ENVOLVIDO 4</div>
+
+    <div class="Envolve">
+
+        
+        <div class="Dentro1">Sexo<br/>${generoEnv4}</div>
+
+        <div class="Dentro1">Tipo de Envolvimento<br/>${tipoDeEnvolvimentoEnv4}</div>
+
+         <div class="Dentro1">Data de Nascimento<br/>${nascimentoEnv4}</div>
+
+         <div class="Dentro1">Naturalidade<br/>${naturalidadeEnv4}</div>
+
+
+    </div>
+
+    <div class="InteiraDentro" >Nome Completo <br/>${nomeEnv4}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Idade Aparente<br/>${idadeAparenteEnv4}</div>
+
+        <div class="Dentro1">Estado Civil<br/>${estadoCivilEnv4}</div>
+
+         <div class="Dentro1">Nacionalidade<br/>${nacionalidadeEnv4}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Cútis<br/>${cutisEnv4}</div>
+
+        <div class="Dentro1">Ocupação Atual<br/>${ocupaçãoAtualEnv4}</div>
+
+         <div class="Dentro1">Grau de Escolaridade<br/>${grauEscoarEnv4}</div>
+
+    </div>
+
+    <div class="InteiraDentro" >Mae<br/>${maeEnv4}</div>
+    <div class="InteiraDentro" >Pai<br/>${paiEnv4}</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Número da Identidade<br/>${identidadeEnv4}</div>
+
+        <div class="Dentro1">Orgão Epedidor<br/>${orgãoExpedidorEnv4}</div>
+
+         <div class="Dentro1">UF<br/>${ufEnvolvidoEnv4}</div>
+         
+         <div class="Dentro1">CPF<br/>${cpfEnv4}</div>
+
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Endereço<br/>${logradouroEnv4}</div>
+
+        <div class="Dentro1">Número<br/>${numeroCasaEnv4}</div>
+
+         <div class="Dentro1">Complemento<br/>${complementoEnv4}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro3">Bairro<br/>${bairroEnv4}</div>
+
+        <div class="Dentro2">Município<br/>${cidadeEnv4}</div>
+
+         <div class="Dentro1">UF<br/>${estadoEnv4}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">País<br/>${paisMoradiaEnv4}</div>
+
+        <div class="Dentro1">CEP<br/>${cepEnv4}</div>
+
+         <div class="Dentro1">Telefone<br/>${telefoneEnv4}</div>
+         
+    </div>
+
+    <div class="InteiraReal">HISTÓRICO</div>
+
+    <div class="Historico" >${historico}</div>
+
+     <div style="height: 75px;"></div>
+
+    <div class=ContainerCima>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" />
+    
+    <div>
+
+        <div class="Inteira">SUPERINTENDÊNCIA DE TRENS URBANOS-BH</div>
+        
+        <div class=ContainerCima>
+            <div class="Meia">${nomeOcorrencia}</div>
+            <div class="Meia"> AUTENTICAÇÃO ${chaveFoto} </div>
+            
+        </div>
+    
+    </div>
+
+    </div>
+
+    <div class="InteiraReal">OBJETOS RECOLHIDOS</div>
+
+    <div class="ObjetosRecolhidos">${objetosRecolhidos}</div>
+
+    <div class="InteiraReal">RESPONSÁVEL PELA APREENSÃO/PRISÃO/CONDUÇÃO</div>
+
+     <div class="Envolve">
+        
+        <div class="Dentro1">Matrícula<br/>${matriculaAgenteResponsavel}</div>
+
+        <div class="Dentro1">Siape<br/>${siapeAgenteResponsavel}</div>
+
+         <div class="Dentro1">Cargo<br/>${cargoAgenteResponsavel}</div>
+         
+    </div>
+
+    <div class="InteiraDentro">Nome Completo<br/>${nomeAgenteResponsavel}</div>
+
+    <div class="InteiraReal">RELATOR DA OCORRÊNCIA</div>
+
+     <div class="Envolve">
+        
+        <div class="Dentro1">Matrícula<br/>${matriculaAgenteRelator}</div>
+
+        <div class="Dentro1">Siape<br/>${siapeAgenteRelator}</div>
+
+         <div class="Dentro1">Cargo<br/>${cargoAgenteRelator}</div>
+         
+    </div>
+
+    <div class="InteiraDentro">Nome Completo<br/>${nomeAgenteRelator}</div>
+
+     <div class="InteiraReal">AGENTE INTEGRANTE</div>
+
+     <div class="Envolve">
+        
+        <div class="Dentro1">Matrícula<br/>${matriculaAgente1}</div>
+
+        <div class="Dentro1">Siape<br/>${siapeAgente1}</div>
+
+         <div class="Dentro1">Cargo<br/>${cargoAgente1}</div>
+         
+    </div>
+
+    <div class="InteiraDentro">Nome Completo<br/>${nomeAgente1}</div>
+
+    <div style="height: 30px;"></div>
+
+    <div class="InteiraReal2">RECIBO DA AUTORIDADE A QUE SE DESTINA OU SEU AGENTE/AUXILIAR POLICIAL OU RECIBO DO RESPONSÁVEL CIVIL</div>
+    
+    <div class="InteiraReal">DESTINATÁRIO/RECIBO 1</div>
+
+    <div class="InteiraDentro2">RECEBI O "${nomeOcorrencia}" DE AUTENTICAÇÃO ${chaveFoto} PARA CONHECIMENTO E PROVIDÊNCIAS, BEM COMO AS PESSOAS,
+    MATERIAIS, OBJETOS , ANIMAIS, SUBSTÂNCIAS E/ OU DOCUMENTOS QUE, EXISTINDO, ESTEJAM DESCRITOS OU ASSINALADOS NESTE DOCUMENTO.
+    
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Data</div>
+
+        <div class="Dentro1">Hora</div>
+
+         <div class="Dentro1">Matrícula</div>
+         
+         <div class="Dentro3">Nome</div>
+         
+    </div>
+
+    <div class="InteiraDentro">Cargo</div>
+    <div class="InteiraDentro">Orgão/UF</div>
+    <div class="InteiraDentro">Unidade</div>
+    <div class="InteiraDentro">Providência a ser tomada pela autoridade</div>
+    <div class="InteiraDentro">Assinatura</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Recibo gerado por<br/>${nomeQuemGerou}</div>
+
+        <div class="Dentro1">Data de criação do recibo<br/>${dataGeracao} ${horaGearacao}</div>
+         
+    </div>
+
+    <div style="height: 210px;"></div>
+
+     <div class=ContainerCima>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" />
+    
+    <div>
+
+        <div class="Inteira">SUPERINTENDÊNCIA DE TRENS URBANOS-BH</div>
+        
+        <div class=ContainerCima>
+            <div class="Meia">${nomeOcorrencia}</div>
+            <div class="Meia"> AUTENTICAÇÃO ${chaveFoto}</div>
+            
+        </div>
+    
+    </div>
+
+    </div>
+
+    <div class="InteiraReal">CARACTERÍSTICAS QUE EVIDENCIAM A POSSIBILIDADE DE FALSIFICAÇÃO</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Marca D'água<br/>${marcaDagua}</div>
+
+        <div class="Dentro1">Microimpressões<br/>${microImpressoes}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Registro Coincidente<br/>${registroCoincidente}</div>
+
+        <div class="Dentro1">Imagem Latente<br/>${imagemLatente}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Impressão em Alto Relevo<br/>${impressaoRelevo}</div>
+
+        <div class="Dentro1">Numeração<br/>${numeraçaoNota}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Fibras Coloridas<br/>${fibrasColoridas}</div>
+
+        <div class="Dentro1">Marca Tátil<br/>${marcaTatil}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Fio de Segurança<br/>${fioDeSegurança}</div>
+
+        <div class="Dentro1">Fundos Especiais<br/>${fundosEspeciais}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Fibras Sensíveis a Ultravioleta<br/>${fibrasLuzVioleta}</div>
+
+        <div class="Dentro1">Faixa Holográfica<br/>${faixaHoografica}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Tipo e/ou Tamanho do Papel<br/>${tipoPapel}</div>
+
+        <div class="Dentro1">Janela Transparente<br/>${janelaTransparente}</div>
+         
+    </div>
+
+    <div class="InteiraDentro">Moeda<br/>${moeda}</div>
+    <div class="InteiraDentro">Outros<br/>${outrasCaracteristicas}</div>
+
+    <div class="InteiraReal">Informações Prestadas pelo Envolvido</div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Origem da Cédula<br/>${origemCedula}</div>
+
+        <div class="Dentro1">Estado de Animo do Usuário<br/>${estadoAnimo}</div>
+         
+    </div>
+
+    <div class="Envolve">
+        
+        <div class="Dentro1">Tentou Evadir do Local<br/>${tentouEvadir}</div>
+
+        <div class="Dentro1">Possuía Outras Cédulas Válidas<br/>${possuiaOutrasCedulas}</div>
+
+        <div class="Dentro1">Pagou Após o Fato<br/>${pagouApos}</div>
+         
+    </div>
+
+    </body>
+
+    </html>
+`;
 
     return (
         <Container >
@@ -996,21 +1887,55 @@ useEffect(() => {
                 <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
             </View>
 
-            <Button title='pdf' onPress={pdfScreen}/>
+            
+
+                { freedown &&
+        <>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
+
+        
+
+             <BtnCadastrarOcorrencia disabled={loading} onPress={() => createAndSavePDF(htmlContent1)} >
+                 <TextBtnOcorrencia>Baixar Ocorrência</TextBtnOcorrencia>
+             </BtnCadastrarOcorrencia>
+
+           </View>
+           </>
+            }
+
+            { !freedown &&
+        <>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
+
+                <Text style={styles.textLoading}>...Loading</Text>
+
+           </View>
+           </>
+            }
+
+            {loading &&
+            <LoadingArea>
+                <ActivityIndicator
+                       size='large'
+                       color='#fff' 
+
+                />
+            </LoadingArea>
+             }
+
         </>}
 
-        {!avatar2 && <>
-
-         <ViewQualificaçao>
+        { !avatar2 && <>
+            <ViewQualificaçao>
                 <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
 
                 
 
-                <View style = {{flexDirection:'row',marginLeft:30}}>
+                <View style = {{flexDirection:'row'}}>
 
                 
 
-                <View style={{}}>
+                <View style={{marginLeft:30}}>
                 <TextNome>{nome}</TextNome>
 
                 <View style={{marginTop:16}}>
@@ -1029,19 +1954,128 @@ useEffect(() => {
                 <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
                 <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
                  
-                 <View style = {{flexDirection:'row'}}>
-                     <View style={{flex:1}}>
-                     <TextLabelcamposmae>CEP:<TextCamposmae>{}</TextCamposmae></TextLabelcamposmae>
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nascimento:<TextCamposmae>{nascimento}</TextCamposmae></TextLabelcamposmae>
                     </View>
 
-                        <View style={{flex:1}}>
-                      <TextLabelcamposmae>Gênero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Genero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
                 </View>
-                 </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nacionalidade:<TextCamposmae>{nacionalidade}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Naturalidade:<TextCamposmae>{naturalidade}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Idade Aparente:<TextCamposmae>{idadeAparente}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Estado Civil:<TextCamposmae>{estadoCivil}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Cútis:<TextCamposmae>{cutis}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Ocupação:<TextCamposmae>{ocupaçãoAtual}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Orgão Epedidor:<TextCamposmae>{orgãoExpedidor}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Escolaridade:<TextCamposmae>{grauEscoar}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>UF.Nascimento:<TextCamposmae>{ufEnvolvido}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Envolvimento:<TextCamposmae>{tipoDeEnvolvimento}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
                  
-                <TextLabelcamposmae>Endereço:<TextCamposmae>{endereço}</TextCamposmae></TextLabelcamposmae>
-            </View>
+                 
+                       </View>
             
+            <View style={{marginLeft:30,marginTop:35}}>
+
+                
+            
+                <TextDetallhesOcorr>Endereço do Envolvido</TextDetallhesOcorr>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>CEP:<TextCamposmae>{cep}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>UF:<TextCamposmae>{ufEnvolvido}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Cidade:<TextCamposmae>{cidade}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Bairro:<TextCamposmae>{bairro}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+                <TextLabelcamposmae>Logradouro:<TextCamposmae>{logradouro}</TextCamposmae></TextLabelcamposmae>
+                    
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Número:<TextCamposmae>{numeroCasa}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>País:<TextCamposmae>{paisMoradia}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                 <TextLabelcamposmae>Complemento:<TextCamposmae>{complemento}</TextCamposmae></TextLabelcamposmae>
+
+            </View>
+
+
+
             <View style={{marginLeft:30,marginTop:35}}>
                 <TextDetallhesOcorr>Detalhes da Ocorrência</TextDetallhesOcorr>
             </View>
@@ -1051,33 +2085,90 @@ useEffect(() => {
                 <View style={{flexDirection:'row'}} >
                    
                    <View style={{flex:1}}>
-                    <TextLabeldetalhes>Data:<TextDetalhes>{data}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabelcamposmae>Data Relatório:<TextCamposmae>{data}</TextCamposmae></TextLabelcamposmae>
                     </View>
                
                 <View style={{flex:1}}>
-                    <TextLabeldetalhes>Hora:<TextDetalhes>{hora}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabelcamposmae>Hora Relatório:<TextCamposmae>{hora}</TextCamposmae></TextLabelcamposmae>
                 </View>
                 
                 </View>
 
-                <View style={{flexDirection:'row'}}>
-                    
+                 <View style={{flexDirection:'row'}}>
+
                     <View style={{flex:1}}>
-                        <TextLabeldetalhes>{tipoRo}:<TextDetalhes>{tipoOcorrencia1}</TextDetalhes></TextLabeldetalhes>
+                        <TextLabelcamposmae>Data do Fato:<TextCamposmae>{dataDoFato}</TextCamposmae></TextLabelcamposmae>
                     </View>
 
                     <View style={{flex:1}}>
-
-                         <TextLabeldetalhes>Local:<TextDetalhes>{local}</TextDetalhes></TextLabeldetalhes>
+                        <TextLabelcamposmae>Hora do Fato:<TextCamposmae>{horarioDoFato}</TextCamposmae></TextLabelcamposmae>
                     </View>
 
-                     
-                   
                 </View>
 
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Data Final:<TextCamposmae>{dataFinal}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Hora Final:<TextCamposmae>{horarioFinal}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Tentado/Consumado:<TextCamposmae>{tentadoConsumado}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Alvo do Evento:<TextCamposmae>{alvoDoEvento}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>{tipoRo}:<TextCamposmae>{tipoOcorrencia1}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Local:<TextCamposmae>{local}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Relator:<TextCamposmae>{nomeAgenteRelator}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Agente Integrante:<TextCamposmae>{nomeAgente1}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Responsável pela Prisão:<TextCamposmae>{nomeAgenteResponsavel}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    
+
+                </View>
+
+                
+
                 <View>
-                    <TextLabeldetalhes>ASO:<TextDetalhes>{nomeAgenteRelator}</TextDetalhes></TextLabeldetalhes>
-                    <TextLabeldetalhes>Detalhes:<TextDetalhes>{historico}</TextDetalhes></TextLabeldetalhes>
+                    <TextLabelcamposmae>Objetos Recolhidos:<TextCamposmae>{objetosRecolhidos}</TextCamposmae></TextLabelcamposmae>
+                    <TextLabelcamposmae>Histórico:<TextCamposmae>{historico}</TextCamposmae></TextLabelcamposmae>
                 </View>
             </View>
 
@@ -1085,8 +2176,43 @@ useEffect(() => {
                 <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
             </View>
 
-            <Button title='pdf' onPress={pdfScreen}/>
-            </>}
+            
+
+                { freedown &&
+        <>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
+
+        
+
+             <BtnCadastrarOcorrencia disabled={loading} onPress={() => createAndSavePDF(htmlContent1)} >
+                 <TextBtnOcorrencia>Baixar Ocorrência</TextBtnOcorrencia>
+             </BtnCadastrarOcorrencia>
+
+           </View>
+           </>
+            }
+
+            { !freedown &&
+        <>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
+
+                <Text style={styles.textLoading}>...Loading</Text>
+
+           </View>
+           </>
+            }
+
+            {loading &&
+            <LoadingArea>
+                <ActivityIndicator
+                       size='large'
+                       color='#fff' 
+
+                />
+            </LoadingArea>
+             }
+
+        </>}
         </Container>
     );
 }
@@ -1105,6 +2231,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         
     },
+    textLoading:{
+        color:'#FF9000',
+
+    }
 
 })
   
