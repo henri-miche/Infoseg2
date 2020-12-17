@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 
 const InputArea = styled.View`
-   width: 280px;
+   width: 315px;
     height: 50px;
     background: #2E2E2E;
     flex-direction: row;
@@ -15,24 +15,38 @@ const InputArea = styled.View`
 
  const Input = styled.TextInput`
     
-    width: 280px;
+    width: 230px;
     height: 50px;
     background: #2E2E2E;
     border-radius: 10px; 
-    padding-right:50px; 
     text-align:center;
+    
+    
 `;   
 
 export const ImagemEmail = styled.Image`
 width:20px;
 height:18px;
-margin-left:16px;
 `;
 
-export default ({placeholder,onEndEditing, value,autoCapitalize, onChangeText, password,placeholderTextColor,color}) => {
+export const Lupa = styled.TouchableOpacity`
+width:20px;
+height:18px;
+margin-left:15px;
+`;
+
+export const Limpar = styled.TouchableOpacity`
+width:20px;
+height:18px;
+margin-left:15px;
+`;
+
+export default ({placeholder,onEndEditing,onPress,onPress2, value,autoCapitalize, onChangeText, password,placeholderTextColor,color}) => {
     return(
         <InputArea>
+            <Lupa onPress={onPress} >
             <ImagemEmail source = {require('../../assets/search.png')}/>
+            </Lupa>
             <Input 
                 color={color}
                 placeholderTextColor={placeholderTextColor}
@@ -43,6 +57,10 @@ export default ({placeholder,onEndEditing, value,autoCapitalize, onChangeText, p
                 autoCapitalize ={autoCapitalize}
                 onEndEditing={onEndEditing}
             />
+            <Limpar onPress={onPress2} >
+            <ImagemEmail source = {require('../../assets/SetaSair.png')}/>
+            </Limpar>
+
         </InputArea>
     );
 }

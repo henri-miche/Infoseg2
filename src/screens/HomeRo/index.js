@@ -173,6 +173,10 @@ const pushDados = async () =>{
            }   
   }
 
+   const handleClickSearchLimpar = () =>{
+          setSearchTexto('');
+  }
+
    const handleClickAreaAgente = () =>{
               navigation.navigate('HomeRdmCadastro');
   }
@@ -229,6 +233,8 @@ const pushDados = async () =>{
                  value={searchTexto} 
                autoCapitalize='characters' 
                onEndEditing={handleClickSearch} 
+               onPress={handleClickSearch}
+               onPress2={handleClickSearchLimpar}
                onChangeText={(t) => setSearchTexto(t)}
                      
                  />

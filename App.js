@@ -8,7 +8,7 @@ import { Platform, InteractionManager } from 'react-native';
 import * as Updates from "expo-updates";
 
 export default function App() {
-
+/*
   useEffect(() => {
     async function updateApp() {
       const { isAvailable } = await Updates.checkForUpdateAsync();
@@ -18,7 +18,7 @@ export default function App() {
       }
     }
     updateApp();
-  }, []);
+  }, []);*/
   
   
 

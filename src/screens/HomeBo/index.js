@@ -1441,7 +1441,7 @@ img {
 
      <div class="Envolve">
         
-        <div class="Dentro1">Matrícula<br/>${matriculaAgenteResponsavel}</div>
+        
 
         <div class="Dentro1">Siape<br/>${siapeAgenteResponsavel}</div>
 
@@ -1455,7 +1455,7 @@ img {
 
      <div class="Envolve">
         
-        <div class="Dentro1">Matrícula<br/>${matriculaAgenteRelator}</div>
+        <div class="Dentro1">Hora e Data do Relato<br/>${data} ${hora}</div>
 
         <div class="Dentro1">Siape<br/>${siapeAgenteRelator}</div>
 
@@ -1465,11 +1465,11 @@ img {
 
     <div class="InteiraDentro">Nome Completo<br/>${nomeAgenteRelator}</div>
 
-     <div class="InteiraReal">AGENTE INTEGRANTE</div>
+     <div class="InteiraReal">AGENTE INTEGRANTE 1</div>
 
      <div class="Envolve">
         
-        <div class="Dentro1">Matrícula<br/>${matriculaAgente1}</div>
+       
 
         <div class="Dentro1">Siape<br/>${siapeAgente1}</div>
 
@@ -1478,6 +1478,23 @@ img {
     </div>
 
     <div class="InteiraDentro">Nome Completo<br/>${nomeAgente1}</div>
+
+
+    <div class="InteiraReal">AGENTE INTEGRANTE 2</div>
+
+     <div class="Envolve">
+        
+        
+
+        <div class="Dentro1">Siape<br/>${siapeAgente2}</div>
+
+         <div class="Dentro1">Cargo<br/>${cargoAgente2}</div>
+         
+    </div>
+
+    <div class="InteiraDentro">Nome Completo<br/>${nomeAgente2}</div>
+
+
 
     <div style="height: 30px;"></div>
 
@@ -1516,7 +1533,7 @@ img {
          
     </div>
 
-    <div style="height: 210px;"></div>
+    <div style="height: 110px;"></div>
 
      <div class=ContainerCima>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" />
@@ -1634,17 +1651,19 @@ img {
             
             </ViewTitullo>
             
-            { avatar2 && <>
+            
             <ViewQualificaçao>
                 <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
 
                 
-
+            {avatar2 && <>
                 <View style = {{flexDirection:'row'}}>
 
+               
                  <View style={styles.viewImage}>
                     <Image source={avatar2} style={styles.itemAvatar} />
                 </View>
+               
 
                 <View style={{}}>
                 <TextNome>{nome}</TextNome>
@@ -1659,281 +1678,14 @@ img {
                 </View>
                
                 </View>
-            </ViewQualificaçao>
+                 </>
+                }
 
-            <View style={{marginLeft:30}}>
-                <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
-                <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
-                 
-                <View style={{flexDirection:'row'}}>
 
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Nascimento:<TextCamposmae>{nascimento}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Genero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Nacionalidade:<TextCamposmae>{nacionalidade}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Naturalidade:<TextCamposmae>{naturalidade}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                 <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Idade Aparente:<TextCamposmae>{idadeAparente}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Estado Civil:<TextCamposmae>{estadoCivil}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Cútis:<TextCamposmae>{cutis}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Ocupação:<TextCamposmae>{ocupaçãoAtual}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Orgão Epedidor:<TextCamposmae>{orgãoExpedidor}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Escolaridade:<TextCamposmae>{grauEscoar}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>UF.Nascimento:<TextCamposmae>{ufEnvolvido}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Envolvimento:<TextCamposmae>{tipoDeEnvolvimento}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                 
-                 
-                       </View>
-            
-            <View style={{marginLeft:30,marginTop:35}}>
-
-                
-            
-                <TextDetallhesOcorr>Endereço do Envolvido</TextDetallhesOcorr>
-
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:1}}>
-                    <TextLabelcamposmae>CEP:<TextCamposmae>{cep}</TextCamposmae></TextLabelcamposmae>
-                </View>
-
-                <View style={{flex:1}}>
-                    <TextLabelcamposmae>UF:<TextCamposmae>{ufEnvolvido}</TextCamposmae></TextLabelcamposmae>
-                </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:1}}>
-                    <TextLabelcamposmae>Cidade:<TextCamposmae>{cidade}</TextCamposmae></TextLabelcamposmae>
-                </View>
-
-                <View style={{flex:1}}>
-                    <TextLabelcamposmae>Bairro:<TextCamposmae>{bairro}</TextCamposmae></TextLabelcamposmae>
-                </View>
-
-                </View>
-                <TextLabelcamposmae>Logradouro:<TextCamposmae>{logradouro}</TextCamposmae></TextLabelcamposmae>
-                    
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:1}}>
-                    <TextLabelcamposmae>Número:<TextCamposmae>{numeroCasa}</TextCamposmae></TextLabelcamposmae>
-                </View>
-
-                <View style={{flex:1}}>
-                    <TextLabelcamposmae>País:<TextCamposmae>{paisMoradia}</TextCamposmae></TextLabelcamposmae>
-                </View>
-
-                </View>
-
-                 <TextLabelcamposmae>Complemento:<TextCamposmae>{complemento}</TextCamposmae></TextLabelcamposmae>
-
-            </View>
-
-
-
-            <View style={{marginLeft:30,marginTop:35}}>
-                <TextDetallhesOcorr>Detalhes da Ocorrência</TextDetallhesOcorr>
-            </View>
-
-            <View style={{marginTop:15,marginLeft:30}}>
-
-                <View style={{flexDirection:'row'}} >
-                   
-                   <View style={{flex:1}}>
-                    <TextLabelcamposmae>Data Relatório:<TextCamposmae>{data}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-               
-                <View style={{flex:1}}>
-                    <TextLabelcamposmae>Hora Relatório:<TextCamposmae>{hora}</TextCamposmae></TextLabelcamposmae>
-                </View>
-                
-                </View>
-
-                 <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Data do Fato:<TextCamposmae>{dataDoFato}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Hora do Fato:<TextCamposmae>{horarioDoFato}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                 <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Data Final:<TextCamposmae>{dataFinal}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Hora Final:<TextCamposmae>{horarioFinal}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Tentado/Consumado:<TextCamposmae>{tentadoConsumado}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Alvo do Evento:<TextCamposmae>{alvoDoEvento}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>{tipoRo}:<TextCamposmae>{tipoOcorrencia1}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Local:<TextCamposmae>{local}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Relator:<TextCamposmae>{nomeAgenteRelator}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Agente Integrante:<TextCamposmae>{nomeAgente1}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                </View>
-
-                <View style={{flexDirection:'row'}}>
-
-                    <View style={{flex:1}}>
-                        <TextLabelcamposmae>Responsável pela Prisão:<TextCamposmae>{nomeAgenteResponsavel}</TextCamposmae></TextLabelcamposmae>
-                    </View>
-
-                    
-
-                </View>
-
-                
-
-                <View>
-                    <TextLabelcamposmae>Objetos Recolhidos:<TextCamposmae>{objetosRecolhidos}</TextCamposmae></TextLabelcamposmae>
-                    <TextLabelcamposmae>Histórico:<TextCamposmae>{historico}</TextCamposmae></TextLabelcamposmae>
-                </View>
-            </View>
-
-            <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
-                <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
-            </View>
-
-            
-
-                { freedown &&
-        <>
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
-
-        
-
-             <BtnCadastrarOcorrencia disabled={loading} onPress={() => createAndSavePDF(htmlContent1)} >
-                 <TextBtnOcorrencia>Baixar Ocorrência</TextBtnOcorrencia>
-             </BtnCadastrarOcorrencia>
-
-           </View>
-           </>
-            }
-
-            { !freedown &&
-        <>
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
-
-                <Text style={styles.textLoading}>...Loading</Text>
-
-           </View>
-           </>
-            }
-
-            {loading &&
-            <LoadingArea>
-                <ActivityIndicator
-                       size='large'
-                       color='#fff' 
-
-                />
-            </LoadingArea>
-             }
-
-        </>}
-
-        { !avatar2 && <>
-            <ViewQualificaçao>
-                <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
-
-                
-
+                { !avatar2 && <>
                 <View style = {{flexDirection:'row'}}>
 
-                
+               
 
                 <View style={{marginLeft:30}}>
                 <TextNome>{nome}</TextNome>
@@ -1948,6 +1700,11 @@ img {
                 </View>
                
                 </View>
+                 </>
+                }
+
+                
+
             </ViewQualificaçao>
 
             <View style={{marginLeft:30}}>
@@ -2212,7 +1969,9 @@ img {
             </LoadingArea>
              }
 
-        </>}
+       
+
+       
         </Container>
     );
 }

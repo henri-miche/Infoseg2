@@ -195,6 +195,68 @@ export default () => {
    
     const [env2, setEnv2] = useState(false);
     const [switchEnv2, setSwitchEnv2] = useState(false);
+    
+    const [env3,setEnv3] = useState(false);
+    const [switchEnv3, setSwitchEnv3] = useState(false);
+
+    const [env4,setEnv4] = useState(false);
+    const [switchEnv4, setSwitchEnv4] = useState(false);
+
+     //Variáveis envolvido 3
+        const [cpfEnv3, setCpfEnv3] = useState();
+        const [nomeEnv3, setNomeEnv3] = useState();
+        const [identidadeEnv3, setIdentidadeEnv3] = useState();
+        const [nascimentoEnv3, setNascimentoEnv3] = useState(); 
+        const [maeEnv3, setMaeEnv3] = useState();
+        const [paiEnv3, setPaiEnv3] = useState();
+        const [telefoneEnv3, setTelefoneEnv3] = useState();
+        const [generoEnv3, setGeneroEnv3] = useState();
+        const [estadoEnv3, setEstadoEnv3] = useState();
+        const [cepEnv3, setCepEnv3] = useState();
+        const [cidadeEnv3, setCidadeEnv3] = useState();
+        const [bairroEnv3, setBairroEnv3] = useState();
+        const [logradouroEnv3, setLogradouroEnv3] = useState();
+        const [numeroCasaEnv3, setNumeroCasaEnv3] = useState();
+        const [complementoEnv3, setComplementoEnv3] = useState();   
+        const [tipoDeEnvolvimentoEnv3, setTipoDeEnvolvimentoEnv3] = useState();
+        const [nacionalidadeEnv3, setNacionalidadeEnv3] = useState();
+        const [naturalidadeEnv3, setNaturalidadeEnv3] = useState();
+        const [idadeAparenteEnv3, setIdadeAparenteEnv3] = useState();
+        const [estadoCivilEnv3, setEstadoCivilEnv3] = useState();
+        const [cutisEnv3, setCutisEnv3] = useState();
+        const [ocupaçãoAtualEnv3, setOcupaçãoAtualEnv3] = useState();
+        const [grauEscoarEnv3, setGrauEscolarEnv3] = useState();
+        const [orgãoExpedidorEnv3, setOrgãoEpedidorEnv3] = useState();
+        const [ufEnvolvidoEnv3, setUfEnvolvidoEnv3] = useState();
+        const [paisMoradiaEnv3, setpaisMoradiaEnv3] = useState();
+
+        //Variáveis envolvido 4
+        const [cpfEnv4, setCpfEnv4] = useState();
+        const [nomeEnv4, setNomeEnv4] = useState();
+        const [identidadeEnv4, setIdentidadeEnv4] = useState();
+        const [nascimentoEnv4, setNascimentoEnv4] = useState(); 
+        const [maeEnv4, setMaeEnv4] = useState();
+        const [paiEnv4, setPaiEnv4] = useState();
+        const [telefoneEnv4, setTelefoneEnv4] = useState();
+        const [generoEnv4, setGeneroEnv4] = useState();
+        const [estadoEnv4, setEstadoEnv4] = useState();
+        const [cepEnv4, setCepEnv4] = useState();
+        const [cidadeEnv4, setCidadeEnv4] = useState();
+        const [bairroEnv4, setBairroEnv4] = useState();
+        const [logradouroEnv4, setLogradouroEnv4] = useState();
+        const [numeroCasaEnv4, setNumeroCasaEnv4] = useState();
+        const [complementoEnv4, setComplementoEnv4] = useState();   
+        const [tipoDeEnvolvimentoEnv4, setTipoDeEnvolvimentoEnv4] = useState();
+        const [nacionalidadeEnv4, setNacionalidadeEnv4] = useState();
+        const [naturalidadeEnv4, setNaturalidadeEnv4] = useState();
+        const [idadeAparenteEnv4, setIdadeAparenteEnv4] = useState();
+        const [estadoCivilEnv4, setEstadoCivilEnv4] = useState();
+        const [cutisEnv4, setCutisEnv4] = useState();
+        const [ocupaçãoAtualEnv4, setOcupaçãoAtualEnv4] = useState();
+        const [grauEscoarEnv4, setGrauEscolarEnv4] = useState();
+        const [orgãoExpedidorEnv4, setOrgãoEpedidorEnv4] = useState();
+        const [ufEnvolvidoEnv4, setUfEnvolvidoEnv4] = useState();
+        const [paisMoradiaEnv4, setpaisMoradiaEnv4] = useState();
 
     const [switchAgenteParticipante1, setSwitchAgenteParticipante1] = useState(false);
     const [AgenteParticipante1, setAgenteParticipante1] = useState(false);
@@ -233,7 +295,7 @@ export default () => {
                 });
             }
 
-            if (env2) {
+            if (env2 && env3 && env4) {
                  firebase.database().ref('/Ocorrencias').child(chave).set({
                 nome: nome,
                 cpf: cpf,                
@@ -277,6 +339,7 @@ export default () => {
                 objetosRecolhidos:objetosRecolhidos,
                 local:local,
 
+                //env2
                 env2:env2,
                 nomeEnv2: nomeEnv2,
                 cpfEnv2: cpfEnv2,
@@ -304,6 +367,64 @@ export default () => {
                 orgãoExpedidorEnv2:orgãoExpedidorEnv2,
                 ufEnvolvidoEnv2:ufEnvolvidoEnv2,
                 paisMoradiaEnv2:paisMoradiaEnv2,
+
+                //env3
+                env3:env3,
+                nomeEnv3: nomeEnv3,
+                cpfEnv3: cpfEnv3,
+                identidadeEnv3:identidadeEnv3,
+                nascimentoEnv3:nascimentoEnv3,
+                maeEnv3:maeEnv3,
+                paiEnv3:paiEnv3,
+                telefoneEnv3:telefoneEnv3,
+                generoEnv3:generoEnv3,
+                estadoEnv3:estadoEnv3,
+                cepEnv3:cepEnv3,
+                cidadeEnv3:cidadeEnv3,
+                bairroEnv3:bairroEnv3,
+                logradouroEnv3:logradouroEnv3,
+                numeroCasaEnv3:numeroCasaEnv3,
+                complementoEnv3:complementoEnv3,
+                tipodeEnvolvimentoEnv3:tipoDeEnvolvimentoEnv3,
+                nacionalidadeEnv3:nacionalidadeEnv3,
+                naturalidadeEnv3:naturalidadeEnv3,
+                idadeAparenteEnv3:idadeAparenteEnv3,
+                estadoCivilEnv3:estadoCivilEnv3,
+                cutisEnv3:cutisEnv3,
+                ocupaçãoAtualEnv3:ocupaçãoAtualEnv3,
+                grauEscolarEnv3:grauEscoarEnv3,
+                orgãoExpedidorEnv3:orgãoExpedidorEnv3,
+                ufEnvolvidoEnv3:ufEnvolvidoEnv3,
+                paisMoradiaEnv3:paisMoradiaEnv3,
+
+                //env3
+                env4:env4,
+                nomeEnv4: nomeEnv4,
+                cpfEnv4: cpfEnv4,
+                identidadeEnv4:identidadeEnv4,
+                nascimentoEnv4:nascimentoEnv4,
+                maeEnv4:maeEnv4,
+                paiEnv4:paiEnv4,
+                telefoneEnv4:telefoneEnv4,
+                generoEnv4:generoEnv4,
+                estadoEnv4:estadoEnv4,
+                cepEnv4:cepEnv4,
+                cidadeEnv4:cidadeEnv4,
+                bairroEnv4:bairroEnv4,
+                logradouroEnv4:logradouroEnv4,
+                numeroCasaEnv4:numeroCasaEnv4,
+                complementoEnv4:complementoEnv4,
+                tipodeEnvolvimentoEnv4:tipoDeEnvolvimentoEnv4,
+                nacionalidadeEnv4:nacionalidadeEnv4,
+                naturalidadeEnv4:naturalidadeEnv4,
+                idadeAparenteEnv4:idadeAparenteEnv4,
+                estadoCivilEnv4:estadoCivilEnv4,
+                cutisEnv4:cutisEnv4,
+                ocupaçãoAtualEnv4:ocupaçãoAtualEnv4,
+                grauEscolarEnv4:grauEscoarEnv4,
+                orgãoExpedidorEnv4:orgãoExpedidorEnv4,
+                ufEnvolvidoEnv4:ufEnvolvidoEnv4,
+                paisMoradiaEnv4:paisMoradiaEnv4,
 
                 //nota falsa estado cidadão
                 notaFalsa:notaFalsa,
@@ -399,7 +520,8 @@ export default () => {
                 setHorarioFinal(''),
                 setNotaFalsa(false),
                 setEnv2(false),
-
+                setEnv3(false),
+                setEnv4(false),
                 
                 setNomeEnv2(''),
                 setCpfEnv2(''),
@@ -429,17 +551,104 @@ export default () => {
                 setUfEnvolvidoEnv2(''),
                 setpaisMoradiaEnv2(''),
 
-                setMarcaDagua(''),
-                setMicroImpressoes(''),
-                setRegistroCoincidente(''),
-                setImagemLatente(''),
-                setImpressaoRelevo(''),
-                setNumeraçaoNota(''),
-                setFibrasColoridas(''),
-                setMarcaTatil(''),
-                setFioDeSegurança(''),
-                setFundosEspeciais(''),
-                setFaiaHolografica(''),
+                //adicionar setenv3
+                    setNomeEnv3('');
+                    setCpfEnv3('');
+                    setIdentidadeEnv3('');
+                    setNascimentoEnv3('');
+                    setMaeEnv3('');
+                    setPaiEnv3('');
+                    setTelefoneEnv3('');
+                    setGeneroEnv3('');
+                    setEstadoEnv3('');
+                    setCepEnv3('');
+                    setCidadeEnv3('');
+                    setBairroEnv3('');
+                    setLogradouroEnv3('');
+                    setNumeroCasaEnv3('')
+                    setComplementoEnv3('');
+                    setTipoDeEnvolvimentoEnv3('');
+                    setNacionalidadeEnv3('');
+                    setNaturalidadeEnv3('');
+                    setIdadeAparenteEnv3('');
+                    setEstadoCivilEnv3('');
+                    setCutisEnv3('');
+                    setOcupaçãoAtualEnv3('');
+                    setGrauEscolarEnv3('');
+                    setOrgãoEpedidorEnv3('');
+                    setUfEnvolvidoEnv3('');
+                    setpaisMoradiaEnv3('');
+
+                    //adicionar setenv4
+                    setNomeEnv4('');
+                    setCpfEnv4('');
+                    setIdentidadeEnv4('');
+                    setNascimentoEnv4('');
+                    setMaeEnv4('');
+                    setPaiEnv4('');
+                    setTelefoneEnv4('');
+                    setGeneroEnv4('');
+                    setEstadoEnv4('');
+                    setCepEnv4('');
+                    setCidadeEnv4('');
+                    setBairroEnv4('');
+                    setLogradouroEnv4('');
+                    setNumeroCasaEnv4('')
+                    setComplementoEnv4('');
+                    setTipoDeEnvolvimentoEnv4('');
+                    setNacionalidadeEnv4('');
+                    setNaturalidadeEnv4('');
+                    setIdadeAparenteEnv4('');
+                    setEstadoCivilEnv4('');
+                    setCutisEnv4('');
+                    setOcupaçãoAtualEnv4('');
+                    setGrauEscolarEnv4('');
+                    setOrgãoEpedidorEnv4('');
+                    setUfEnvolvidoEnv4('');
+                    setpaisMoradiaEnv4('');
+
+                setMarcaDagua('');
+                    setMicroImpressoes('');
+                    setRegistroCoincidente('');
+                    setImagemLatente('');
+                    setImpressaoRelevo('');
+                    setNumeraçaoNota('');
+                    setFibrasColoridas('');
+                    setMarcaTatil('');
+                    setFioDeSegurança('');
+                    setFundosEspeciais('');
+                    setFaiaHolografica('');
+                    setFibrasLuzVioleta('');
+                    setOrigemCedula('');
+                    setEstadoAnimo('');
+                    setTentouEvadir('');
+                    setPossuiaOutrascCeduas('');
+                    setPagouApos('');
+
+                    setJanelaTransparente('');
+                    setMoeda('');
+                    setOutrasCaracteristicas('');
+                    setTipoPapel('');
+
+                    //variaveis agente relator
+                    setMatriculaAgenteRelator('');
+                    setSiapeAgenteRelator('');
+                    setCargoAgenteRelator('');
+                    setnomeAgenteRelator('');
+
+                    //agente integrante 1
+                    setNomeAgente1('');
+                    setSiapeAgente1('');
+                    setMatriculaAgente1('');
+                    setCargoAgente1('');
+                    setTipoEnvolvimentoAgente1('');
+
+                    //agente integrante 2
+                    setNomeAgente2('');
+                    setSiapeAgente2('');
+                    setMatriculaAgente2('');
+                    setCargoAgente2('');
+                    setTipoEnvolvimentoAgente2('');
 
                     setLoading(false);
                     alert('Dados enviados!');
@@ -449,7 +658,592 @@ export default () => {
                 .catch((error) => {
                     alert(error);
                 });
-            }else{
+            }
+            if(env2 && env3){
+
+                 firebase.database().ref('/Ocorrencias').child(chave).set({
+                nome: nome,
+                cpf: cpf,                
+                data:data,
+                hora:hora,
+                identidade:identidade,
+                nascimento:nascimento,
+                mae:mae,
+                pai:pai,
+                telefone:telefone,
+                genero:genero,
+                estado:estado,
+                cep:cep,
+                cidade:cidade,
+                bairro:bairro,
+                logradouro:logradouro,
+                numeroCasa:numeroCasa,
+                complemento:complemento,
+                nacionalidade:nacionalidade,
+                naturalidade:naturalidade,
+                idadeAparente:idadeAparente,
+                estadoCivil:estadoCivil,
+                cutis:cutis,
+                ocupaçãoAtual:ocupaçãoAtual,
+                grauEscolar:grauEscoar,
+                orgãoExpedidor:orgãoExpedidor,
+                ufEnvolvido:ufEnvolvido,
+                paisMoradia:paisMoradia,
+
+                
+                tipoOcorrencia1:tipoOcorrencia1,
+                tipodeEnvolvimento:tipoDeEnvolvimento,
+                tipoRo:tipoRo,
+                tentadoConsumado:tentadoConsumado,
+                alvoDoEvento:alvoDoEvento,
+                dataDoFato:dataDoFato,
+                horarioDoFato:horarioDoFato,
+                dataFinal:dataFinal,              
+                horarioFinal:horarioFinal,
+                historico:historico,
+                objetosRecolhidos:objetosRecolhidos,
+                local:local,
+
+                //env2
+                env2:env2,
+                nomeEnv2: nomeEnv2,
+                cpfEnv2: cpfEnv2,
+                identidadeEnv2:identidadeEnv2,
+                nascimentoEnv2:nascimentoEnv2,
+                maeEnv2:maeEnv2,
+                paiEnv2:paiEnv2,
+                telefoneEnv2:telefoneEnv2,
+                generoEnv2:generoEnv2,
+                estadoEnv2:estadoEnv2,
+                cepEnv2:cepEnv2,
+                cidadeEnv2:cidadeEnv2,
+                bairroEnv2:bairroEnv2,
+                logradouroEnv2:logradouroEnv2,
+                numeroCasaEnv2:numeroCasaEnv2,
+                complementoEnv2:complementoEnv2,
+                tipodeEnvolvimentoEnv2:tipoDeEnvolvimentoEnv2,
+                nacionalidadeEnv2:nacionalidadeEnv2,
+                naturalidadeEnv2:naturalidadeEnv2,
+                idadeAparenteEnv2:idadeAparenteEnv2,
+                estadoCivilEnv2:estadoCivilEnv2,
+                cutisEnv2:cutisEnv2,
+                ocupaçãoAtualEnv2:ocupaçãoAtualEnv2,
+                grauEscolarEnv2:grauEscoarEnv2,
+                orgãoExpedidorEnv2:orgãoExpedidorEnv2,
+                ufEnvolvidoEnv2:ufEnvolvidoEnv2,
+                paisMoradiaEnv2:paisMoradiaEnv2,
+
+                //env3
+                env3:env3,
+                nomeEnv3: nomeEnv3,
+                cpfEnv3: cpfEnv3,
+                identidadeEnv3:identidadeEnv3,
+                nascimentoEnv3:nascimentoEnv3,
+                maeEnv3:maeEnv3,
+                paiEnv3:paiEnv3,
+                telefoneEnv3:telefoneEnv3,
+                generoEnv3:generoEnv3,
+                estadoEnv3:estadoEnv3,
+                cepEnv3:cepEnv3,
+                cidadeEnv3:cidadeEnv3,
+                bairroEnv3:bairroEnv3,
+                logradouroEnv3:logradouroEnv3,
+                numeroCasaEnv3:numeroCasaEnv3,
+                complementoEnv3:complementoEnv3,
+                tipodeEnvolvimentoEnv3:tipoDeEnvolvimentoEnv3,
+                nacionalidadeEnv3:nacionalidadeEnv3,
+                naturalidadeEnv3:naturalidadeEnv3,
+                idadeAparenteEnv3:idadeAparenteEnv3,
+                estadoCivilEnv3:estadoCivilEnv3,
+                cutisEnv3:cutisEnv3,
+                ocupaçãoAtualEnv3:ocupaçãoAtualEnv3,
+                grauEscolarEnv3:grauEscoarEnv3,
+                orgãoExpedidorEnv3:orgãoExpedidorEnv3,
+                ufEnvolvidoEnv3:ufEnvolvidoEnv3,
+                paisMoradiaEnv3:paisMoradiaEnv3,
+
+               
+                env4:env4,
+
+                //nota falsa estado cidadão
+                notaFalsa:notaFalsa,
+
+                marcaDagua:marcaDagua,
+                microImpressoes:microImpressoes,
+                regitroCoincidente:registroCoincidente,
+                imagemLatente:imagemLatente,
+                impressaoRelevo:impressaoRelevo,
+                numeraçaoNota:numeraçaoNota,
+                fibrasColoridas:fibrasColoridas,
+                marcaTatil:marcaTatil,
+                fioDeSegurança:fioDeSegurança,
+                fundosEspeciais:fundosEspeciais,
+                faixaHoografica:faixaHoografica,
+                fibrasLuzVioleta:fibrasLuzVioleta,
+                origemCedula:origemCedula,
+                estadoAnimo:estadoAnimo,
+                tentouEvadir:tentouEvadir,
+                possuiaOutrasCedulas:possuiaOutrasCedulas,
+                pagouApos:pagouApos,
+                moeda:moeda,
+                janelaTransparente:janelaTransparente,
+                outrasCaracteristicas:outrasCaracteristicas,
+                tipoDoPapel:tipoDoPapel,
+
+                //agente envolvido 1
+                nomeAgente1:nomeAgente1,
+                siapeAgente1:siapeAgente1,
+                matriculaAgente1:matriculaAgente1,
+                cargoAgente1:cargoAgente1,
+                tipoEnvolvimentoAgente1:tipoEnvolvimentoAgente1,
+                
+                //agente relator
+                matriculaAgenteRelator:matriculaAgenteRelator,
+                siapeAgenteRelator:siapeAgenteRelator,
+                cargoAgenteRelator:cargoAgenteRelator,
+                nomeAgenteRelator:nomeAgenteRelator,
+                chaveFoto:chave,
+
+                //agente envolvido 2
+                nomeAgente2:nomeAgente2,
+                siapeAgente2:siapeAgente2,
+                matriculaAgente2:matriculaAgente2,
+                cargoAgente2:cargoAgente2,
+                tipoEnvolvimentoAgente2:tipoEnvolvimentoAgente2,
+
+                
+                
+                
+            })
+
+                .then(() => { 
+                    setNome('');
+                    setCpf('');
+                    
+                    setIdentidade('');
+                    setNascimento('');
+                    setTipoRo('');
+                    setLocal('');
+                    setMae('');
+                    setPai('');
+                    setTelefone('');
+                    setGenero('');
+                    setHistorico('');
+                    setEstado('');
+                    setTipoOcorrencia('');
+                    setCep('');
+                    setCidade('');
+                    setBairro('');
+                    setLogradouro('');
+                    setNumeroCasa('');
+                    setComplemento('');
+
+
+
+                    setTipoDeEnvolvimento(''),
+                    setNacionalidade(''),
+                    setNaturalidade(''),
+                    setIdadeAparente(''),
+                    setEstadoCivil(''),
+                    setCutis(''),
+                    setOcupaçãoAtual(''),
+                    setGrauEscolar(''),
+                    setOrgãoEpedidor(''),
+                    setUfEnvolvido(''),
+                    setpaisMoradia(''),
+                    setTentadoConsumado(''),
+                    setAlvoDoEvento(''),
+                    setDataDoFato(''),
+                    setHorarioDoFato(''),
+                    setDataFinal(''),
+                    setHorarioFinal(''),
+                    setNotaFalsa(false),
+                    setEnv2(false),
+
+                    
+                    setNomeEnv2(''),
+                    setCpfEnv2(''),
+                    setIdentidadeEnv2(''),
+                    setNascimentoEnv2(''),
+                    setMaeEnv2(''),
+                    setPaiEnv2(''),
+                    setTelefoneEnv2(''),
+                    setGeneroEnv2(''),
+                    setEstadoEnv2(''),
+                    setCepEnv2(''),
+                    setCidadeEnv2(''),
+                    setBairroEnv2(''),
+                    setLogradouroEnv2(''),
+                    setNumeroCasaEnv2(''),
+                    setComplementoEnv2(''),
+
+                    setTipoDeEnvolvimentoEnv2(''),
+                    setNacionalidadeEnv2(''),
+                    setNaturalidadeEnv2(''),
+                    setIdadeAparenteEnv2(''),
+                    setEstadoCivilEnv2(''),
+                    setCutisEnv2(''),
+                    setOcupaçãoAtualEnv2(''),
+                    setGrauEscolarEnv2(''),
+                    setOrgãoEpedidorEnv2(''),
+                    setUfEnvolvidoEnv2(''),
+                    setpaisMoradiaEnv2(''),
+
+                 //adicionar setenv3
+                    setNomeEnv3('');
+                    setCpfEnv3('');
+                    setIdentidadeEnv3('');
+                    setNascimentoEnv3('');
+                    setMaeEnv3('');
+                    setPaiEnv3('');
+                    setTelefoneEnv3('');
+                    setGeneroEnv3('');
+                    setEstadoEnv3('');
+                    setCepEnv3('');
+                    setCidadeEnv3('');
+                    setBairroEnv3('');
+                    setLogradouroEnv3('');
+                    setNumeroCasaEnv3('')
+                    setComplementoEnv3('');
+                    setTipoDeEnvolvimentoEnv3('');
+                    setNacionalidadeEnv3('');
+                    setNaturalidadeEnv3('');
+                    setIdadeAparenteEnv3('');
+                    setEstadoCivilEnv3('');
+                    setCutisEnv3('');
+                    setOcupaçãoAtualEnv3('');
+                    setGrauEscolarEnv3('');
+                    setOrgãoEpedidorEnv3('');
+                    setUfEnvolvidoEnv3('');
+                    setpaisMoradiaEnv3('');
+                    setEnv3(false);
+
+                    
+                    setEnv4(false),
+
+                   
+
+                    setMarcaDagua('');
+                    setMicroImpressoes('');
+                    setRegistroCoincidente('');
+                    setImagemLatente('');
+                    setImpressaoRelevo('');
+                    setNumeraçaoNota('');
+                    setFibrasColoridas('');
+                    setMarcaTatil('');
+                    setFioDeSegurança('');
+                    setFundosEspeciais('');
+                    setFaiaHolografica('');
+                    setFibrasLuzVioleta('');
+                    setOrigemCedula('');
+                    setEstadoAnimo('');
+                    setTentouEvadir('');
+                    setPossuiaOutrascCeduas('');
+                    setPagouApos('');
+
+                    setJanelaTransparente('');
+                    setMoeda('');
+                    setOutrasCaracteristicas('');
+                    setTipoPapel('');
+
+                    //variaveis agente relator
+                    setMatriculaAgenteRelator('');
+                    setSiapeAgenteRelator('');
+                    setCargoAgenteRelator('');
+                    setnomeAgenteRelator('');
+
+                    //agente integrante 1
+                    setNomeAgente1('');
+                    setSiapeAgente1('');
+                    setMatriculaAgente1('');
+                    setCargoAgente1('');
+                    setTipoEnvolvimentoAgente1('');
+
+                    //agente integrante 2
+                    setNomeAgente2('');
+                    setSiapeAgente2('');
+                    setMatriculaAgente2('');
+                    setCargoAgente2('');
+                    setTipoEnvolvimentoAgente2('');
+
+                    setLoading(false);
+                    alert('Dados enviados!');
+                    navigation.navigate('HomeRo');
+
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+            
+
+
+            }
+
+            if(env2){
+
+                 firebase.database().ref('/Ocorrencias').child(chave).set({
+                nome: nome,
+                cpf: cpf,                
+                data:data,
+                hora:hora,
+                identidade:identidade,
+                nascimento:nascimento,
+                mae:mae,
+                pai:pai,
+                telefone:telefone,
+                genero:genero,
+                estado:estado,
+                cep:cep,
+                cidade:cidade,
+                bairro:bairro,
+                logradouro:logradouro,
+                numeroCasa:numeroCasa,
+                complemento:complemento,
+                nacionalidade:nacionalidade,
+                naturalidade:naturalidade,
+                idadeAparente:idadeAparente,
+                estadoCivil:estadoCivil,
+                cutis:cutis,
+                ocupaçãoAtual:ocupaçãoAtual,
+                grauEscolar:grauEscoar,
+                orgãoExpedidor:orgãoExpedidor,
+                ufEnvolvido:ufEnvolvido,
+                paisMoradia:paisMoradia,
+
+                
+                tipoOcorrencia1:tipoOcorrencia1,
+                tipodeEnvolvimento:tipoDeEnvolvimento,
+                tipoRo:tipoRo,
+                tentadoConsumado:tentadoConsumado,
+                alvoDoEvento:alvoDoEvento,
+                dataDoFato:dataDoFato,
+                horarioDoFato:horarioDoFato,
+                dataFinal:dataFinal,              
+                horarioFinal:horarioFinal,
+                historico:historico,
+                objetosRecolhidos:objetosRecolhidos,
+                local:local,
+
+                //env2
+                env2:env2,
+                nomeEnv2: nomeEnv2,
+                cpfEnv2: cpfEnv2,
+                identidadeEnv2:identidadeEnv2,
+                nascimentoEnv2:nascimentoEnv2,
+                maeEnv2:maeEnv2,
+                paiEnv2:paiEnv2,
+                telefoneEnv2:telefoneEnv2,
+                generoEnv2:generoEnv2,
+                estadoEnv2:estadoEnv2,
+                cepEnv2:cepEnv2,
+                cidadeEnv2:cidadeEnv2,
+                bairroEnv2:bairroEnv2,
+                logradouroEnv2:logradouroEnv2,
+                numeroCasaEnv2:numeroCasaEnv2,
+                complementoEnv2:complementoEnv2,
+                tipodeEnvolvimentoEnv2:tipoDeEnvolvimentoEnv2,
+                nacionalidadeEnv2:nacionalidadeEnv2,
+                naturalidadeEnv2:naturalidadeEnv2,
+                idadeAparenteEnv2:idadeAparenteEnv2,
+                estadoCivilEnv2:estadoCivilEnv2,
+                cutisEnv2:cutisEnv2,
+                ocupaçãoAtualEnv2:ocupaçãoAtualEnv2,
+                grauEscolarEnv2:grauEscoarEnv2,
+                orgãoExpedidorEnv2:orgãoExpedidorEnv2,
+                ufEnvolvidoEnv2:ufEnvolvidoEnv2,
+                paisMoradiaEnv2:paisMoradiaEnv2,
+
+                env3:env3,
+                env4:env4,
+
+               
+                //nota falsa estado cidadão
+                notaFalsa:notaFalsa,
+
+                marcaDagua:marcaDagua,
+                microImpressoes:microImpressoes,
+                regitroCoincidente:registroCoincidente,
+                imagemLatente:imagemLatente,
+                impressaoRelevo:impressaoRelevo,
+                numeraçaoNota:numeraçaoNota,
+                fibrasColoridas:fibrasColoridas,
+                marcaTatil:marcaTatil,
+                fioDeSegurança:fioDeSegurança,
+                fundosEspeciais:fundosEspeciais,
+                faixaHoografica:faixaHoografica,
+                fibrasLuzVioleta:fibrasLuzVioleta,
+                origemCedula:origemCedula,
+                estadoAnimo:estadoAnimo,
+                tentouEvadir:tentouEvadir,
+                possuiaOutrasCedulas:possuiaOutrasCedulas,
+                pagouApos:pagouApos,
+                moeda:moeda,
+                janelaTransparente:janelaTransparente,
+                outrasCaracteristicas:outrasCaracteristicas,
+                tipoDoPapel:tipoDoPapel,
+
+                //agente envolvido 1
+                nomeAgente1:nomeAgente1,
+                siapeAgente1:siapeAgente1,
+                matriculaAgente1:matriculaAgente1,
+                cargoAgente1:cargoAgente1,
+                tipoEnvolvimentoAgente1:tipoEnvolvimentoAgente1,
+                
+                //agente relator
+                matriculaAgenteRelator:matriculaAgenteRelator,
+                siapeAgenteRelator:siapeAgenteRelator,
+                cargoAgenteRelator:cargoAgenteRelator,
+                nomeAgenteRelator:nomeAgenteRelator,
+                chaveFoto:chave,
+
+                //agente envolvido 2
+                nomeAgente2:nomeAgente2,
+                siapeAgente2:siapeAgente2,
+                matriculaAgente2:matriculaAgente2,
+                cargoAgente2:cargoAgente2,
+                tipoEnvolvimentoAgente2:tipoEnvolvimentoAgente2,
+
+                
+                
+                
+            })
+
+                .then(() => { 
+                    setNome('');
+                    setCpf('');
+                    
+                    setIdentidade('');
+                    setNascimento('');
+                    setTipoRo('');
+                    setLocal('');
+                    setMae('');
+                    setPai('');
+                    setTelefone('');
+                    setGenero('');
+                    setHistorico('');
+                    setEstado('');
+                    setTipoOcorrencia('');
+                    setCep('');
+                    setCidade('');
+                    setBairro('');
+                    setLogradouro('');
+                    setNumeroCasa('');
+                    setComplemento('');
+
+
+
+                    setTipoDeEnvolvimento(''),
+                    setNacionalidade(''),
+                    setNaturalidade(''),
+                    setIdadeAparente(''),
+                    setEstadoCivil(''),
+                    setCutis(''),
+                    setOcupaçãoAtual(''),
+                    setGrauEscolar(''),
+                    setOrgãoEpedidor(''),
+                    setUfEnvolvido(''),
+                    setpaisMoradia(''),
+                    setTentadoConsumado(''),
+                    setAlvoDoEvento(''),
+                    setDataDoFato(''),
+                    setHorarioDoFato(''),
+                    setDataFinal(''),
+                    setHorarioFinal(''),
+                    setNotaFalsa(false),
+                    setEnv2(false),
+                    setEnv3(false),
+                    setEnv4(false),
+                    
+                    setNomeEnv2(''),
+                    setCpfEnv2(''),
+                    setIdentidadeEnv2(''),
+                    setNascimentoEnv2(''),
+                    setMaeEnv2(''),
+                    setPaiEnv2(''),
+                    setTelefoneEnv2(''),
+                    setGeneroEnv2(''),
+                    setEstadoEnv2(''),
+                    setCepEnv2(''),
+                    setCidadeEnv2(''),
+                    setBairroEnv2(''),
+                    setLogradouroEnv2(''),
+                    setNumeroCasaEnv2(''),
+                    setComplementoEnv2(''),
+
+                    setTipoDeEnvolvimentoEnv2(''),
+                    setNacionalidadeEnv2(''),
+                    setNaturalidadeEnv2(''),
+                    setIdadeAparenteEnv2(''),
+                    setEstadoCivilEnv2(''),
+                    setCutisEnv2(''),
+                    setOcupaçãoAtualEnv2(''),
+                    setGrauEscolarEnv2(''),
+                    setOrgãoEpedidorEnv2(''),
+                    setUfEnvolvidoEnv2(''),
+                    setpaisMoradiaEnv2(''),
+
+                 
+                   
+
+                    setMarcaDagua('');
+                    setMicroImpressoes('');
+                    setRegistroCoincidente('');
+                    setImagemLatente('');
+                    setImpressaoRelevo('');
+                    setNumeraçaoNota('');
+                    setFibrasColoridas('');
+                    setMarcaTatil('');
+                    setFioDeSegurança('');
+                    setFundosEspeciais('');
+                    setFaiaHolografica('');
+                    setFibrasLuzVioleta('');
+                    setOrigemCedula('');
+                    setEstadoAnimo('');
+                    setTentouEvadir('');
+                    setPossuiaOutrascCeduas('');
+                    setPagouApos('');
+
+                    setJanelaTransparente('');
+                    setMoeda('');
+                    setOutrasCaracteristicas('');
+                    setTipoPapel('');
+
+                    //variaveis agente relator
+                    setMatriculaAgenteRelator('');
+                    setSiapeAgenteRelator('');
+                    setCargoAgenteRelator('');
+                    setnomeAgenteRelator('');
+
+                    //agente integrante 1
+                    setNomeAgente1('');
+                    setSiapeAgente1('');
+                    setMatriculaAgente1('');
+                    setCargoAgente1('');
+                    setTipoEnvolvimentoAgente1('');
+
+                    //agente integrante 2
+                    setNomeAgente2('');
+                    setSiapeAgente2('');
+                    setMatriculaAgente2('');
+                    setCargoAgente2('');
+                    setTipoEnvolvimentoAgente2('');
+
+                    setLoading(false);
+                    alert('Dados enviados!');
+                    navigation.navigate('HomeRo');
+
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+            
+
+
+            
+
+            }
+            
+            else{
 
              firebase.database().ref('/Ocorrencias').child(chave).set({
                nome: nome,
@@ -495,6 +1289,8 @@ export default () => {
                 local:local,
 
                 env2:env2,
+                env3:env3,
+                env4:env4,
 
 
                 marcaDagua:marcaDagua,
@@ -766,6 +1562,34 @@ export default () => {
         setNascimentoEnv2(mask(t,['99/99/9999']))
     }
 
+    //Mascaras env 3
+
+    const mascaraCpfEnv3 = (t) => {
+        setCpfEnv3(mask(t,['999.999.999-99']))
+    }
+
+    const mascaraTelefoneEnv3 = (t) => {
+        setTelefoneEnv3(mask(t,['(99) 99999-9999']))
+    }
+
+    const mascaraNascimentoEnv3 = (t) => {
+        setNascimentoEnv3(mask(t,['99/99/9999']))
+    }
+
+    //Mascaras env 4
+
+    const mascaraCpfEnv4 = (t) => {
+        setCpfEnv4(mask(t,['999.999.999-99']))
+    }
+
+    const mascaraTelefoneEnv4 = (t) => {
+        setTelefoneEnv4(mask(t,['(99) 99999-9999']))
+    }
+
+    const mascaraNascimentoEnv4 = (t) => {
+        setNascimentoEnv4(mask(t,['99/99/9999']))
+    }
+
     //mascaras informações da ocorrência
     const mascaraDataFato = (t) => {
         setDataDoFato(mask(t,['99/99/9999']))
@@ -842,7 +1666,12 @@ export default () => {
                   if(switchEnv2 === true){
                       setEnv2(true)
                   }else{
+                    setSwitchEnv2(false)
+                    setSwitchEnv3(false)
+                    setSwitchEnv4(false)
                     setEnv2(false)
+                    setEnv3(false)
+                    setEnv4(false)
                     setNomeEnv2('')
                     setCpfEnv2('')
                     setIdentidadeEnv2('')
@@ -871,10 +1700,166 @@ export default () => {
                     setUfEnvolvidoEnv2('')
                     setpaisMoradiaEnv2('')  
 
-                  }if(switchAgenteParticipante1 === true){
+                    setNomeEnv3('')
+                    setCpfEnv3('')
+                    setIdentidadeEnv3('')
+                    setNascimentoEnv3('')
+                    setMaeEnv3('')
+                    setPaiEnv3('')
+                    setTelefoneEnv3('')
+                    setGeneroEnv3('')
+                    setEstadoEnv3('')
+                    setCepEnv3('')
+                    setCidadeEnv3('')
+                    setBairroEnv3('')
+                    setLogradouroEnv3('')
+                    setNumeroCasaEnv3('')
+                    setComplementoEnv3('')
+
+                    setTipoDeEnvolvimentoEnv3('')
+                    setNacionalidadeEnv3('')
+                    setNaturalidadeEnv3('')
+                    setIdadeAparenteEnv3('')
+                    setEstadoCivilEnv3('')
+                    setCutisEnv3('')
+                    setOcupaçãoAtualEnv3('')
+                    setGrauEscolarEnv3('')
+                    setOrgãoEpedidorEnv3('')
+                    setUfEnvolvidoEnv3('')
+                    setpaisMoradiaEnv3('')  
+
+                    setNomeEnv4('')
+                    setCpfEnv4('')
+                    setIdentidadeEnv4('')
+                    setNascimentoEnv4('')
+                    setMaeEnv4('')
+                    setPaiEnv4('')
+                    setTelefoneEnv4('')
+                    setGeneroEnv4('')
+                    setEstadoEnv4('')
+                    setCepEnv4('')
+                    setCidadeEnv4('')
+                    setBairroEnv4('')
+                    setLogradouroEnv4('')
+                    setNumeroCasaEnv4('')
+                    setComplementoEnv4('')
+
+                    setTipoDeEnvolvimentoEnv4('')
+                    setNacionalidadeEnv4('')
+                    setNaturalidadeEnv4('')
+                    setIdadeAparenteEnv4('')
+                    setEstadoCivilEnv4('')
+                    setCutisEnv4('')
+                    setOcupaçãoAtualEnv4('')
+                    setGrauEscolarEnv4('')
+                    setOrgãoEpedidorEnv4('')
+                    setUfEnvolvidoEnv4('')
+                    setpaisMoradiaEnv4('')
+
+                  }
+                  if(switchEnv3 === true){
+                      setEnv3(true)
+                  }else{
+                    setEnv4(false)
+                    setEnv3(false)
+                    setSwitchEnv4(false)
+                    setSwitchEnv3(false)
+                    
+                    
+                    setNomeEnv3('')
+                    setCpfEnv3('')
+                    setIdentidadeEnv3('')
+                    setNascimentoEnv3('')
+                    setMaeEnv3('')
+                    setPaiEnv3('')
+                    setTelefoneEnv3('')
+                    setGeneroEnv3('')
+                    setEstadoEnv3('')
+                    setCepEnv3('')
+                    setCidadeEnv3('')
+                    setBairroEnv3('')
+                    setLogradouroEnv3('')
+                    setNumeroCasaEnv3('')
+                    setComplementoEnv3('')
+
+                    setTipoDeEnvolvimentoEnv3('')
+                    setNacionalidadeEnv3('')
+                    setNaturalidadeEnv3('')
+                    setIdadeAparenteEnv3('')
+                    setEstadoCivilEnv3('')
+                    setCutisEnv3('')
+                    setOcupaçãoAtualEnv3('')
+                    setGrauEscolarEnv3('')
+                    setOrgãoEpedidorEnv3('')
+                    setUfEnvolvidoEnv3('')
+                    setpaisMoradiaEnv3('')  
+
+                    setNomeEnv4('')
+                    setCpfEnv4('')
+                    setIdentidadeEnv4('')
+                    setNascimentoEnv4('')
+                    setMaeEnv4('')
+                    setPaiEnv4('')
+                    setTelefoneEnv4('')
+                    setGeneroEnv4('')
+                    setEstadoEnv4('')
+                    setCepEnv4('')
+                    setCidadeEnv4('')
+                    setBairroEnv4('')
+                    setLogradouroEnv4('')
+                    setNumeroCasaEnv4('')
+                    setComplementoEnv4('')
+
+                    setTipoDeEnvolvimentoEnv4('')
+                    setNacionalidadeEnv4('')
+                    setNaturalidadeEnv4('')
+                    setIdadeAparenteEnv4('')
+                    setEstadoCivilEnv4('')
+                    setCutisEnv4('')
+                    setOcupaçãoAtualEnv4('')
+                    setGrauEscolarEnv4('')
+                    setOrgãoEpedidorEnv4('')
+                    setUfEnvolvidoEnv4('')
+                    setpaisMoradiaEnv4('')  
+
+                  }
+                  if(switchEnv4 === true){
+                      setEnv4(true)
+                  }else{
+                    setEnv4(false)
+                    setNomeEnv4('')
+                    setCpfEnv4('')
+                    setIdentidadeEnv4('')
+                    setNascimentoEnv4('')
+                    setMaeEnv4('')
+                    setPaiEnv4('')
+                    setTelefoneEnv4('')
+                    setGeneroEnv4('')
+                    setEstadoEnv4('')
+                    setCepEnv4('')
+                    setCidadeEnv4('')
+                    setBairroEnv4('')
+                    setLogradouroEnv4('')
+                    setNumeroCasaEnv4('')
+                    setComplementoEnv4('')
+
+                    setTipoDeEnvolvimentoEnv4('')
+                    setNacionalidadeEnv4('')
+                    setNaturalidadeEnv4('')
+                    setIdadeAparenteEnv4('')
+                    setEstadoCivilEnv4('')
+                    setCutisEnv4('')
+                    setOcupaçãoAtualEnv4('')
+                    setGrauEscolarEnv4('')
+                    setOrgãoEpedidorEnv4('')
+                    setUfEnvolvidoEnv4('')
+                    setpaisMoradiaEnv4('')  
+
+                  }
+                  if(switchAgenteParticipante1 === true){
                       setAgenteParticipante1(true)
                   }else{
-                      setAgenteParticipante1(false)
+                      setAgenteParticipante1(false);
                       setSwitchAgenteParticipante2(false);
                       setSearchAgente1('');
                       setNomeAgente1('');
@@ -882,6 +1867,12 @@ export default () => {
                       setSiapeAgente1('');
                       setCargoAgente1('');
                       setTipoEnvolvimentoAgente1('');
+                      setNomeAgente2('');
+                      setMatriculaAgente2('');
+                      setSiapeAgente2('');
+                      setCargoAgente2('');
+                      setTipoEnvolvimentoAgente2('');
+                      setSearchAgente2('');
                   }
                    if(switchAgenteParticipante2 === true){
                       setAgenteParticipante2(true);
@@ -965,7 +1956,7 @@ export default () => {
                   }else{
                       setTipoDoPapel('')
                   }
-              },[switchEnv2,switchAgenteParticipante1,switchAgenteParticipante2,switchMarcaDagua,switchMicroImpressoes,switchRegistroCoincidente,
+              },[switchEnv2,switchEnv3,switchEnv4,switchAgenteParticipante1,switchAgenteParticipante2,switchMarcaDagua,switchMicroImpressoes,switchRegistroCoincidente,
                 switchImagemLatente,switchImpressaoRelevo,switchNumeraçaoNota,switchFibrasColoridas,switchMarcaTatil,
                 switchFioDeSegurança,switchFundosEspeciais,switchFibrasLuzVioleta,switchFaixaHoografica,switchTipoDoPapel,switchJanelaTransparente,
             ]) 
@@ -988,34 +1979,85 @@ export default () => {
                   setMaeEnv2('Sem registro')
               }
 
+              const semRegistroPai3 = () => {
+                    setPaiEnv3('Sem registro')
+              }
+
+              const semRegistroMae3 = () => {
+                  setMaeEnv3('Sem registro')
+              }
+
+              const semRegistroPai4 = () => {
+                    setPaiEnv4('Sem registro')
+              }
+
+              const semRegistroMae4 = () => {
+                  setMaeEnv4('Sem registro')
+              }
+
 
             
                     //fetch('https://viacep.com.br/ws/30570000/json/')por cep em baio por uf cidade
                 const buscarCep = (cep) =>{
                             fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
-                                    console.log(data);
+                                   if(data.localidade){
+                                        console.log(data);
                                     setCidade(data.localidade);
                                     setBairro(data.bairro);
                                     setLogradouro(data.logradouro);
                                     setEstado(data.uf)
-                                    console.log(cidade);
-                                    console.log(bairro);
-                                    console.log(estado);
-                                    console.log(logradouro);
+                                   }else{
+                                       alert('CEP não encontrado');
+                                   }
+                                   
+                                    
                             })
+                                
+                            
                 }
 
                  const buscarCepenv2 = (cep) =>{
                             fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
-                                    console.log(data);
+                                   if(data.localidade){
+                                        console.log(data);
                                     setCidadeEnv2(data.localidade);
                                     setBairroEnv2(data.bairro);
                                     setLogradouroEnv2(data.logradouro);
                                     setEstadoEnv2(data.uf)
-                                    console.log(cidadeEnv2);
-                                    console.log(bairroEnv2);
-                                    console.log(estadoEnv2);
-                                    console.log(logradouroEnv2);
+                                   }else{
+                                       alert('CEP não encontrado');
+                                   }
+                                   
+                            })
+                }
+
+                 const buscarCepenv3 = (cep) =>{
+                            fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
+                                   if(data.localidade){
+                                        console.log(data);
+                                    setCidadeEnv3(data.localidade);
+                                    setBairroEnv3(data.bairro);
+                                    setLogradouroEnv3(data.logradouro);
+                                    setEstadoEnv3(data.uf)
+                                   }else{
+                                       alert('CEP não encontrado');
+                                   }
+                                    
+                            })
+                }
+
+                 const buscarCepenv4 = (cep) =>{
+                            fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
+                                    if(data.localidade){
+                                        console.log(data);
+                                    setCidadeEnv4(data.localidade);
+                                    setBairroEnv4(data.bairro);
+                                    setLogradouroEnv4(data.logradouro);
+                                    setEstadoEnv4(data.uf)
+                                   }else{
+                                       alert('CEP não encontrado');
+                                   }
+                                    
                             })
                 }
 
@@ -1314,7 +2356,7 @@ export default () => {
             <View style= {styles.viewEstado}>
 
 
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' onEndEditing={()=>buscarCep(cep)} keyboardType='number-pad' value={cep} onChangeText={(t) => setCep(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' maxLength={8} placeholderTextColor ='#666360' onEndEditing={()=>buscarCep(cep)} keyboardType='number-pad' value={cep} onChangeText={(t) => setCep(t)} />
                 <Picker
                 mode="dropdown"
                 selectedValue={estado}
@@ -1525,7 +2567,7 @@ export default () => {
             <View style= {styles.viewEstado}>
 
 
-                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' placeholderTextColor ='#666360' onEndEditing={()=>buscarCepenv2(cepEnv2)} keyboardType='number-pad' value={cepEnv2} onChangeText={(t) => setCepEnv2(t)} />
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' maxLength={8} placeholderTextColor ='#666360' onEndEditing={()=>buscarCepenv2(cepEnv2)} keyboardType='number-pad' value={cepEnv2} onChangeText={(t) => setCepEnv2(t)} />
                 <Picker
                 mode="dropdown"
                 selectedValue={estadoEnv2}
@@ -1582,10 +2624,417 @@ export default () => {
                         
                        
                        </View>
+
+                       <View style={{justifyContent:'flex-start',alignItems:'flex-start',flexDirection:'row',marginLeft:30}}>
+                        <View style={{marginRight:15}}>
+                            <TextEnvolvido2>Envolvido 3</TextEnvolvido2>
+                        </View>
+                     <Switch thumbColor='#FF9000' trackColor={{true: '#FF9000', false: '#2E2E2E'}} value={switchEnv3} onValueChange={(t)=>setSwitchEnv3(t)} />
+                </View>
                        
               </View>
               }  
 
+
+
+              { env3 && 
+              <View>
+              <View style={styles.viewQualiEnv}>
+                <TextSubtitulo>Qualificação do Envolvido 3</TextSubtitulo>
+            </View>
+
+           
+
+               
+
+                
+
+
+                <View style={{marginLeft:30,marginTop:15}}>
+                
+                <InputsInteiro source = {require('../../../assets/rgicon.png')} placeholder ='RG' placeholderTextColor ='#666360' keyboardType='number-pad' value={identidadeEnv3} onChangeText={(t) => setIdentidadeEnv3(t)}/>
+                 <InputsInteiro source = {require('../../../assets/rgicon.png')} placeholder ='CPF' placeholderTextColor ='#666360' keyboardType='number-pad' value={cpfEnv3} onChangeText={(t) => mascaraCpfEnv3(t)}/>
+                  <InputsInteiro source = {require('../../../assets/phone.png')} placeholder ='Telefone' placeholderTextColor ='#666360' keyboardType='number-pad' value={telefoneEnv3} onChangeText={(t) => mascaraTelefoneEnv3(t)}/>
+                </View>
+
+           
+
+            <View style = {styles.viewInputsMeio} >
+                <InputsInteiro  source = {require('../../../assets/user.png')} placeholder ='Nome Completo' placeholderTextColor ='#666360' autoCapitalize='characters' value={nomeEnv3} onChangeText={(t)=>setNomeEnv3(t)} />
+                
+                 <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={maeEnv3} onChangeText={(t) => setMaeEnv3(t)}/>
+                    <BtnFixa onPress={semRegistroMae2}>
+                        <Image  source = {require('../../../assets/Btnfixa.png')}/>
+                    </BtnFixa>
+                </View>
+                
+                 <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={paiEnv3} onChangeText={(t) => setPaiEnv3(t)}/>
+                    <BtnFixa onPress={semRegistroPai2}>
+                        <Image  source = {require('../../../assets/Btnfixa.png')}/>
+                    </BtnFixa>
+                 </View>
+
+            </View>
+            
+            <View style = {styles.viewNascimento}>
+
+                <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Nascimento' placeholderTextColor ='#666360' keyboardType='number-pad' value={nascimentoEnv3} onChangeText={(t) => mascaraNascimentoEnv3(t)} />
+
+                <Picker
+                mode="dropdown"
+                selectedValue={generoEnv3}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setGeneroEnv3(itemValue)}
+                >
+                <Picker.Item label="Gênero" value="Gênero" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                </Picker>
+                
+            </View>
+
+             <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Nacionalidade' placeholderTextColor ='#666360' value={nacionalidadeEnv3} onChangeText={(t) => setNacionalidadeEnv3(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Naturalidade' placeholderTextColor ='#666360' value={naturalidadeEnv3} onChangeText={(t) => setNaturalidadeEnv3(t)} />
+            </View>
+
+             <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Idade Aparente' placeholderTextColor ='#666360' value={idadeAparenteEnv3} onChangeText={(t) => setIdadeAparenteEnv3(t)} />
+                       
+                       <Picker
+                mode="dropdown"
+                selectedValue={estadoCivilEnv3}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setEstadoCivilEnv3(itemValue)}
+                >
+                <Picker.Item label="Estado Civil" value="Estado Civil" />
+                <Picker.Item label="Solteiro(a)" value="Solteiro(a)" />
+                <Picker.Item label="Casado(a)" value="Casado(a)" />
+                <Picker.Item label="Divorciado(a)" value="Divorciado(a)" />
+                </Picker>
+                       </View>
+
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutisEnv3} onChangeText={(t) => setCutisEnv3(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Ocupação Atual' placeholderTextColor ='#666360' value={ocupaçãoAtualEnv3} onChangeText={(t) => setOcupaçãoAtualEnv3(t)} />
+            </View>
+
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidorEnv3} onChangeText={(t) => setOrgãoEpedidorEnv3(t)} />
+               
+               <Picker
+                mode="dropdown"
+                selectedValue={grauEscoarEnv3}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setGrauEscolarEnv3(itemValue)}
+                >
+                <Picker.Item label="Grau de Escolaridade" value="Grau de Escolaridade" />
+                <Picker.Item label="Fundamental Incompleto" value="Fundamental Incompleto" />
+                <Picker.Item label="Fundamental Completo" value="Fundamental Completo" />
+                <Picker.Item label="Médio Incompleto" value="Médio Incompleto" />
+                <Picker.Item label="Médio Completo" value="Médio Completo" />
+                <Picker.Item label="Superior Incompleto" value="Superior Incompleto" />
+                <Picker.Item label="Superior Completo" value="Superior Completo" />
+                </Picker>
+                          </View>
+
+                   <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='UF Nascimento' placeholderTextColor ='#666360' value={ufEnvolvidoEnv3} onChangeText={(t) => setUfEnvolvidoEnv3(t)} />
+                     
+                     <Picker
+                mode="dropdown"
+                selectedValue={tipoDeEnvolvimentoEnv3}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTipoDeEnvolvimentoEnv3(itemValue)}
+                >
+                <Picker.Item label="Tipo de Envolvimento" value="Tipo de Envolvimento" />
+                <Picker.Item label="Autor" value="Autor" />
+                <Picker.Item label="Vítima" value="Vítima" />
+                <Picker.Item label="Testemunha" value="Testemunha" />
+                </Picker>
+                      </View>
+
+                   
+            
+
+                   
+
+
+            <>
+                <TextEndereço>Endereço do Envolvido 3</TextEndereço>
+
+            </>
+
+            <View style= {styles.viewEstado}>
+
+
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' maxLength={8} placeholderTextColor ='#666360' onEndEditing={()=>buscarCepenv3(cepEnv3)} keyboardType='number-pad' value={cepEnv3} onChangeText={(t) => setCepEnv3(t)} />
+                <Picker
+                mode="dropdown"
+                selectedValue={estadoEnv3}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff' }}
+                onValueChange={(itemValue, itemIndex) => setEstadoEnv3(itemValue)}
+                >
+                        <Picker.Item label="Minas Gerais" value="MG" />
+                        <Picker.Item label="Acre" value="AC" />
+                        <Picker.Item label="Alagoas" value="AL" />
+                        <Picker.Item label="Amapa" value="AP" />
+                        <Picker.Item label="Amazonas" value="AM" />
+                        <Picker.Item label="Bahia" value="BA" />
+                        <Picker.Item label="Ceará" value="CE" />
+                        <Picker.Item label="Espírito Santo" value="ES" />
+                        <Picker.Item label="Goiás" value="GO" />
+                        <Picker.Item label="Maranhão" value="MA" />
+                        <Picker.Item label="Mato Grosso do Sul" value="MS" />
+                        <Picker.Item label="Pará" value="PA" />
+                        <Picker.Item label="Paraíba" value="PB" />
+                        <Picker.Item label="Paraná" value="PR" />
+                        <Picker.Item label="Pernambuco" value="PE" />
+                        <Picker.Item label="Piauí" value="PI" />
+                        <Picker.Item label="Rio de Janeiro" value="RJ" />
+                        <Picker.Item label="Rio Grande do Norte" value="RN" />
+                        <Picker.Item label="Rio Grande do Sul" value="RS" />
+                        <Picker.Item label="Rondônia" value="RO" />
+                        <Picker.Item label="Roraima" value="RR" />
+                        <Picker.Item label="Santa Catarina" value="SC" />
+                        <Picker.Item label="Pernambuco" value="PE" />
+                        <Picker.Item label="São Paulo" value="SP" />
+                        <Picker.Item label="Sergipe" value="SE" />
+                        <Picker.Item label="Tocantins" value="TO" />
+                        <Picker.Item label="Distrito Federal" value="DF" />
+                </Picker>
+            </View>
+                    
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cidade' placeholderTextColor ='#666360' value={cidadeEnv3} onChangeText={(t) => setCidadeEnv3(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Bairro' placeholderTextColor ='#666360' value={bairroEnv3} onChangeText={(t) => setBairroEnv3(t)} />
+            </View>
+
+            <View style = {styles.viewLogradoro}>
+             <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouroEnv3} onChangeText={(t) => setLogradouroEnv3(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasaEnv3} onChangeText={(t) => setNumeroCasaEnv3(t)} />
+
+            </View>
+
+            <View style = {{marginLeft:30}} >
+            <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Complemento' placeholderTextColor ='#666360' value={complementoEnv3} onChangeText={(t) => setComplementoEnv3(t)}/>
+            </View>
+
+             <View style = {styles.viewCidadeBairro}>
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='País' placeholderTextColor ='#666360' value={paisMoradiaEnv3} onChangeText={(t) => setpaisMoradiaEnv3(t)} />
+                        
+                       
+                       </View>
+
+                       <View style={{justifyContent:'flex-start',alignItems:'flex-start',flexDirection:'row',marginLeft:30}}>
+                        <View style={{marginRight:15}}>
+                            <TextEnvolvido2>Envolvido 4</TextEnvolvido2>
+                        </View>
+                     <Switch thumbColor='#FF9000' trackColor={{true: '#FF9000', false: '#2E2E2E'}} value={switchEnv4} onValueChange={(t)=>setSwitchEnv4(t)} />
+                </View>
+                       
+              </View>
+              }
+
+
+
+              { env4 && 
+              <View>
+              <View style={styles.viewQualiEnv}>
+                <TextSubtitulo>Qualificação do Envolvido 4</TextSubtitulo>
+            </View>
+
+           
+
+               
+
+                
+
+
+                <View style={{marginLeft:30,marginTop:15}}>
+                
+                <InputsInteiro source = {require('../../../assets/rgicon.png')} placeholder ='RG' placeholderTextColor ='#666360' keyboardType='number-pad' value={identidadeEnv4} onChangeText={(t) => setIdentidadeEnv4(t)}/>
+                 <InputsInteiro source = {require('../../../assets/rgicon.png')} placeholder ='CPF' placeholderTextColor ='#666360' keyboardType='number-pad' value={cpfEnv4} onChangeText={(t) => mascaraCpfEnv4(t)}/>
+                  <InputsInteiro source = {require('../../../assets/phone.png')} placeholder ='Telefone' placeholderTextColor ='#666360' keyboardType='number-pad' value={telefoneEnv4} onChangeText={(t) => mascaraTelefoneEnv4(t)}/>
+                </View>
+
+           
+
+            <View style = {styles.viewInputsMeio} >
+                <InputsInteiro  source = {require('../../../assets/user.png')} placeholder ='Nome Completo' placeholderTextColor ='#666360' autoCapitalize='characters' value={nomeEnv4} onChangeText={(t)=>setNomeEnv4(t)} />
+                
+                 <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={maeEnv4} onChangeText={(t) => setMaeEnv4(t)}/>
+                    <BtnFixa onPress={semRegistroMae2}>
+                        <Image  source = {require('../../../assets/Btnfixa.png')}/>
+                    </BtnFixa>
+                </View>
+                
+                 <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                    <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={paiEnv4} onChangeText={(t) => setPaiEnv4(t)}/>
+                    <BtnFixa onPress={semRegistroPai2}>
+                        <Image  source = {require('../../../assets/Btnfixa.png')}/>
+                    </BtnFixa>
+                 </View>
+
+            </View>
+            
+            <View style = {styles.viewNascimento}>
+
+                <InputMenor source = {require('../../../assets/calendar.png')} placeholder ='Nascimento' placeholderTextColor ='#666360' keyboardType='number-pad' value={nascimentoEnv4} onChangeText={(t) => mascaraNascimentoEnv4(t)} />
+
+                <Picker
+                mode="dropdown"
+                selectedValue={generoEnv4}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setGeneroEnv4(itemValue)}
+                >
+                <Picker.Item label="Gênero" value="Gênero" />
+                <Picker.Item label="Masculino" value="Masculino" />
+                <Picker.Item label="Feminino" value="Feminino" />
+                </Picker>
+                
+            </View>
+
+             <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Nacionalidade' placeholderTextColor ='#666360' value={nacionalidadeEnv4} onChangeText={(t) => setNacionalidadeEnv4(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Naturalidade' placeholderTextColor ='#666360' value={naturalidadeEnv4} onChangeText={(t) => setNaturalidadeEnv4(t)} />
+            </View>
+
+             <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Idade Aparente' placeholderTextColor ='#666360' value={idadeAparenteEnv4} onChangeText={(t) => setIdadeAparenteEnv4(t)} />
+                       
+                       <Picker
+                mode="dropdown"
+                selectedValue={estadoCivilEnv4}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setEstadoCivilEnv4(itemValue)}
+                >
+                <Picker.Item label="Estado Civil" value="Estado Civil" />
+                <Picker.Item label="Solteiro(a)" value="Solteiro(a)" />
+                <Picker.Item label="Casado(a)" value="Casado(a)" />
+                <Picker.Item label="Divorciado(a)" value="Divorciado(a)" />
+                </Picker>
+                       </View>
+
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cútis' placeholderTextColor ='#666360' value={cutisEnv4} onChangeText={(t) => setCutisEnv4(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Ocupação Atual' placeholderTextColor ='#666360' value={ocupaçãoAtualEnv4} onChangeText={(t) => setOcupaçãoAtualEnv4(t)} />
+            </View>
+
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Orgão Expedidor' placeholderTextColor ='#666360' value={orgãoExpedidorEnv4} onChangeText={(t) => setOrgãoEpedidorEnv4(t)} />
+               
+               <Picker
+                mode="dropdown"
+                selectedValue={grauEscoarEnv4}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setGrauEscolarEnv4(itemValue)}
+                >
+                <Picker.Item label="Grau de Escolaridade" value="Grau de Escolaridade" />
+                <Picker.Item label="Fundamental Incompleto" value="Fundamental Incompleto" />
+                <Picker.Item label="Fundamental Completo" value="Fundamental Completo" />
+                <Picker.Item label="Médio Incompleto" value="Médio Incompleto" />
+                <Picker.Item label="Médio Completo" value="Médio Completo" />
+                <Picker.Item label="Superior Incompleto" value="Superior Incompleto" />
+                <Picker.Item label="Superior Completo" value="Superior Completo" />
+                </Picker>
+                          </View>
+
+                   <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='UF Nascimento' placeholderTextColor ='#666360' value={ufEnvolvidoEnv4} onChangeText={(t) => setUfEnvolvidoEnv4(t)} />
+                     
+                     <Picker
+                mode="dropdown"
+                selectedValue={tipoDeEnvolvimentoEnv4}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTipoDeEnvolvimentoEnv4(itemValue)}
+                >
+                <Picker.Item label="Tipo de Envolvimento" value="Tipo de Envolvimento" />
+                <Picker.Item label="Autor" value="Autor" />
+                <Picker.Item label="Vítima" value="Vítima" />
+                <Picker.Item label="Testemunha" value="Testemunha" />
+                </Picker>
+                      </View>
+
+                   
+            
+
+                   
+
+
+            <>
+                <TextEndereço>Endereço do Envolvido 4</TextEndereço>
+
+            </>
+
+            <View style= {styles.viewEstado}>
+
+
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='CEP' maxLength={8} placeholderTextColor ='#666360' onEndEditing={()=>buscarCepenv4(cepEnv4)} keyboardType='number-pad' value={cepEnv4} onChangeText={(t) => setCepEnv4(t)} />
+                <Picker
+                mode="dropdown"
+                selectedValue={estadoEnv4}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff' }}
+                onValueChange={(itemValue, itemIndex) => setEstadoEnv4(itemValue)}
+                >
+                        <Picker.Item label="Minas Gerais" value="MG" />
+                        <Picker.Item label="Acre" value="AC" />
+                        <Picker.Item label="Alagoas" value="AL" />
+                        <Picker.Item label="Amapa" value="AP" />
+                        <Picker.Item label="Amazonas" value="AM" />
+                        <Picker.Item label="Bahia" value="BA" />
+                        <Picker.Item label="Ceará" value="CE" />
+                        <Picker.Item label="Espírito Santo" value="ES" />
+                        <Picker.Item label="Goiás" value="GO" />
+                        <Picker.Item label="Maranhão" value="MA" />
+                        <Picker.Item label="Mato Grosso do Sul" value="MS" />
+                        <Picker.Item label="Pará" value="PA" />
+                        <Picker.Item label="Paraíba" value="PB" />
+                        <Picker.Item label="Paraná" value="PR" />
+                        <Picker.Item label="Pernambuco" value="PE" />
+                        <Picker.Item label="Piauí" value="PI" />
+                        <Picker.Item label="Rio de Janeiro" value="RJ" />
+                        <Picker.Item label="Rio Grande do Norte" value="RN" />
+                        <Picker.Item label="Rio Grande do Sul" value="RS" />
+                        <Picker.Item label="Rondônia" value="RO" />
+                        <Picker.Item label="Roraima" value="RR" />
+                        <Picker.Item label="Santa Catarina" value="SC" />
+                        <Picker.Item label="Pernambuco" value="PE" />
+                        <Picker.Item label="São Paulo" value="SP" />
+                        <Picker.Item label="Sergipe" value="SE" />
+                        <Picker.Item label="Tocantins" value="TO" />
+                        <Picker.Item label="Distrito Federal" value="DF" />
+                </Picker>
+            </View>
+                    
+            <View style = {styles.viewCidadeBairro}>
+                <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Cidade' placeholderTextColor ='#666360' value={cidadeEnv4} onChangeText={(t) => setCidadeEnv4(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Bairro' placeholderTextColor ='#666360' value={bairroEnv4} onChangeText={(t) => setBairroEnv4(t)} />
+            </View>
+
+            <View style = {styles.viewLogradoro}>
+             <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouroEnv4} onChangeText={(t) => setLogradouroEnv4(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasaEnv4} onChangeText={(t) => setNumeroCasaEnv4(t)} />
+
+            </View>
+
+            <View style = {{marginLeft:30}} >
+            <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='Complemento' placeholderTextColor ='#666360' value={complementoEnv4} onChangeText={(t) => setComplementoEnv4(t)}/>
+            </View>
+
+             <View style = {styles.viewCidadeBairro}>
+                <InputsInteiro source = {require('../../../assets/map-pin.png')} placeholder ='País' placeholderTextColor ='#666360' value={paisMoradiaEnv4} onChangeText={(t) => setpaisMoradiaEnv4(t)} />
+                        
+                       
+                       </View>
+
+                       
+                       
+              </View>
+              }
 
 
                 <View style={{justifyContent:'flex-start',alignItems:'flex-start',flexDirection:'row',marginLeft:30,marginTop:15}}>
