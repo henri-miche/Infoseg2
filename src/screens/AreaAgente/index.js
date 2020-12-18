@@ -1,21 +1,18 @@
 import React,{useState,useEffect,useRef} from 'react';
-import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image} from 'react-native';
+import { StyleSheet,View,Image} from 'react-native';
 import {Container,
-TextoBoasVindas,
-TouchExit,
-SubTitulo,
+
+
 GerarRo,
 TextoGerarRo,
-GerarRrm,
-OcorrenciasText,
+
 TextoRedefinirSenha,
 
 
 } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import firebase from '../../connection/FirebaseConection';
-import DownFotos2 from '../../components/DownFotos2';
-import Search from '../../components/Search'
+
 
 
 export default () => {
@@ -173,7 +170,7 @@ const pushDados = async () =>{
   }
 
    const handleClickAreaAgente = () =>{
-              navigation.navigate('HomeRdm');
+              navigation.navigate('RedefinirSenha');
   }
 
 

@@ -133,9 +133,10 @@ const pushDados = async () =>{
     },)
 
     useEffect(()=>{
-        if (searchTexto == '') {
+        if (searchTexto === '') {
             pushDados();
         }
+        console.log(searchTexto)
     },[searchTexto])
    
   useEffect(() => {
@@ -157,9 +158,6 @@ const pushDados = async () =>{
 
      
 
-     const todasOcorrencias = () =>  {
-        navigation.navigate('HomeRoSearch');
-    };
 
     const cadastroRo = () =>  {
         navigation.navigate('HomeRoCadastro');
@@ -178,7 +176,7 @@ const pushDados = async () =>{
   }
 
    const handleClickAreaAgente = () =>{
-              navigation.navigate('HomeRdmCadastro');
+              navigation.navigate('AreaAgente');
   }
 
 

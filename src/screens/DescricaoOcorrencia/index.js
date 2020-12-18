@@ -4,20 +4,35 @@ import {useNavigation, useRoute} from '@react-navigation/native'
 import firebase from '../../connection/FirebaseConection';
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
-import { Container,LoadingArea,BtnCadastrarOcorrencia,
+import moment from 'moment';
+import { Container,
+ViewTitullo,
+TextTitulo,
+TouchSair,
+ViewQualificaçao,
+TextQuaificaçao,
+TextNome,
+TextLabel,
+TextLabelText,
+TextLabelcamposmae,
+TextCamposmae,
+TextDetallhesOcorr,
+TextLabeldetalhes,
+TextDetalhes,
+TextCodRegistro,
+LoadingArea,BtnCadastrarOcorrencia,
 TextBtnOcorrencia,
 LoadingIcon,
 
 } from './styles';
-import moment from 'moment';
 
 export default () => {
 
         const route = useRoute();
         const navigation = useNavigation();
         const [key, setKey] = useState(route.params.key);
-        const [localparam, setlocalparam] = useState(route.params.local);
         const [chaveFoto, setChaveFoto] = useState();
+        const [localparam, setlocalparam] = useState(route.params.local);
 
         //variáveis envolvido 1
         const [nome, setNome] = useState();
@@ -65,61 +80,61 @@ export default () => {
         const [nomeOcorrencia,setNomeOcorrencia] = useState('');
 
         //variaveis env2
-        const [cpfEnv2, setCpfEnv2] = useState('');
-        const [nomeEnv2, setNomeEnv2] = useState('');
-        const [identidadeEnv2, setIdentidadeEnv2] = useState('');
-        const [nascimentoEnv2, setNascimentoEnv2] = useState('');
-        const [maeEnv2, setMaeEnv2] = useState('');
-        const [paiEnv2, setPaiEnv2] = useState('');
-        const [telefoneEnv2, setTelefoneEnv2] = useState('');
-        const [generoEnv2, setGeneroEnv2] = useState('');
-        const [estadoEnv2, setEstadoEnv2] = useState('');
-        const [cepEnv2, setCepEnv2] = useState('');
-        const [cidadeEnv2, setCidadeEnv2] = useState('');
-        const [bairroEnv2, setBairroEnv2] = useState('');
-        const [logradouroEnv2, setLogradouroEnv2] = useState('');
-        const [numeroCasaEnv2, setNumeroCasaEnv2] = useState('');
-        const [complementoEnv2, setComplementoEnv2] = useState('');
-        const [tipoDeEnvolvimentoEnv2, setTipoDeEnvolvimentoEnv2] = useState('');
-        const [nacionalidadeEnv2, setNacionalidadeEnv2] = useState('');
-        const [naturalidadeEnv2, setNaturalidadeEnv2] = useState('');
-        const [idadeAparenteEnv2, setIdadeAparenteEnv2] = useState('');
-        const [estadoCivilEnv2, setEstadoCivilEnv2] = useState('');
-        const [cutisEnv2, setCutisEnv2] = useState('');
-        const [ocupaçãoAtualEnv2, setOcupaçãoAtualEnv2] = useState('');
-        const [grauEscoarEnv2, setGrauEscolarEnv2] = useState('');
-        const [orgãoExpedidorEnv2, setOrgãoEpedidorEnv2] = useState('');
-        const [ufEnvolvidoEnv2, setUfEnvolvidoEnv2] = useState('');
-        const [paisMoradiaEnv2, setpaisMoradiaEnv2] = useState('');
+        const [cpfEnv2, setCpfEnv2] = useState();
+        const [nomeEnv2, setNomeEnv2] = useState();
+        const [identidadeEnv2, setIdentidadeEnv2] = useState();
+        const [nascimentoEnv2, setNascimentoEnv2] = useState();
+        const [maeEnv2, setMaeEnv2] = useState();
+        const [paiEnv2, setPaiEnv2] = useState();
+        const [telefoneEnv2, setTelefoneEnv2] = useState();
+        const [generoEnv2, setGeneroEnv2] = useState();
+        const [estadoEnv2, setEstadoEnv2] = useState();
+        const [cepEnv2, setCepEnv2] = useState();
+        const [cidadeEnv2, setCidadeEnv2] = useState();
+        const [bairroEnv2, setBairroEnv2] = useState();
+        const [logradouroEnv2, setLogradouroEnv2] = useState();
+        const [numeroCasaEnv2, setNumeroCasaEnv2] = useState();
+        const [complementoEnv2, setComplementoEnv2] = useState();
+        const [tipoDeEnvolvimentoEnv2, setTipoDeEnvolvimentoEnv2] = useState();
+        const [nacionalidadeEnv2, setNacionalidadeEnv2] = useState();
+        const [naturalidadeEnv2, setNaturalidadeEnv2] = useState();
+        const [idadeAparenteEnv2, setIdadeAparenteEnv2] = useState();
+        const [estadoCivilEnv2, setEstadoCivilEnv2] = useState();
+        const [cutisEnv2, setCutisEnv2] = useState();
+        const [ocupaçãoAtualEnv2, setOcupaçãoAtualEnv2] = useState();
+        const [grauEscoarEnv2, setGrauEscolarEnv2] = useState();
+        const [orgãoExpedidorEnv2, setOrgãoEpedidorEnv2] = useState();
+        const [ufEnvolvidoEnv2, setUfEnvolvidoEnv2] = useState();
+        const [paisMoradiaEnv2, setpaisMoradiaEnv2] = useState();
         
 
         //Variáveis envolvido 3
-        const [cpfEnv3, setCpfEnv3] = useState('xx');
-        const [nomeEnv3, setNomeEnv3] = useState('xx');
-        const [identidadeEnv3, setIdentidadeEnv3] = useState('xx');
-        const [nascimentoEnv3, setNascimentoEnv3] = useState('xx'); 
-        const [maeEnv3, setMaeEnv3] = useState('xx');
-        const [paiEnv3, setPaiEnv3] = useState('xx');
-        const [telefoneEnv3, setTelefoneEnv3] = useState('xx');
-        const [generoEnv3, setGeneroEnv3] = useState('xx');
-        const [estadoEnv3, setEstadoEnv3] = useState('xx');
-        const [cepEnv3, setCepEnv3] = useState('');
-        const [cidadeEnv3, setCidadeEnv3] = useState('');
-        const [bairroEnv3, setBairroEnv3] = useState('');
-        const [logradouroEnv3, setLogradouroEnv3] = useState('');
-        const [numeroCasaEnv3, setNumeroCasaEnv3] = useState('');
-        const [complementoEnv3, setComplementoEnv3] = useState('');   
-        const [tipoDeEnvolvimentoEnv3, setTipoDeEnvolvimentoEnv3] = useState('');
-        const [nacionalidadeEnv3, setNacionalidadeEnv3] = useState('');
-        const [naturalidadeEnv3, setNaturalidadeEnv3] = useState('');
-        const [idadeAparenteEnv3, setIdadeAparenteEnv3] = useState('');
-        const [estadoCivilEnv3, setEstadoCivilEnv3] = useState('');
-        const [cutisEnv3, setCutisEnv3] = useState('');
-        const [ocupaçãoAtualEnv3, setOcupaçãoAtualEnv3] = useState('');
-        const [grauEscoarEnv3, setGrauEscolarEnv3] = useState('');
-        const [orgãoExpedidorEnv3, setOrgãoEpedidorEnv3] = useState('');
-        const [ufEnvolvidoEnv3, setUfEnvolvidoEnv3] = useState('');
-        const [paisMoradiaEnv3, setpaisMoradiaEnv3] = useState('');
+        const [cpfEnv3, setCpfEnv3] = useState();
+        const [nomeEnv3, setNomeEnv3] = useState();
+        const [identidadeEnv3, setIdentidadeEnv3] = useState();
+        const [nascimentoEnv3, setNascimentoEnv3] = useState(); 
+        const [maeEnv3, setMaeEnv3] = useState();
+        const [paiEnv3, setPaiEnv3] = useState();
+        const [telefoneEnv3, setTelefoneEnv3] = useState();
+        const [generoEnv3, setGeneroEnv3] = useState();
+        const [estadoEnv3, setEstadoEnv3] = useState();
+        const [cepEnv3, setCepEnv3] = useState();
+        const [cidadeEnv3, setCidadeEnv3] = useState();
+        const [bairroEnv3, setBairroEnv3] = useState();
+        const [logradouroEnv3, setLogradouroEnv3] = useState();
+        const [numeroCasaEnv3, setNumeroCasaEnv3] = useState();
+        const [complementoEnv3, setComplementoEnv3] = useState();   
+        const [tipoDeEnvolvimentoEnv3, setTipoDeEnvolvimentoEnv3] = useState();
+        const [nacionalidadeEnv3, setNacionalidadeEnv3] = useState();
+        const [naturalidadeEnv3, setNaturalidadeEnv3] = useState();
+        const [idadeAparenteEnv3, setIdadeAparenteEnv3] = useState();
+        const [estadoCivilEnv3, setEstadoCivilEnv3] = useState();
+        const [cutisEnv3, setCutisEnv3] = useState();
+        const [ocupaçãoAtualEnv3, setOcupaçãoAtualEnv3] = useState();
+        const [grauEscoarEnv3, setGrauEscolarEnv3] = useState();
+        const [orgãoExpedidorEnv3, setOrgãoEpedidorEnv3] = useState();
+        const [ufEnvolvidoEnv3, setUfEnvolvidoEnv3] = useState();
+        const [paisMoradiaEnv3, setpaisMoradiaEnv3] = useState();
 
         //Variáveis envolvido 4
         const [cpfEnv4, setCpfEnv4] = useState();
@@ -224,6 +239,7 @@ export default () => {
         const [nomeQuemGerou, setNomeQuemGerou] = useState('');
         const [horaGearacao, setHoraGeracao] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
         const [dataGeracao, setDataGeracao] = useState(moment().format('DD-MM-YYYY'));
+      
 
 
         const [env2, setEnv2] = useState(true);
@@ -239,14 +255,14 @@ export default () => {
         const [recibo, setRecibo] = useState(true);
         const [freedown, setFreeDown] = useState(false);
         const [loading, setLoading] = useState(false);
-        
 
+        const [avatar2, setAvatar2] = useState(null);
        
     const pushDados = () =>{
      try {
      firebase.database().ref('/Ocorrencias').child(key)
                 .once('value').then((snapshot) => {
-                    //env1
+                     //env1
                     const nome = snapshot.val().nome;
                     const identidade = snapshot.val().identidade;
                     const cpf = snapshot.val().cpf;
@@ -617,11 +633,6 @@ export default () => {
                     setMatriculaAgente2(matriculaAgente2);
                     setCargoAgente2(cargoAgente2);
                     setTipoEnvolvimentoAgente2(tipoEnvolvimentoAgente2);
-                    
-         
-
-
-                    
 
                 });
 
@@ -632,7 +643,7 @@ export default () => {
 
  const buscarFotos = () => {
         const storage = firebase.storage();
-        const starsRef = storage.ref('images/').child(key);
+        const starsRef = storage.ref('ocorrencias/').child(key);
     
         starsRef.getDownloadURL().then(function (url) {
             let avatar1 = { uri: url };
@@ -656,9 +667,6 @@ useEffect(() => {
           buscarFotos();
       }
    }, 1000);
-   if(localparam !== undefined){
-          poolEndereçoLocal(localparam);
-          }
    return ()=>{
       isUnmount = true;
     setIdentidade('');
@@ -701,6 +709,8 @@ useEffect(() => {
         setEndereço('');
         navigation.goBack();
     };
+
+    
    
 
     const poolEndereçoLocal = async(local) =>{
@@ -729,9 +739,8 @@ useEffect(() => {
 
                 
               }
-    
 
-  const createAndSavePDF = async (html) => {
+     const createAndSavePDF = async (html) => {
   try {
       setLoading(true);
     const { uri } = await Print.printToFileAsync({ html });
@@ -771,7 +780,7 @@ useEffect(()=>{
 
 },[tipoRo])
 
-        const pushUser = () => {
+ const pushUser = () => {
         const user = firebase.auth().currentUser;
         if (user) {
             firebase.database().ref('usuarios').child(user.uid)
@@ -785,18 +794,21 @@ useEffect(()=>{
 
         useEffect(()=>{
         pushUser();
+        if(localparam !== undefined){
+          poolEndereçoLocal(localparam);
+          }
        
        
 
-    });
+    },[localparam]);
 
-  
+    useEffect(()=>{
+    if (nomeOcorrencia) {
+        setFreeDown(true)
+    }
+  },[nomeOcorrencia])
 
-  const pagina2 = () => {
-      navigation.navigate('HomeRauCadastro')
-  }
-
-  useEffect(()=>{
+    useEffect(()=>{
       if (tipoEnvolvimentoAgente1==='Responsável pela Apreensão/Prisão/Condução') {
           setNomeAgenteResponsavel(nomeAgente1);
           setMatriculaAgenteResponsavel(matriculaAgente1);
@@ -823,13 +835,8 @@ useEffect(()=>{
       }
   },[tipoEnvolvimentoAgente1,tipoEnvolvimentoAgente2])
 
-  useEffect(()=>{
-    if (nomeOcorrencia) {
-        setFreeDown(true)
-    }
-  },[nomeOcorrencia])
 
-  const htmlContent1 = `
+const htmlContent1 = `
    <!DOCTYPE html>
 <html lang="en">
 
@@ -1431,7 +1438,7 @@ img {
 
      <div class="Envolve">
         
-        <div class="Dentro1">Matrícula<br/>${matriculaAgenteResponsavel}</div>
+        
 
         <div class="Dentro1">Siape<br/>${siapeAgenteResponsavel}</div>
 
@@ -1445,7 +1452,7 @@ img {
 
      <div class="Envolve">
         
-        <div class="Dentro1">Matrícula<br/>${matriculaAgenteRelator}</div>
+        <div class="Dentro1">Hora e Data do Relato<br/>${data} ${hora}</div>
 
         <div class="Dentro1">Siape<br/>${siapeAgenteRelator}</div>
 
@@ -1455,11 +1462,11 @@ img {
 
     <div class="InteiraDentro">Nome Completo<br/>${nomeAgenteRelator}</div>
 
-     <div class="InteiraReal">AGENTE INTEGRANTE</div>
+     <div class="InteiraReal">AGENTE INTEGRANTE 1</div>
 
      <div class="Envolve">
         
-        <div class="Dentro1">Matrícula<br/>${matriculaAgente1}</div>
+       
 
         <div class="Dentro1">Siape<br/>${siapeAgente1}</div>
 
@@ -1468,6 +1475,23 @@ img {
     </div>
 
     <div class="InteiraDentro">Nome Completo<br/>${nomeAgente1}</div>
+
+
+    <div class="InteiraReal">AGENTE INTEGRANTE 2</div>
+
+     <div class="Envolve">
+        
+        
+
+        <div class="Dentro1">Siape<br/>${siapeAgente2}</div>
+
+         <div class="Dentro1">Cargo<br/>${cargoAgente2}</div>
+         
+    </div>
+
+    <div class="InteiraDentro">Nome Completo<br/>${nomeAgente2}</div>
+
+
 
     <div style="height: 30px;"></div>
 
@@ -1506,7 +1530,7 @@ img {
          
     </div>
 
-    <div style="height: 210px;"></div>
+    <div style="height: 110px;"></div>
 
      <div class=ContainerCima>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" />
@@ -1610,20 +1634,312 @@ img {
 
     </html>
 `;
-
+console.log("PComponent => I'm rendering...")
     return (
-        
-
         <Container >
 
-        { freedown &&
+           <ViewTitullo>
+                
+                <TextTitulo>Detalhes da Ocorrência</TextTitulo>
+                
+                <TouchSair onPress = {sair}>
+                    <Image source = {require('../../../assets/SetaSair.png')} />
+                </TouchSair>
+            
+            </ViewTitullo>
+            
+            
+            <ViewQualificaçao>
+                <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
+
+                
+            {avatar2 && <>
+                <View style = {{flexDirection:'row'}}>
+
+               
+                 <View style={styles.viewImage}>
+                    <Image source={avatar2} style={styles.itemAvatar} />
+                </View>
+               
+
+                <View style={{}}>
+                <TextNome>{nome}</TextNome>
+
+                <View style={{marginTop:16}}>
+                <TextLabel>RG:<TextLabelText>{identidade}</TextLabelText></TextLabel>
+                <TextLabel>CPF:<TextLabelText>{cpf}</TextLabelText></TextLabel>
+                <TextLabel>Telefone:<TextLabelText>{telefone}</TextLabelText></TextLabel>
+                <TextLabel>Nascimento:<TextLabelText>{nascimento}</TextLabelText></TextLabel>
+                </View>
+                
+                </View>
+               
+                </View>
+                 </>
+                }
+
+
+                { !avatar2 && <>
+                <View style = {{flexDirection:'row'}}>
+
+               
+
+                <View style={{marginLeft:30}}>
+                <TextNome>{nome}</TextNome>
+
+                <View style={{marginTop:16}}>
+                <TextLabel>RG:<TextLabelText>{identidade}</TextLabelText></TextLabel>
+                <TextLabel>CPF:<TextLabelText>{cpf}</TextLabelText></TextLabel>
+                <TextLabel>Telefone:<TextLabelText>{telefone}</TextLabelText></TextLabel>
+                <TextLabel>Nascimento:<TextLabelText>{nascimento}</TextLabelText></TextLabel>
+                </View>
+                
+                </View>
+               
+                </View>
+                 </>
+                }
+
+                
+
+            </ViewQualificaçao>
+
+            <View style={{marginLeft:30}}>
+                <TextLabelcamposmae>Mãe:<TextCamposmae>{mae}</TextCamposmae></TextLabelcamposmae>
+                <TextLabelcamposmae>Pai:<TextCamposmae>{pai}</TextCamposmae></TextLabelcamposmae>
+                 
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nascimento:<TextCamposmae>{nascimento}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Genero:<TextCamposmae>{genero}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nacionalidade:<TextCamposmae>{nacionalidade}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Naturalidade:<TextCamposmae>{naturalidade}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Idade Aparente:<TextCamposmae>{idadeAparente}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Estado Civil:<TextCamposmae>{estadoCivil}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Cútis:<TextCamposmae>{cutis}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Ocupação:<TextCamposmae>{ocupaçãoAtual}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Orgão Epedidor:<TextCamposmae>{orgãoExpedidor}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Escolaridade:<TextCamposmae>{grauEscoar}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>UF.Nascimento:<TextCamposmae>{ufEnvolvido}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Envolvimento:<TextCamposmae>{tipoDeEnvolvimento}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 
+                 
+                       </View>
+            
+            <View style={{marginLeft:30,marginTop:35}}>
+
+                
+            
+                <TextDetallhesOcorr>Endereço do Envolvido</TextDetallhesOcorr>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>CEP:<TextCamposmae>{cep}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>UF:<TextCamposmae>{ufEnvolvido}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Cidade:<TextCamposmae>{cidade}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Bairro:<TextCamposmae>{bairro}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+                <TextLabelcamposmae>Logradouro:<TextCamposmae>{logradouro}</TextCamposmae></TextLabelcamposmae>
+                    
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Número:<TextCamposmae>{numeroCasa}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>País:<TextCamposmae>{paisMoradia}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                 <TextLabelcamposmae>Complemento:<TextCamposmae>{complemento}</TextCamposmae></TextLabelcamposmae>
+
+            </View>
+
+
+
+            <View style={{marginLeft:30,marginTop:35}}>
+                <TextDetallhesOcorr>Detalhes da Ocorrência</TextDetallhesOcorr>
+            </View>
+
+            <View style={{marginTop:15,marginLeft:30}}>
+
+                <View style={{flexDirection:'row'}} >
+                   
+                   <View style={{flex:1}}>
+                    <TextLabelcamposmae>Data Relatório:<TextCamposmae>{data}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+               
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Hora Relatório:<TextCamposmae>{hora}</TextCamposmae></TextLabelcamposmae>
+                </View>
+                
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Data do Fato:<TextCamposmae>{dataDoFato}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Hora do Fato:<TextCamposmae>{horarioDoFato}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Data Final:<TextCamposmae>{dataFinal}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Hora Final:<TextCamposmae>{horarioFinal}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Tentado/Consumado:<TextCamposmae>{tentadoConsumado}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Alvo do Evento:<TextCamposmae>{alvoDoEvento}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>{tipoRo}:<TextCamposmae>{tipoOcorrencia1}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Local:<TextCamposmae>{local}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Relator:<TextCamposmae>{nomeAgenteRelator}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Agente Integrante:<TextCamposmae>{nomeAgente1}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Responsável pela Prisão:<TextCamposmae>{nomeAgenteResponsavel}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    
+
+                </View>
+
+                
+
+                <View>
+                    <TextLabelcamposmae>Objetos Recolhidos:<TextCamposmae>{objetosRecolhidos}</TextCamposmae></TextLabelcamposmae>
+                    <TextLabelcamposmae>Histórico:<TextCamposmae>{historico}</TextCamposmae></TextLabelcamposmae>
+                </View>
+            </View>
+
+            <View style = {{marginTop:30,justifyContent:'center',alignItems:'center'}}>
+                <TextCodRegistro>Código de Registro: {chaveFoto}</TextCodRegistro>
+            </View>
+
+            
+
+                { freedown &&
         <>
         <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
 
         
 
              <BtnCadastrarOcorrencia disabled={loading} onPress={() => createAndSavePDF(htmlContent1)} >
-                 <TextBtnOcorrencia>Baixar Pdf</TextBtnOcorrencia>
+                 <TextBtnOcorrencia>Baixar Ocorrência</TextBtnOcorrencia>
              </BtnCadastrarOcorrencia>
 
            </View>
@@ -1650,21 +1966,31 @@ img {
             </LoadingArea>
              }
 
-           
+       
+
+       
         </Container>
     );
 }
 
 const styles = StyleSheet.create({
-     viewPadrao:{
-        borderWidth:1,
-        flex:1,
-        width:'100%',
+
+    viewImage:{
+        
+        marginTop:15,
+        marginLeft:30,
+        marginRight:15,
+    },
+    itemAvatar: {
+        width: 116,
+        height: 156,
+        borderRadius: 5,
+        
     },
     textLoading:{
         color:'#FF9000',
 
     }
-  
 
 })
+  

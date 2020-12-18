@@ -1,61 +1,117 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+
+
+
 export const Container = styled.SafeAreaView`
     flex: 1;
-    flex-direction: column;
     background-color:#000;
-`
-
-export const ViewTitullo = styled.View`
     
-    flex-direction:row;
-    margin-top:30px;
-    justify-content:space-between;
+    align-items:center;
+`;
 
-`
-
-export const TextTitulo= styled.Text`
-    width: 219px;
-    height: 26px;
-    margin-left:30px;
-
-    font-family: RobotoSlab;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 26px;
+export const TextoBoasVindas = styled.Text`
+   
+width: 112px;
+height: 26px;
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 26px;
+font-family: RobotoSlab;
 
 /* Orange */
 
 color: #FF9000;
     
+`;
+
+export const TouchExit = styled.TouchableOpacity`
+
+width: 24px;
+height: 24px;
+
+
 `
 
-export const TouchSair = styled.TouchableOpacity`
-    width: 24px;
-    height: 24px;
-    margin-right:50px;
-`
+export const SubTitulo = styled.Text`
 
-export const TextSubtitulo= styled.Text`
-  
-width: 303px;
-height: 21px;
-margin-left:30px;
-margin-top:5px;
-font-family: RobotoSlab;
 font-style: normal;
 font-weight: 500;
 font-size: 16px;
 line-height: 21px;
+font-family: RobotoSlab;
 
 /* White */
 
 color: #F4EDE8;
-    
 `
 
+
+export const GerarRo = styled.TouchableOpacity`
+
+width: 60%;
+height: 100px;
+justify-content:center;
+align-items:center;
+flexDirection:row;
+align-items:center;
+/* Darkest */
+
+background: #2E2E2E;
+border-radius: 50px;
+`
+export const TextoGerarRo = styled.Text`
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 24px;
+font-family: RobotoSlab;
+margin-top:10px;
+
+/* identical to box height */
+
+text-align: center;
+
+/* Text */
+
+color: #767676;
+`
+export const TextoRedefinirSenha = styled.Text`
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 24px;
+font-family: RobotoSlab;
+margin-top:10px;
+/* identical to box height */
+
+text-align: center;
+
+/* Text */
+
+color: #ff9000;
+`
+
+
+export const OcorrenciasText = styled.Text`
+
+width: 205px;
+height: 26px;
+margin-left:30px;
+margin-top:10px;
+margin-bottom:15px;
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 26px;
+font-family: RobotoSlab;
+
+/* White */
+
+color: #F4EDE8;
+`
 export const FiltrosText = styled.Text`
 
 width: 44px;
@@ -199,19 +255,52 @@ text-align: center;
 
 color: #F4EDE8;
 `
-export const ResultBuscaText = styled.Text`
-width: 315px;
-height: 26px;
-font-family: RobotoSlab;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 26px;
+
+export const ViewResumo = styled.View`
+margin-top:21px;
 margin-left:30px;
-margin-top:20px;
-margin-bottom:20px;
+width: 315px;
+height: 237px;
+justify-content:center;
+align-items:center;
 
-/* White */
 
-color: #F4EDE8;
+/* Darkest */
+
+background: #2E2E2E;
+
+border-radius: 10px;
 `
+export const ViewProx = styled.View`
+   
+    width: 315px;
+    height: 21px;
+    margin-left:30px;
+    margin-top:15px;
+    flexDirection:row;
+`
+export const AnteriorBtn = styled.TouchableOpacity`
+    flex:1;
+    flexDirection:row;
+    align-items: center;
+`
+export const ProxBtn = styled.TouchableOpacity`
+    flex:1;
+    flexDirection:row;
+    align-items: center;
+    justify-content:flex-end;
+`
+export const BtnTodasOcorrencias = styled.TouchableOpacity`
+   
+    width: 315px;
+    height: 50px;
+    margin-left:30px;
+    margin-top:15px;
+    align-items: center;
+    justify-content:center;
+    background: #FF9000;
+    border-radius: 10px;
+`
+
+
+

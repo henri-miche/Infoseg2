@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { SafeAreaView,Text,ActivityIndicator, View,Switch, StyleSheet,Image,TextInput,Button,Alert, Modal,TouchableOpacity } from 'react-native';
+import {Text,ActivityIndicator, View,Switch, StyleSheet,Image,TextInput, Modal, } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import Constants from 'expo-constants';
@@ -79,7 +79,6 @@ export default () => {
     const [complemento, setComplemento] = useState('');
     const [hora, setHora] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
     const [data, setData] = useState(moment().format('DD-MM-YYYY'));
-    const [pickerChoice, setPickerChoice] = useState();
     const [modalVisible, setModallVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [permissaoBo, setPermissaoBo] = useState(false);
@@ -155,13 +154,11 @@ export default () => {
     const [nomeEnv2, setNomeEnv2] = useState('');
     const [identidadeEnv2, setIdentidadeEnv2] = useState('');
     const [nascimentoEnv2, setNascimentoEnv2] = useState('');
-    const [tipoRoEnv2, setTipoRoEnv2] = useState("Escolha Tipo Ocorrencia");
-    const [localEnv2, setLocalEnv2] = useState("UVL");
     const [maeEnv2, setMaeEnv2] = useState('');
     const [paiEnv2, setPaiEnv2] = useState('');
     const [telefoneEnv2, setTelefoneEnv2] = useState('');
     const [generoEnv2, setGeneroEnv2] = useState("Masculino");
-    const [historicoEnv2, setHistoricoEnv2] = useState('');
+   
 
     const [estadoEnv2, setEstadoEnv2] = useState("MG");
    
@@ -173,10 +170,7 @@ export default () => {
     const [logradouroEnv2, setLogradouroEnv2] = useState('');
     const [numeroCasaEnv2, setNumeroCasaEnv2] = useState('');
     const [complementoEnv2, setComplementoEnv2] = useState('');
-    const [horaEnv2, setHoraEnv2] = useState(moment().utcOffset('-03:00').format(' hh:mm:ss a'));
-    const [dataEnv2, setDataEnv2] = useState(moment().format('DD-MM-YYYY'));
-    const [pickerChoiceEnv2, setPickerChoiceEnv2] = useState();
-    
+   
     
 
 
@@ -277,7 +271,7 @@ export default () => {
     const [searchAgente2, setSearchAgente2] = useState('');
     const [tipoEnvolvimentoAgente2, setTipoEnvolvimentoAgente2] = useState('Agente Integrante');
 
-    const [listAgentes, setListAgentes] = useState(null);
+    
 
 
 
@@ -295,7 +289,7 @@ export default () => {
                 });
             }
 
-            if (env2 && env3 && env4) {
+            if (env4) {
                  firebase.database().ref('/Ocorrencias').child(chave).set({
                 nome: nome,
                 cpf: cpf,                
@@ -607,7 +601,7 @@ export default () => {
                     setUfEnvolvidoEnv4('');
                     setpaisMoradiaEnv4('');
 
-                setMarcaDagua('');
+                    setMarcaDagua('');
                     setMicroImpressoes('');
                     setRegistroCoincidente('');
                     setImagemLatente('');
@@ -628,13 +622,9 @@ export default () => {
                     setJanelaTransparente('');
                     setMoeda('');
                     setOutrasCaracteristicas('');
-                    setTipoPapel('');
+                    setTipoDoPapel('');
 
-                    //variaveis agente relator
-                    setMatriculaAgenteRelator('');
-                    setSiapeAgenteRelator('');
-                    setCargoAgenteRelator('');
-                    setnomeAgenteRelator('');
+                   
 
                     //agente integrante 1
                     setNomeAgente1('');
@@ -659,7 +649,7 @@ export default () => {
                     alert(error);
                 });
             }
-            if(env2 && env3){
+            if(env2 == true && env3 == true && env4 == false){
 
                  firebase.database().ref('/Ocorrencias').child(chave).set({
                 nome: nome,
@@ -944,14 +934,9 @@ export default () => {
                     setJanelaTransparente('');
                     setMoeda('');
                     setOutrasCaracteristicas('');
-                    setTipoPapel('');
+                    setTipoDoPapel('');
 
-                    //variaveis agente relator
-                    setMatriculaAgenteRelator('');
-                    setSiapeAgenteRelator('');
-                    setCargoAgenteRelator('');
-                    setnomeAgenteRelator('');
-
+                  
                     //agente integrante 1
                     setNomeAgente1('');
                     setSiapeAgente1('');
@@ -979,7 +964,7 @@ export default () => {
 
             }
 
-            if(env2){
+            if(env2 == true && env3 == false && env4 == false){
 
                  firebase.database().ref('/Ocorrencias').child(chave).set({
                 nome: nome,
@@ -1206,13 +1191,10 @@ export default () => {
                     setJanelaTransparente('');
                     setMoeda('');
                     setOutrasCaracteristicas('');
-                    setTipoPapel('');
+                    setTipoDoPapel('');
 
                     //variaveis agente relator
-                    setMatriculaAgenteRelator('');
-                    setSiapeAgenteRelator('');
-                    setCargoAgenteRelator('');
-                    setnomeAgenteRelator('');
+                  
 
                     //agente integrante 1
                     setNomeAgente1('');
@@ -1243,7 +1225,7 @@ export default () => {
 
             }
             
-            else{
+            if(env2 == false && env3 == false && env4 == false){
 
              firebase.database().ref('/Ocorrencias').child(chave).set({
                nome: nome,

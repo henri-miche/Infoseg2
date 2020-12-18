@@ -9,7 +9,7 @@ import {
     SignMessageButton,
     SignMessageButtonText,
 } from './styles';
-import SignInput from '../../components/SignInput';
+
 import firebase from '../../connection/FirebaseConection';
 
 export default () => {
@@ -82,22 +82,7 @@ export default () => {
 
             <InputArea>
 
-                <SignInput placeholder="Nome"
-                    value={nomeField}
-                    onChangeText={t => setNomeField(t)}
-                />
-
-                <SignInput placeholder="E-mail"
-                    value={emailField}
-                    onChangeText={t => setEmailField(t)}
-                />
-
-                <SignInput
-                    placeholder="Senha"
-                    value={senhaField}
-                    onChangeText={t => setSenhaField(t)}
-                    password={true}
-                />
+            
 
                 <CustomButton onPress={handleSignClic} >
                     <CustomBottomText>CADASTRAR</CustomBottomText>

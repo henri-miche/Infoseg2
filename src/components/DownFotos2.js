@@ -1,10 +1,11 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,memo } from 'react';
 import { View, StyleSheet, Image, Text} from 'react-native';
 import firebase from '../connection/FirebaseConection';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 
-export default ({data}) => {
+
+function DownFotos2({data}) {
 
     const nome = data.nome;
     const cpf = data.cpf;
@@ -116,6 +117,7 @@ font-family: RobotoSlab;
 color: #F4EDE8;
 `;
 
+
 const BtnOcorrenciaFull = styled.TouchableOpacity`
 
 width: 315px;
@@ -165,9 +167,10 @@ color: #F4EDE8;
 
 
 function handleClickVerCompleta () {
-        navigation.navigate('HomeBo',{key:key,local:local});
+        navigation.navigate('DescricaoOcorrencia',{key:key,local:local});
         
     };
+    
 
 
         return (
@@ -185,7 +188,7 @@ function handleClickVerCompleta () {
                 <TextNome style={styles.textNome}>{nome}</TextNome>
                 
                 <View style={styles.viewRoLocal}>
-                <TextLabelP>{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
+                <TextLabelP numberOfLines={2} ellipsizeMode="tail">{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
                 <TextLabel>Local:<TextPool>{local}</TextPool> </TextLabel>
                 </View>
                 <TextLabelP>ASO:<TextPool>{nomeAgenteRelator}</TextPool></TextLabelP>
@@ -218,7 +221,7 @@ function handleClickVerCompleta () {
                 <TextNome style={styles.textNome}>{nome}</TextNome>
                 
                 <View style={styles.viewRoLocal}>
-                <TextLabelP>{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
+                <TextLabelP numberOfLines={2} ellipsizeMode="tail">{tipoRo}:<TextPool>{tipoOcorrencia1}</TextPool></TextLabelP>
                 <TextLabel>Local:<TextPool>{local}</TextPool> </TextLabel>
                 </View>
                 <TextLabelP>ASO:<TextPool>{nomeAgenteRelator}</TextPool></TextLabelP>
@@ -352,6 +355,8 @@ borderRadius: 10,
         fontSize:12,
     }
 });
+
+export default memo(DownFotos2);
 /*<View style={{flexDirection:'row',marginTop:5,padding:10,height:200,paddingLeft:40}}>
                     
                     <View style={{flex:1,justifyContent:'space-between'}}> 
