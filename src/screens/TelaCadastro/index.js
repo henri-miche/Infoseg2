@@ -3,23 +3,35 @@ import { Text, Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
     Container,
-    InputArea,
-    CustomButton,
-    CustomBottomText,
+    TextoTitulo,
+    ImagemStyle,
+    SubtituloCbtu,
+    FaçaSeuLogin,
+    BtnEntrar,
+    EntrarText,
     SignMessageButton,
     SignMessageButtonText,
-} from './styles';
-
+    InputArea,
+    CustomBottomText,
+    CustomButton
+ } from './styles';
+import InputLogin from '../../components/InputLogin';
+import InputLoginSenha from '../../components/InputLoginSenha';
 import firebase from '../../connection/FirebaseConection';
+
 
 export default () => {
 
     const [emailField, setEmailField] = useState('');
     const [nomeField, setNomeField] = useState('');
     const [senhaField, setSenhaField] = useState('');
+    const [siape, setSiape] = useState('');
+    const [matricula, setMatricula] = useState('');
+    const [cargo, setCargo] = useState('');
+    
     const navigation = useNavigation();
 
-/*função logout a ser passada para sistemaconect*/
+
     firebase.auth().signOut();
 
     const handleMessageButtonClick = () => {
@@ -28,28 +40,31 @@ export default () => {
         });
     }
     
-    /*função cadastro a ser passada para sistemaconect*/
+    
+
     const handleSignClic = () => {
+
         if(emailField != '' && senhaField != '' && nomeField != '') {
 
-/*função ouvinte que seta nome para DB a ser passada para sistemaconect*/
-            firebase.auth().onAuthStateChanged((user) => {
-        if(user) {
-            firebase.database().ref('usuarios').child(user.uid).set({
-                nome:nomeField
-            });
+           
+
+                firebase.auth().createUserWithEmailAndPassword(emailField, senhaField)
+                    .then((user) => {
+                        var user = firebase.auth().currentUser;
+                        firebase.database().ref('usuarios').child(user.uid).set({
+                            nome:nomeField,
+                            siape:siape,
+                            matricula:matricula,
+                            cargo:cargo,
+                        });
                 
-            navigation.reset({
-                routes: [{ name: 'MainTab' }]
-            });
-        }
-     });
-     /*conexao firebase cadastro*/
-        firebase.auth().createUserWithEmailAndPassword(
-            emailField,
-            senhaField).catch((error) =>{
-                
-                switch (error.code) {
+                    })
+                    .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // ..
+
+                    switch (error.code) {
                     case 'auth/weak-password':
                         alert("Sua senha deve ter pelo menos 6 caracteres!");
                         break;
@@ -65,33 +80,79 @@ export default () => {
                     default:
                         break;
                 }
-                
-            });
+                     });
+     
+        
         }else{
             alert("Preencha os campos corretamente");
         }
     }
 
+    
+    console.log('render')
     return (
         <Container>
-            <Image source={require('../../../assets/brasaoTransarente.png')}
-                style={{ width: 250, height: 250 }}
+           
+            
+            <ImagemStyle source={require('../../../assets/brasaoTransarente.png')}/>
+            
+            <TextoTitulo>InfoSeg Mobile</TextoTitulo>
 
-            />
-            <Text style={{ fontSize: 40, marginTop: 10, color: '#D3D3D3' }}>INFOSEG</Text>
+            <SubtituloCbtu>CBTU BH</SubtituloCbtu>
 
-            <InputArea>
+            <FaçaSeuLogin> Faça seu Cadastro</FaçaSeuLogin>
 
             
+            <InputLogin
+             value={emailField} 
+             onChangeText={t => setEmailField(t)}
+             placeholder="E-mail" 
+             placeholderTextColor="#666360" 
+             color="#fff"/>
+            <InputLoginSenha  
+            value={senhaField} 
+            onChangeText={t => setSenhaField(t)} 
+            password={true}
+            placeholder="Senha" 
+            placeholderTextColor="#666360" 
+            color="#fff"/>
+             <InputLoginSenha  
+            value={nomeField} 
+            onChangeText={t => setNomeField(t)} 
+            
+            placeholder="nome" 
+            placeholderTextColor="#666360" 
+            color="#fff"/>
+             <InputLoginSenha  
+            value={matricula} 
+            onChangeText={t => setMatricula(t)} 
+            
+            placeholder="Matricula" 
+            placeholderTextColor="#666360" 
+            color="#fff"/>
+             <InputLoginSenha  
+            value={siape} 
+            onChangeText={t => setSiape(t)} 
+            
+            placeholder="Siape" 
+            placeholderTextColor="#666360" 
+            color="#fff"/>
+            <InputLoginSenha  
+            value={cargo} 
+            onChangeText={t => setCargo(t)} 
+            
+            placeholder="Cargo" 
+            placeholderTextColor="#666360" 
+            color="#fff"/>
+            
 
-                <CustomButton onPress={handleSignClic} >
-                    <CustomBottomText>CADASTRAR</CustomBottomText>
-                </CustomButton>
-
-            </InputArea>
+            <BtnEntrar onPress={handleSignClic}>
+                <EntrarText>Cadastrar</EntrarText>
+            </BtnEntrar>
+         
 
             <SignMessageButton onPress={handleMessageButtonClick} >
-                <SignMessageButtonText>LOGIN</SignMessageButtonText>
+                <SignMessageButtonText>TELA LOGIN</SignMessageButtonText>
             </SignMessageButton>
         </Container>
     );

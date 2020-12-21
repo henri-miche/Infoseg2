@@ -12,7 +12,7 @@ export const Container = styled.SafeAreaView`
 
 export const TextoBoasVindas = styled.Text`
    
-width: 112px;
+width: 300px;
 height: 26px;
 font-style: normal;
 font-weight: 500;
@@ -83,7 +83,7 @@ height: 60px;
 justify-content:center;
 align-items:center;
 flexDirection:row;
-justify-content:space-between
+justify-content:space-between;
 /* Darkest */
 
 background: #2E2E2E;

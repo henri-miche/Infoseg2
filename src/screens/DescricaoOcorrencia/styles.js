@@ -44,7 +44,7 @@ export const ViewQualificaçao = styled.View`
 `;
 
 export const TextQuaificaçao= styled.Text`
-    width: 246px;
+    
     height: 26px;
     margin-top:25px;
     margin-left:30px;
@@ -243,7 +243,7 @@ export const LoadingArea = styled.View`
         bottom:0;
         background-color: rgba(0,0,0,0.6);
         align-items:center;
-        justify-content:center;
+        justify-content:flex-end;
         
     
 `

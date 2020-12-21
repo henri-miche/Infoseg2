@@ -8,6 +8,17 @@ export const Container = styled.SafeAreaView`
     justify-content: center;
     align-items: center;
 `;
+export const SignMessageButton = styled.TouchableOpacity`
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+`;
+export const SignMessageButtonText = styled.Text`
+    font-size: 16px;
+    color: #D3D3D3;
+    font-weight: bold;
+`;
 /*
 export const InputArea = styled.SafeAreaView`
     padding: 20px;

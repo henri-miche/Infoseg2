@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Text,Image,StyleSheet,TouchableOpacity, View } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { 
@@ -11,6 +11,8 @@ import {
     EntrarText,
     EsqueciSenha,
     BtnCriarConta,
+    SignMessageButton,
+    SignMessageButtonText
  } from './styles';
 import InputLogin from '../../components/InputLogin';
 import InputLoginSenha from '../../components/InputLoginSenha';
@@ -30,19 +32,22 @@ export default () => {
         });
     }
 
+     
+    
+  
+
     const handleSignClic = () => {
 
-        if (emailField != '' && senhaField != '') {
-
-            /*função ouvinte a ser passada para sistemaconect*/
-            firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     navigation.reset({
                         routes: [{ name: 'HomeRo' }]
                     });
                 }
             });
-            /*conexao firebase cadastro*/
+            
+        if (emailField != '' && senhaField != '') {
+
             firebase.auth().signInWithEmailAndPassword(
                 emailField,
                 senhaField).catch((error) => {
@@ -104,7 +109,9 @@ export default () => {
             </BtnEntrar>
 
             
-            
+            <SignMessageButton onPress={handleMessageButtonClick} >
+                <SignMessageButtonText>CADASTRE-SE</SignMessageButtonText>
+            </SignMessageButton>
          
             
         </Container>

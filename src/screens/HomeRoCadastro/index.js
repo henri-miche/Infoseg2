@@ -1274,7 +1274,7 @@ export default () => {
                 env3:env3,
                 env4:env4,
 
-
+                notaFalsa:notaFalsa,
                 marcaDagua:marcaDagua,
                 microImpressoes:microImpressoes,
                 regitroCoincidente:registroCoincidente,
@@ -1286,6 +1286,7 @@ export default () => {
                 fioDeSegurança:fioDeSegurança,
                 fundosEspeciais:fundosEspeciais,
                 faixaHoografica:faixaHoografica,
+                fibrasLuzVioleta:fibrasLuzVioleta,
 
                 origemCedula:origemCedula,
                 estadoAnimo:estadoAnimo,
@@ -1440,7 +1441,7 @@ export default () => {
     
  /*if tem que ser editado para nano permitir envio vazio*/
     const confirmar = () => {
-        if(nome !== '' && cpf !== ''  && tipoRo !== 'Escolha Tipo Ocorrencia' ){
+        if(nome !== '' && cpf !== ''  && tipoRo !== '*Escolha Tipo Ocorrencia' ){
            
            const user = firebase.auth().currentUser;
                 if(user){
@@ -1448,9 +1449,9 @@ export default () => {
                     firebase.database().ref('usuarios').child(user.uid)
                         .once('value').then((snapshot) => {
                             let nomeAgenteRelator = snapshot.val().nome;
-                            let matriculaAgenteRelator = snapshot.val().matriculaAgente;
-                            let siapeAgenteRelator = snapshot.val().siapeAgente;
-                            let cargoAgenteRelator = snapshot.val().cargoAgente;
+                            let matriculaAgenteRelator = snapshot.val().matricula;
+                            let siapeAgenteRelator = snapshot.val().siape;
+                            let cargoAgenteRelator = snapshot.val().cargo;
                             //seta chave realtime para foto
                             let chavess = firebase.database().ref('/Ocorrencias');
                             let chave = chavess.push().key;
@@ -2053,24 +2054,24 @@ export default () => {
                         snapshot.forEach((childItem) => {
                         list.push({
                         
-                            cargoAgente:childItem.val().cargoAgente,
+                            cargo:childItem.val().cargo,
                             nome: childItem.val().nome,
-                            matriculaAgente: childItem.val().matriculaAgente,
-                            siapeAgente: childItem.val().siapeAgente,
+                            matricula: childItem.val().matricula,
+                            siape: childItem.val().siape,
                         
                         });
                         });
                         
                         const nome = list[0].nome;
-                        const cargoAgente = list[0].cargoAgente;
-                        const matriculaAgente = list[0].matriculaAgente;
-                        const siapeAgente = list[0].siapeAgente;
+                        const cargo = list[0].cargo;
+                        const matricula = list[0].matricula;
+                        const siape = list[0].siape;
                         
                         setNomeAgente1(nome);
-                        setCargoAgente1(cargoAgente);
-                        setMatriculaAgente1(matriculaAgente);
-                        console.log(matriculaAgente1)
-                        setSiapeAgente1(siapeAgente);
+                        setCargoAgente1(cargo);
+                        setMatriculaAgente1(matricula);
+                        console.log(matricula)
+                        setSiapeAgente1(siape);
 
                         
                         
@@ -2319,6 +2320,8 @@ export default () => {
                 >
                 <Picker.Item label="Tipo de Envolvimento" value="Tipo de Envolvimento" />
                 <Picker.Item label="Autor" value="Autor" />
+                <Picker.Item label="Infrator" value="Infrator" />
+                <Picker.Item label="Auxiliado" value="Auxiliado" />
                 <Picker.Item label="Vítima" value="Vítima" />
                 <Picker.Item label="Testemunha" value="Testemunha" />
                 </Picker>
@@ -2382,7 +2385,7 @@ export default () => {
 
             <View style = {styles.viewLogradoro}>
              <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouro} onChangeText={(t) => setLogradouro(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasa} onChangeText={(t) => setNumeroCasa(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' keyboardType='number-pad' placeholderTextColor ='#666360' value={numeroCasa} onChangeText={(t) => setNumeroCasa(t)} />
 
             </View>
 
@@ -2593,7 +2596,7 @@ export default () => {
 
             <View style = {styles.viewLogradoro}>
              <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouroEnv2} onChangeText={(t) => setLogradouroEnv2(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasaEnv2} onChangeText={(t) => setNumeroCasaEnv2(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' keyboardType='number-pad' placeholderTextColor ='#666360' value={numeroCasaEnv2} onChangeText={(t) => setNumeroCasaEnv2(t)} />
 
             </View>
 
@@ -2646,14 +2649,14 @@ export default () => {
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={maeEnv3} onChangeText={(t) => setMaeEnv3(t)}/>
-                    <BtnFixa onPress={semRegistroMae2}>
+                    <BtnFixa onPress={semRegistroMae3}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                 </View>
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={paiEnv3} onChangeText={(t) => setPaiEnv3(t)}/>
-                    <BtnFixa onPress={semRegistroPai2}>
+                    <BtnFixa onPress={semRegistroPai3}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                  </View>
@@ -2796,7 +2799,7 @@ export default () => {
 
             <View style = {styles.viewLogradoro}>
              <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouroEnv3} onChangeText={(t) => setLogradouroEnv3(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasaEnv3} onChangeText={(t) => setNumeroCasaEnv3(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' keyboardType='number-pad' placeholderTextColor ='#666360' value={numeroCasaEnv3} onChangeText={(t) => setNumeroCasaEnv3(t)} />
 
             </View>
 
@@ -2849,14 +2852,14 @@ export default () => {
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Mãe' placeholderTextColor ='#666360' value={maeEnv4} onChangeText={(t) => setMaeEnv4(t)}/>
-                    <BtnFixa onPress={semRegistroMae2}>
+                    <BtnFixa onPress={semRegistroMae4}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                 </View>
                 
                  <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                     <InputMaePai  source = {require('../../../assets/user.png')} placeholder ='Pai' placeholderTextColor ='#666360' value={paiEnv4} onChangeText={(t) => setPaiEnv4(t)}/>
-                    <BtnFixa onPress={semRegistroPai2}>
+                    <BtnFixa onPress={semRegistroPai4}>
                         <Image  source = {require('../../../assets/Btnfixa.png')}/>
                     </BtnFixa>
                  </View>
@@ -2999,7 +3002,7 @@ export default () => {
 
             <View style = {styles.viewLogradoro}>
              <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Logradouro' placeholderTextColor ='#666360' value={logradouroEnv4} onChangeText={(t) => setLogradouroEnv4(t)} />
-                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' placeholderTextColor ='#666360' value={numeroCasaEnv4} onChangeText={(t) => setNumeroCasaEnv4(t)} />
+                <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Número' keyboardType='number-pad' placeholderTextColor ='#666360' value={numeroCasaEnv4} onChangeText={(t) => setNumeroCasaEnv4(t)} />
 
             </View>
 
@@ -3119,9 +3122,21 @@ export default () => {
             </View>
 
              <View style = {styles.viewCidadeBairro}>
-                        <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Tentado/Consumado' placeholderTextColor ='#666360' value={tentadoConsumado} onChangeText={(t) => setTentadoConsumado(t)} />
-                        <InputMenorAinda source = {require('../../../assets/map-pin.png')} placeholder ='Alvo do Evento' placeholderTextColor ='#666360' value={alvoDoEvento} onChangeText={(t) => setAlvoDoEvento(t)} />
+
+            <InputMenor source = {require('../../../assets/map-pin.png')} placeholder ='Alvo do Evento' placeholderTextColor ='#666360' value={alvoDoEvento} onChangeText={(t) => setAlvoDoEvento(t)} />
                 
+                            <Picker
+                mode="dropdown"
+                selectedValue={tentadoConsumado}
+                style={{ height: 50, width: 150,backgroundColor: '#2E2E2E',borderRadius:10,marginLeft:50,color:'#fff'}}
+                onValueChange={(itemValue, itemIndex) => setTentadoConsumado(itemValue)}
+                >
+                <Picker.Item label="Tentado/consumado" value="Tentado/Consumado" />
+                <Picker.Item label="Tentado" value="Tentado" />
+                <Picker.Item label="Consumado" value="Consumado" />
+              
+                </Picker>
+                        
                  </View>
 
                  <View style = {styles.viewCidadeBairro}>
@@ -3151,7 +3166,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
-                <Picker.Item label="Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
+                <Picker.Item label="*Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
                 <Picker.Item label="RO" value="RO" />
                 <Picker.Item label="BO" value="BO" />
                 <Picker.Item label="RRM" value="RRM" />
@@ -3166,7 +3181,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
-                <Picker.Item label="Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
+                <Picker.Item label="*Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
                 <Picker.Item label="RO" value="RO" />
                 
                 <Picker.Item label="RRM" value="RRM" />
@@ -3389,7 +3404,8 @@ export default () => {
 
              
 
-             <TextInput style={styles.inputHist} color ='#fff' placeholder='                         Histórico da ocorrência' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />  
+             <TextInput style={styles.inputHist} color ='#fff' placeholder='                         *Histórico da ocorrência' placeholderTextColor='#666360' multiline={true} textAlignVertical='top' value={historico} onChangeText={(t) => setHistorico(t)} />  
+             <Text style={{color:'#fff',fontSize:12,marginLeft:30,marginTop:15}}>* Campos Obrigatórios</Text>
              <BtnCadastrarOcorrencia disabled={loading} onPress={confirmar}>
                  <TextBtnOcorrencia>Cadastrar Ocorrência</TextBtnOcorrencia>
              </BtnCadastrarOcorrencia>

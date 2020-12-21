@@ -92,7 +92,7 @@ export const TextEndereço= styled.Text`
     
 `
 export const TextInformações= styled.Text`
-        width: 257px;
+        
         height: 26px;
         font-family: RobotoSlab;
         font-style: normal;
@@ -115,7 +115,7 @@ border-radius: 10px;
 justify-content:center;
     align-items:center;
     margin-left:30px;
-    margin-top:30px;
+    
 `
 export const TextBtnOcorrencia= styled.Text`      
 width: 162px;

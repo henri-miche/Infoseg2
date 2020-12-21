@@ -242,11 +242,11 @@ export default () => {
       
 
 
-        const [env2, setEnv2] = useState(true);
+        const [env2, setEnv2] = useState(false);
         const [envolvido2,setEnvolvido2] = useState(true);
-        const [env3,setEnv3] = useState(true);
-        const [env4,setEnv4] = useState(true);
-        const [formNotaFalsa,setFormNotaFalsa] = useState(true);
+        const [env3,setEnv3] = useState(false);
+        const [env4,setEnv4] = useState(false);
+        const [notaFalsa,setNotaFalsa] = useState(false);
         const [historicoOcorr,sethistoricoOcorr] = useState(true);
         const [agenteIntegrante,setAgenteIntegrante] = useState(true);
         const [animoUsuario,setAnimoUsuario] = useState(true);
@@ -533,7 +533,8 @@ export default () => {
                     setpaisMoradiaEnv2(paisMoradiaEnv2);
 
 
-                   //adicionar setenv3
+                   
+                    setEnv3(env3);
                     setNomeEnv3(nomeEnv3);
                     setCpfEnv3(cpfEnv3);
                     setIdentidadeEnv3(identidadeEnv3);
@@ -561,7 +562,8 @@ export default () => {
                     setUfEnvolvidoEnv3(ufEnvolvidoEnv3);
                     setpaisMoradiaEnv3(paisMoradiaEnv3);
 
-                    //adicionar setenv4
+                    
+                    setEnv4(env4);
                     setNomeEnv4(nomeEnv4);
                     setCpfEnv4(cpfEnv4);
                     setIdentidadeEnv4(identidadeEnv4);
@@ -590,7 +592,7 @@ export default () => {
                     setpaisMoradiaEnv4(paisMoradiaEnv4);
 
 
-
+                    setNotaFalsa(notaFalsa);
                     setMarcaDagua(marcaDagua);
                     setMicroImpressoes(microImpressoes);
                     setRegistroCoincidente(regitroCoincidente);
@@ -1634,7 +1636,7 @@ img {
 
     </html>
 `;
-console.log("PComponent => I'm rendering...")
+console.log("PComponent => I'm rendering..."+env3+env4+env2)
     return (
         <Container >
 
@@ -1650,7 +1652,7 @@ console.log("PComponent => I'm rendering...")
             
             
             <ViewQualificaçao>
-                <TextQuaificaçao>Qualificação do Envolvido</TextQuaificaçao>
+                <TextQuaificaçao>Qualificação do Envolvido 1</TextQuaificaçao>
 
                 
             {avatar2 && <>
@@ -1788,7 +1790,7 @@ console.log("PComponent => I'm rendering...")
 
                 
             
-                <TextDetallhesOcorr>Endereço do Envolvido</TextDetallhesOcorr>
+                <TextDetallhesOcorr>Endereço do Envolvido 1</TextDetallhesOcorr>
 
                 <View style={{flexDirection:'row'}}>
                 <View style={{flex:1}}>
@@ -1827,6 +1829,638 @@ console.log("PComponent => I'm rendering...")
                  <TextLabelcamposmae>Complemento:<TextCamposmae>{complemento}</TextCamposmae></TextLabelcamposmae>
 
             </View>
+
+
+
+
+
+
+
+
+
+
+
+
+            { env2 && 
+            <>
+            <ViewQualificaçao>
+                <TextQuaificaçao>Qualificação do Envolvido 2</TextQuaificaçao>
+
+               
+                <View style = {{flexDirection:'row'}}>
+
+               
+
+                <View style={{marginLeft:30}}>
+                <TextNome>{nomeEnv2}</TextNome>
+
+                <View style={{marginTop:16}}>
+                <TextLabel>RG:<TextLabelText>{identidadeEnv2}</TextLabelText></TextLabel>
+                <TextLabel>CPF:<TextLabelText>{cpfEnv2}</TextLabelText></TextLabel>
+                <TextLabel>Telefone:<TextLabelText>{telefoneEnv2}</TextLabelText></TextLabel>
+                <TextLabel>Nascimento:<TextLabelText>{nascimentoEnv2}</TextLabelText></TextLabel>
+                </View>
+                
+                </View>
+               
+                </View>
+
+            </ViewQualificaçao>
+
+            <View style={{marginLeft:30}}>
+                <TextLabelcamposmae>Mãe:<TextCamposmae>{maeEnv2}</TextCamposmae></TextLabelcamposmae>
+                <TextLabelcamposmae>Pai:<TextCamposmae>{paiEnv2}</TextCamposmae></TextLabelcamposmae>
+                 
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nascimento:<TextCamposmae>{nascimentoEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Genero:<TextCamposmae>{generoEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nacionalidade:<TextCamposmae>{nacionalidadeEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Naturalidade:<TextCamposmae>{naturalidadeEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Idade Aparente:<TextCamposmae>{idadeAparenteEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Estado Civil:<TextCamposmae>{estadoCivilEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Cútis:<TextCamposmae>{cutisEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Ocupação:<TextCamposmae>{ocupaçãoAtualEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Orgão Epedidor:<TextCamposmae>{orgãoExpedidorEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Escolaridade:<TextCamposmae>{grauEscoarEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>UF.Nascimento:<TextCamposmae>{ufEnvolvidoEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Envolvimento:<TextCamposmae>{tipoDeEnvolvimentoEnv2}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                       </View>
+            
+            <View style={{marginLeft:30,marginTop:35}}>
+
+                <TextDetallhesOcorr>Endereço do Envolvido 2</TextDetallhesOcorr>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>CEP:<TextCamposmae>{cepEnv2}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>UF:<TextCamposmae>{ufEnvolvidoEnv2}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Cidade:<TextCamposmae>{cidadeEnv2}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Bairro:<TextCamposmae>{bairroEnv2}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+                <TextLabelcamposmae>Logradouro:<TextCamposmae>{logradouroEnv2}</TextCamposmae></TextLabelcamposmae>
+                    
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Número:<TextCamposmae>{numeroCasaEnv2}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>País:<TextCamposmae>{paisMoradiaEnv2}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                 <TextLabelcamposmae>Complemento:<TextCamposmae>{complementoEnv2}</TextCamposmae></TextLabelcamposmae>
+
+            </View>
+            </>
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             { env3 && 
+            <>
+            <ViewQualificaçao>
+                <TextQuaificaçao>Qualificação do Envolvido 3</TextQuaificaçao>
+
+               
+                <View style = {{flexDirection:'row'}}>
+
+               
+
+                <View style={{marginLeft:30}}>
+                <TextNome>{nomeEnv3}</TextNome>
+
+                <View style={{marginTop:16}}>
+                <TextLabel>RG:<TextLabelText>{identidadeEnv3}</TextLabelText></TextLabel>
+                <TextLabel>CPF:<TextLabelText>{cpfEnv3}</TextLabelText></TextLabel>
+                <TextLabel>Telefone:<TextLabelText>{telefoneEnv3}</TextLabelText></TextLabel>
+                <TextLabel>Nascimento:<TextLabelText>{nascimentoEnv3}</TextLabelText></TextLabel>
+                </View>
+                
+                </View>
+               
+                </View>
+                 
+                
+
+                
+
+            </ViewQualificaçao>
+
+            <View style={{marginLeft:30}}>
+                <TextLabelcamposmae>Mãe:<TextCamposmae>{maeEnv3}</TextCamposmae></TextLabelcamposmae>
+                <TextLabelcamposmae>Pai:<TextCamposmae>{paiEnv3}</TextCamposmae></TextLabelcamposmae>
+                 
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nascimento:<TextCamposmae>{nascimentoEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Genero:<TextCamposmae>{generoEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nacionalidade:<TextCamposmae>{nacionalidadeEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Naturalidade:<TextCamposmae>{naturalidadeEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Idade Aparente:<TextCamposmae>{idadeAparenteEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Estado Civil:<TextCamposmae>{estadoCivilEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Cútis:<TextCamposmae>{cutisEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Ocupação:<TextCamposmae>{ocupaçãoAtualEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Orgão Epedidor:<TextCamposmae>{orgãoExpedidorEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Escolaridade:<TextCamposmae>{grauEscoarEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>UF.Nascimento:<TextCamposmae>{ufEnvolvidoEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Envolvimento:<TextCamposmae>{tipoDeEnvolvimentoEnv3}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 
+                 
+                       </View>
+            
+            <View style={{marginLeft:30,marginTop:35}}>
+
+                
+            
+                <TextDetallhesOcorr>Endereço do Envolvido 3</TextDetallhesOcorr>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>CEP:<TextCamposmae>{cepEnv3}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>UF:<TextCamposmae>{ufEnvolvidoEnv3}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Cidade:<TextCamposmae>{cidadeEnv3}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Bairro:<TextCamposmae>{bairroEnv3}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+                <TextLabelcamposmae>Logradouro:<TextCamposmae>{logradouroEnv3}</TextCamposmae></TextLabelcamposmae>
+                    
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Número:<TextCamposmae>{numeroCasaEnv3}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>País:<TextCamposmae>{paisMoradiaEnv3}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                 <TextLabelcamposmae>Complemento:<TextCamposmae>{complementoEnv3}</TextCamposmae></TextLabelcamposmae>
+
+            </View>
+            </>
+            }
+
+
+
+
+
+
+
+
+
+
+
+             { env4 && 
+            <>
+            <ViewQualificaçao>
+                <TextQuaificaçao>Qualificação do Envolvido 4</TextQuaificaçao>
+
+               
+                <View style = {{flexDirection:'row'}}>
+
+               
+
+                <View style={{marginLeft:30}}>
+                <TextNome>{nomeEnv4}</TextNome>
+
+                <View style={{marginTop:16}}>
+                <TextLabel>RG:<TextLabelText>{identidadeEnv4}</TextLabelText></TextLabel>
+                <TextLabel>CPF:<TextLabelText>{cpfEnv4}</TextLabelText></TextLabel>
+                <TextLabel>Telefone:<TextLabelText>{telefoneEnv4}</TextLabelText></TextLabel>
+                <TextLabel>Nascimento:<TextLabelText>{nascimentoEnv4}</TextLabelText></TextLabel>
+                </View>
+                
+                </View>
+               
+                </View>
+                 
+                
+
+                
+
+            </ViewQualificaçao>
+
+            <View style={{marginLeft:30}}>
+                <TextLabelcamposmae>Mãe:<TextCamposmae>{maeEnv4}</TextCamposmae></TextLabelcamposmae>
+                <TextLabelcamposmae>Pai:<TextCamposmae>{paiEnv4}</TextCamposmae></TextLabelcamposmae>
+                 
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nascimento:<TextCamposmae>{nascimentoEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Genero:<TextCamposmae>{generoEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Nacionalidade:<TextCamposmae>{nacionalidadeEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Naturalidade:<TextCamposmae>{naturalidadeEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Idade Aparente:<TextCamposmae>{idadeAparenteEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Estado Civil:<TextCamposmae>{estadoCivilEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Cútis:<TextCamposmae>{cutisEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Ocupação:<TextCamposmae>{ocupaçãoAtualEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Orgão Epedidor:<TextCamposmae>{orgãoExpedidorEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Escolaridade:<TextCamposmae>{grauEscoarEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>UF.Nascimento:<TextCamposmae>{ufEnvolvidoEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Envolvimento:<TextCamposmae>{tipoDeEnvolvimentoEnv4}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 
+                 
+                       </View>
+            
+            <View style={{marginLeft:30,marginTop:35}}>
+
+                
+            
+                <TextDetallhesOcorr>Endereço do Envolvido 4</TextDetallhesOcorr>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>CEP:<TextCamposmae>{cepEnv4}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>UF:<TextCamposmae>{ufEnvolvidoEnv4}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Cidade:<TextCamposmae>{cidadeEnv4}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Bairro:<TextCamposmae>{bairroEnv4}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+                <TextLabelcamposmae>Logradouro:<TextCamposmae>{logradouroEnv4}</TextCamposmae></TextLabelcamposmae>
+                    
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Número:<TextCamposmae>{numeroCasaEnv4}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>País:<TextCamposmae>{paisMoradiaEnv4}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                </View>
+
+                 <TextLabelcamposmae>Complemento:<TextCamposmae>{complementoEnv4}</TextCamposmae></TextLabelcamposmae>
+
+            </View>
+            </>
+            }
+
+
+
+
+
+
+            { notaFalsa && <>
+            
+             <View style={{marginLeft:30,marginTop:35}}>
+                <TextDetallhesOcorr>CARACTERÍSTICAS QUE EVIDENCIAM A POSSIBILIDADE DE FALSIFICAÇÃO</TextDetallhesOcorr>
+            </View>
+
+            <View style={{marginTop:15,marginLeft:30}}>
+
+                <View style={{flexDirection:'row'}} >
+                   
+                   <View style={{flex:1}}>
+                    <TextLabelcamposmae>Marca D'água:<TextCamposmae>{marcaDagua}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+               
+                <View style={{flex:1}}>
+                    <TextLabelcamposmae>Microimpressões:<TextCamposmae>{microImpressoes}</TextCamposmae></TextLabelcamposmae>
+                </View>
+                
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Registro Coincidente:<TextCamposmae>{registroCoincidente}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Imagem Latente:<TextCamposmae>{imagemLatente}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                 <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Impressão Alto Relevo:<TextCamposmae>{impressaoRelevo}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Numeração:<TextCamposmae>{numeraçaoNota}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Fibras Coloridas:<TextCamposmae>{fibrasColoridas}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Marca Tátil:<TextCamposmae>{marcaTatil}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Fio de Segurança:<TextCamposmae>{fioDeSegurança}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Fundos Especiais:<TextCamposmae>{fundosEspeciais}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Fibras Sensíveis:<TextCamposmae>{fibrasLuzVioleta}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Faixa Holográfica:<TextCamposmae>{faixaHoografica}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Janela Transarente:<TextCamposmae>{janelaTransparente}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                
+
+                <View>
+                <TextLabelcamposmae>Tipo e/ou Tamanho do Papel:<TextCamposmae>{tipoPapel}</TextCamposmae></TextLabelcamposmae>
+                    <TextLabelcamposmae>Moeda:<TextCamposmae>{moeda}</TextCamposmae></TextLabelcamposmae>
+                    <TextLabelcamposmae>Outros:<TextCamposmae>{outrasCaracteristicas}</TextCamposmae></TextLabelcamposmae>
+                </View>
+
+                <View style={{marginTop:35}}>
+                <TextDetallhesOcorr>Informações Prestadas pelo Envolvido</TextDetallhesOcorr>
+            </View>
+
+            <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Origem da Cédula:<TextCamposmae>{origemCedula}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Estado de Ânimo:<TextCamposmae>{estadoAnimo}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+
+                <View style={{flexDirection:'row'}}>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Tentou Evadir:<TextCamposmae>{tentouEvadir}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                    <View style={{flex:1}}>
+                        <TextLabelcamposmae>Pagou Após:<TextCamposmae>{pagouApos}</TextCamposmae></TextLabelcamposmae>
+                    </View>
+
+                </View>
+                <TextLabelcamposmae>Possuía Outras édulas Válidas:<TextCamposmae>{possuiaOutrasCedulas}</TextCamposmae></TextLabelcamposmae>
+
+            </View>
+            </>
+            }
+
+
 
 
 
