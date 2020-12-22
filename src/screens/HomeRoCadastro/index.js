@@ -29,6 +29,7 @@ ModalText,
 ModalTextText,
 LoadingArea,
 TextEnvolvido2,
+LoadingAreaReincidente
 } from './styles';
 
 
@@ -40,7 +41,7 @@ export default () => {
     const [nome, setNome] = useState('');
     const [identidade, setIdentidade] = useState('');
     const [nascimento, setNascimento] = useState('');
-    const [tipoRo, setTipoRo] = useState("Escolha");
+    const [tipoRo, setTipoRo] = useState("*Escolha Tipo Ocorrencia");
     const [local, setLocal] = useState("UVL");
     const [mae, setMae] = useState('');
     const [pai, setPai] = useState('');
@@ -274,6 +275,7 @@ export default () => {
 
     
     const [searchTextoReincidente, setSearchTextoReincidente] = useState('');
+    const [loadingReincidente, setLoadingReincidente] = useState(false);
 
 
     const navigation = useNavigation();
@@ -1611,7 +1613,7 @@ export default () => {
         case 'RRM':
              setTipoOcorrencia(tipoOcorrenciaRRM)
               break;  
-        case 'Escolha Tipo Ocorrencia':
+        case '*Escolha Tipo Ocorrencia':
              setTipoOcorrencia('')
              setTipoOcorrencia1('');
               break;       
@@ -2129,6 +2131,7 @@ export default () => {
                 }
 
                 const handleClickSearchReincidente = (nomeReincidente) =>{
+                            setLoadingReincidente(true)
                                 try {
                     firebase.database().ref('/Ocorrencias').orderByChild('nome').startAt(nomeReincidente)
                     .once('value', (snapshot) => {
@@ -2143,8 +2146,7 @@ export default () => {
                             
                      nome : childItem.val().nome,
                      identidade : childItem.val().identidade,
-                     cpf : childItem.val().cpf,
-                     chaveFoto : childItem.val().chaveFoto,
+                     cpf : childItem.val().cpf,                    
                      data : childItem.val().data,
                      hora : childItem.val().hora,
                      nascimento : childItem.val().nascimento,
@@ -2154,7 +2156,6 @@ export default () => {
                      telefone : childItem.val().telefone,
                      genero : childItem.val().genero,
                      endereço : childItem.val().endereço,
-
                      cidade : childItem.val().cidade,
                      bairro : childItem.val().bairro,
                      logradouro : childItem.val().logradouro,
@@ -2179,13 +2180,12 @@ export default () => {
                         
                         const nome = list[0].nome;
                         const identidade = list[0].identidade;
-                        const cpf = list[0].cpf;
-                        const chaveFoto = list[0].chaveFoto;
+                        const cpf = list[0].cpf;                       
                         const data = list[0].data;
                         const hora = list[0].hora;
                         const nascimento = list[0].nascimento;
                         const local = list[0].local;
-                         const mae = list[0].mae;
+                        const mae = list[0].mae;
                         const pai = list[0].pai;
                         const telefone = list[0].telefone;
                         const genero = list[0].genero;
@@ -2193,7 +2193,7 @@ export default () => {
                         const cidade = list[0].cidade;
                         const bairro = list[0].bairro;
                         const logradouro = list[0].logradouro;
-                         const numeroCasa = list[0].numeroCasa;
+                        const numeroCasa = list[0].numeroCasa;
                         const complemento = list[0].complemento;
                         const estado = list[0].estado;
                         const cep = list[0].cep;
@@ -2201,7 +2201,7 @@ export default () => {
                         const naturalidade = list[0].naturalidade;
                         const idadeAparente = list[0].idadeAparente;
                         const estadoCivil = list[0].estadoCivil;
-                         const cutis = list[0].cutis;
+                        const cutis = list[0].cutis;
                         const ocupaçãoAtual = list[0].ocupaçãoAtual;
                         const grauEscolar = list[0].grauEscolar;
                         const orgãoExpedidor = list[0].orgãoExpedidor;
@@ -2212,45 +2212,34 @@ export default () => {
                         
                     setIdentidade(identidade);
                     setNome(nome);
-                    setCpf(cpf);
-                    
+                    setCpf(cpf); 
                     setData(data);
                     setHora(hora);
-                    setNascimento(nascimento);
-                    
+                    setNascimento(nascimento);                   
                     setLocal(local);
                     setMae(mae);
                     setPai(pai);
                     setTelefone(telefone);
-                    setGenero(genero);
-                  
-                   
-                    setEstado(estado);
-
-                    
-                    
+                    setGenero(genero);                  
+                    setEstado(estado);          
                     setCep(cep);
                     setBairro(bairro);
                     setCidade(cidade);
                     setLogradouro(logradouro);
                     setNumeroCasa(numeroCasa);
-                    setComplemento(complemento);
-                    
+                    setComplemento(complemento);                   
                     setNacionalidade(nacionalidade);
                     setNaturalidade(naturalidade);
                     setIdadeAparente(idadeAparente);
                     setEstadoCivil(estadoCivil);
                     setCutis(cutis);
                     setOcupaçãoAtual(ocupaçãoAtual);
-                    setGrauEscolar(grauEscolar);
-                    
+                    setGrauEscolar(grauEscolar);                   
                     setOrgãoEpedidor(orgãoExpedidor);
                     setUfEnvolvido(ufEnvolvido);
                     setpaisMoradia(paisMoradia);
-                    setTipoDeEnvolvimento(tipodeEnvolvimento)
-
-                        
-                        
+                    setTipoDeEnvolvimento(tipodeEnvolvimento)                      
+                    setLoadingReincidente(false)
                         
                         
                         
@@ -3353,7 +3342,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
-                <Picker.Item label="*Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
+                <Picker.Item label="*Escolha Tipo Ocorrencia" value="*Escolha Tipo Ocorrencia" />
                 <Picker.Item label="RO" value="RO" />
                 <Picker.Item label="BO" value="BO" />
                 <Picker.Item label="RRM" value="RRM" />
@@ -3368,7 +3357,7 @@ export default () => {
                 style={{ height: 50, width: 182,backgroundColor: '#2E2E2E',borderRadius:10,color:'#fff'}}
                 onValueChange={(itemValue, itemIndex) => setTipoRo(itemValue)}
                 >
-                <Picker.Item label="*Escolha Tipo Ocorrencia" value="Escolha Tipo Ocorrencia" />
+                <Picker.Item label="*Escolha Tipo Ocorrencia" value="*Escolha Tipo Ocorrencia" />
                 <Picker.Item label="RO" value="RO" />
                 
                 <Picker.Item label="RRM" value="RRM" />
@@ -3605,6 +3594,17 @@ export default () => {
 
                 />
             </LoadingArea>
+             }
+
+             {loadingReincidente &&
+            <LoadingAreaReincidente>
+                <ActivityIndicator
+                       size='large'
+                       color='#fff' 
+                       style={{marginTop:130}}
+
+                />
+            </LoadingAreaReincidente>
              }
                
         </Container>
