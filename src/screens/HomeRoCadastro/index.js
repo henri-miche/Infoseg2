@@ -1444,7 +1444,7 @@ export default () => {
     
  /*if tem que ser editado para nano permitir envio vazio*/
     const confirmar = () => {
-        if(nome !== '' && cpf !== ''  && tipoRo !== '*Escolha Tipo Ocorrencia' ){
+        if(historico !== '' && tipoRo !== '*Escolha Tipo Ocorrencia' ){
            
            const user = firebase.auth().currentUser;
                 if(user){
@@ -2181,8 +2181,7 @@ export default () => {
                         const nome = list[0].nome;
                         const identidade = list[0].identidade;
                         const cpf = list[0].cpf;                       
-                        const data = list[0].data;
-                        const hora = list[0].hora;
+                       
                         const nascimento = list[0].nascimento;
                         const local = list[0].local;
                         const mae = list[0].mae;
@@ -2213,8 +2212,6 @@ export default () => {
                     setIdentidade(identidade);
                     setNome(nome);
                     setCpf(cpf); 
-                    setData(data);
-                    setHora(hora);
                     setNascimento(nascimento);                   
                     setLocal(local);
                     setMae(mae);
@@ -2256,8 +2253,6 @@ export default () => {
           setIdentidade('');
                     setNome('');
                     setCpf('');
-                    setData('');
-                    setHora('');
                     setNascimento('');
                     setLocal('');
                     setMae('');
