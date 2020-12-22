@@ -7,23 +7,14 @@ import { useNavigation } from '@react-navigation/native';
 
 function DownFotos2({data}) {
 
-    const nome = data.nome;
-    const cpf = data.cpf;
+    const nome = data.nome; 
     const key = data.key;
-    const chaveFoto = data.chaveFoto;
     const dataa = data.dataa;
-    const hora = data.hora;
-    const identidade = data.identidade;
-    const nascimento = data.nascimento;
+    const hora = data.hora;  
     const tipoRo = data.tipoRo;
     const local = data.local;
-    const mae = data.mae;
-    const pai = data.pai;
-    const telefone = data.telefone;
-    const genero = data.genero;
     const historico = data.historico;
     const nomeAgenteRelator = data.nomeAgenteRelator;
-    const endereço = data.endereço;
     const tipoOcorrencia1 = data.tipoOcorrencia1;
     const [avatar2,setAvatar2] = useState(null);  
     const navigation = useNavigation();
@@ -332,14 +323,7 @@ backgroundColor: '#2E2E2E',
 borderRadius: 10,
 
 
-        /*
-        flex:1,
-        borderColor: '#fff',
-        borderWidth: 1,
-        borderRadius: 5,
-        backgroundColor:'#000',
-        margin: 5,
-*/
+       
     },
     btnEnviar: {
         borderWidth: 1,
@@ -357,28 +341,3 @@ borderRadius: 10,
 });
 
 export default memo(DownFotos2);
-/*<View style={{flexDirection:'row',marginTop:5,padding:10,height:200,paddingLeft:40}}>
-                    
-                    <View style={{flex:1,justifyContent:'space-between'}}> 
-                        <Text style={styles.text}> Nome: {nome} </Text>
-                        <Text style={styles.text}> Mae: {mae}</Text>
-                        <Text style={styles.text}> Pai: {pai}</Text>
-                        <Text style={styles.text}> Endereço: {endereço}</Text>
-                        <Text style={styles.text}> Cosop: {cosop}</Text>
-                        <Text style={styles.text}> Data: {dataa}</Text>   
-                        <Text style={styles.text}> Hora: {hora}</Text>   
-                    </View>
-                    
-                    <View style={{flex:1,justifyContent:'space-between'}}>
-                        <Text style={styles.text}> CPF: {cpf}</Text>
-                        <Text style={styles.text}> Identidade: {identidade}</Text>
-                        <Text style={styles.text}> Nascimento: {nascimento}</Text>
-                        <Text style={styles.text}> Telefone: {telefone}</Text>
-                        <Text style={styles.text}> Genero: {genero}</Text>
-                        <Text style={styles.text}> Local: {local}</Text>
-                        <Text style={styles.text}> RO: {tipoRo}</Text>
-                    </View>
-                </View>
-                        <View style={{margin:10}}>
-                            <Text style={styles.text}> Historico: {historico}</Text>
-                        </View>*/

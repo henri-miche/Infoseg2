@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef} from 'react';
+import React,{useState,useEffect} from 'react';
 import {SafeAreaView,FlatList, StyleSheet,View, RefreshControl,Image} from 'react-native';
 import {Container,
 TextoBoasVindas,
@@ -8,8 +8,6 @@ GerarRo,
 TextoGerarRo,
 GerarRrm,
 OcorrenciasText,
-
-
 } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import firebase from '../../connection/FirebaseConection';
@@ -23,12 +21,11 @@ export default () => {
     const navigation = useNavigation();
     const [isRefresh, setIsRefresh] = useState(false);
     const [searchTexto, setSearchTexto] = useState('');
-    const [Filtro, setFiltro] = useState('');
     const [nome, setNome] = useState('');
-    const [nomeOcorr, setNomeOcorr] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [index, setIndex] = useState(0);
-    const mounted = useRef();
+    
+    
+    
+   
     
 
     
@@ -59,20 +56,12 @@ const pushDados = async () =>{
         snapshot.forEach((childItem) => {
           list.push({
             key: childItem.key,
-            cpf: childItem.val().cpf,
             nome: childItem.val().nome,
             chaveFoto: childItem.val().chaveFoto,
-            endereço: childItem.val().endereço,
             dataa: childItem.val().data,
             hora: childItem.val().hora,
-            identidade: childItem.val().identidade,
-            nascimento: childItem.val().nascimento,
             tipoRo: childItem.val().tipoRo,
             local: childItem.val().local,
-            mae: childItem.val().mae,
-            pai: childItem.val().pai,
-            telefone: childItem.val().telefone,
-            genero: childItem.val().genero,
             historico: childItem.val().historico,
             nomeAgenteRelator: childItem.val().nomeAgenteRelator,
             tipoOcorrencia1:childItem.val().tipoOcorrencia1, 
@@ -97,23 +86,15 @@ const pushDados = async () =>{
         snapshot.forEach((childItem) => {
           list.push({
             key: childItem.key,
-            cpf: childItem.val().cpf,
             nome: childItem.val().nome,
             chaveFoto: childItem.val().chaveFoto,
-            endereço: childItem.val().endereço,
             dataa: childItem.val().data,
             hora: childItem.val().hora,
-            identidade: childItem.val().identidade,
-            nascimento: childItem.val().nascimento,
             tipoRo: childItem.val().tipoRo,
             local: childItem.val().local,
-            mae: childItem.val().mae,
-            pai: childItem.val().pai,
-            telefone: childItem.val().telefone,
-            genero: childItem.val().genero,
             historico: childItem.val().historico,
             nomeAgenteRelator: childItem.val().nomeAgenteRelator,
-            tipoOcorrencia1:childItem.val().tipoOcorrencia1,
+            tipoOcorrencia1:childItem.val().tipoOcorrencia1, 
           });
         });
         setListFire(list);
@@ -229,7 +210,7 @@ const pushDados = async () =>{
                 
                  <Search color='#fff'
                  value={searchTexto} 
-               autoCapitalize='characters' 
+               
                onEndEditing={handleClickSearch} 
                onPress={handleClickSearch}
                onPress2={handleClickSearchLimpar}
@@ -242,7 +223,7 @@ const pushDados = async () =>{
                   
 
                 <SafeAreaView style={{ flex:1,backgroundColor:'#000',marginLeft:30,marginTop:15}}>
-                    <FlatList style={styles.viewFlat} 
+                    <FlatList  
                     data={listFire}
                         
                         keyExtractor={(item) => item.key}
@@ -270,14 +251,6 @@ const pushDados = async () =>{
 }
 
 const styles = StyleSheet.create({
-    viewFiltros:{
-       flexDirection:'row',
-       justifyContent:'space-between',
-       marginTop:25,
-       marginLeft:30,
-       paddingRight:30,
-       marginRight:59,
-    },
     ViewRrmBo:{
        flexDirection:'row',
        justifyContent:'space-between',
@@ -303,117 +276,5 @@ const styles = StyleSheet.create({
         marginLeft:30,
         paddingRight:35,
     },
-    textVerTodasOcorr:{
-width: 194,
-height: 21,
-
-fontWeight: 'bold',
-fontSize: 16,
-lineHeight: 21,
-/* Text */
-
-color: '#F4EDE8',
-    },
-    textProxAnter:{   
-width: 64,
-height: 21,
-fontSize: 16,
-lineHeight: 21,
-/* Orange */
-color: '#FF9000',
-    },
-    itemArea:{
-        height:100,
-        flex:1,
-        flexDirection:'row',
-    },
-    itemFoto:{
-        width:150,
-        height:150,
-        margin:10,
-    },
-    itemInfo:{
-        flex:1
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#000',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        color: '#fff',
-    },
-    textInput: {
-        width: 300,
-        height: 50,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        textAlign: 'center',
-        marginTop: 5
-    },
-    btnEnviar: {
-        margin: 10,
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 150,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    iconFlat: {
-        flexDirection: 'row',
-        width: 350,
-        height: 50,
-        borderColor: '#fff',
-        borderWidth: 1,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 5
-    },
-    btnEnviar: {
-        borderWidth: 1,
-        borderColor: 'red',
-        width: 50,
-        height: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: 5
-    },
-    viewFlat: {
-        
-    }
+   
 })
-/*<SafeAreaView style={{ backgroundColor: '#1C1C1C', flex: 1 ,marginTop:1}}>
-               <SearchCadastrar  autoCapitalize={'characters'} onEndEditing={handleClickSearch} value={searchTexto} onChangeText={(t) => setSearchTexto(t)} onPress={handleClick} />
-                
-                <SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
-                    <FlatList style={styles.viewFlat} 
-                    data={listFire}
-                        
-                        keyExtractor={(item) => item.key}
-                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
-                        
-                        renderItem={({ item }) =>
-                           <DownFotos2 data={item}/>
-                           
-                            
-
-                        } />
-                </SafeAreaView>
-
-            </SafeAreaView>*//*<SafeAreaView style={{ flex:1,backgroundColor:'#000'}}>
-                    <FlatList style={styles.viewFlat} 
-                    data={listFire}
-                        
-                        keyExtractor={(item) => item.key}
-                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
-                        
-                        renderItem={({ item }) =>
-                           <DownFotos2 data={item}/>
-                           
-                            
-
-                        } />
-                </SafeAreaView>*/
