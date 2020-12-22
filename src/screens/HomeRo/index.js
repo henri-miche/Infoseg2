@@ -117,7 +117,7 @@ const pushDados = async () =>{
         if (searchTexto === '') {
             pushDados();
         }
-        console.log(searchTexto)
+       
     },[searchTexto])
    
   useEffect(() => {

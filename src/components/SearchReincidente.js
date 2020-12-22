@@ -11,6 +11,7 @@ const InputArea = styled.View`
     /*padding-left: 15px;*/
     align-items: center;
     margin-left:30px;
+    margin-top: 15px;
 `;
 
  const Input = styled.TextInput`

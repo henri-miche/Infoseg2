@@ -172,7 +172,7 @@ export const LoadingArea = styled.View`
         background-color: rgba(0,0,0,0.6);
         align-items:center;
         justify-content:flex-end;
-        margin-bottom:100px;
+       
     
 `
 export const TextEnvolvido2= styled.Text`

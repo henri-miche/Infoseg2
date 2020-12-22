@@ -7,11 +7,12 @@ import * as Permissions from 'expo-permissions';
 import * as imagePicker from 'expo-image-picker';
 import moment from 'moment';
 import firebase from '../../connection/FirebaseConection';
-import Inputs from '../../components/Inputs'
-import InputsInteiro from '../../components/InputsInteiro'
-import InputMaePai from '../../components/InputMaePai'
-import InputMenor from '../../components/InputMenor'
-import InputMenorAinda from '../../components/InputMenorAinda'
+import Inputs from '../../components/Inputs';
+import InputsInteiro from '../../components/InputsInteiro';
+import InputMaePai from '../../components/InputMaePai';
+import InputMenor from '../../components/InputMenor';
+import InputMenorAinda from '../../components/InputMenorAinda';
+import SearchReincidente from '../../components/SearchReincidente';
 import { mask } from 'remask'
 import { Container,
 ViewTitullo,
@@ -272,7 +273,7 @@ export default () => {
     const [tipoEnvolvimentoAgente2, setTipoEnvolvimentoAgente2] = useState('Agente Integrante');
 
     
-
+    const [searchTextoReincidente, setSearchTextoReincidente] = useState('');
 
 
     const navigation = useNavigation();
@@ -1984,7 +1985,7 @@ export default () => {
                 const buscarCep = (cep) =>{
                             fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
                                    if(data.localidade){
-                                        console.log(data);
+                                        
                                     setCidade(data.localidade);
                                     setBairro(data.bairro);
                                     setLogradouro(data.logradouro);
@@ -2002,7 +2003,7 @@ export default () => {
                  const buscarCepenv2 = (cep) =>{
                             fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
                                    if(data.localidade){
-                                        console.log(data);
+                                        
                                     setCidadeEnv2(data.localidade);
                                     setBairroEnv2(data.bairro);
                                     setLogradouroEnv2(data.logradouro);
@@ -2017,7 +2018,7 @@ export default () => {
                  const buscarCepenv3 = (cep) =>{
                             fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
                                    if(data.localidade){
-                                        console.log(data);
+                                        
                                     setCidadeEnv3(data.localidade);
                                     setBairroEnv3(data.bairro);
                                     setLogradouroEnv3(data.logradouro);
@@ -2032,7 +2033,7 @@ export default () => {
                  const buscarCepenv4 = (cep) =>{
                             fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
                                     if(data.localidade){
-                                        console.log(data);
+                                        
                                     setCidadeEnv4(data.localidade);
                                     setBairroEnv4(data.bairro);
                                     setLogradouroEnv4(data.logradouro);
@@ -2070,7 +2071,7 @@ export default () => {
                         setNomeAgente1(nome);
                         setCargoAgente1(cargo);
                         setMatriculaAgente1(matricula);
-                        console.log(matricula)
+                        
                         setSiapeAgente1(siape);
 
                         
@@ -2111,7 +2112,7 @@ export default () => {
                         setNomeAgente2(nome);
                         setCargoAgente2(cargoAgente);
                         setMatriculaAgente2(matriculaAgente);
-                        console.log(matriculaAgente1)
+                        
                         setSiapeAgente2(siapeAgente);
 
                         
@@ -2126,6 +2127,173 @@ export default () => {
                     alert(error);
                     }
                 }
+
+                const handleClickSearchReincidente = (nomeReincidente) =>{
+                                try {
+                    firebase.database().ref('/Ocorrencias').orderByChild('nome').startAt(nomeReincidente)
+                    .once('value', (snapshot) => {
+                        const list = [];
+                        
+                        snapshot.forEach((childItem) => {
+                        list.push({
+                        
+                            
+
+
+                            
+                     nome : childItem.val().nome,
+                     identidade : childItem.val().identidade,
+                     cpf : childItem.val().cpf,
+                     chaveFoto : childItem.val().chaveFoto,
+                     data : childItem.val().data,
+                     hora : childItem.val().hora,
+                     nascimento : childItem.val().nascimento,
+                     local : childItem.val().local,
+                     mae : childItem.val().mae,
+                     pai : childItem.val().pai,
+                     telefone : childItem.val().telefone,
+                     genero : childItem.val().genero,
+                     endereço : childItem.val().endereço,
+
+                     cidade : childItem.val().cidade,
+                     bairro : childItem.val().bairro,
+                     logradouro : childItem.val().logradouro,
+                     numeroCasa : childItem.val().numeroCasa,
+                     complemento : childItem.val().complemento,
+                     estado : childItem.val().estado,//observar pq não esta usando
+                     cep : childItem.val().cep,
+                     nacionalidade : childItem.val().nacionalidade,
+                     naturalidade : childItem.val().naturalidade,
+                     idadeAparente : childItem.val().idadeAparente,
+                     estadoCivil : childItem.val().estadoCivil,
+                     cutis : childItem.val().cutis,
+                     ocupaçãoAtual : childItem.val().ocupaçãoAtual,
+                     grauEscolar : childItem.val().grauEscolar,
+                     orgãoExpedidor : childItem.val().orgãoExpedidor,
+                     ufEnvolvido : childItem.val().ufEnvolvido,
+                     paisMoradia : childItem.val().paisMoradia,
+                     tipodeEnvolvimento : childItem.val().tipodeEnvolvimento,
+                        
+                        });
+                        });
+                        
+                        const nome = list[0].nome;
+                        const identidade = list[0].identidade;
+                        const cpf = list[0].cpf;
+                        const chaveFoto = list[0].chaveFoto;
+                        const data = list[0].data;
+                        const hora = list[0].hora;
+                        const nascimento = list[0].nascimento;
+                        const local = list[0].local;
+                         const mae = list[0].mae;
+                        const pai = list[0].pai;
+                        const telefone = list[0].telefone;
+                        const genero = list[0].genero;
+                        const endereço = list[0].endereço;
+                        const cidade = list[0].cidade;
+                        const bairro = list[0].bairro;
+                        const logradouro = list[0].logradouro;
+                         const numeroCasa = list[0].numeroCasa;
+                        const complemento = list[0].complemento;
+                        const estado = list[0].estado;
+                        const cep = list[0].cep;
+                        const nacionalidade = list[0].nacionalidade;
+                        const naturalidade = list[0].naturalidade;
+                        const idadeAparente = list[0].idadeAparente;
+                        const estadoCivil = list[0].estadoCivil;
+                         const cutis = list[0].cutis;
+                        const ocupaçãoAtual = list[0].ocupaçãoAtual;
+                        const grauEscolar = list[0].grauEscolar;
+                        const orgãoExpedidor = list[0].orgãoExpedidor;
+                        const ufEnvolvido = list[0].ufEnvolvido;
+                        const paisMoradia = list[0].paisMoradia;
+                        const tipodeEnvolvimento = list[0].tipodeEnvolvimento;
+                      
+                        
+                    setIdentidade(identidade);
+                    setNome(nome);
+                    setCpf(cpf);
+                    
+                    setData(data);
+                    setHora(hora);
+                    setNascimento(nascimento);
+                    
+                    setLocal(local);
+                    setMae(mae);
+                    setPai(pai);
+                    setTelefone(telefone);
+                    setGenero(genero);
+                  
+                   
+                    setEstado(estado);
+
+                    
+                    
+                    setCep(cep);
+                    setBairro(bairro);
+                    setCidade(cidade);
+                    setLogradouro(logradouro);
+                    setNumeroCasa(numeroCasa);
+                    setComplemento(complemento);
+                    
+                    setNacionalidade(nacionalidade);
+                    setNaturalidade(naturalidade);
+                    setIdadeAparente(idadeAparente);
+                    setEstadoCivil(estadoCivil);
+                    setCutis(cutis);
+                    setOcupaçãoAtual(ocupaçãoAtual);
+                    setGrauEscolar(grauEscolar);
+                    
+                    setOrgãoEpedidor(orgãoExpedidor);
+                    setUfEnvolvido(ufEnvolvido);
+                    setpaisMoradia(paisMoradia);
+                    setTipoDeEnvolvimento(tipodeEnvolvimento)
+
+                        
+                        
+                        
+                        
+                        
+                        
+                    })
+
+                    } catch (error) {
+                    alert(error);
+                    }
+                }
+
+                const handleClickSearchLimpar = () =>{
+          setSearchTextoReincidente('');
+          setIdentidade('');
+                    setNome('');
+                    setCpf('');
+                    setData('');
+                    setHora('');
+                    setNascimento('');
+                    setLocal('');
+                    setMae('');
+                    setPai('');
+                    setTelefone('');
+                    setGenero('');                                    
+                    setEstado('');                                       
+                    setCep('');
+                    setBairro('');
+                    setCidade('');
+                    setLogradouro('');
+                    setNumeroCasa('');
+                    setComplemento('');                   
+                    setNacionalidade('');
+                    setNaturalidade('');
+                    setIdadeAparente('');
+                    setEstadoCivil('');
+                    setCutis('');
+                    setOcupaçãoAtual('');
+                    setGrauEscolar('');               
+                    setOrgãoEpedidor('');
+                    setUfEnvolvido('');
+                    setpaisMoradia('');
+                     setTipoDeEnvolvimento('')
+  }
 
             useEffect(()=>{
                
@@ -2166,6 +2334,14 @@ export default () => {
            
   }
 
+   const handleClickSearchReincidente1 = () =>{
+           if (searchTextoReincidente) {
+                handleClickSearchReincidente(searchTextoReincidente);
+           }   
+           
+  }
+  
+
     return (
         <Container >
        
@@ -2182,6 +2358,17 @@ export default () => {
             <View style={styles.viewQualiEnv}>
                 <TextSubtitulo>Qualificação do Envolvido</TextSubtitulo>
             </View>
+
+             <SearchReincidente color='#fff'
+                 value={searchTextoReincidente} 
+               placeholderTextColor ='#666360'
+               placeholder='Reincidente?'
+               onPress={handleClickSearchReincidente1}
+               onEndEditing={handleClickSearchReincidente1}
+               onPress2={handleClickSearchLimpar}
+               onChangeText={(t) => setSearchTextoReincidente(t)}
+                     
+                 />
 
             <View style = {styles.viewFotoMais}>
 

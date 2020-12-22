@@ -750,13 +750,13 @@ useEffect(() => {
       const permission = await MediaLibrary.requestPermissionsAsync();
       if (permission.granted) {
         await MediaLibrary.createAssetAsync(uri);
-        console.log(uri.split('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540h-michel%252FInfoseg/Print/'))
+       
         setLoading(false);
         alert('PDF: '+uri.split('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540h-michel%252FInfoseg/Print/')+' \nbaixado com sucesso!');
       }
     
   } catch (error) {
-    console.error(error);
+   
   }
 };
 
@@ -1636,7 +1636,7 @@ img {
 
     </html>
 `;
-console.log("PComponent => I'm rendering..."+env3+env4+env2)
+
     return (
         <Container >
 
