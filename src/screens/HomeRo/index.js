@@ -194,7 +194,7 @@ const pushDados = async () =>{
                 <GerarRrm onPress={handleClickAreaAgente}>
 
                 <View style={{flex:1,alignItems:'flex-end',marginRight:10}}>
-                    <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30,marginLeft:60}}/>
+                    <Image source = {require('../../../assets/police2.png')} style={{width:50,height:50,marginLeft:60}}/>
                 </View>
 
                     <View style={{flex:2,justifyContent:'flex-start',alignItems:'flex-start'}}>
