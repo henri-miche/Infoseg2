@@ -113,9 +113,9 @@ const BtnOcorrenciaFull = styled.TouchableOpacity`
 
 width: 315px;
 height: 50px;
-alignItems:center;
-justifyContent:center;
-flexDirection:row;
+align-items:center;
+justify-content:center;
+flex-direction:row;
 border-bottom-left-radius:15px;
 border-bottom-right-radius:15px;
 
@@ -128,7 +128,7 @@ const Flat = styled.View`
 
 width: 315px;
 height: 237px;
-marginBottom:45px;
+margin-bottom:45px;
 
 /* Darkest */
 
