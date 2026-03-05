@@ -1,82 +1,58 @@
-import React, {useState,useEffect} from 'react';
-import { Text,Image,StyleSheet,TouchableOpacity, View } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import { 
-    Container,
-    TextoTitulo,
-    ImagemStyle,
-    SubtituloCbtu,
-    FaçaSeuLogin,
-    BtnEntrar,
-    EntrarText,
-    EsqueciSenha,
-    BtnCriarConta,
-    SignMessageButton,
-    SignMessageButtonText
- } from './styles';
+import React, { useState } from 'react';
+import { Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import {
+  Container,
+  TextoTitulo,
+  ImagemStyle,
+  SubtituloCbtu,
+  FaçaSeuLogin,
+  BtnEntrar,
+  EntrarText,
+  EsqueciSenha,
+  SignMessageButton,
+  SignMessageButtonText,
+} from './styles';
 import InputLogin from '../../components/InputLogin';
 import InputLoginSenha from '../../components/InputLoginSenha';
-import firebase from '../../connection/FirebaseConection';
+import { signInWithEmailAndPassword, onAuthStateChanged } from '../../services/authService';
+import { getAuthErrorMessage } from '../../utils/authErrors';
+import { validateLogin } from '../../utils/validation';
 
 export default () => {
+  const [emailField, setEmailField] = useState('');
+  const [senhaField, setSenhaField] = useState('');
+  const navigation = useNavigation();
 
-    const [emailField, setEmailField] = useState('');
-    const [senhaField, setSenhaField] = useState('');
-    const navigation = useNavigation();
+  const handleMessageButtonClick = () => {
+    navigation.reset({
+      routes: [{ name: 'TelaCadastro' }],
+    });
+  };
 
-    firebase.auth().signOut();
+  const handleEsqueciSenha = () => {
+    navigation.navigate('EsqueciSenha');
+  };
 
-    const handleMessageButtonClick = () => {
+  const handleSignClic = () => {
+    const validationError = validateLogin(emailField, senhaField);
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
+
+    onAuthStateChanged((user) => {
+      if (user) {
         navigation.reset({
-            routes: [{name: 'TelaCadastro'}]
+          routes: [{ name: 'HomeRo' }],
         });
-    }
+      }
+    });
 
-     
-    
-  
-
-    const handleSignClic = () => {
-
-        firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                    navigation.reset({
-                        routes: [{ name: 'HomeRo' }]
-                    });
-                }
-            });
-            
-        if (emailField != '' && senhaField != '') {
-
-            firebase.auth().signInWithEmailAndPassword(
-                emailField,
-                senhaField).catch((error) => {
-                    
-
-                    switch (error.code) {
-                        case 'auth/invalid-email':
-                            alert("E-mail inválido!");
-                            break;
-
-                        case 'auth/wrong-password':
-                            alert("Senha inválida!");
-                            break;
-
-                        case 'auth/user-not-found':
-                            alert("Usuário não encontrado!");
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                });
-        } else {
-            alert("Preencha os campos corretamente");
-        }
-    
-
-    }
+    signInWithEmailAndPassword(emailField.trim(), senhaField).catch((error) => {
+      alert(getAuthErrorMessage(error.code));
+    });
+  };
 
     return (
         <Container>
@@ -108,15 +84,16 @@ export default () => {
                 <EntrarText>Entrar</EntrarText>
             </BtnEntrar>
 
-            
-            <SignMessageButton onPress={handleMessageButtonClick} >
-                <SignMessageButtonText>CADASTRE-SE</SignMessageButtonText>
+            <TouchableOpacity onPress={handleEsqueciSenha} style={{ marginTop: 20 }}>
+              <EsqueciSenha>Esqueci minha senha</EsqueciSenha>
+            </TouchableOpacity>
+
+            <SignMessageButton onPress={handleMessageButtonClick}>
+              <SignMessageButtonText>CADASTRE-SE</SignMessageButtonText>
             </SignMessageButton>
-         
-            
         </Container>
     );
-}
+};
 /*
 <Container>
        

@@ -10,9 +10,11 @@ GerarRrm,
 OcorrenciasText,
 } from './styles';
 import { useNavigation } from '@react-navigation/native';
-import firebase from '../../connection/FirebaseConection';
+import { signOut, getCurrentUser } from '../../services/authService';
+import { getByUid } from '../../services/usuarioService';
+import { listOcorrencias, searchOcorrenciasByNome } from '../../services/ocorrenciaService';
 import DownFotos2 from '../../components/DownFotos2';
-import Search from '../../components/Search'
+import Search from '../../components/Search';
 
 
 export default () => {
@@ -29,82 +31,40 @@ export default () => {
     
 
     
-    const Logout  = () => {
-        firebase.auth().signOut();
-    }
-   
+    const Logout = () => {
+        signOut();
+    };
+
     const pushUser = () => {
-        const user = firebase.auth().currentUser;
+        const user = getCurrentUser();
         if (user) {
-            firebase.database().ref('usuarios').child(user.uid)
-                .once('value').then((snapshot) => {
-                    const nome = snapshot.val().nome;
-                    setNome(nome);
-
-                });
-        }}
+            getByUid(user.uid).then((data) => {
+                if (data && data.nome) setNome(data.nome);
+            });
+        }
+    };
 
 
     
     
-const pushDados = async () =>{
-    
+    const pushDados = () => {
+        listOcorrencias()
+            .then(setListFire)
+            .catch((error) => alert(error));
+    };
 
-   try {
-      firebase.database().ref('/Ocorrencias').once('value', (snapshot) => {
-        const list = [];
-        snapshot.forEach((childItem) => {
-          list.push({
-            key: childItem.key,
-            nome: childItem.val().nome,
-            chaveFoto: childItem.val().chaveFoto,
-            dataa: childItem.val().data,
-            hora: childItem.val().hora,
-            tipoRo: childItem.val().tipoRo,
-            local: childItem.val().local,
-            historico: childItem.val().historico,
-            nomeAgenteRelator: childItem.val().nomeAgenteRelator,
-            tipoOcorrencia1:childItem.val().tipoOcorrencia1, 
-          });
-        });
-        setListFire(list.reverse());
-        
-      })
-
-    } catch (error) {
-      alert(error);
-    }
-        
-}
+    const handleRefresh = () => {
+        setIsRefresh(true);
+        pushDados();
+        setTimeout(() => setIsRefresh(false), 800);
+    };
 
 
-    const pushDadosSearch = () =>{
-     try {
-      firebase.database().ref('/Ocorrencias').orderByChild('nome').startAt(searchTexto)
-      .once('value', (snapshot) => {
-        const list = [];
-        snapshot.forEach((childItem) => {
-          list.push({
-            key: childItem.key,
-            nome: childItem.val().nome,
-            chaveFoto: childItem.val().chaveFoto,
-            dataa: childItem.val().data,
-            hora: childItem.val().hora,
-            tipoRo: childItem.val().tipoRo,
-            local: childItem.val().local,
-            historico: childItem.val().historico,
-            nomeAgenteRelator: childItem.val().nomeAgenteRelator,
-            tipoOcorrencia1:childItem.val().tipoOcorrencia1, 
-          });
-        });
-        setListFire(list);
-        
-      })
-
-    } catch (error) {
-      alert(error);
-    }
-}
+    const pushDadosSearch = () => {
+        searchOcorrenciasByNome(searchTexto)
+            .then(setListFire)
+            .catch((error) => alert(error));
+    };
     
   
 
@@ -227,7 +187,7 @@ const pushDados = async () =>{
                     data={listFire}
                         
                         keyExtractor={(item) => item.key}
-                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={pushDados} />}
+                         refreshControl={<RefreshControl refreshing={isRefresh} onRefresh={handleRefresh} />}
                         
                         renderItem={({ item }) =>
                            <DownFotos2 data={item}/>

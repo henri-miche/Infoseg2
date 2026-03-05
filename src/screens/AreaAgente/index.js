@@ -153,8 +153,8 @@ const pushDados = async () =>{
 
      
 
-     const todasOcorrencias = () =>  {
-        navigation.navigate('HomeRoSearch');
+     const todasOcorrencias = () => {
+        navigation.navigate('HomeRo');
     };
 
     const cadastroRo = () =>  {
@@ -193,9 +193,8 @@ const pushDados = async () =>{
                 
                 <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginRight:15}}>
                 
-                <GerarRo>                 
-                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
-                        
+                <GerarRo onPress={() => alert('Em breve')}>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/>
                     </GerarRo>
                     <TextoGerarRo>Pedido de folga</TextoGerarRo>
                 </View>
@@ -205,20 +204,18 @@ const pushDados = async () =>{
                 <View style={{flexDirection:'row',marginTop:30}} >
                  <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginLeft:15}}>
                 
-                <GerarRo >                 
-                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
-                        
+                <GerarRo onPress={() => alert('Em breve')}>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/>
                     </GerarRo>
-                    <TextoGerarRo>Marcação de fèrias</TextoGerarRo>
+                    <TextoGerarRo>Marcação de férias</TextoGerarRo>
                 </View>
 
                
                 
                 <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginRight:15}}>
                 
-                <GerarRo>                 
-                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
-                        
+                <GerarRo onPress={() => alert('Em breve')}>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/>
                     </GerarRo>
                     <TextoGerarRo>IS's</TextoGerarRo>
                 </View>
@@ -230,9 +227,8 @@ const pushDados = async () =>{
                   <View style={{flexDirection:'row',marginTop:30}} >
                  <View style = {{flex:1,justifyContent:"center",alignItems:'center',marginLeft:15}}>
                 
-                <GerarRo >                 
-                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/> 
-                        
+                <GerarRo onPress={() => alert('Em breve')}>
+                        <Image source = {require('../../../assets/file-plus.png')} style={{width:30,height:30}}/>
                     </GerarRo>
                     <TextoGerarRo>Escala</TextoGerarRo>
                 </View>

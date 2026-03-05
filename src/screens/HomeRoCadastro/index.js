@@ -2,8 +2,6 @@ import React,{useEffect, useState} from 'react';
 import {Text,ActivityIndicator, View,Switch, StyleSheet,Image,TextInput, Modal, } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
 import * as imagePicker from 'expo-image-picker';
 import moment from 'moment';
 import firebase from '../../connection/FirebaseConection';
@@ -1472,41 +1470,35 @@ export default () => {
 
      //Galeria
      const carregarFoto = async () => {
-        if(Constants.platform.ios){
-            const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if(status !== 'granted'){
-                alert('Permissão necessária!');
-                return;
-            }
-        }
-        const data = await imagePicker.launchImageLibraryAsync({});
-        if (data.cancelled) {
+        const { status } = await imagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            alert('Permissão necessária para acessar a galeria.');
             return;
         }
-         if (!data.uri) {
-             return;
-         }
-        setFoto(data);
+        const data = await imagePicker.launchImageLibraryAsync({});
+        const cancelled = data.canceled ?? data.cancelled;
+        const uri = data.assets?.[0]?.uri ?? data.uri;
+        if (cancelled || !uri) {
+            return;
+        }
+        setFoto({ uri, ...data.assets?.[0] });
         setModallVisible(false);
     }
 
     //foto camera
     const tirarFoto = async () => {
-        if(Constants.platform.ios){
-            const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if(status !== 'granted'){
-                alert('Permissão necessária!');
-                return;
-            }
-        }
-        const data = await imagePicker.launchCameraAsync({});
-        if (data.cancelled) {
+        const { status } = await imagePicker.requestCameraPermissionsAsync();
+        if (status !== 'granted') {
+            alert('Permissão necessária para usar a câmera.');
             return;
         }
-         if (!data.uri) {
-             return;
-         }
-        setFoto(data);
+        const data = await imagePicker.launchCameraAsync({});
+        const cancelled = data.canceled ?? data.cancelled;
+        const uri = data.assets?.[0]?.uri ?? data.uri;
+        if (cancelled || !uri) {
+            return;
+        }
+        setFoto({ uri, ...data.assets?.[0] });
         setModallVisible(false);
     }
 

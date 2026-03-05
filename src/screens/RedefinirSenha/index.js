@@ -12,36 +12,37 @@ import {
  } from './styles';
 
 import InputLoginSenha from '../../components/InputLoginSenha';
-import firebase from '../../connection/FirebaseConection';
+import { getCurrentUser } from '../../services/authService';
+import { getAuthErrorMessage } from '../../utils/authErrors';
+import { isValidPassword } from '../../utils/validation';
 
 export default () => {
-
-    
-    const [newPassword, setNewPassword] = useState();
-    const [currentPass, setCurrentPass] = useState();
-    const [confirmaçao, setConfirmaçao] = useState();
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmaçao, setConfirmaçao] = useState('');
     const navigation = useNavigation();
 
-    
-
-    
-
-    
-
     const handleClickRedefinir = () => {
-
-
-        const user = firebase.auth().currentUser;
-        
-    
-    if (user != null && newPassword === confirmaçao) {
-        user.updatePassword(newPassword).then(() => {
-            alert('Sanha redefinida!')
-    }, (error) => {
-  
-         alert(error)
-    });
-}}
+        if (!newPassword || !confirmaçao) {
+            alert('Preencha os dois campos.');
+            return;
+        }
+        if (newPassword !== confirmaçao) {
+            alert('As senhas não coincidem.');
+            return;
+        }
+        if (!isValidPassword(newPassword)) {
+            alert('A senha deve ter pelo menos 6 caracteres.');
+            return;
+        }
+        const user = getCurrentUser();
+        if (user) {
+            user.updatePassword(newPassword)
+                .then(() => alert('Senha redefinida!'))
+                .catch((error) => alert(getAuthErrorMessage(error.code) || error.message));
+        } else {
+            alert('Faça login para redefinir a senha.');
+        }
+    };
    
     
     

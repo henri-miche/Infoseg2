@@ -7,18 +7,16 @@ import HomeRo from '../screens/HomeRo';
 import DescricaoOcorrencia from '../screens/DescricaoOcorrencia';
 import HomeRoCadastro from '../screens/HomeRoCadastro';
 import RedefinirSenha from '../screens/RedefinirSenha';
+import EsqueciSenha from '../screens/EsqueciSenha';
 import AreaAgente from '../screens/AreaAgente';
-
-
 
 const Stack = createStackNavigator();
 
-
 export default () => (
     <Stack.Navigator initialRouteName="Preload" screenOptions={{headerShown:false}} >
-    
         <Stack.Screen name="Preload" component={Preload} />  
         <Stack.Screen name="TelaLogin" component={TelaLogin} />
+        <Stack.Screen name="EsqueciSenha" component={EsqueciSenha} />
         <Stack.Screen name="TelaCadastro" component={TelaCadastro} />
         <Stack.Screen name="HomeRo" component={HomeRo} />
          <Stack.Screen name="HomeRoCadastro" component={HomeRoCadastro} />

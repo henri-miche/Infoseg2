@@ -17,75 +17,48 @@ import {
  } from './styles';
 import InputLogin from '../../components/InputLogin';
 import InputLoginSenha from '../../components/InputLoginSenha';
-import firebase from '../../connection/FirebaseConection';
-
+import { createUserWithEmailAndPassword, getCurrentUser } from '../../services/authService';
+import { setUsuario } from '../../services/usuarioService';
+import { getAuthErrorMessage } from '../../utils/authErrors';
+import { validateCadastro } from '../../utils/validation';
 
 export default () => {
-
     const [emailField, setEmailField] = useState('');
     const [nomeField, setNomeField] = useState('');
     const [senhaField, setSenhaField] = useState('');
     const [siape, setSiape] = useState('');
     const [matricula, setMatricula] = useState('');
     const [cargo, setCargo] = useState('');
-    
     const navigation = useNavigation();
-
-
-    firebase.auth().signOut();
 
     const handleMessageButtonClick = () => {
         navigation.reset({
-            routes: [{ name: 'TelaLogin' }]
+            routes: [{ name: 'TelaLogin' }],
         });
-    }
-    
-    
+    };
 
     const handleSignClic = () => {
-
-        if(emailField != '' && senhaField != '' && nomeField != '') {
-
-           
-
-                firebase.auth().createUserWithEmailAndPassword(emailField, senhaField)
-                    .then((user) => {
-                        var user = firebase.auth().currentUser;
-                        firebase.database().ref('usuarios').child(user.uid).set({
-                            nome:nomeField,
-                            siape:siape,
-                            matricula:matricula,
-                            cargo:cargo,
-                        });
-                
-                    })
-                    .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // ..
-
-                    switch (error.code) {
-                    case 'auth/weak-password':
-                        alert("Sua senha deve ter pelo menos 6 caracteres!");
-                        break;
-                    
-                    case 'auth/email-already-in-use':
-                        alert("Este e-mail já está cadastrado");
-                        break;
-                    
-                    case 'auth/invalid-email':
-                        alert("E-mail inválido");
-                        break;
-
-                    default:
-                        break;
-                }
-                     });
-     
-        
-        }else{
-            alert("Preencha os campos corretamente");
+        const validationError = validateCadastro(emailField, senhaField, nomeField);
+        if (validationError) {
+            alert(validationError);
+            return;
         }
+
+        createUserWithEmailAndPassword(emailField.trim(), senhaField)
+            .then(() => {
+                const user = getCurrentUser();
+                if (user) {
+                    setUsuario(user.uid, {
+                        nome: nomeField.trim(),
+                        siape: siape || '',
+                        matricula: matricula || '',
+                        cargo: cargo || '',
+                    });
+                }
+            })
+            .catch((error) => {
+                alert(getAuthErrorMessage(error.code));
+            });
     }
 
     

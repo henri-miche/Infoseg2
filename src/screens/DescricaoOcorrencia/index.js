@@ -518,7 +518,7 @@ export default () => {
                     setCidadeEnv2(cidadeEnv2);
                     setBairroEnv2(bairroEnv2);
                     setLogradouroEnv2(logradouroEnv2);
-                    setNumeroCasaEnv2(numeroCasaEnv2)
+                    setNumeroCasaEnv2(numeroCasaEnv2);
                     setComplementoEnv2(complementoEnv2);
                     setTipoDeEnvolvimentoEnv2(tipodeEnvolvimentoEnv2);
                     setNacionalidadeEnv2(nacionalidadeEnv2);
@@ -548,7 +548,7 @@ export default () => {
                     setCidadeEnv3(cidadeEnv3);
                     setBairroEnv3(bairroEnv3);
                     setLogradouroEnv3(logradouroEnv3);
-                    setNumeroCasaEnv3(numeroCasaEnv3)
+                    setNumeroCasaEnv3(numeroCasaEnv3);
                     setComplementoEnv3(complementoEnv3);
                     setTipoDeEnvolvimentoEnv3(tipodeEnvolvimentoEnv3);
                     setNacionalidadeEnv3(nacionalidadeEnv3);
@@ -577,7 +577,7 @@ export default () => {
                     setCidadeEnv4(cidadeEnv4);
                     setBairroEnv4(bairroEnv4);
                     setLogradouroEnv4(logradouroEnv4);
-                    setNumeroCasaEnv4(numeroCasaEnv4)
+                    setNumeroCasaEnv4(numeroCasaEnv4);
                     setComplementoEnv4(complementoEnv4);
                     setTipoDeEnvolvimentoEnv4(tipodeEnvolvimentoEnv4);
                     setNacionalidadeEnv4(nacionalidadeEnv4);
