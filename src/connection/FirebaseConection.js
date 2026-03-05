@@ -1,8 +1,8 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/database';
-import 'firebase/compat/storage';
-import Constants from 'expo-constants';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/database";
+import "firebase/compat/storage";
+import Constants from "expo-constants";
 
 const extra = Constants.expoConfig?.extra?.firebase || {};
 const firebaseConfig = {
@@ -18,7 +18,7 @@ const firebaseConfig = {
 
 if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   throw new Error(
-    'Firebase config missing. Configure EXPO_PUBLIC_FIREBASE_* in .env (see .env.example).'
+    "Firebase config missing. Configure EXPO_PUBLIC_FIREBASE_* in .env (see .env.example).",
   );
 }
 

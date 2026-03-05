@@ -1,300 +1,269 @@
-import React from 'react';
-import styled from 'styled-components/native';
-
-
-
+import React from "react";
+import styled from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
-    flex: 1;
-    background-color:#000;
-    
+  flex: 1;
+  background-color: #000;
 `;
 
 export const TextoBoasVindas = styled.Text`
-   
-width: 300px;
-height: 26px;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 26px;
-font-family: RobotoSlab;
+  width: 300px;
+  height: 26px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  font-family: RobotoSlab;
 
-/* Orange */
+  /* Orange */
 
-color: #FF9000;
-    
+  color: #ff9000;
 `;
 
 export const TouchExit = styled.TouchableOpacity`
-
-width: 24px;
-height: 24px;
-
-
-`
+  width: 24px;
+  height: 24px;
+`;
 
 export const SubTitulo = styled.Text`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  font-family: RobotoSlab;
 
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 21px;
-font-family: RobotoSlab;
+  /* White */
 
-/* White */
-
-color: #F4EDE8;
-`
-
+  color: #f4ede8;
+`;
 
 export const GerarRo = styled.TouchableOpacity`
+  width: 95%;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  flexdirection: row;
 
-width: 95%;
-height: 60px;
-justify-content:center;
-align-items:center;
-flexDirection:row;
+  /* Darkest */
 
-/* Darkest */
-
-background: #2E2E2E;
-border-radius: 10px;
-`
+  background: #2e2e2e;
+  border-radius: 10px;
+`;
 export const TextoGerarRo = styled.Text`
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 24px;
-font-family: RobotoSlab;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  font-family: RobotoSlab;
 
-/* identical to box height */
+  /* identical to box height */
 
-text-align: center;
+  text-align: center;
 
-/* Text */
+  /* Text */
 
-color: #FF9000;
-`
+  color: #ff9000;
+`;
 
 export const GerarRrm = styled.TouchableOpacity`
-width: 95%;
-height: 60px;
-justify-content:center;
-align-items:center;
-flexDirection:row;
-justify-content:space-between;
-/* Darkest */
+  width: 95%;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  flexdirection: row;
+  justify-content: space-between;
+  /* Darkest */
 
-background: #2E2E2E;
-border-radius: 10px;
-`
+  background: #2e2e2e;
+  border-radius: 10px;
+`;
 export const OcorrenciasText = styled.Text`
+  width: 205px;
+  height: 26px;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  font-family: RobotoSlab;
 
-width: 205px;
-height: 26px;
-margin-left:30px;
-margin-top:10px;
-margin-bottom:15px;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 26px;
-font-family: RobotoSlab;
+  /* White */
 
-/* White */
-
-color: #F4EDE8;
-`
+  color: #f4ede8;
+`;
 export const FiltrosText = styled.Text`
+  width: 44px;
+  height: 18px;
 
-width: 44px;
-height: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: RobotoSlab;
 
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-font-family: RobotoSlab;
+  /* Text 2 */
 
-/* Text 2 */
-
-color: #767676;
-`
+  color: #767676;
+`;
 
 export const FiltroRo = styled.TouchableOpacity`
+  width: 40px;
+  height: 20px;
 
-width: 40px;
-height: 20px;
+  justify-content: center;
+  align-items: center;
 
-justify-content:center;
-align-items:center;
+  /* Orange */
 
-/* Orange */
+  border: 1px solid #ff9000;
 
-border: 1px solid #FF9000;
-
-border-radius: 20px;
-
-`
+  border-radius: 20px;
+`;
 export const RoText = styled.Text`
+  width: 20px;
+  height: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: RobotoSlab;
 
-width: 20px;
-height: 18px;
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-display: flex;
-align-items: center;
-text-align: center;
-font-family: RobotoSlab;
+  /* Orange */
 
-/* Orange */
-
-color: #FF9000;
-`
+  color: #ff9000;
+`;
 export const FiltroRau = styled.TouchableOpacity`
+  width: 51px;
+  height: 20px;
 
-width: 51px;
-height: 20px;
+  justify-content: center;
+  align-items: center;
 
-justify-content:center;
-align-items:center;
+  /* Text */
 
-/* Text */
+  border: 1px solid #f4ede8;
 
-border: 1px solid #F4EDE8;
-
-border-radius: 20px;
-
-`
+  border-radius: 20px;
+`;
 export const RauText = styled.Text`
+  width: 31px;
+  height: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: RobotoSlab;
 
-width: 31px;
-height: 18px;
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-display: flex;
-align-items: center;
-text-align: center;
-font-family: RobotoSlab;
+  /* Text */
 
-
-/* Text */
-
-color: #F4EDE8;
-`
+  color: #f4ede8;
+`;
 
 export const FiltroRrm = styled.TouchableOpacity`
+  width: 54px;
+  height: 20px;
 
-width: 54px;
-height: 20px;
+  justify-content: center;
+  align-items: center;
 
-justify-content:center;
-align-items:center;
+  /* Orange */
 
-/* Orange */
-
-border: 1px solid #FF9000;
-border-radius: 20px;
-
-`
+  border: 1px solid #ff9000;
+  border-radius: 20px;
+`;
 export const RrmText = styled.Text`
-width: 34px;
-height: 18px;
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-display: flex;
-align-items: center;
-text-align: center;
-font-family: RobotoSlab;
+  width: 34px;
+  height: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: RobotoSlab;
 
-/* Orange */
+  /* Orange */
 
-color: #FF9000;
-`
+  color: #ff9000;
+`;
 
 export const FiltroBo = styled.TouchableOpacity`
+  width: 40px;
+  height: 20px;
 
-width: 40px;
-height: 20px;
+  justify-content: center;
+  align-items: center;
 
-justify-content:center;
-align-items:center;
+  /* Text */
 
-/* Text */
-
-border: 1px solid #F4EDE8;
-border-radius: 20px;
-
-`
+  border: 1px solid #f4ede8;
+  border-radius: 20px;
+`;
 export const BoText = styled.Text`
-font-family: RobotoSlab;
-width: 19px;
-height: 18px;
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-display: flex;
-align-items: center;
-text-align: center;
+  font-family: RobotoSlab;
+  width: 19px;
+  height: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-/* Text */
+  /* Text */
 
-color: #F4EDE8;
-`
+  color: #f4ede8;
+`;
 
 export const ViewResumo = styled.View`
-margin-top:21px;
-margin-left:30px;
-width: 315px;
-height: 237px;
-justify-content:center;
-align-items:center;
+  margin-top: 21px;
+  margin-left: 30px;
+  width: 315px;
+  height: 237px;
+  justify-content: center;
+  align-items: center;
 
+  /* Darkest */
 
-/* Darkest */
+  background: #2e2e2e;
 
-background: #2E2E2E;
-
-border-radius: 10px;
-`
+  border-radius: 10px;
+`;
 export const ViewProx = styled.View`
-   
-    width: 315px;
-    height: 21px;
-    margin-left:30px;
-    margin-top:15px;
-    flexDirection:row;
-`
+  width: 315px;
+  height: 21px;
+  margin-left: 30px;
+  margin-top: 15px;
+  flexdirection: row;
+`;
 export const AnteriorBtn = styled.TouchableOpacity`
-    flex:1;
-    flexDirection:row;
-    align-items: center;
-`
+  flex: 1;
+  flexdirection: row;
+  align-items: center;
+`;
 export const ProxBtn = styled.TouchableOpacity`
-    flex:1;
-    flexDirection:row;
-    align-items: center;
-    justify-content:flex-end;
-`
+  flex: 1;
+  flexdirection: row;
+  align-items: center;
+  justify-content: flex-end;
+`;
 export const BtnTodasOcorrencias = styled.TouchableOpacity`
-   
-    width: 315px;
-    height: 50px;
-    margin-left:30px;
-    margin-top:15px;
-    align-items: center;
-    justify-content:center;
-    background: #FF9000;
-    border-radius: 10px;
-`
-
-
-
+  width: 315px;
+  height: 50px;
+  margin-left: 30px;
+  margin-top: 15px;
+  align-items: center;
+  justify-content: center;
+  background: #ff9000;
+  border-radius: 10px;
+`;

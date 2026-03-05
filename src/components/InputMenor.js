@@ -1,51 +1,59 @@
-import React from 'react';
-import styled from 'styled-components/native';
-
+import React from "react";
+import styled from "styled-components/native";
 
 const InputArea = styled.View`
-    width: 150px;
-    height: 50px;
-    background: #2E2E2E;
-    flex-direction: row;
-    border-radius: 10px;
-    /*padding-left: 15px;*/
-    align-items: center;
-    margin-bottom:15px;
-    
+  width: 150px;
+  height: 50px;
+  background: #2e2e2e;
+  flex-direction: row;
+  border-radius: 10px;
+  /*padding-left: 15px;*/
+  align-items: center;
+  margin-bottom: 15px;
 `;
 
- const Input = styled.TextInput`
-    
-    width: 150px;
-    height: 50px;
-    background: #2E2E2E;
-    border-radius: 10px; 
-    padding-left:10px;
-    color:#fff;
-    
-`;   
+const Input = styled.TextInput`
+  width: 150px;
+  height: 50px;
+  background: #2e2e2e;
+  border-radius: 10px;
+  padding-left: 10px;
+  color: #fff;
+`;
 
 export const ImagemEmail = styled.Image`
-width:16px;
-height:16px;
-margin-left:16px;
+  width: 16px;
+  height: 16px;
+  margin-left: 16px;
 `;
 
-export default ({placeholder,onEndEditing,maxLength,source,styled,keyboardType, value, onChangeText, password,placeholderTextColor,color}) => {
-    return(
-        <InputArea>
-            <ImagemEmail source = {source}/>
-            <Input 
-                color={color}
-                placeholderTextColor={placeholderTextColor}
-                placeholder={placeholder}
-                value={value}
-                onChangeText={onChangeText}
-                secureTextEntry={password}
-                keyboardType = {keyboardType}
-                onEndEditing={onEndEditing}
-                maxLength={maxLength}
-            />
-        </InputArea>
-    );
-}
+export default ({
+  placeholder,
+  onEndEditing,
+  maxLength,
+  source,
+  styled,
+  keyboardType,
+  value,
+  onChangeText,
+  password,
+  placeholderTextColor,
+  color,
+}) => {
+  return (
+    <InputArea>
+      <ImagemEmail source={source} />
+      <Input
+        color={color}
+        placeholderTextColor={placeholderTextColor}
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={password}
+        keyboardType={keyboardType}
+        onEndEditing={onEndEditing}
+        maxLength={maxLength}
+      />
+    </InputArea>
+  );
+};

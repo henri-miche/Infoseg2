@@ -1,13 +1,13 @@
-import firebase from '../connection/FirebaseConection';
+import firebase from "../connection/FirebaseConection";
 
 function usuariosRef() {
-  return firebase.database().ref('usuarios');
+  return firebase.database().ref("usuarios");
 }
 
 export function getByUid(uid) {
   return usuariosRef()
     .child(uid)
-    .once('value')
+    .once("value")
     .then((snapshot) => snapshot.val());
 }
 
@@ -17,9 +17,9 @@ export function setUsuario(uid, data) {
 
 export function searchByNome(nome) {
   return usuariosRef()
-    .orderByChild('nome')
+    .orderByChild("nome")
     .startAt(nome)
-    .once('value')
+    .once("value")
     .then((snapshot) => {
       const list = [];
       snapshot.forEach((child) => {

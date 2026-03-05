@@ -1,7 +1,7 @@
-import firebase from '../connection/FirebaseConection';
+import firebase from "../connection/FirebaseConection";
 
 function ocorrenciasRef() {
-  return firebase.database().ref('/Ocorrencias');
+  return firebase.database().ref("/Ocorrencias");
 }
 
 const DEFAULT_PAGE_SIZE = 50;
@@ -10,7 +10,7 @@ export function listOcorrencias(limit = DEFAULT_PAGE_SIZE) {
   return ocorrenciasRef()
     .orderByKey()
     .limitToLast(limit)
-    .once('value')
+    .once("value")
     .then((snapshot) => {
       const list = [];
       snapshot.forEach((childItem) => {
@@ -27,9 +27,9 @@ export function listOcorrencias(limit = DEFAULT_PAGE_SIZE) {
 
 export function searchOcorrenciasByNome(nome) {
   return ocorrenciasRef()
-    .orderByChild('nome')
+    .orderByChild("nome")
     .startAt(nome)
-    .once('value')
+    .once("value")
     .then((snapshot) => {
       const list = [];
       snapshot.forEach((childItem) => {
@@ -47,8 +47,10 @@ export function searchOcorrenciasByNome(nome) {
 export function getOcorrenciaById(key) {
   return ocorrenciasRef()
     .child(key)
-    .once('value')
-    .then((snapshot) => (snapshot.val() ? { key: snapshot.key, ...snapshot.val() } : null));
+    .once("value")
+    .then((snapshot) =>
+      snapshot.val() ? { key: snapshot.key, ...snapshot.val() } : null,
+    );
 }
 
 export function createOcorrencia(data) {
@@ -61,9 +63,5 @@ export function updateOcorrencia(key, data) {
 }
 
 export function getFotoUrl(key) {
-  return firebase
-    .storage()
-    .ref('ocorrencias')
-    .child(key)
-    .getDownloadURL();
+  return firebase.storage().ref("ocorrencias").child(key).getDownloadURL();
 }

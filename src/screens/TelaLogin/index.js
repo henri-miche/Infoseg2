@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Text, Image, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import { Text, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import {
   Container,
   TextoTitulo,
@@ -12,26 +12,29 @@ import {
   EsqueciSenha,
   SignMessageButton,
   SignMessageButtonText,
-} from './styles';
-import InputLogin from '../../components/InputLogin';
-import InputLoginSenha from '../../components/InputLoginSenha';
-import { signInWithEmailAndPassword, onAuthStateChanged } from '../../services/authService';
-import { getAuthErrorMessage } from '../../utils/authErrors';
-import { validateLogin } from '../../utils/validation';
+} from "./styles";
+import InputLogin from "../../components/InputLogin";
+import InputLoginSenha from "../../components/InputLoginSenha";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "../../services/authService";
+import { getAuthErrorMessage } from "../../utils/authErrors";
+import { validateLogin } from "../../utils/validation";
 
 export default () => {
-  const [emailField, setEmailField] = useState('');
-  const [senhaField, setSenhaField] = useState('');
+  const [emailField, setEmailField] = useState("");
+  const [senhaField, setSenhaField] = useState("");
   const navigation = useNavigation();
 
   const handleMessageButtonClick = () => {
     navigation.reset({
-      routes: [{ name: 'TelaCadastro' }],
+      routes: [{ name: "TelaCadastro" }],
     });
   };
 
   const handleEsqueciSenha = () => {
-    navigation.navigate('EsqueciSenha');
+    navigation.navigate("EsqueciSenha");
   };
 
   const handleSignClic = () => {
@@ -44,7 +47,7 @@ export default () => {
     onAuthStateChanged((user) => {
       if (user) {
         navigation.reset({
-          routes: [{ name: 'HomeRo' }],
+          routes: [{ name: "HomeRo" }],
         });
       }
     });
@@ -54,45 +57,45 @@ export default () => {
     });
   };
 
-    return (
-        <Container>
-            
-            <ImagemStyle source={require('../../../assets/brasaoTransarente.png')}/>
-            
-            <TextoTitulo>InfoSeg Mobile</TextoTitulo>
+  return (
+    <Container>
+      <ImagemStyle source={require("../../../assets/brasaoTransarente.png")} />
 
-            <SubtituloCbtu>CBTU BH</SubtituloCbtu>
+      <TextoTitulo>InfoSeg Mobile</TextoTitulo>
 
-            <FaçaSeuLogin> Faça seu login</FaçaSeuLogin>
+      <SubtituloCbtu>CBTU BH</SubtituloCbtu>
 
-            
-            <InputLogin
-             value={emailField} 
-             onChangeText={t => setEmailField(t)}
-             placeholder="E-mail" 
-             placeholderTextColor="#666360" 
-             color="#fff"/>
-            <InputLoginSenha  
-            value={senhaField} 
-            onChangeText={t => setSenhaField(t)} 
-            password={true}
-            placeholder="Senha" 
-            placeholderTextColor="#666360" 
-            color="#fff"/>
+      <FaçaSeuLogin> Faça seu login</FaçaSeuLogin>
 
-            <BtnEntrar onPress={handleSignClic}>
-                <EntrarText>Entrar</EntrarText>
-            </BtnEntrar>
+      <InputLogin
+        value={emailField}
+        onChangeText={(t) => setEmailField(t)}
+        placeholder="E-mail"
+        placeholderTextColor="#666360"
+        color="#fff"
+      />
+      <InputLoginSenha
+        value={senhaField}
+        onChangeText={(t) => setSenhaField(t)}
+        password={true}
+        placeholder="Senha"
+        placeholderTextColor="#666360"
+        color="#fff"
+      />
 
-            <TouchableOpacity onPress={handleEsqueciSenha} style={{ marginTop: 20 }}>
-              <EsqueciSenha>Esqueci minha senha</EsqueciSenha>
-            </TouchableOpacity>
+      <BtnEntrar onPress={handleSignClic}>
+        <EntrarText>Entrar</EntrarText>
+      </BtnEntrar>
 
-            <SignMessageButton onPress={handleMessageButtonClick}>
-              <SignMessageButtonText>CADASTRE-SE</SignMessageButtonText>
-            </SignMessageButton>
-        </Container>
-    );
+      <TouchableOpacity onPress={handleEsqueciSenha} style={{ marginTop: 20 }}>
+        <EsqueciSenha>Esqueci minha senha</EsqueciSenha>
+      </TouchableOpacity>
+
+      <SignMessageButton onPress={handleMessageButtonClick}>
+        <SignMessageButtonText>CADASTRE-SE</SignMessageButtonText>
+      </SignMessageButton>
+    </Container>
+  );
 };
 /*
 <Container>

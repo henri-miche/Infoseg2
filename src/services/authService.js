@@ -1,4 +1,4 @@
-import firebase from '../connection/FirebaseConection';
+import firebase from "../connection/FirebaseConection";
 
 export function getAuth() {
   return firebase.auth();
