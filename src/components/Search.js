@@ -2,20 +2,22 @@ import React from "react";
 import styled from "styled-components/native";
 
 const InputArea = styled.View`
-  width: 315px;
-  height: 50px;
+  min-height: 50px;
   background: #2e2e2e;
   flex-direction: row;
   border-radius: 10px;
-  /*padding-left: 15px;*/
   align-items: center;
+`;
+
+const InputAreaDefault = styled(InputArea)`
+  width: 315px;
   margin-left: 30px;
 `;
 
 const Input = styled.TextInput`
-  width: 230px;
-  height: 50px;
-  background: #2e2e2e;
+  flex: 1;
+  min-height: 50px;
+  background: transparent;
   border-radius: 10px;
   text-align: center;
 `;
@@ -48,9 +50,11 @@ export default ({
   password,
   placeholderTextColor,
   color,
+  containerStyle,
 }) => {
+  const Wrapper = containerStyle ? InputArea : InputAreaDefault;
   return (
-    <InputArea>
+    <Wrapper style={containerStyle}>
       <Lupa onPress={onPress}>
         <ImagemEmail source={require("../../assets/search.png")} />
       </Lupa>
@@ -67,6 +71,6 @@ export default ({
       <Limpar onPress={onPress2}>
         <ImagemEmail source={require("../../assets/SetaSair.png")} />
       </Limpar>
-    </InputArea>
+    </Wrapper>
   );
 };

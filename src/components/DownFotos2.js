@@ -96,7 +96,7 @@ function DownFotos2({ data }) {
   `;
 
   const BtnOcorrenciaFull = styled.TouchableOpacity`
-    width: 315px;
+    width: 100%;
     height: 50px;
     align-items: center;
     justify-content: center;
@@ -109,8 +109,8 @@ function DownFotos2({ data }) {
     background: #ff9000;
   `;
   const Flat = styled.View`
-    width: 315px;
-    height: 237px;
+    width: 100%;
+    min-height: 237px;
     margin-bottom: 45px;
 
     /* Darkest */
