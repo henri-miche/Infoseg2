@@ -15,17 +15,6 @@ const firebaseConfig = {
   measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID || process.env.FIREBASE_MEASUREMENT_ID,
 };
 
-if (!firebaseConfig.apiKey) {
-  firebaseConfig.apiKey = 'AIzaSyBkvVjMQ0zs_QdpS1ACxb3-ePa69xqhXik';
-  firebaseConfig.authDomain = 'crudfirebase-74cc4.firebaseapp.com';
-  firebaseConfig.databaseURL = 'https://crudfirebase-74cc4.firebaseio.com';
-  firebaseConfig.projectId = 'crudfirebase-74cc4';
-  firebaseConfig.storageBucket = 'crudfirebase-74cc4.appspot.com';
-  firebaseConfig.messagingSenderId = '759202711157';
-  firebaseConfig.appId = '1:759202711157:web:e59c0bc5a8363e311c5a3c';
-  firebaseConfig.measurementId = 'G-VB5B4YLLRW';
-}
-
 module.exports = {
   expo: {
     name: 'Infoseg',
