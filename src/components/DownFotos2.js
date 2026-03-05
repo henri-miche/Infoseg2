@@ -1,8 +1,25 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import firebase from "../connection/FirebaseConection";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
+
+const URL_CACHE_TTL_MS = 50 * 60 * 1000; // 50 minutes (Firebase signed URLs often valid 1h)
+const urlCache = new Map();
+
+function getCachedUrl(key) {
+  const entry = urlCache.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.at > URL_CACHE_TTL_MS) {
+    urlCache.delete(key);
+    return null;
+  }
+  return entry.url;
+}
+
+function setCachedUrl(key, url) {
+  urlCache.set(key, { url, at: Date.now() });
+}
 
 function DownFotos2({ data }) {
   const nome = data.nome;
@@ -14,38 +31,41 @@ function DownFotos2({ data }) {
   const historico = data.historico;
   const nomeAgenteRelator = data.nomeAgenteRelator;
   const tipoOcorrencia1 = data.tipoOcorrencia1;
-  const [avatar2, setAvatar2] = useState(null);
+  const [avatar2, setAvatar2] = useState(() => {
+    const cached = getCachedUrl(key);
+    return cached ? { uri: cached } : null;
+  });
   const navigation = useNavigation();
+  const isMounted = useRef(true);
 
-  const buscarFotos = () => {
+  useEffect(() => {
+    isMounted.current = true;
+
+    const cached = getCachedUrl(key);
+    if (cached) {
+      setAvatar2({ uri: cached });
+      return;
+    }
+
     const storage = firebase.storage();
     const starsRef = storage.ref("/ocorrencias").child(key);
 
     starsRef
       .getDownloadURL()
-      .then(function (url) {
-        let avatar1 = { uri: url };
-        setAvatar2(avatar1);
+      .then((url) => {
+        setCachedUrl(key, url);
+        if (isMounted.current) setAvatar2({ uri: url });
       })
       .catch((error) => {
-        if (error.code === "storage/object-not-found") {
+        if (error.code !== "storage/object-not-found") {
+          // optionally log or handle other errors
         }
       });
-  };
 
-  useEffect(() => {
-    let isUnmount = false;
-
-    setTimeout(() => {
-      if (!isUnmount) {
-        buscarFotos();
-      }
-    }, 1000);
     return () => {
-      isUnmount = true;
-      setAvatar2(null);
+      isMounted.current = false;
     };
-  }, []);
+  }, [key]);
 
   const TextNome = styled.Text`
     width: 162px;
@@ -146,7 +166,11 @@ function DownFotos2({ data }) {
         <>
           <View style={styles.row}>
             <View style={styles.viewImage}>
-              <Image source={avatar2} style={styles.itemAvatar} />
+              <Image
+              source={avatar2}
+              style={styles.itemAvatar}
+              resizeMode="cover"
+            />
             </View>
 
             <View style={{ marginTop: 15, marginLeft: 14 }}>
